@@ -1,10 +1,12 @@
-package cn.com.lzt.service.cms;/**
+package cn.com.lzt.service.cms.impl;/**
  * Created by Administrator on 2017/7/20.
  */
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsGoodMapper;
 import cn.com.lzt.model.TCmsGood;
+import cn.com.lzt.service.cms.CmsGoodService;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
