@@ -35,6 +35,7 @@ public class CmsGoodController extends BaseController {
 	 */
 	@RequestMapping("toAddCmsGood.do")
 	public ModelAndView toSysUsers(@ModelAttribute("user") TCmsGood tCmsGood) {
+	    logger.info("新增cms商品的入参:"+tCmsGood);
 		ModelAndView mav = new ModelAndView();
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodService.save(tCmsGood);

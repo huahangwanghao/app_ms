@@ -25,7 +25,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
 
     @Override
     public ResponseMessage save(TCmsGood tCmsGood) {
-        ResponseMessage rm=null;
+        ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
          tCmsGoodMapper.insertSelective(tCmsGood);
         return rm;
     }
