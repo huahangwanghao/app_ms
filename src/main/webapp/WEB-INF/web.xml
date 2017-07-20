@@ -69,7 +69,7 @@
 	</error-page>
 	
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/superui/login.html</welcome-file>
+		<welcome-file>/login.html</welcome-file>
 	</welcome-file-list>
 	
 </web-app>
