@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/pic")
+@RequestMapping("/good")
 public class CmsGoodController extends BaseController {
 	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController.class);
 	@Autowired
