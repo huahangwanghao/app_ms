@@ -80,7 +80,7 @@ public class CmsGoodController extends BaseController {
 	 * @param cmsGoodReq
 	 * @return
 	 */
-	@RequestMapping("toAddCmsGood.do")
+	@RequestMapping("getCmsGoodList.do")
 	public ResponseMessage getGood(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
 		logger.info("查询cms商品的入参:"+cmsGoodReq);
 		ResponseMessage responseMessage=null;
