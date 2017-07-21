@@ -196,7 +196,7 @@
                 html+='<td >'+val.goodLevel+'级</td>';
                 html+='<td >'+val.hasCount+'</td>';
                 html+='<td >'+val.goodEndTime+'</td>';
-                html+='<td >正常</td>';
+                html+='<td >'+(val.goodStatus == '1')?"正常":"下架" +'</td>';
                 html+='<td >';
                 html+='<a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>';
                 html+='<a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>';

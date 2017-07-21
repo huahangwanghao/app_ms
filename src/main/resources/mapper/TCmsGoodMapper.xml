@@ -13,6 +13,7 @@
     <result column="good_end_time" property="goodEndTime" jdbcType="TIMESTAMP" />
     <result column="good_detail" property="goodDetail" jdbcType="VARCHAR" />
     <result column="good_image" property="goodImage" jdbcType="VARCHAR" />
+    <result column="good_status" property="goodStatus" jdbcType="VARCHAR" />
     <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     good_id, good_level, parent_id, good_name, has_count, good_dec, good_brand, good_guige, 
-    good_end_time, good_detail, good_image, crt_date
+    good_end_time, good_detail, good_image, crt_date,good_status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lzt.model.TCmsGoodCriteria" >
     select

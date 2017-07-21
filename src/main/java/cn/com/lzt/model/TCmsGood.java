@@ -26,6 +26,8 @@ public class TCmsGood {
     private String goodImage;
 
     private Date crtDate;
+    
+    private String goodStatus;
 
     public Integer getGoodId() {
         return goodId;
@@ -123,6 +125,14 @@ public class TCmsGood {
         this.crtDate = crtDate;
     }
 
+    public String getGoodStatus() {
+        return goodStatus;
+    }
+
+    public void setGoodStatus(String goodStatus) {
+        this.goodStatus = goodStatus;
+    }
+
     @Override
     public String toString() {
         return "TCmsGood{" +
@@ -138,6 +148,7 @@ public class TCmsGood {
                 ", goodDetail='" + goodDetail + '\'' +
                 ", goodImage='" + goodImage + '\'' +
                 ", crtDate=" + crtDate +
+                ", goodStatus='" + goodStatus + '\'' +
                 '}';
     }
 }
