@@ -5,6 +5,7 @@ package cn.com.lzt.service.cms.impl;/**
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsGoodMapper;
 import cn.com.lzt.model.TCmsGood;
+import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.service.cms.CmsGoodService;
 
 import org.springframework.stereotype.Service;
@@ -28,5 +29,16 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
          tCmsGoodMapper.insertSelective(tCmsGood);
         return rm;
+    }
+
+    /**
+     * 通过条件查询商品信息
+     *
+     * @param cmsGoodReq
+     * @return
+     */
+    @Override
+    public ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq) {
+        return null;
     }
 }

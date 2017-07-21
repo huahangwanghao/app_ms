@@ -2,6 +2,7 @@ package cn.com.lzt.controller;
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsGood;
+import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.service.cms.CmsGoodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class CmsGoodController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("toAddCmsGood.do")
-	public ModelAndView toSysUsers(@ModelAttribute("user") TCmsGood tCmsGood) {
+	public ModelAndView toSysUsers(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 	    logger.info("新增cms商品的入参:"+tCmsGood);
 		ModelAndView mav = new ModelAndView();
 		ResponseMessage responseMessage=null;
@@ -50,7 +51,7 @@ public class CmsGoodController extends BaseController {
 	 * 上传基本信息照片
 	 * @return
 	 */
-	@RequestMapping(value={"/pic/upload"}, method= RequestMethod.POST)
+	@RequestMapping(value={"/pic/upload.do"}, method= RequestMethod.POST)
 	@ResponseBody
 	public ResponseMessage uploadBaseInfoPic(HttpServletRequest request){
 		ResponseMessage rm=new ResponseMessage();
@@ -73,8 +74,21 @@ public class CmsGoodController extends BaseController {
 		return rm;
 	}
 
+	/**
+	 * 查询cms商品
+	 *
+	 * @param cmsGoodReq
+	 * @return
+	 */
+	@RequestMapping("toAddCmsGood.do")
+	public ResponseMessage getGood(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
+		logger.info("查询cms商品的入参:"+cmsGoodReq);
+		ResponseMessage responseMessage=null;
+		responseMessage=cmsGoodService.queryByCondition(cmsGoodReq);
+		return ResponseMessage.createSuccessMsg(0);
+	}
 
-	
-	
+
+
 
 }
