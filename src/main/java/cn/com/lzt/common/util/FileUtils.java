@@ -8,6 +8,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 /**
  * 文件工具类
@@ -38,6 +41,24 @@ public class FileUtils {
             return tmpFile;
         }
         return file;
+    }
+
+    public static String uploadImg(MultipartFile file, String relativePath)
+            throws Exception {
+        Random random = new Random();
+        String imgname = file.getOriginalFilename();
+        String imgformat = imgname.substring(imgname.lastIndexOf("."),
+                imgname.length());
+        String filename = new SimpleDateFormat("yyyyMMddHHmmsssss")
+                .format(new Date()) + random.nextInt(10000) + imgformat;
+        // TOMCAT上传路径
+        String filepath = relativePath;
+        File path = new File(filepath);
+        if (!path.exists()) {
+            path.mkdirs();
+        }
+        file.transferTo(new File(filepath + filename));
+        return relativePath + filename;
     }
     
 }

@@ -1,9 +1,11 @@
 package cn.com.lzt.controller;
 
 import cn.com.lzt.common.ResponseMessage;
+import cn.com.lzt.common.util.FileUtils;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.service.cms.CmsGoodService;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 @Controller
@@ -74,6 +79,25 @@ public class CmsGoodController extends BaseController {
 		return rm;
 	}
 
+
+	@RequestMapping(value = "uploadtopicimg.do")
+	public String addImg(MultipartFile file, HttpServletResponse response)
+			throws Exception {
+		if (null != file && !file.isEmpty()) {
+			BufferedImage sourceImg = ImageIO.read(file.getInputStream());
+			JSONObject json = new JSONObject();
+			String imgpath = FileUtils.uploadImg(file, "topic/");
+			json.put("imgpath", imgpath);
+			json.put("imgwidth", sourceImg.getWidth());
+			json.put("imgheight", sourceImg.getHeight());
+			// 返回图片路径
+			response.getWriter().print(json.toString());
+		}
+		return null;
+	}
+	
+	
+	
 	/**
 	 * 查询cms商品
 	 *
@@ -89,6 +113,8 @@ public class CmsGoodController extends BaseController {
 	}
 
 
+	
+	
 
 
 }
