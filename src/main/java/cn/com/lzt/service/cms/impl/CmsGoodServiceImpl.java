@@ -5,11 +5,14 @@ package cn.com.lzt.service.cms.impl;/**
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsGoodMapper;
 import cn.com.lzt.model.TCmsGood;
+import cn.com.lzt.model.TCmsGoodCriteria;
 import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.service.cms.CmsGoodService;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * cms商品service
@@ -20,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class CmsGoodServiceImpl implements CmsGoodService {
-    
+    @Autowired
     private TCmsGoodMapper tCmsGoodMapper;
 
 
@@ -39,6 +42,10 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      */
     @Override
     public ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq) {
-        return null;
+        TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
+        TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
+        criteria.andGoodLevelEqualTo("3");
+        List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
+        return ResponseMessage.createSuccessMsg(list);
     }
 }

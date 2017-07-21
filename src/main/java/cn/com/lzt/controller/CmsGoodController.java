@@ -9,11 +9,11 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-@Controller
+@RestController
 @RequestMapping("/good")
 public class CmsGoodController extends BaseController {
 	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController.class);
@@ -110,12 +110,13 @@ public class CmsGoodController extends BaseController {
 	 * @param cmsGoodReq
 	 * @return
 	 */
-	@RequestMapping("getCmsGoodList.do")
+	@RequestMapping("/getCmsGoodList.do")
 	public ResponseMessage getGood(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
 		logger.info("查询cms商品的入参:"+cmsGoodReq);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodService.queryByCondition(cmsGoodReq);
-		return ResponseMessage.createSuccessMsg(0);
+		logger.info("返回给前端的数据"+responseMessage);
+		return responseMessage;
 	}
 
 
