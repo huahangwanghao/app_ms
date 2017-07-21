@@ -40,15 +40,31 @@ public class CmsGoodController extends BaseController {
 	 * @param tCmsGood
 	 * @return
 	 */
-	@RequestMapping("toAddCmsGood.do")
-	public ModelAndView toSysUsers(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
+	@RequestMapping("/toAddCmsGoo1d.do")
+	public ModelAndView toSysUsers1(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 	    logger.info("新增cms商品的入参:"+tCmsGood);
 		ModelAndView mav = new ModelAndView();
 		ResponseMessage responseMessage=null;
+		int i =0;
 		responseMessage=cmsGoodService.save(tCmsGood);
 		mav.addObject("roles", null);
 		mav.setViewName("sys/sysusers");
 		return mav;
+	}
+
+
+	/**
+	 * 新增cms商品
+	 *
+	 * @param tCmsGood
+	 * @return
+	 */
+	@RequestMapping("/toAddCmsGood.do")
+	public ResponseMessage toSysUsers(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
+		logger.info("新增cms商品的入参:"+tCmsGood);
+		ResponseMessage responseMessage=null;
+		responseMessage=cmsGoodService.save(tCmsGood);
+		return responseMessage;
 	}
 	
 

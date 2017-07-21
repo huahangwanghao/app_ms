@@ -1,13 +1,33 @@
-# Created by .ignore support plugin (hsz.mobi)
-.idea/
-.idea/encodings.xml
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/workspace.xml
-target/
-.settings/
-<<<<<<< HEAD
-/target
-=======
-/.idea/
->>>>>>> branch 'master' of https://github.com/huahangwanghao/app_ms.git
+*~
+*.swp
+bin
+target
+build
+
+.settings
+*/.settings
+*/*/.settings
+*.project
+*/.project
+*/*/.project
+*/*/*/.project
+*/target
+*/*/target
+*/*/*/target
+.classpath
+*/.classpath
+*/*/.classpath
+*/*/*/.classpath
+.launch
+*/.launch
+*/*/.launch
+*/*/*/.launch
+
+*/.gitignore
+*/*/.gitignore
+*/*/*/.gitignore
+.idea
+*/*.iml
+*/*/*.iml
+*/*/*/*.iml
+/*.iml

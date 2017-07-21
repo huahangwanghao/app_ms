@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,8 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     @Override
     public ResponseMessage save(TCmsGood tCmsGood) {
         ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
+        //设置过期时间是2099年
+        tCmsGood.setGoodEndTime(new Date(2114355661000l));
          tCmsGoodMapper.insertSelective(tCmsGood);
         return rm;
     }
@@ -48,4 +51,6 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
         return ResponseMessage.createSuccessMsg(list);
     }
+
+
 }

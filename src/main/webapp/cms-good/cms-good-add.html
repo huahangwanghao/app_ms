@@ -50,15 +50,15 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form">
+                        <form role="form" id="goodForm">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>商品名称</label>
-                                <input type="text" class="form-control" placeholder="商品名称 ...">
+                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
                             </div>
                             <div class="form-group">
                                 <label>商品等级</label>
-                                <input type="text" class="form-control" placeholder="Enter ...">
+                                <input type="text" name="goodLevel" class="form-control" placeholder="Enter ...">
                             </div>
 
                             <div class="form-group">
@@ -84,7 +84,7 @@
                            
                             <div class="form-group">
                                 <label>库存数量</label>
-                                <input type="text" class="form-control" placeholder="库存数量 ...">
+                                <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
                             </div>
 
                             <div class="form-group">
@@ -106,7 +106,7 @@
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>商品描述</label>
-                                <textarea class="form-control" rows="3" placeholder="商品描述...."></textarea>
+                                <textarea name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
                             </div>
                             
                             <div class="form-group" style="display: none;">
@@ -128,7 +128,7 @@
                     </div>
                     <div class="box-footer">
                         <button type="button" class="btn btn-default">重置</button>
-                        <button type="submit" class="btn btn-info pull-right">保存</button>
+                        <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -145,7 +145,21 @@
         function goBack () {
             window.history.go(-1);
         }
-        
+        function saveGood() {
+            $.ajax({
+                type : "post",
+                url : "/good/toAddCmsGood.do",
+                data : $('#goodForm').serialize(),
+                contentType : "application/x-www-form-urlencoded",
+                async : false,
+                error : function() {
+                    alert("请求失败！");
+                },
+                success : function(json) {
+                    alert(json);
+                }
+            });
+        }
     </script>
 </body>
 </html>
