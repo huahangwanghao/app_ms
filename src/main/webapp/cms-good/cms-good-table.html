@@ -66,7 +66,7 @@
                         </div>
 
                         <div id="toolbar" class="btn-group">
-                            <button id="btn_add" type="button" class="btn btn-default" href="cms-good-add.html">
+                            <button id="btn_add" type="button" class="btn btn-default" onclick="goGoodAdd()" href="cms-good-add.html">
                                 <span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
                             </button>
                             <button id="btn_edit" type="button" class="btn btn-default">
@@ -309,5 +309,10 @@
             $alert.hide();
         }, 3000);
     }
+    
+    function goGoodAdd(){
+        window.location.href="cms-good-add.html";
+    }
+    
 </script>
 </html>
