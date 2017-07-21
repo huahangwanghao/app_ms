@@ -79,7 +79,13 @@ public class CmsGoodController extends BaseController {
 		return rm;
 	}
 
-
+	/**
+	 * 批量上传图片的接口
+	 * @param file
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "uploadtopicimg.do")
 	public String addImg(MultipartFile file, HttpServletResponse response)
 			throws Exception {
