@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 @Controller
 @RequestMapping("/good")
@@ -49,37 +50,31 @@ public class CmsGoodController extends BaseController {
 	 * 上传基本信息照片
 	 * @return
 	 */
-	@RequestMapping(value={"monthloan/basePic/upload"}, method= RequestMethod.POST)
+	@RequestMapping(value={"/pic/upload"}, method= RequestMethod.POST)
 	@ResponseBody
 	public ResponseMessage uploadBaseInfoPic(HttpServletRequest request){
 		ResponseMessage rm=new ResponseMessage();
+		String imgPath=this.UPLOAD_DIR;
 		try {
 			String loanApplyNo=request.getParameter("loanApplyNo");
-			
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile multipartFile = multipartRequest.getFile("multipartFile");
-			logger.info(loanApplyNo+"上传基本信息照片照片内容:" + multipartFile + ",照片内容的字节长度" + multipartFile.getBytes().length);
-	;
 			String fileName=multipartFile.getOriginalFilename();
 			logger.info(loanApplyNo+"上传基本信息照片的名称:"+fileName);
-		
-			String type=request.getParameter("type");
-			// String patch=request.getParameter("patch");
-			String token=request.getParameter("token");
-			String businessType=request.getParameter("businessType");
-			logger.info(loanApplyNo+"月供贷基本信息上传开始入参：fileName:" + fileName + ",loanApplyNo:"
-					+ request.getParameter("loanApplyNo") + ",type:" + request.getParameter("type") + ",patch:"
-					+ request.getParameter("patch") + ",token:" + request.getParameter("token") + ",businessType:"
-					+ request.getParameter("businessType")+"pictureOrder"+request.getParameter("pictureOrder"));
-		
-
-			
+			File targetFile = new File(imgPath, fileName);
+			if(!targetFile.exists()){
+				targetFile.mkdir();
+			}
+			multipartFile.transferTo(targetFile);
 		} catch (Exception e) {
 			logger.info("上传基本信息照片异常:",e);
 			rm=ResponseMessage.createErrorMsg(e);
 		}
 		return rm;
 	}
+
+
+	
 	
 
 }
