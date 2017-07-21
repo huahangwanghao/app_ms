@@ -189,6 +189,7 @@
             var dataList=JSON.parse(data).data;
             var html="";
             $(dataList).each(function(i,val) {
+                var status=(val.goodStatus == '1')?"正常":"下架";
                 html+='<tr data-index="0">';
                 html+='<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>';
                 html+='<td >'+val.goodId+'</td>';
@@ -196,7 +197,7 @@
                 html+='<td >'+val.goodLevel+'级</td>';
                 html+='<td >'+val.hasCount+'</td>';
                 html+='<td >'+val.goodEndTime+'</td>';
-                html+='<td >'+(val.goodStatus == '1')?"正常":"下架" +'</td>';
+                html+='<td >'+ status+'</td>';
                 html+='<td >';
                 html+='<a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>';
                 html+='<a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>';
