@@ -6,4 +6,8 @@
 .idea/workspace.xml
 target/
 .settings/
+<<<<<<< HEAD
 /target
+=======
+/.idea/
+>>>>>>> branch 'master' of https://github.com/huahangwanghao/app_ms.git

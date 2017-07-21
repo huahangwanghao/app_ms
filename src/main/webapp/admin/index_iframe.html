@@ -555,7 +555,7 @@ immediately after the control sidebar -->
                   ]
               },
          
-              {
+              { 
                   id: "10202",
                   text: "插件",
 
@@ -650,7 +650,38 @@ immediately after the control sidebar -->
                    }
                      ]
 
-                 }
+                 },
+            {
+                id: "70020",
+                isOpen: false,
+                text: "商品管理",
+                icon: "fa fa-bookmark-o",
+                children: [
+                    {
+                        id: "80021", text: "商品查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../cms-good/cms-good-table.html"
+                    },
+                    {
+                        id: "80022", text: "商品添加",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../cms-good/cms-good-add.html"
+                    }
+                ]
+            },
+            {
+                id: "70021",
+                isOpen: false,
+                text: "系统管理",
+                icon: "fa fa-bookmark-o",
+                children: [
+                    {
+                        id: "80023", text: "用户管理",  icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
+                    },
+                    {
+                        id: "80024", text: "日志管理",  icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
+                    },
+                    {
+                        id: "80025",text: "配置管理", icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
+                    }
+                ]
+            }
         ];
         $('.sidebar-menu').sidebarMenu({ data: menus, param: { strUser: 'admin' } });
 
