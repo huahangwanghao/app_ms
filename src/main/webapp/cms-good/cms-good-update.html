@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | General Form Elements</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../content/ui/global/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link href="../content/ui/global/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../content/adminlte/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="../content/adminlte/dist/css/skins/_all-skins.min.css">
+    <link href="../content/min/css/supershopui.common.min.css" rel="stylesheet"/>
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head> 
+<body>
+    <section class="content-header">
+        <h1>
+           <a href="#" onclick="goBack()"><<</a>商品修改
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Forms</a></li>
+            <li class="active">商品修改</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+          
+            <!-- right column -->
+            <div class="col-md-6">
+                <!-- Horizontal Form -->
+               
+                <!-- general form elements disabled -->
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form role="form" id="goodForm">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>商品名称</label>
+                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
+                            </div>
+                            <div class="form-group">
+                                <label>商品等级</label>
+                                <input type="text" name="goodLevel" class="form-control" placeholder="Enter ...">
+                            </div>
+
+                            <div class="form-group">
+                                <label>商品等级</label>
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>所属分类</label>
+                                <select class="form-control">
+                                    <option>...</option>
+                                    <option>家电</option>
+                                    <option>衣服</option>
+                                    <option>书籍</option>
+                                    <option>日用品</option>
+                                    <option>护肤品</option>
+                                </select>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label>库存数量</label>
+                                <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">高级Datetimepicker示例</label>
+                                <div class="col-md-4">
+                                    <div class="form-control input-group date form_datetime" data-date="2012-12-21T15:25:00Z">
+                                        <input type="text" size="16" readonly class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default date-reset" type="button">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                            <button class="btn default date-set" type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label>商品描述</label>
+                                <textarea name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
+                            </div>
+                            
+                            <div class="form-group" style="display: none;">
+                                <label>Select Multiple</label>
+                                <select multiple class="form-control">
+                                    <option>option 1</option>
+                                    <option>option 2</option>
+                                    <option>option 3</option>
+                                    <option>option 4</option>
+                                    <option>option 5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">上传图片</label>
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default">重置</button>
+                        <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <script src="../content/ui/global/jQuery/jquery.min.js"></script>
+    <script src="../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../content/min/js/supershopui.common.js"></script>
+    <script>
+
+        $(function(){
+           alert("this is init");
+        });
+
+        function goBack () {
+            window.history.go(-1);
+        }
+        function saveGood() {
+            $.ajax({
+                type : "post",
+                url : "/good/toAddCmsGood.do",
+                data : $('#goodForm').serialize(),
+                contentType : "application/x-www-form-urlencoded",
+                async : false,
+                error : function() {
+                    alert("请求失败！");
+                },
+                success : function(json) {
+                    alert(json);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
