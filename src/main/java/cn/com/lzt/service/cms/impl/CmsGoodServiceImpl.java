@@ -52,5 +52,19 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         return ResponseMessage.createSuccessMsg(list);
     }
 
+    /**
+     * 修改商品信息
+     *
+     * @param tCmsGood
+     * @return
+     */
+    @Override
+    public ResponseMessage update(TCmsGood tCmsGood) {
+        ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
+        //设置过期时间是2099年
+        tCmsGoodMapper.updateByPrimaryKeySelective(tCmsGood);
+        return rm;
+    }
+
 
 }

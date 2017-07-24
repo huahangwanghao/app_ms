@@ -60,13 +60,29 @@ public class CmsGoodController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/toAddCmsGood.do")
-	public ResponseMessage toSysUsers(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
+	public ResponseMessage addCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 		logger.info("新增cms商品的入参:"+tCmsGood);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodService.save(tCmsGood);
 		return responseMessage;
 	}
-	
+
+	/**
+	 * 修改cms商品
+	 *
+	 * @param tCmsGood
+	 * @return
+	 */
+	@RequestMapping("/toUpdateCmsGood.do")
+	public ResponseMessage updateCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
+		logger.info("新增cms商品的入参:"+tCmsGood);
+		ResponseMessage responseMessage=null;
+		responseMessage=cmsGoodService.update(tCmsGood);
+		return responseMessage;
+	}
+
+
+
 
 	/**
 	 * 上传基本信息照片

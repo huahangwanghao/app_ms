@@ -16,4 +16,11 @@ public interface CmsGoodService {
      * @return
      */
     ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq);
+
+    /**
+     * 修改商品信息
+     * @param tCmsGood
+     * @return
+     */
+    ResponseMessage update(TCmsGood tCmsGood);
 }
