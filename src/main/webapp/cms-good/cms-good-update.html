@@ -51,14 +51,15 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <form role="form" id="goodForm">
+                            <input name="goodId" id="goodId" value="" hidden="hidden"/>
                             <!-- text input -->
                             <div class="form-group">
                                 <label>商品名称</label>
-                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
+                                <input id="goodName" type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
                             </div>
                             <div class="form-group">
                                 <label>商品等级</label>
-                                <input type="text" name="goodLevel" class="form-control" placeholder="Enter ...">
+                                <input id="goodLevel" type="text" name="goodLevel" class="form-control" placeholder="Enter ...">
                             </div>
 
                             <div class="form-group">
@@ -84,7 +85,7 @@
                            
                             <div class="form-group">
                                 <label>库存数量</label>
-                                <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
+                                <input id="hasCount" name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
                             </div>
 
                             <div class="form-group">
@@ -128,7 +129,7 @@
                     </div>
                     <div class="box-footer">
                         <button type="button" class="btn btn-default">重置</button>
-                        <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
+                        <button type="button" onclick="updateGood()" class="btn btn-info pull-right">保存</button>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -142,18 +143,45 @@
     <script src="../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../content/min/js/supershopui.common.js"></script>
     <script>
-
+        var thisURL = document.URL;
+        var  getval =thisURL.split('?')[1];
+        var id= getval.split("=")[1];
         $(function(){
-           alert("this is init");
+           getGood(id);
         });
 
         function goBack () {
             window.history.go(-1);
         }
-        function saveGood() {
+        function getGood(id) {
             $.ajax({
                 type : "post",
-                url : "/good/toAddCmsGood.do",
+                url : "/good/getCmsGoodList.do?goodId="+id,
+                contentType : "application/x-www-form-urlencoded",
+                async : false,
+                error : function() {
+                    alert("请求失败！");
+                },
+                success : function(json) {
+                    var result=JSON.parse(json);
+                    var dataObj=JSON.parse(json).data;
+                    if(result.code!=0){
+                        alert("无此数据!");
+                        return;
+                    }
+                    dataObj=dataObj[0];
+                    $("#goodName").val(dataObj.goodName);
+                    $("#goodLeve").val(dataObj.goodLeve);
+                    $("#hasCount").val(dataObj.hasCount);
+                    alert(dataObj.goodId);
+                    $("#goodId").val(dataObj.goodId);
+                }
+            });
+        }
+        function updateGood() {
+            $.ajax({
+                type : "post",
+                url : "/good/toUpdateCmsGood.do",
                 data : $('#goodForm').serialize(),
                 contentType : "application/x-www-form-urlencoded",
                 async : false,
@@ -161,7 +189,8 @@
                     alert("请求失败！");
                 },
                 success : function(json) {
-                    alert(json);
+                    var result=JSON.parse(json);
+                    alert(result.msg);
                 }
             });
         }

@@ -47,6 +47,9 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     public ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq) {
         TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
+        
+        if(null!=cmsGoodReq.getGoodId())
+        criteria.andGoodIdEqualTo(cmsGoodReq.getGoodId());
         criteria.andGoodLevelEqualTo("3");
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
         return ResponseMessage.createSuccessMsg(list);

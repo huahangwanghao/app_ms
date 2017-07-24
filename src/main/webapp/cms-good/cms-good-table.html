@@ -214,7 +214,7 @@
                 html+='<td >'+val.goodEndTime+'</td>';
                 html+='<td >'+ status+'</td>';
                 html+='<td >';
-                html+='<a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>';
+                html+='<a id='+val.goodId+' href="javascript:;" class="btn btn-icon-only purple" onclick="doUpdate(this)"><i class="fa fa-edit"></i></a>';
                 html+='<a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>';
                 html+='</td>';
                 html+='</tr>';
@@ -335,8 +335,10 @@
     /**
      * 跳转修改页面
      */
-    function doUpdate(){
-        window.location.href="cms-good-update.html";
+    function doUpdate(obj){
+        //获取当前这一行的id
+        var id=obj.id;
+        window.location.href="cms-good-update.html?id="+id;
     }
     
 </script>
