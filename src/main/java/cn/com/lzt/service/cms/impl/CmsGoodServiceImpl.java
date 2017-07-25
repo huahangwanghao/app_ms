@@ -50,7 +50,10 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         
         if(null!=cmsGoodReq.getGoodId())
         criteria.andGoodIdEqualTo(cmsGoodReq.getGoodId());
+        //3类产品
         criteria.andGoodLevelEqualTo("3");
+        //有效的记录
+        criteria.andDataFlagEqualTo("1");
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
         return ResponseMessage.createSuccessMsg(list);
     }
@@ -64,7 +67,6 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     @Override
     public ResponseMessage update(TCmsGood tCmsGood) {
         ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
-        //设置过期时间是2099年
         tCmsGoodMapper.updateByPrimaryKeySelective(tCmsGood);
         return rm;
     }

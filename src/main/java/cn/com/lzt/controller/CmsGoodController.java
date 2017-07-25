@@ -81,6 +81,24 @@ public class CmsGoodController extends BaseController {
 		return responseMessage;
 	}
 
+	/**
+	 * 修改cms商品
+	 *
+	 * @param tCmsGood
+	 * @return
+	 */
+	@RequestMapping("/doDeleteCmsGood.do")
+	public ResponseMessage deleteCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
+		logger.info("新增cms商品的入参:"+tCmsGood);
+		ResponseMessage responseMessage=null;
+		tCmsGood.setDataFlag("0");
+		responseMessage=cmsGoodService.update(tCmsGood);
+		return responseMessage;
+	}
+
+
+	
+
 
 
 

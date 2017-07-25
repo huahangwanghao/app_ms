@@ -2,9 +2,8 @@ package cn.com.lzt.mapper;
 
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.TCmsGoodCriteria;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TCmsGoodMapper {
     int countByExample(TCmsGoodCriteria example);

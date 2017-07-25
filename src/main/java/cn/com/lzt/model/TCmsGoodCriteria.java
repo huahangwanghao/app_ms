@@ -855,6 +855,146 @@ public class TCmsGoodCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andGoodStatusIsNull() {
+            addCriterion("good_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusIsNotNull() {
+            addCriterion("good_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusEqualTo(String value) {
+            addCriterion("good_status =", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusNotEqualTo(String value) {
+            addCriterion("good_status <>", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusGreaterThan(String value) {
+            addCriterion("good_status >", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("good_status >=", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusLessThan(String value) {
+            addCriterion("good_status <", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusLessThanOrEqualTo(String value) {
+            addCriterion("good_status <=", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusLike(String value) {
+            addCriterion("good_status like", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusNotLike(String value) {
+            addCriterion("good_status not like", value, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusIn(List<String> values) {
+            addCriterion("good_status in", values, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusNotIn(List<String> values) {
+            addCriterion("good_status not in", values, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusBetween(String value1, String value2) {
+            addCriterion("good_status between", value1, value2, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodStatusNotBetween(String value1, String value2) {
+            addCriterion("good_status not between", value1, value2, "goodStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagIsNull() {
+            addCriterion("data_flag is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagIsNotNull() {
+            addCriterion("data_flag is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagEqualTo(String value) {
+            addCriterion("data_flag =", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagNotEqualTo(String value) {
+            addCriterion("data_flag <>", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagGreaterThan(String value) {
+            addCriterion("data_flag >", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("data_flag >=", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagLessThan(String value) {
+            addCriterion("data_flag <", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagLessThanOrEqualTo(String value) {
+            addCriterion("data_flag <=", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagLike(String value) {
+            addCriterion("data_flag like", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagNotLike(String value) {
+            addCriterion("data_flag not like", value, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagIn(List<String> values) {
+            addCriterion("data_flag in", values, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagNotIn(List<String> values) {
+            addCriterion("data_flag not in", values, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagBetween(String value1, String value2) {
+            addCriterion("data_flag between", value1, value2, "dataFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFlagNotBetween(String value1, String value2) {
+            addCriterion("data_flag not between", value1, value2, "dataFlag");
+            return (Criteria) this;
+        }
+
         public Criteria andCrtDateIsNull() {
             addCriterion("crt_date is null");
             return (Criteria) this;

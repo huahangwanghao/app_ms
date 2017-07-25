@@ -25,9 +25,11 @@ public class TCmsGood {
 
     private String goodImage;
 
-    private Date crtDate;
-    
     private String goodStatus;
+
+    private String dataFlag;
+
+    private Date crtDate;
 
     public Integer getGoodId() {
         return goodId;
@@ -117,38 +119,27 @@ public class TCmsGood {
         this.goodImage = goodImage == null ? null : goodImage.trim();
     }
 
+    public String getGoodStatus() {
+        return goodStatus;
+    }
+
+    public void setGoodStatus(String goodStatus) {
+        this.goodStatus = goodStatus == null ? null : goodStatus.trim();
+    }
+
+    public String getDataFlag() {
+        return dataFlag;
+    }
+
+    public void setDataFlag(String dataFlag) {
+        this.dataFlag = dataFlag == null ? null : dataFlag.trim();
+    }
+
     public Date getCrtDate() {
         return crtDate;
     }
 
     public void setCrtDate(Date crtDate) {
         this.crtDate = crtDate;
-    }
-
-    public String getGoodStatus() {
-        return goodStatus;
-    }
-
-    public void setGoodStatus(String goodStatus) {
-        this.goodStatus = goodStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "TCmsGood{" +
-                "goodId=" + goodId +
-                ", goodLevel='" + goodLevel + '\'' +
-                ", parentId=" + parentId +
-                ", goodName='" + goodName + '\'' +
-                ", hasCount=" + hasCount +
-                ", goodDec='" + goodDec + '\'' +
-                ", goodBrand='" + goodBrand + '\'' +
-                ", goodGuige='" + goodGuige + '\'' +
-                ", goodEndTime=" + goodEndTime +
-                ", goodDetail='" + goodDetail + '\'' +
-                ", goodImage='" + goodImage + '\'' +
-                ", crtDate=" + crtDate +
-                ", goodStatus='" + goodStatus + '\'' +
-                '}';
     }
 }
