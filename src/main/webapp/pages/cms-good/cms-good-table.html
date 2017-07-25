@@ -87,7 +87,7 @@
                                    data-toolbar="#toolbar" data-row-style="rowStyle">
                                 <thead>
                                     <tr>
-                                        <th data-checkbox="true"></th>
+                                        <th data-checkbox="true" onclick="selectAllOrNot(this);"></th>
                                         <th data-field="id" data-sortable="true">Id</th>
                                         <th data-field="lastname" data-sortable="true">商品名称</th>
                                         <th data-field="username" data-sortable="true" >商品类别</th>
@@ -189,6 +189,11 @@
 <script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 </body>
 <script>
+    
+    function selectAllOrNot(obj){
+        alert(obj.data-checkbox);
+    }
+    
     $.ajaxSetup({
         async : false
     });
@@ -206,7 +211,7 @@
                 $(dataList).each(function(i,val) {
                     var status=(val.goodStatus == '1')?"正常":"下架";
                     html+='<tr data-index="0">';
-                    html+='<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>';
+                    html+='<td class="bs-checkbox "><input value="'+val.goodId+'" data-index="0" name="btSelectItem" type="checkbox"></td>';
                     html+='<td >'+val.goodId+'</td>';
                     html+='<td >'+val.goodName+'</td>';
                     html+='<td >'+val.goodLevel+'级</td>';
