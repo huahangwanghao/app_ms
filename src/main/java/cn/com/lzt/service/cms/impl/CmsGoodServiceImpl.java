@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,6 +70,27 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
         tCmsGoodMapper.updateByPrimaryKeySelective(tCmsGood);
         return rm;
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param goodIds
+     * @return
+     */
+    @Override
+    public ResponseMessage batchDeleteByIds(String goodIds) {
+
+
+        String _goodIds=goodIds.substring(0,goodIds.length()-1);
+        String[] a=_goodIds.split(",");
+        List<String> list=new ArrayList<String>();
+        for(int i=0;i<a.length;i++){
+            list.add(a[i]);
+        }
+        int i=tCmsGoodMapper.batchDeleteByIds(list);
+        
+        return ResponseMessage.createSuccessMsg(0);
     }
 
 

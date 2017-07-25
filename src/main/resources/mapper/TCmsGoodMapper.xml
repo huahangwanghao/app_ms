@@ -353,4 +353,15 @@
       crt_date = #{crtDate,jdbcType=TIMESTAMP}
     where good_id = #{goodId,jdbcType=INTEGER}
   </update>
+  
+  <update id="batchDeleteByIds" parameterType="java.lang.String">
+    
+    update t_cms_good set data_flag=0 where good_id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    
+    
+  </update>
+  
 </mapper>

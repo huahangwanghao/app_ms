@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,6 +94,19 @@ public class CmsGoodController extends BaseController {
 		ResponseMessage responseMessage=null;
 		tCmsGood.setDataFlag("0");
 		responseMessage=cmsGoodService.update(tCmsGood);
+		return responseMessage;
+	}
+	/**
+	 * 修改cms商品
+	 *
+	 * @param goodIds
+	 * @return
+	 */
+	@RequestMapping("/doDeleteAllCmsGood.do")
+	public ResponseMessage deleteAllCmsGood(@RequestParam String goodIds) {
+		logger.info("新增cms商品的入参:"+goodIds);
+		ResponseMessage responseMessage=null;
+		responseMessage=responseMessage=cmsGoodService.batchDeleteByIds(goodIds);
 		return responseMessage;
 	}
 

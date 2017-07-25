@@ -2,8 +2,9 @@ package cn.com.lzt.mapper;
 
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.TCmsGoodCriteria;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TCmsGoodMapper {
     int countByExample(TCmsGoodCriteria example);
@@ -27,4 +28,11 @@ public interface TCmsGoodMapper {
     int updateByPrimaryKeySelective(TCmsGood record);
 
     int updateByPrimaryKey(TCmsGood record);
+
+    /**
+     * 批量删除
+     * @param list
+     * @return
+     */
+    int batchDeleteByIds(List<String> list);
 }

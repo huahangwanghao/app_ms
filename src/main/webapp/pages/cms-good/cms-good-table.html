@@ -346,11 +346,38 @@
     function doDelete(obj){
         if(!obj){
             //获取所有被选中的对象
-            
+            var checkCount=$(".bs-checkbox input:checkbox:checked").length;
+            if(checkCount<1){
+                alert("请选择操作的记录!");
+            }else{
+                var obj=document.getElementsByName('btSelectItem');
+                var ids='';
+                for(var i=0; i<checkCount; i++){
+                    if(obj[i].checked) ids+=obj[i].value+','; //如果选中，将value添加到变量s中 
+                }
+
+                $.ajax({
+                    type : "post",
+                    url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
+                    contentType : "application/x-www-form-urlencoded",
+                    async : false,
+                    error : function() {
+                        alert("请求失败！");
+                    },
+                    success : function(json) {
+                        var result=JSON.parse(json);
+                        if(result.code==0){
+                            getdate();
+                        }else{
+                            alert(result.msg);
+                        }
+                    }
+                });
+             
+            }
         }
         else{
             var id=obj.id; 
-            alert("id is "+id);
             $.ajax({
                 type : "post",
                 url : "/good/doDeleteCmsGood.do?goodId="+id,
