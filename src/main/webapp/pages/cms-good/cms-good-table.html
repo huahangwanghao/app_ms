@@ -69,10 +69,10 @@
                             <button id="btn_add" type="button" class="btn btn-default" onclick="goGoodAdd()" href="cms-good-add.html">
                                 <span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
                             </button>
-                            <button id="btn_edit" type="button" class="btn btn-default" onclick="doUpdate()">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+                            <button id="btn_edit" type="button" class="btn btn-default" onclick="selectAllOrNot(this)" value="0">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>全选
                             </button>
-                            <button id="btn_delete" type="button" class="btn btn-default">
+                            <button id="btn_delete" type="button" class="btn btn-default" onclick="doDelete();">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
                             </button>
                         </div>
@@ -87,7 +87,7 @@
                                    data-toolbar="#toolbar" data-row-style="rowStyle">
                                 <thead>
                                     <tr>
-                                        <th data-checkbox="true"></th>
+                                        <th data-checkbox="true" onclick="selectAllOrNot(this);"></th>
                                         <th data-field="id" data-sortable="true">Id</th>
                                         <th data-field="lastname" data-sortable="true">商品名称</th>
                                         <th data-field="username" data-sortable="true" >商品类别</th>
@@ -189,6 +189,21 @@
 <script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 </body>
 <script>
+    
+    function selectAllOrNot(obj){
+        var checkCount=$(".bs-checkbox input:checkbox").length; 
+        var flag=obj.value;
+        if(checkCount>0){
+            if(0==flag){
+                $("[name = btSelectItem]:checkbox").attr("checked", true);
+                obj.value=1;
+            }else{
+                $("[name = btSelectItem]:checkbox").attr("checked", false);
+                obj.value=0;
+            }
+        }
+    }
+    
     $.ajaxSetup({
         async : false
     });
@@ -199,32 +214,36 @@
         $alert = $('.alert').hide();
     
     	function getdate(){
-    		
+            $("#myTable tr").remove();
+            $.get("/good/getCmsGoodList.do",function(data){
+                var dataList=JSON.parse(data).data;
+                var html="";
+                $(dataList).each(function(i,val) {
+                    var status=(val.goodStatus == '1')?"正常":"下架";
+                    html+='<tr data-index="0">';
+                    html+='<td class="bs-checkbox "><input value="'+val.goodId+'" data-index="0" name="btSelectItem" type="checkbox"></td>';
+                    html+='<td >'+val.goodId+'</td>';
+                    html+='<td >'+val.goodName+'</td>';
+                    html+='<td >'+val.goodLevel+'级</td>';
+                    html+='<td >'+val.hasCount+'</td>';
+                    html+='<td >'+val.goodEndTime+'</td>';
+                    html+='<td >'+ status+'</td>';
+                    html+='<td >';
+                    html+='<a onclick="doUpdate(this)" id='+val.goodId+'  class="btn btn-icon-only purple" ><i class="fa fa-edit"></i></a>';
+                    html+='<a id='+val.goodId+'  class="btn btn-icon-only red" onclick="doDelete(this)"> <i class="fa fa-times"></i></a>';
+                    html+='</td>';
+                    html+='</tr>';
+                });
+                $("#myTable .no-records-found").remove();
+                $("#myTable").append(html);
+            });
     	}
-	    $.get("/good/getCmsGoodList.do",function(data){
-	        var dataList=JSON.parse(data).data;
-	        var html="";
-	        $(dataList).each(function(i,val) {
-	            var status=(val.goodStatus == '1')?"正常":"下架";
-	            html+='<tr data-index="0">';
-	            html+='<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>';
-	            html+='<td >'+val.goodId+'</td>';
-	            html+='<td >'+val.goodName+'</td>';
-	            html+='<td >'+val.goodLevel+'级</td>';
-	            html+='<td >'+val.hasCount+'</td>';
-	            html+='<td >'+val.goodEndTime+'</td>';
-	            html+='<td >'+ status+'</td>';
-	            html+='<td >';
-	            html+='<a id='+val.goodId+' href="javascript:;" class="btn btn-icon-only purple" onclick="doUpdate(this)"><i class="fa fa-edit"></i></a>';
-	            html+='<a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>';
-	            html+='</td>';
-	            html+='</tr>';
-	        });
-	        $("#myTable .no-records-found").remove();
-	        $("#myTable").append(html);
-	    });
+	   
     
     $(function () {
+       
+        getdate();
+        
         // create event
         $('.create').click(function () {
             showModal($(this).text());
@@ -332,6 +351,65 @@
         //获取当前这一行的id
         var id=obj.id;
         window.location.href="cms-good-update.html?id="+id;
+    }
+    
+    function doDelete(obj){
+        if(!obj){
+            //获取所有被选中的对象
+            var checkCount=$(".bs-checkbox input:checkbox:checked").length;
+            if(checkCount<1){
+                alert("请选择操作的记录!");
+            }else{
+                var obj=document.getElementsByName('btSelectItem');
+                var ids='';
+                for(var i=0; i<checkCount; i++){
+                    if(obj[i].checked) ids+=obj[i].value+','; //如果选中，将value添加到变量s中 
+                }
+
+                $.ajax({
+                    type : "post",
+                    url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
+                    contentType : "application/x-www-form-urlencoded",
+                    async : false,
+                    error : function() {
+                        alert("请求失败！");
+                    },
+                    success : function(json) {
+                        var result=JSON.parse(json);
+                        if(result.code==0){
+                            getdate();
+                        }else{
+                            alert(result.msg);
+                        }
+                    }
+                });
+             
+            }
+        }
+        else{
+            var id=obj.id; 
+            $.ajax({
+                type : "post",
+                url : "/good/doDeleteCmsGood.do?goodId="+id,
+                contentType : "application/x-www-form-urlencoded",
+                async : false,
+                error : function() {
+                    alert("请求失败！");
+                },
+                success : function(json) {
+                    var result=JSON.parse(json);
+                    if(result.code==0){
+                        getdate();
+                    }else{
+                        alert(result.msg);    
+                    }
+                }
+            });
+            
+           
+            
+            
+        }
     }
     
 </script>

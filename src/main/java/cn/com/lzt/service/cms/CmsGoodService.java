@@ -23,4 +23,11 @@ public interface CmsGoodService {
      * @return
      */
     ResponseMessage update(TCmsGood tCmsGood);
+
+    /**
+     * 批量删除
+     * @param goodIds
+     * @return
+     */
+    ResponseMessage batchDeleteByIds(String goodIds);
 }

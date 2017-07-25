@@ -28,4 +28,11 @@ public interface TCmsGoodMapper {
     int updateByPrimaryKeySelective(TCmsGood record);
 
     int updateByPrimaryKey(TCmsGood record);
+
+    /**
+     * 批量删除
+     * @param list
+     * @return
+     */
+    int batchDeleteByIds(List<String> list);
 }
