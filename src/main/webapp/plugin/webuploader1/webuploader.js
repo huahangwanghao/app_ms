@@ -2909,7 +2909,7 @@
     
                 // 类型不匹配，则派送错误事件，并返回。
                 if ( !me.acceptFile( file ) ) {
-                    me.owner.trigger( 'error', 'Q_TYPE_DENIED', file );
+                    me.owner.trigger( 'error', '请选择图片！', file );
                     return;
                 }
     
@@ -4091,7 +4091,7 @@
             // 完成上传。
             _finishFile: function( file, ret, hds ) {
                 var owner = this.owner;
-    
+                
                 return owner
                         .request( 'after-send-file', arguments, function() {
                             file.setStatus( Status.COMPLETE );
@@ -4195,7 +4195,7 @@
                 count = 0,
                 max = parseInt( opts.fileNumLimit, 10 ),
                 flag = true;
-    
+            
             if ( !max ) {
                 return;
             }
@@ -4204,12 +4204,11 @@
     
                 if ( count >= max && flag ) {
                     flag = false;
-                    this.trigger( 'error', 'Q_EXCEED_NUM_LIMIT', max, file );
+                    this.trigger( 'error', '帖子图片最多可添加9张！', max, file );
                     setTimeout(function() {
                         flag = true;
                     }, 1 );
                 }
-    
                 return count >= max ? false : true;
             });
     
@@ -4286,16 +4285,17 @@
                 return;
             }
     
+            /*
             uploader.on( 'beforeFileQueued', function( file ) {
     
                 if ( file.size > max ) {
                     file.setStatus( WUFile.Status.INVALID, 'exceed_size' );
-                    this.trigger( 'error', 'F_EXCEED_SIZE', max, file );
+                    this.trigger( 'error', '图片文件过大，请选择小于300K的图片！', max, file );
                     return false;
                 }
     
             });
-    
+    */
         });
     
         /**
@@ -4333,7 +4333,7 @@
     
                 // 已经重复了
                 if ( mapping[ hash ] ) {
-                    this.trigger( 'error', 'F_DUPLICATE', file );
+                    this.trigger( 'error', '选择的图片有重复，请重新选择！', file );
                     return false;
                 }
             });
@@ -4881,6 +4881,7 @@
     
                 input.attr( 'type', 'file' );
                 input.attr( 'name', opts.name );
+                input.attr( 'id', 'filephoto' );
                 input.addClass('webuploader-element-invisible');
     
                 label.on( 'click', function() {
