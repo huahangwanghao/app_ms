@@ -3,6 +3,8 @@ package cn.com.lzt.service.cms;
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.dto.CmsGoodReq;
+import cn.com.lzt.model.dto.PageInfoReq;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by Administrator on 2017/7/20.
@@ -30,4 +32,11 @@ public interface CmsGoodService {
      * @return
      */
     ResponseMessage batchDeleteByIds(String goodIds);
+
+    /**
+     * 分页信息查询
+     * @param pageInfo
+     * @return
+     */
+    JSONObject query4Page(PageInfoReq pageInfo);
 }

@@ -7,7 +7,14 @@ import cn.com.lzt.mapper.TCmsGoodMapper;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.TCmsGoodCriteria;
 import cn.com.lzt.model.dto.CmsGoodReq;
+import cn.com.lzt.model.dto.PageInfoReq;
 import cn.com.lzt.service.cms.CmsGoodService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +32,7 @@ import java.util.List;
 @Service
 @Transactional
 public class CmsGoodServiceImpl implements CmsGoodService {
+    private static final Logger logger = LoggerFactory.getLogger(CmsGoodServiceImpl.class);
     @Autowired
     private TCmsGoodMapper tCmsGoodMapper;
 
@@ -91,6 +99,33 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         int i=tCmsGoodMapper.batchDeleteByIds(list);
         
         return ResponseMessage.createSuccessMsg(0);
+    }
+
+    /**
+     * 分页信息查询
+     *
+     * @param pageInfo
+     * @return
+     */
+    @Override
+    public JSONObject query4Page(PageInfoReq pageInfo) {
+        logger.info("分页查询商品信息入参:"+pageInfo);
+        TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
+        TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
+        //3类产品
+        // criteria.andGoodLevelEqualTo("3");
+        //有效的记录
+        criteria.andDataFlagEqualTo("1");
+        PageHelper.startPage(pageInfo.getOffset()+1,10);
+        List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
+        PageInfo<TCmsGood>  pageInfo1=new PageInfo<TCmsGood>(list);
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("total",pageInfo1.getPages());
+        JSONArray jsonArray=new JSONArray();
+        jsonArray.addAll(list);
+        jsonObject.put("rows",jsonArray);
+        logger.info("返回前端的信息:"+jsonObject);
+        return jsonObject;
     }
 
 

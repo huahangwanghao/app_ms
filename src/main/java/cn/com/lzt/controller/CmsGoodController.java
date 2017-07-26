@@ -4,6 +4,7 @@ import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.common.util.FileUtils;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.dto.CmsGoodReq;
+import cn.com.lzt.model.dto.PageInfoReq;
 import cn.com.lzt.service.cms.CmsGoodService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -181,6 +182,33 @@ public class CmsGoodController extends BaseController {
 		responseMessage=cmsGoodService.queryByCondition(cmsGoodReq);
 		logger.info("返回给前端的数据"+responseMessage);
 		return responseMessage;
+	}
+
+	/**
+	 * 查询cms分页信息
+	 *
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("/getGoodPageInfo.do")
+	public JSONObject getGoodPageInfo(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
+
+
+		return cmsGoodService.query4Page(pageInfo);
+		
+		
+		/*JSONObject json=new JSONObject();
+		json.put("total",1100);
+		
+		JSONArray jsonArray=new JSONArray();
+		TCmsGood t=new TCmsGood();
+		t.setGoodName("test");
+		jsonArray.add(t);
+		json.put("rows",jsonArray);
+		
+		
+		logger.info("-------------->"+json);
+		return json;*/
 	}
 
 
