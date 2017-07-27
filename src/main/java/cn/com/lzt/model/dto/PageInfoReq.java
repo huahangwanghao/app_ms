@@ -10,44 +10,33 @@ package cn.com.lzt.model.dto;/**
  **/
 public class PageInfoReq {
     
-    private int offset;
-    
-    private int limit;
-    
+    private int pageNumber;
+    private int pageSize;
     private String name;
-
-    public int getOffset() {
-        return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
-
-   
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "PageInfoReq{" +
-                "offset=" + offset +
-                ", limit=" + limit +
-                ", name='" + name + '\'' +
-                '}';
-    }
+    private String queryJson;
+	public int getPageNumber() {
+		return pageNumber;
+	}
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getQueryJson() {
+		return queryJson;
+	}
+	public void setQueryJson(String queryJson) {
+		this.queryJson = queryJson;
+	}
+    
 }

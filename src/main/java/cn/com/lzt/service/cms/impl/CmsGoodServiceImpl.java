@@ -116,7 +116,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         // criteria.andGoodLevelEqualTo("3");
         //有效的记录
         criteria.andDataFlagEqualTo("1");
-        PageHelper.startPage(pageInfo.getOffset()+1,10);
+        PageHelper.startPage(pageInfo.getPageNumber(),pageInfo.getPageSize());
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
         PageInfo<TCmsGood>  pageInfo1=new PageInfo<TCmsGood>(list);
         JSONObject jsonObject=new JSONObject();

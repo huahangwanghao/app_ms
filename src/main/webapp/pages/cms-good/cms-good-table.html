@@ -3,484 +3,296 @@
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en">
-    <!--<![endif]-->
-    <!-- BEGIN HEAD -->
-
-    <head>
-        <meta charset="utf-8" />
-        <title></title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="" name="description" />
-        <meta content="" name="author" />
-        <!-- Bootstrap 3.3.6 -->
-        <link rel="stylesheet" href="../../content/ui/global/bootstrap/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link href="../../content/ui/global/font-awesome/css/font-awesome.css" rel="stylesheet" />
-        <!-- Theme style -->
-        <link rel="stylesheet" href="../../content/adminlte/dist/css/AdminLTE.css">
-        <link rel="stylesheet" href="../../content/adminlte/dist/css/skins/_all-skins.min.css">
-        <link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet" />
-        <link href="../../content/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
-    <!--全局通用框架样式 end-->
-        </head>
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8" />
+<title></title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<!-- Bootstrap 3.3.6 -->
+<link rel="stylesheet"
+	href="../../content/ui/global/bootstrap/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link href="../../content/ui/global/font-awesome/css/font-awesome.css"
+	rel="stylesheet" />
+<!-- Theme style -->
+<link rel="stylesheet"
+	href="../../content/adminlte/dist/css/AdminLTE.css">
+<link rel="stylesheet"
+	href="../../content/adminlte/dist/css/skins/_all-skins.min.css">
+<link href="../../content/min/css/supershopui.common.min.css"
+	rel="stylesheet" />
+<link href="../../content/plugins/bootstrap-table/bootstrap-table.css"
+	rel="stylesheet" />
+<!--全局通用框架样式 end-->
+</head>
 <body>
-    <section class="content-header">
-        <h1>
-             商品管理
-            <small>商品管理表格</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Simple</li>
-        </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-
-        <div class="row">
-                <!-- BEGIN SAMPLE TABLE PORTLET-->
-                <div class="col-md-12">
-                    <!-- BEGIN SAMPLE TABLE PORTLET-->
-                    <div class="box-body" style="padding-bottom:0px;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">查询条件</div>
-                            <div class="panel-body">
-                                <form id="formSearch" class="form-horizontal">
-                                    <div class="form-group" style="margin-top:15px">
-                                        <label class="control-label col-sm-1" for="txt_search_departmentname">商品名称</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" name="name" id="txt_search_departmentname" value="123">
-                                        </div>
-                                        <label class="control-label col-sm-1" for="txt_search_statu">用户名</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="txt_search_statu">
-                                        </div>
-                                        <div class="col-sm-4" style="text-align:left;">
-                                            <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div id="toolbar" class="btn-group">
-                            <button id="btn_add" type="button" class="btn btn-default" onclick="goGoodAdd()" href="cms-good-add.html">
-                                <span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
-                            </button>
-                            <button id="btn_edit" type="button" class="btn btn-default" onclick="selectAllOrNot(this)" value="0">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>全选
-                            </button>
-                            <button id="btn_delete" type="button" class="btn btn-default" onclick="doDelete();">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-                            </button>
-                        </div>
-                        <div class="table-scrollable">
-                            <table class="table-striped table-hover" id="table"
-                                   data-id-table="advancedTable"
-                                    data-row-style="rowStyle">
-                                <thead>
-                                    <tr>
-                                        <th data-checkbox="true" onclick="selectAllOrNot(this);"></th>
-                                        <th data-field="goodId" data-sortable="true">Id</th>
-                                        <th data-field="goodName" data-sortable="true">商品名称</th>
-                                        <th data-field="username" data-sortable="true" >商品类别</th>
-                                        <th data-field="hasCount" data-sortable="true" >库存数量</th>
-                                        <th data-field="username" data-sortable="true" >失效时间</th>
-                                        <th data-field="username" data-sortable="true" >状态</th>
-                                        <th data-formatter="actionFormatter">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="myTable">
-                                        <!--<tr data-index="0">
-                                            <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                            <td style="">1</td>
-                                            <td style="">商品名称1</td>
-                                            <td style="">1级</td>
-                                            <td style="">100</td>
-                                            <td style="">2017-09-09</td>
-                                            <td style="">正常</td>
-                                            <td style="">
-                                                <a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>
-                                                <a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr data-index="0">
-                                            <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-                                            <td style="">2</td>
-                                            <td style="">商品名称1</td>
-                                            <td style="">1级</td>
-                                            <td style="">100</td>
-                                            <td style="">2017-09-09</td>
-                                            <td style="">正常</td>
-                                            <td style="">
-                                                <a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>
-                                                <a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>
-                                            </td>
-                                        </tr>-->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- END SAMPLE TABLE PORTLET-->
-
-                    <div id="modal" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title"></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Id</label>
-                                        <input type="number" class="form-control" name="id" placeholder="id">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stars</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>商品名称</label>
-                                        <input type="number" class="form-control" name="forks_count" placeholder="用户名">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>商品类别</label>
-                                        <input type="text" class="form-control" name="商品类别" placeholder="商品类别">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>库存数量</label>
-                                        <input type="text" class="form-control" name="库存数量" placeholder="库存数量">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>失效时间</label>
-                                        <input type="text" class="form-control" name="失效时间" placeholder="失效时间">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>状态</label>
-                                        <input type="text" class="form-control" name="状态" placeholder="状态">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    <button type="button" class="btn btn-primary submit">保存</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                </div>
-
-
-        </div>
-       
-    </section>
-<script src="../../content/ui/global/jQuery/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.6 -->
-
-<script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../content/min/js/supershopui.common.js"></script>
-<script src="../../content/plugins/bootstrap-table/bootstrap-table.js"></script>
-<script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+	<section class="content-header">
+		<h1>商品管理</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="#">Tables</a></li>
+			<li class="active">Simple</li>
+		</ol>
+	</section>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- BEGIN SAMPLE TABLE PORTLET-->
+			<div class="col-md-12">
+				<!-- BEGIN SAMPLE TABLE PORTLET-->
+				<div class="box-body" style="padding-bottom:0px;">
+					<div class="panel panel-default">
+						<div class="panel-heading">查询条件</div>
+						<div class="panel-body">
+							<form id="formSearch" class="form-horizontal">
+								<div class="form-group" style="margin-top:15px">
+									<label class="control-label col-sm-1"
+										for="txt_search_departmentname">商品名称</label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control" name="name"
+											id="txt_search_departmentname" value="123">
+									</div>
+									<label class="control-label col-sm-1" for="txt_search_statu">用户名</label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control" id="txt_search_statu">
+									</div>
+									<div class="col-sm-4" style="text-align:left;">
+										<button type="button" style="margin-left:50px" id="search"
+											class="btn btn-primary">查询</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div id="toolbar" class="btn-group">
+						<button id="btn_add" type="button" class="btn btn-default"
+							onclick="goGoodAdd()" href="cms-good-add.html">
+							<span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
+						</button>
+						<button id="btn_edit" type="button" class="btn btn-default"
+							onclick="selectAllOrNot(this)" value="0">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>全选
+						</button>
+						<button id="btn_delete" type="button" class="btn btn-default"
+							onclick="doDelete();">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+						</button>
+					</div>
+					<div class="table-scrollable">
+						<table class="table-striped table-hover" id="datatable">
+							<!-- <thead>
+								<tr>
+									
+									<th data-checkbox="true" onclick="selectAllOrNot(this);"></th>
+									<th data-field="goodId" data-sortable="true">Id</th>
+									<th data-field="goodName" data-sortable="true">商品名称</th>
+									<th data-field="username" data-sortable="true">商品类别</th>
+									<th data-field="hasCount" data-sortable="true">库存数量</th>
+									<th data-field="username" data-sortable="true">失效时间</th>
+									<th data-field="username" data-sortable="true">状态</th>
+									<th data-formatter="actionFormatter">操作</th>
+								</tr>
+							</thead>
+							<tbody id="myTable">
+								<tr data-index="0">
+                                          <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                          <td style="">1</td>
+                                          <td style="">商品名称1</td>
+                                          <td style="">1级</td>
+                                          <td style="">100</td>
+                                          <td style="">2017-09-09</td>
+                                          <td style="">正常</td>
+                                          <td style="">
+                                              <a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>
+                                              <a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>
+                                          </td>
+                                      </tr>
+                                      <tr data-index="0">
+                                          <td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
+                                          <td style="">2</td>
+                                          <td style="">商品名称1</td>
+                                          <td style="">1级</td>
+                                          <td style="">100</td>
+                                          <td style="">2017-09-09</td>
+                                          <td style="">正常</td>
+                                          <td style="">
+                                              <a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>
+                                              <a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>
+                                          </td>
+                                      </tr>
+							</tbody> -->
+						</table>
+					</div>
+				</div>
+				<!-- END SAMPLE TABLE PORTLET-->
+				<div id="modal" class="modal fade">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title"></h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<label>Id</label> <input type="number" class="form-control"
+										name="id" placeholder="id">
+								</div>
+								<div class="form-group">
+									<label>Stars</label> <input type="text" class="form-control"
+										name="name" placeholder="Name">
+								</div>
+								<div class="form-group">
+									<label>商品名称</label> <input type="number" class="form-control"
+										name="forks_count" placeholder="用户名">
+								</div>
+								<div class="form-group">
+									<label>商品类别</label> <input type="text" class="form-control"
+										name="商品类别" placeholder="商品类别">
+								</div>
+								<div class="form-group">
+									<label>库存数量</label> <input type="text" class="form-control"
+										name="库存数量" placeholder="库存数量">
+								</div>
+								<div class="form-group">
+									<label>失效时间</label> <input type="text" class="form-control"
+										name="失效时间" placeholder="失效时间">
+								</div>
+								<div class="form-group">
+									<label>状态</label> <input type="text" class="form-control"
+										name="状态" placeholder="状态">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">关闭</button>
+								<button type="button" class="btn btn-primary submit">保存</button>
+							</div>
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
+			</div>
+		</div>
+	</section>
+	<script src="../../content/ui/global/jQuery/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../content/min/js/supershopui.common.js"></script>
+	<script src="../../content/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 </body>
 <script>
-    
-    function selectAllOrNot(obj){
-        var checkCount=$(".bs-checkbox input:checkbox").length; 
-        var flag=obj.value;
-        if(checkCount>0){
-            if(0==flag){
-                $("[name = btSelectItem]:checkbox").attr("checked", true);
-                obj.value=1;
-            }else{
-                $("[name = btSelectItem]:checkbox").attr("checked", false);
-                obj.value=0;
-            }
-        }
-    }
-    
-    $.ajaxSetup({
-        async : false
-    });
-    var API_URL = 'http://' + location.host + ':3001/list/';
-
-    var
-        $modal = $('#modal').modal({ show: false }),
-        $alert = $('.alert').hide();
-    
-            $("#myTable tr").remove();
-            $.get("/good/getCmsGoodList.do",function(data){
-                var dataList=JSON.parse(data).data;
-                var html="";
-                $(dataList).each(function(i,val) {
-                    var status=(val.goodStatus == '1')?"正常":"下架";
-                    html+='<tr data-index="0">';
-                    html+='<td class="bs-checkbox "><input value="'+val.goodId+'" data-index="0" name="btSelectItem" type="checkbox"></td>';
-                    html+='<td >'+val.goodId+'</td>';
-                    html+='<td >'+val.goodName+'</td>';
-                    html+='<td >'+val.goodLevel+'级</td>';
-                    html+='<td >'+val.hasCount+'</td>';
-                    html+='<td >'+val.goodEndTime+'</td>';
-                    html+='<td >'+ status+'</td>';
-                    html+='<td >';
-                    html+='<a onclick="doUpdate(this)" id='+val.goodId+'  class="btn btn-icon-only purple" ><i class="fa fa-edit"></i></a>';
-                    html+='<a id='+val.goodId+'  class="btn btn-icon-only red" onclick="doDelete(this)"> <i class="fa fa-times"></i></a>';
-                    html+='</td>';
-                    html+='</tr>';
-                });
-                alert(html);
-                $("#myTable .no-records-found").remove();
-               // $("#myTable").append(html);
-            });
-	   
-    
-    $(function () {
-<<<<<<< HEAD
-       
-=======
-
-        var oTable = new TableInit();
-        oTable.Init();
-        
-        // create event
-        $('.create').click(function () {
-            showModal($(this).text());
-        });
-
-        $modal.find('.submit').click(function () {
-            var row = {};
-
-            $modal.find('input[name]').each(function () {
-                row[$(this).attr('name')] = $(this).val();
-            });
-
-        });
-    });
-
-    var TableInit = function () {
-        
-        var oTableInit = new Object();
-        //初始化Table
-        oTableInit.Init = function () {
-            $('#table').bootstrapTable({
-                url: '/good/getGoodPageInfo.do',         //请求后台的URL（*）
-                method: 'post',                      //请求方式（*）
-                toolbar: '#toolbar',                //工具按钮用哪个容器
-                striped: true,                      //是否显示行间隔色
-                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-                pagination: true,                   //是否显示分页（*）
-                sortable: false,                     //是否启用排序
-                sortOrder: "asc",                   //排序方式
-                queryParams: oTableInit.queryParams,//传递参数（*）
-                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-                pageNumber:1,                       //初始化加载第一页，默认第一页
-                pageSize: 50,                       //每页的记录行数（*）
-                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-                strictSearch: true,
-                clickToSelect: true,                //是否启用点击选中行
-                height: 460,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-                uniqueId: "goodId",                     //每一行的唯一标识，一般为主键列
-                cardView: false,                    //是否显示详细视图
-                detailView: false,                   //是否显示父子表
-                columns: [{
-                    field: 'goodId',
-                    title: '序号'
-                }, {
-                    field: 'goodName',
-                    title: '商品名称'
-                }, {
-                    field: 'hasCount',
-                    title: '库存数量'
-                }]
-            });
-        };
-
-        //得到查询的参数
-        oTableInit.queryParams = function (params) {
-            var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-                limit: params.limit,   //页面大小
-                offset: params.offset,  //页码
-                sdate: $("#stratTime").val(),
-                edate: $("#endTime").val(),
-                sellerid: $("#sellerid").val(),
-                orderid: $("#orderid").val(),
-                CardNumber: $("#CardNumber").val(),
-                maxrows: params.limit,
-                pageindex:params.pageNumber,
-                portid: $("#portid").val(),
-                CardNumber: $("#CardNumber").val(),
-                tradetype:$('input:radio[name="tradetype"]:checked').val(),
-                success:$('input:radio[name="success"]:checked').val(),
-            };
-            return temp;
-        };
-        return oTableInit;
-    };
-
-
-
-
-
-
-
-
-
-
-
-
-        function nameFormatter(value, row) {
-        var icon = row.id % 2 === 0 ? 'glyphicon-star' : 'glyphicon-star-empty'
-
-        return '<i class="glyphicon ' + icon + '"></i> ' + value;
-    }
-    function actionFormatter(value) {
-        return [
-            ' <a href="javascript:;" class="btn btn-icon-only purple"><i class="fa fa-edit"></i></a>'+
-                    '<a href="javascript:;" class="btn btn-icon-only red"> <i class="fa fa-times"></i></a>',
-        ].join('');
-    }
-    function stateFormatter(value, row) {
-      
-        if (row.state === "1") {
-            return ' <span class="label label-sm label-success"> 在职 </span>';
-        }
-        else if (row.state == "2") {
-            return ' <span class="label label-sm label-warning"> 实习 </span>';
-        }
-        else {
-            return '<span class="label label-sm label-danger"> 离职 </span>';
-        }
-      
-    }
-    function rowStyle(row, index) {
-        var classes = ['active', 'success', 'info', 'warning', 'danger'];
-
-        if (index % 2 === 0 && index / 2 < classes.length) {
-            return {
-                classes: classes[index / 2]
-            };
-        }
-        return {};
-    }
-    // update and delete events
-    window.actionEvents = {
-        'click .update': function (e, value, row) {
-            showModal($(this).attr('title'), row);
-        },
-        'click .remove': function (e, value, row) {
-            if (confirm('Are you sure to delete this item?')) {
-                $.ajax({
-                    url: API_URL + row.id,
-                    type: 'delete',
-                    success: function () {
-                        $table.bootstrapTable('refresh');
-                        showAlert('Delete item successful!', 'success');
-                    },
-                    error: function () {
-                        showAlert('Delete item error!', 'danger');
-                    }
-                })
-            }
-        }
-    };
-
-    function showModal(title, row) {
-        row = row || {
-            id: '',
-            name: '',
-            stargazers_count: 0,
-            forks_count: 0,
-            description: ''
-        }; // default row value
-
-        $modal.data('id', row.id);
-        $modal.find('.modal-title').text(title);
-        for (var name in row) {
-            $modal.find('input[name="' + name + '"]').val(row[name]);
-        }
-        $modal.modal('show');
-    }
-
-    function showAlert(title, type) {
-        $alert.attr('class', 'alert alert-' + type || 'success')
-              .html('<i class="glyphicon glyphicon-check"></i> ' + title).show();
-        setTimeout(function () {
-            $alert.hide();
-        }, 3000);
-    }
-    /**
-     * 跳转新增页面
-      */
-    function goGoodAdd(){
-        window.location.href="cms-good-add.html";
-    }
-    /**
-     * 跳转修改页面
-     */
-    function doUpdate(obj){
-        //获取当前这一行的id
-        var id=obj.id;
-        window.location.href="cms-good-update.html?id="+id;
-    }
-    
-    function doDelete(obj){
-        if(!obj){
-            //获取所有被选中的对象
-            var checkCount=$(".bs-checkbox input:checkbox:checked").length;
-            if(checkCount<1){
-                alert("请选择操作的记录!");
-            }else{
-                var obj=document.getElementsByName('btSelectItem');
-                var ids='';
-                for(var i=0; i<checkCount; i++){
-                    if(obj[i].checked) ids+=obj[i].value+','; //如果选中，将value添加到变量s中 
-                }
-
-                $.ajax({
-                    type : "post",
-                    url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
-                    contentType : "application/x-www-form-urlencoded",
-                    async : false,
-                    error : function() {
-                        alert("请求失败！");
-                    },
-                    success : function(json) {
-                        var result=JSON.parse(json);
-                        if(result.code==0){
-                            getdate();
-                        }else{
-                            alert(result.msg);
-                        }
-                    }
-                });
-             
-            }
-        }
-        else{
-            var id=obj.id; 
-            $.ajax({
-                type : "post",
-                url : "/good/doDeleteCmsGood.do?goodId="+id,
-                contentType : "application/x-www-form-urlencoded",
-                async : false,
-                error : function() {
-                    alert("请求失败！");
-                },
-                success : function(json) {
-                    var result=JSON.parse(json);
-                    if(result.code==0){
-                        getdate();
-                    }else{
-                        alert(result.msg);    
-                    }
-                }
-            });
-            
-           
-            
-            
-        }
-    }
-    
+	function initTable(){
+		//先销毁表格  
+        $('#datatable').bootstrapTable('destroy');
+        $("#datatable").bootstrapTable({
+			url: "/good/getGoodPageInfo.do", 
+	        dataType: "json",
+	        singleSelect: false,
+	        striped: true,	//是否显示行间隔色
+	        cache: false,	//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+	        sortable: true,	//是否启用排序 
+	        pagination: true,	//显示分页按钮
+	        sortName:"goodEndTime",
+	        sortOrder:"desc",	//默认排序
+	        pageNumber: 1,	//初始化加载第一页，默认第一页
+	        pageSize: 2,	//默认显示的每页个数
+	        pageList: [10, 25, 50, 100],	//可供选择的每页的行数（*）
+	        queryParamsType: '',	//默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort // 设置为 '' 在这种情况下传给服务器的参数为：pageSize,pageNumber
+	        queryParams:function(params){
+	            var temp = {
+	                pageSize: params.pageSize,   //页面大小
+	                pageNumber: params.pageNumber,  //页码
+	                sortName: params.sortName,  //排序列
+	                sortOrder: params.sortOrder,    //排序方式
+	                queryJson: JSON.stringify(getQuetyData()),  //查询数据
+	            }
+	            return temp;
+	        },
+	        responseHandler:function(res){
+	            //动态渲染表格之前获取有后台传递的数据时,用于获取出除去本身渲染所需的数据的额外参数
+	            //详见此函数参数的api
+	            return res;
+	        },
+	        //search: true, 显示搜索框（客户端搜索）
+	        sidePagination: "server", //服务端处理分页
+	        //showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+	        //cardView: false,                    //是否显示详细视图
+	        detailView: false,                   //是否显示父子表
+	        columns: [{  
+	            field: 'checkAll',
+	            title: '全选',
+	            align : 'center',
+	            valign : 'middle',
+	            checkbox : true,
+	            width : 10
+	        },{  
+	            field: 'goodId',
+	            title: '商品id',
+	            align : 'center',
+	            valign : 'middle',
+	            width : 60
+	        },{
+	        	field : 'goodName',
+	            title : '商品名称',
+	            align : 'center',
+	            width :  100,
+	            valign : 'middle'
+	        },{
+	        	field : 'hasCount',
+	            title : '库存数量',
+	            align : 'center',
+	            width :  100,
+	            valign : 'middle'
+	        },{
+	        	field : 'goodEndTime',
+	            title : '失效时间',
+	            align : 'center',
+	            width :  100,
+	            valign : 'middle'
+	        },{
+	            title : '操作',
+	            field : 'id',
+	            align : 'center',
+	            width :  120 ,
+	            valign : 'middle',
+	            formatter : function(value,row,index){
+	                var e = '<a href="javascript:void()" onclick="editGood(\''+ row.goodId + '\')">编辑</a> ';  
+	                var d = '<a href="javascript:void()" onclick="deleteGood(\''+ row.goodId +'\')">删除</a> '; 
+	                return e+d;
+	            }
+	        }],
+	        onLoadSuccess: function(){  //加载成功时执行  
+	            //$("#theTable th").css("text-align","center");  //设置表头内容居中
+	        },  
+	        onLoadError: function(){  //加载失败时执行  
+	            alert("加载数据失败");
+	        }        
+	    });
+	}
+	function getQuetyData(){
+		return $("#formSearch").serialize();
+	}
+	function editGood(id){
+		window.location.href = "cms-good-update.html?id=" + id;
+	}
+	function deleteGood(){
+		
+	}
+	$(function(){
+		//调用函数，初始化表格  
+        initTable();  
+        //当点击查询按钮的时候执行  
+        $("#search").bind("click", initTable);
+	});
 </script>
 </html>
