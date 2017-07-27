@@ -12,7 +12,8 @@ public class PageInfoReq {
     
     private int pageNumber;
     private int pageSize;
-    private String name;
+    private String goodName;
+    private String userName;
     private String queryJson;
 	public int getPageNumber() {
 		return pageNumber;
@@ -26,11 +27,18 @@ public class PageInfoReq {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	public String getName() {
-		return name;
+	
+	public String getGoodName() {
+		return goodName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setGoodName(String goodName) {
+		this.goodName = goodName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getQueryJson() {
 		return queryJson;
