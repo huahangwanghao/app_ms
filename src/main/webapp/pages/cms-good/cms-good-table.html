@@ -213,7 +213,6 @@
         $modal = $('#modal').modal({ show: false }),
         $alert = $('.alert').hide();
     
-    	function getdate(){
             $("#myTable tr").remove();
             $.get("/good/getCmsGoodList.do",function(data){
                 var dataList=JSON.parse(data).data;
@@ -234,15 +233,14 @@
                     html+='</td>';
                     html+='</tr>';
                 });
+                alert(html);
                 $("#myTable .no-records-found").remove();
                 $("#myTable").append(html);
             });
-    	}
 	   
     
     $(function () {
        
-        getdate();
         
         // create event
         $('.create').click(function () {
