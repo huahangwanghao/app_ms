@@ -21,13 +21,7 @@
         	color: red;
         }
     </style>
-      <script type="text/javascript">
-              document.onkeydown= function keyLogin(e){
-              if (event.keyCode==13)  //回车键的键值为13
-                  document.getElementById("loginBtn").click();
-              return;
-          }
-          </script>
+      
 </head>
 
 <body class="login-bg" onkeydown="keyLogin();">
@@ -87,6 +81,12 @@
     		$("#login-error").html(data.restr)
     	}
 	}
+    
+    document.onkeydown = function keyLogin(e){
+        if (event.keyCode==13)  //回车键的键值为13
+        	$("#loginBtn").click();
+        return;
+    }
     
 </script>
 </html>
