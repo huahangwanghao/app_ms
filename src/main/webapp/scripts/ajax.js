@@ -33,3 +33,20 @@ function handleAjaxAdvance(type, url, data, dataType, contentType, async, cache,
 		}
 	});
 }
+
+$.fn.serializeJsonObject = function(obj) {
+	if (obj == undefined || obj == '')
+		obj = {};
+	var formarray = this.serializeArray();
+	$.each(formarray, function() {
+		if (obj[this.name]) {
+			if (!obj[this.name].push) {
+				obj[this.name] = [ obj[this.name] ];
+			}
+			obj[this.name].push(this.value || '');
+		} else {
+			obj[this.name] = this.value || '';
+		}
+	});
+	return obj;
+};

@@ -189,6 +189,7 @@
 	<script src="../../content/min/js/supershopui.common.js"></script>
 	<script src="../../content/plugins/bootstrap-table/bootstrap-table.js"></script>
 	<script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+	<script src="/scripts/ajax.js"></script>
 </body>
 <script>
 	function initTable(){
@@ -282,25 +283,8 @@
 	}
 	function getQuetyData(){
 		return $("#formSearch").serializeJsonObject();
-		//return $("#formSearch").serializeJsonObject();
-		//return $("#formSearch").serialize();
 	}
-	$.fn.serializeJsonObject = function(obj) {
-		if (obj == undefined || obj == '')
-			obj = {};
-		var formarray = this.serializeArray();
-		$.each(formarray, function() {
-			if (obj[this.name]) {
-				if (!obj[this.name].push) {
-					obj[this.name] = [ obj[this.name] ];
-				}
-				obj[this.name].push(this.value || '');
-			} else {
-				obj[this.name] = this.value || '';
-			}
-		});
-		return obj;
-	};
+	
 	function editGood(id){
 		window.location.href = "cms-good-update.html?id=" + id;
 	}
