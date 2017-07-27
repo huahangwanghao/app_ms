@@ -206,7 +206,7 @@
 	        sortName:"goodEndTime",
 	        sortOrder:"desc",	//默认排序
 	        pageNumber: 1,	//初始化加载第一页，默认第一页
-	        pageSize: 2,	//默认显示的每页个数
+	        pageSize: 5,	//默认显示的每页个数
 	        pageList: [10, 25, 50, 100],	//可供选择的每页的行数（*）
 	        queryParamsType: '',	//默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort // 设置为 '' 在这种情况下传给服务器的参数为：pageSize,pageNumber
 	        queryParams:function(params){
@@ -297,5 +297,8 @@
         //当点击查询按钮的时候执行  
         $("#search").bind("click", initTable);
 	});
+    function goGoodAdd(){
+        window.location.href="cms-good-add.html";
+    }
 </script>
 </html>

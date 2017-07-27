@@ -120,7 +120,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
         PageInfo<TCmsGood>  pageInfo1=new PageInfo<TCmsGood>(list);
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("total",pageInfo1.getPages());
+        jsonObject.put("total",pageInfo1.getTotal());
         JSONArray jsonArray=new JSONArray();
         jsonArray.addAll(list);
         jsonObject.put("rows",jsonArray);
