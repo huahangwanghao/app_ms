@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,10 +111,15 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     @Override
     public JSONObject query4Page(PageInfoReq pageInfo) {
         logger.info("分页查询商品信息入参:"+pageInfo);
+        JSONObject json=JSONObject.parseObject(pageInfo.getQueryJson());
+        String goodName=json.getString("goodName");
+        String userName=json.getString("userName");
         TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
         //3类产品
         // criteria.andGoodLevelEqualTo("3");
+        if(StringUtils.isNotEmpty(goodName))
+        criteria.andGoodNameLike(goodName);
         //有效的记录
         criteria.andDataFlagEqualTo("1");
         PageHelper.startPage(pageInfo.getPageNumber(),pageInfo.getPageSize());

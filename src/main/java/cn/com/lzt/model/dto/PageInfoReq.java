@@ -46,5 +46,15 @@ public class PageInfoReq {
 	public void setQueryJson(String queryJson) {
 		this.queryJson = queryJson;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "PageInfoReq{" +
+				"pageNumber=" + pageNumber +
+				", pageSize=" + pageSize +
+				", goodName='" + goodName + '\'' +
+				", userName='" + userName + '\'' +
+				", queryJson='" + queryJson + '\'' +
+				'}';
+	}
 }
