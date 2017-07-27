@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -48,7 +48,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">查询条件</div>
 						<div class="panel-body">
-							<form id="formSearch" class="form-horizontal" accept-charset="UTF-8">
+							<form id="form_search" class="form-horizontal" accept-charset="UTF-8">
 								<div class="form-group" style="margin-top:15px">
 									<label class="control-label col-sm-1"
 										for="txt_search_departmentname">商品名称</label>
@@ -61,7 +61,7 @@
 										<input type="text" class="form-control" id="txt_search_statu" name="userName">
 									</div>
 									<div class="col-sm-4" style="text-align:left;">
-										<button type="button" style="margin-left:50px" id="search"
+										<button type="button" style="margin-left:50px" id="btn_search"
 											class="btn btn-primary">查询</button>
 									</div>
 								</div>
@@ -190,10 +190,12 @@
 	<script src="../../content/plugins/bootstrap-table/bootstrap-table.js"></script>
 	<script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 	<script src="/scripts/ajax.js"></script>
+	<script src="/scripts/tableutil.js"></script>
+	
 </body>
 <script>
 	function initTable(){
-		//先销毁表格  
+		//先销毁表格
         $('#datatable').bootstrapTable('destroy');
         $("#datatable").bootstrapTable({
 			url: "/good/getGoodPageInfo.do", 
@@ -281,9 +283,6 @@
 	        }        
 	    });
 	}
-	function getQuetyData(){
-		return $("#formSearch").serializeJsonObject();
-	}
 	
 	function editGood(id){
 		window.location.href = "cms-good-update.html?id=" + id;
@@ -291,12 +290,7 @@
 	function deleteGood(){
 		
 	}
-	$(function(){
-		//调用函数，初始化表格  
-        initTable();  
-        //当点击查询按钮的时候执行  
-        $("#search").bind("click", initTable);
-	});
+	
     function goGoodAdd(){
         window.location.href="cms-good-add.html";
     }
