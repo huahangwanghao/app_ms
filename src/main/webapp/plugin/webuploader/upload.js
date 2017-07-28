@@ -151,7 +151,7 @@
             swf: 'dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'uploadtopicimg.do',
+            server: '/good/uploadtopicimg.do',
             // runtimeOrder: 'flash',
 
              accept: {
@@ -208,12 +208,14 @@
                 filePath: response._raw
             };*/
         	var imgpath = response._raw;
-        	var topicimgs = getCookie("topicimgs");
-        	if(topicimgs != null && topicimgs != ''){
-        		fileList = getCookie("topicimgs").split(',');
-        	}
+            imgpath=JSON.parse(imgpath);
+            alert("图片路径是:"+imgpath.imgpath);
+            /*var topicimgs = getCookie("topicimgs");
+            if(topicimgs != null && topicimgs != ''){
+                fileList = getCookie("topicimgs").split(',');
+            }*/
         	fileList.push(imgpath);
-        	setCookie("topicimgs",fileList.join(','));
+        	//setCookie("topicimgs",fileList.join(','));
         });
         //add by leyan 
         

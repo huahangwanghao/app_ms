@@ -130,7 +130,7 @@ public class CmsGoodController extends BaseController {
 			String loanApplyNo=request.getParameter("loanApplyNo");
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile multipartFile = multipartRequest.getFile("multipartFile");
-			String fileName=multipartFile.getOriginalFilename();
+			String fileName="test.png";
 			logger.info(loanApplyNo+"上传基本信息照片的名称:"+fileName);
 			File targetFile = new File(imgPath, fileName);
 			if(!targetFile.exists()){
@@ -152,19 +152,22 @@ public class CmsGoodController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "uploadtopicimg.do")
-	public String addImg(MultipartFile file, HttpServletResponse response)
+	public JSONObject addImg(MultipartFile file, HttpServletResponse response)
 			throws Exception {
 		if (null != file && !file.isEmpty()) {
 			BufferedImage sourceImg = ImageIO.read(file.getInputStream());
 			JSONObject json = new JSONObject();
-			String imgpath = FileUtils.uploadImg(file, "topic/");
+			String imgpath = FileUtils.uploadImg(file, "D://");
 			json.put("imgpath", imgpath);
 			json.put("imgwidth", sourceImg.getWidth());
 			json.put("imgheight", sourceImg.getHeight());
 			// 返回图片路径
-			response.getWriter().print(json.toString());
+			//response.getWriter().print(json.toString());
+			return json;
+		}else{
+			return null;
 		}
-		return null;
+		
 	}
 	
 	
