@@ -2,30 +2,30 @@ package cn.com.lzt.common.exception;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-import com.alibaba.fastjson.JSON;
+import cn.com.lzt.common.ResponseMessage;
+import cn.com.lzt.common.util.JsonUtil;
 
 public class CustomExceptionResolver extends SimpleMappingExceptionResolver {
 
-	@Value("${ERROR_MSG}")
-	public String ERROR_MSG;
-
+	private static final Logger logger = LoggerFactory.getLogger(CustomExceptionResolver.class);
+	
+	@SuppressWarnings("static-access")
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
-		ex.printStackTrace();
-		CustomException customException = null;
+		logger.error("错误信息：", ex);
+		ResponseMessage message = new ResponseMessage();
+		message = message.createErrorMsg(ex);
 		if (ex instanceof CustomException) {
-			customException = (CustomException) ex;
-		} else {
-			customException = new CustomException(ERROR_MSG);
+			CustomException customException = (CustomException) ex;
+			message.setMsg(customException.getErrormsg());
 		}
 		// JSP格式返回
 		if (!(request.getHeader("accept").indexOf("application/json") > -1 || (request
@@ -41,17 +41,14 @@ public class CustomExceptionResolver extends SimpleMappingExceptionResolver {
 				viewName = "error/500";
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName(viewName);
-			mav.addObject("restr", customException.getErrormsg());
+			mav.addObject("errormsg", message.getMsg());
 			return mav;
 		} else {
 			// JSON格式返回
 			try {
 				response.setContentType("text/json;charset=utf-8");
 				PrintWriter writer = response.getWriter();
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("code", 1);
-				map.put("restr", customException.getErrormsg());
-				writer.print(JSON.toJSONString(map));
+				writer.print(JsonUtil.jsonToString(message));
 				writer.flush();
 				writer.close();
 				writer = null;

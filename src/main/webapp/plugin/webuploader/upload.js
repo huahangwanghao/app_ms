@@ -151,7 +151,7 @@
             swf: 'dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/good/uploadtopicimg.do',
+            server: '/good/uploadImg.do',
             // runtimeOrder: 'flash',
 
              accept: {
@@ -197,8 +197,6 @@
         //     });
         // });
 
-        
-        //add by leyan 
         uploader.on('uploadSuccess', function (file, response) {//上传成功事件
             /*var fileEvent = {
                 queueId: file.id,
@@ -217,7 +215,6 @@
         	fileList.push(imgpath);
         	//setCookie("topicimgs",fileList.join(','));
         });
-        //add by leyan 
         
         // 添加“添加文件”的按钮，
         uploader.addButton({

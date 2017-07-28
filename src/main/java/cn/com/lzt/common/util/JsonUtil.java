@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 
 public class JsonUtil {
+	
 	private static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
 	private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -26,7 +26,7 @@ public class JsonUtil {
 	 * @param o
 	 * @return
 	 */
-	public static String json2String(Object o) {
+	public static String jsonToString(Object o) {
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
 		try {
 			return ow.writeValueAsString(o);
@@ -36,7 +36,7 @@ public class JsonUtil {
 		}
 	}
 	
-	public static String json2PlainString(Object o) {
+	public static String jsonToPlainString(Object o) {
 		try {
 			return mapper.writer().writeValueAsString(o);
 		} catch (IOException e) {
@@ -51,11 +51,10 @@ public class JsonUtil {
 	 * @param s
 	 * @return
 	 */
-	public static JsonNode string2Json(String s) {
+	public static JsonNode stringToJson(String s) {
 		try {
 			ObjectReader or = mapper.reader();
 			return or.readTree(s);
-
 		} catch (IOException e) {
 			logger.error("Error when converting a string to a json object. " + e.getMessage(), e);
 			return null;
@@ -68,7 +67,7 @@ public class JsonUtil {
 	 * @param s
 	 * @return
 	 */
-	public static <T> T string2Object(String s, Class<T> clazz) {
+	public static <T> T stringToObject(String s, Class<T> clazz) {
 		try {
 			return mapper.readValue(s.getBytes("utf-8"), clazz);
 		} catch (Exception e) {
