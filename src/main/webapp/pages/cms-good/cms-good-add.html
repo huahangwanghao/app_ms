@@ -27,24 +27,16 @@
 <body>
     <section class="content-header">
         <h1>
-           <a href="#" onclick="goBack()"><<</a>商品添加
-            <small></small>
+           <a href="#" onclick="goBack();">&lt;&lt;</a>商品添加
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Forms</a></li>
-            <li class="active">商品添加</li>
-        </ol>
     </section>
     <!-- Main content -->
     <section class="content">
         <div class="row">
             <!-- left column -->
-          
             <!-- right column -->
             <div class="col-md-6">
                 <!-- Horizontal Form -->
-               
                 <!-- general form elements disabled -->
                 <div class="box box-warning">
                     <div class="box-header with-border">
@@ -62,7 +54,6 @@
                                 <label>商品等级</label>
                                 <input type="text" name="goodLevel" class="form-control" placeholder="Enter ...">
                             </div>
-
                             <div class="form-group">
                                 <label>商品等级</label>
                                 <select class="form-control">
@@ -71,7 +62,6 @@
                                     <option>3</option>
                                 </select>
                             </div>
-                            
                             <div class="form-group">
                                 <label>所属分类</label>
                                 <select class="form-control">
@@ -83,79 +73,46 @@
                                     <option>护肤品</option>
                                 </select>
                             </div>
-                           
                             <div class="form-group">
                                 <label>库存数量</label>
                                 <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">高级Datetimepicker示例</label>
-                                <div class="col-md-4">
-                                    <div class="form-control input-group date form_datetime" data-date="2012-12-21T15:25:00Z">
-                                        <input type="text" size="16" readonly class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default date-reset" type="button">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                            <button class="btn default date-set" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
                             </div>
                             <!-- textarea -->
                             <div class="form-group">
                                 <label>商品描述</label>
                                 <textarea name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
                             </div>
-                            
-                            <div class="form-group" style="display: none;">
-                                <label>Select Multiple</label>
-                                <select multiple class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                </select>
-                            </div>
-                            <!--<div class="form-group">
-                                <label for="picFile">上传图片</label>
-                                <input type="file" id="picFile" >
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>-->
-                            <div id="wrapper">
-                                <div id="container">
-                                    <!--头部，相册选择和格式选择-->
-
-                                    <div id="uploader">
-                                        <div class="queueList">
-                                            <div id="dndArea" class="placeholder">
-                                                <div id="filePicker"></div>
-                                                <p>单次最多可选300张</p>
-                                            </div>
-                                        </div>
-                                        <div class="statusBar" style="display:none;">
-                                            <div class="progress">
-                                                <span class="text">0%</span>
-                                                <span class="percentage"></span>
-                                            </div><div class="info"></div>
-                                            <div class="btns">
-                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                            	<div id="wrapper">
+	                                <div id="container">
+	                                    <!--头部，相册选择和格式选择-->
+	                                    <div id="uploader">
+	                                        <div class="queueList">
+	                                            <div id="dndArea" class="placeholder">
+	                                                <div id="filePicker"></div>
+	                                                <p>单次最多可选300张</p>
+	                                            </div>
+	                                        </div>
+	                                        <div class="statusBar" style="display:none;">
+	                                            <div class="progress">
+	                                                <span class="text">0%</span>
+	                                                <span class="percentage"></span>
+	                                            </div><div class="info"></div>
+	                                            <div class="btns">
+	                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
                             </div>
                             <input type="hidden" id="upload_filefolder" value="good" />
-                            <input type="text" id="upload_files" name="upload_files" />
+                            <input type="hidden" id="upload_files" name="upload_files" />
                         </form>
                     </div>
                     <div class="box-footer">
                         <button type="button" class="btn btn-default">重置</button>
-                        <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
+                        <button type="button" id="btn_save" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -170,11 +127,8 @@
     <script src="../../content/min/js/supershopui.common.js"></script>
     <script src="../../plugin/webuploader/webuploader.js"></script>
     <script src="../../plugin/webuploader/upload.js"></script>
+    <script src="../../scripts/common.js"></script>
     <script>
-    delCookie("files");
-        function goBack () {
-            window.history.go(-1);
-        }
         function saveGood() {
         	var files = getCookie("files");
         	alert(files);return;
@@ -192,9 +146,8 @@
                 }
             });
         }
-
        
-      
+      //初始化上传图片插件清除cookie
         
     </script>
 </body>

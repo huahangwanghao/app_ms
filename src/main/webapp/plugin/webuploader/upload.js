@@ -1,6 +1,7 @@
 (function( $ ){
     // 当domReady的时候开始初始化
     $(function() {
+    	delCookie("files");//清除缓存文件信息
         var $wrap = $('#uploader'),
         	fileList = [],
             // 图片容器
@@ -86,7 +87,6 @@
             uploader;
 
         if ( !WebUploader.Uploader.support('flash') && WebUploader.browser.ie ) {
-
             // flash 安装了但是版本过低。
             if (flashVersion) {
                 (function(container) {
@@ -168,7 +168,7 @@
             disableGlobalDnd: true,
             fileNumLimit: 9,
             fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-            fileSingleSizeLimit: 300 * 1024    // 300K
+            fileSingleSizeLimit: 10 * 1024 * 1024    // 10M
         });
         
 
@@ -226,7 +226,7 @@
             var $li = $( '<li id="' + file.id + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
-                    '<p class="progress"><span></span></p>' +
+//                    '<p class="progress"><span></span></p>' +
                     '</li>' ),
 
                 $btns = $('<div class="file-panel">' +
