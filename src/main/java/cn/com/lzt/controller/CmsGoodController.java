@@ -192,23 +192,12 @@ public class CmsGoodController extends BaseController {
 	 */
 	@RequestMapping("/getGoodPageInfo.do")
 	public JSONObject getGoodPageInfo(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
-
-
-		return cmsGoodService.query4Page(pageInfo);
+	
+		logger.info("查询cms分页信息入参:"+pageInfo);
+		JSONObject json= cmsGoodService.query4Page(pageInfo);
+		logger.info("查询cms分页信息返回结果:"+json);
+		return json;
 		
-		
-		/*JSONObject json=new JSONObject();
-		json.put("total",1100);
-		
-		JSONArray jsonArray=new JSONArray();
-		TCmsGood t=new TCmsGood();
-		t.setGoodName("test");
-		jsonArray.add(t);
-		json.put("rows",jsonArray);
-		
-		
-		logger.info("-------------->"+json);
-		return json;*/
 	}
 
 
