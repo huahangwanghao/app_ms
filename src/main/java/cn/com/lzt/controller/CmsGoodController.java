@@ -195,7 +195,9 @@ public class CmsGoodController extends BaseController {
 	 */
 	@RequestMapping("/getGoodPageInfo.do")
 	public JSONObject getGoodPageInfo(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
-	
+		String str = null;
+		if (str.equals("123"))
+			System.out.println("123456");
 		logger.info("查询cms分页信息入参:"+pageInfo);
 		JSONObject json= cmsGoodService.query4Page(pageInfo);
 		logger.info("查询cms分页信息返回结果:"+json);

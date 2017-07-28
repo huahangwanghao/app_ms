@@ -138,11 +138,11 @@
 	<!-- Bootstrap 3.3.6 -->
 	<script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../../content/min/js/supershopui.common.js"></script>
-	<script src="/content/supermgr/Base/js/common.js"></script>
+	<script src="../../content/supermgr/Base/js/common.js"></script>
 	<script src="../../content/plugins/bootstrap-table/bootstrap-table.js"></script>
 	<script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
-	<script src="/scripts/ajax.js"></script>
-	<script src="/scripts/tableutil.js"></script>
+	<script src="../../scripts/ajax.js"></script>
+	<script src="../../scripts/tableutil.js"></script>
 	
 </body>
 <script>
@@ -227,9 +227,11 @@
 	                return e+d;
 	            }
 	        }],
-	        onLoadSuccess: function(){  //加载成功时执行  
+	        onLoadSuccess: function(data){  //加载成功时执行  
+	        	if (data.code == 9999)
+	        		$.fn.modalAlert(data.msg, "error");
 	            //$("#theTable th").css("text-align","center");  //设置表头内容居中
-	        },  
+	        },
 	        onLoadError: function(){  //加载失败时执行  
 	            $.fn.modalAlert("加载数据失败", "error");
 	        }        

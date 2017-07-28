@@ -4,7 +4,6 @@ import cn.com.lzt.common.util.Constants;
 import cn.com.lzt.model.TSysuser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.WebUtils;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class BaseController {
