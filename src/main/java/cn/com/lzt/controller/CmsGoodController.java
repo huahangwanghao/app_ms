@@ -1,7 +1,6 @@
 package cn.com.lzt.controller;
 
 import cn.com.lzt.common.ResponseMessage;
-import cn.com.lzt.common.util.FileUtil;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.model.dto.PageInfoReq;
@@ -144,31 +143,7 @@ public class CmsGoodController extends BaseController {
 		return rm;
 	}
 
-	/**
-	 * 批量上传图片的接口
-	 * @param file
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "uploadImg.do")
-	public JSONObject uploadImg(MultipartFile file, HttpServletResponse response)
-			throws Exception {
-		if (null != file && !file.isEmpty()) {
-			BufferedImage sourceImg = ImageIO.read(file.getInputStream());
-			JSONObject json = new JSONObject();
-			String imgpath = FileUtil.uploadImg(file, UPLOAD_DIR, "good/");
-			json.put("imgpath", imgpath);
-			json.put("imgwidth", sourceImg.getWidth());
-			json.put("imgheight", sourceImg.getHeight());
-			// 返回图片路径
-			//response.getWriter().print(json.toString());
-			return json;
-		}else{
-			return null;
-		}
-		
-	}
+	
 	
 	/**
 	 * 查询cms商品

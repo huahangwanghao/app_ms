@@ -141,24 +141,28 @@
         uploader = WebUploader.create({
             pick: {
                 id: '#filePicker',
-                label: '点击选择图片'
+                label: '点击选择文件'
             },
             formData: {
-                uid: 123
+            	//设置文件上传文件夹
+            	filefolder: $("#upload_filefolder").val()
             },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: 'dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: '/good/uploadImg.do',
+            server: '/upload/fileUpload.do',
             // runtimeOrder: 'flash',
 
-             accept: {
-                 title: 'Images',
-                 extensions: 'gif,jpg,jpeg,bmp,png',
-                 mimeTypes: 'image/*'
-             },
+            //设置上传文件类型
+            /*
+            accept: {
+            	title: 'Images',
+            	extensions: 'gif,jpg,jpeg,bmp,png',
+            	mimeTypes: 'image/*'
+            },
+            */
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
@@ -198,6 +202,9 @@
         // });
 
         uploader.on('uploadSuccess', function (file, response) {//上传成功事件
+        	var data = JSON.parse(response._raw);
+        	alert(data);
+        	
             /*var fileEvent = {
                 queueId: file.id,
                 name: file.name,
@@ -205,14 +212,14 @@
                 type: file.type,
                 filePath: response._raw
             };*/
-        	var imgpath = response._raw;
-            imgpath=JSON.parse(imgpath);
-            alert("图片路径是:"+imgpath.imgpath);
+        	//var imgpath = response._raw;
+            //imgpath=JSON.parse(imgpath);
+            //alert("图片路径是:"+imgpath.imgpath);
             /*var topicimgs = getCookie("topicimgs");
             if(topicimgs != null && topicimgs != ''){
                 fileList = getCookie("topicimgs").split(',');
             }*/
-        	fileList.push(imgpath);
+        	//fileList.push(imgpath);
         	//setCookie("topicimgs",fileList.join(','));
         });
         
