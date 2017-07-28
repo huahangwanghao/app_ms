@@ -1,7 +1,7 @@
 package cn.com.lzt.controller;
 
 import cn.com.lzt.common.ResponseMessage;
-import cn.com.lzt.common.util.FileUtils;
+import cn.com.lzt.common.util.FileUtil;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.model.dto.PageInfoReq;
@@ -151,13 +151,13 @@ public class CmsGoodController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "uploadtopicimg.do")
-	public JSONObject addImg(MultipartFile file, HttpServletResponse response)
+	@RequestMapping(value = "uploadImg.do")
+	public JSONObject uploadImg(MultipartFile file, HttpServletResponse response)
 			throws Exception {
 		if (null != file && !file.isEmpty()) {
 			BufferedImage sourceImg = ImageIO.read(file.getInputStream());
 			JSONObject json = new JSONObject();
-			String imgpath = FileUtils.uploadImg(file, "D://");
+			String imgpath = FileUtil.uploadImg(file, UPLOAD_DIR, "good/");
 			json.put("imgpath", imgpath);
 			json.put("imgwidth", sourceImg.getWidth());
 			json.put("imgheight", sourceImg.getHeight());
@@ -169,8 +169,6 @@ public class CmsGoodController extends BaseController {
 		}
 		
 	}
-	
-	
 	
 	/**
 	 * 查询cms商品
@@ -195,19 +193,11 @@ public class CmsGoodController extends BaseController {
 	 */
 	@RequestMapping("/getGoodPageInfo.do")
 	public JSONObject getGoodPageInfo(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
-		String str = null;
-		if (str.equals("123"))
-			System.out.println("123456");
 		logger.info("查询cms分页信息入参:"+pageInfo);
 		JSONObject json= cmsGoodService.query4Page(pageInfo);
 		logger.info("查询cms分页信息返回结果:"+json);
 		return json;
 		
 	}
-
-
-	
-	
-
 
 }
