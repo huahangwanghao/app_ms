@@ -108,6 +108,7 @@ public class FileUploadController extends BaseController {
 		file.transferTo(new File(filepath + filename));
 		json.put("filepath", relativePath + filename);
 		message = message.createSuccessMsg(json);
+		logger.info("上传文件响应：" + JsonUtil.jsonToString(message));
 		return message;
 	}
 	

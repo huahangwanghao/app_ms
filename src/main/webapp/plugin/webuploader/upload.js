@@ -203,24 +203,12 @@
 
         uploader.on('uploadSuccess', function (file, response) {//上传成功事件
         	var data = JSON.parse(response._raw);
-        	alert(data);
-        	
-            /*var fileEvent = {
-                queueId: file.id,
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                filePath: response._raw
-            };*/
-        	//var imgpath = response._raw;
-            //imgpath=JSON.parse(imgpath);
-            //alert("图片路径是:"+imgpath.imgpath);
-            /*var topicimgs = getCookie("topicimgs");
-            if(topicimgs != null && topicimgs != ''){
-                fileList = getCookie("topicimgs").split(',');
-            }*/
-        	//fileList.push(imgpath);
-        	//setCookie("topicimgs",fileList.join(','));
+        	var files = getCookie("files");
+        	if(files != null && files != ''){
+                fileList = getCookie("files").split(',');
+            }
+        	fileList.push(data.data.filepath);
+        	setCookie("files",fileList.join(','));
         });
         
         // 添加“添加文件”的按钮，
@@ -595,3 +583,30 @@
     });
 
 })( jQuery );
+
+//写cookies 
+function setCookie(name, value) {
+	var Days = 30;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+	document.cookie = name + "=" + escape(value) + ";expires="
+			+ exp.toGMTString();
+}
+
+// 读取cookies
+function getCookie(name) {
+	var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+	if (arr = document.cookie.match(reg))
+		return unescape(arr[2]);
+	else
+		return null;
+}
+
+// 删除cookies
+function delCookie(name) {
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval = getCookie(name);
+	if (cval != null)
+		document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
