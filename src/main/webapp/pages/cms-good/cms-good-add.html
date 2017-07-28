@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../../content/adminlte/dist/css/AdminLTE.css">
     <link rel="stylesheet" href="../../content/adminlte/dist/css/skins/_all-skins.min.css">
     <link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet"/>
+    <link href="../../plugin/webuploader/webuploader.css" rel="stylesheet"/>
+    <link href="../../plugin/webuploader/style.css" rel="stylesheet"/>
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -119,10 +121,33 @@
                                     <option>option 5</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">上传图片</label>
-                                <input type="file" id="exampleInputFile">
+                            <!--<div class="form-group">
+                                <label for="picFile">上传图片</label>
+                                <input type="file" id="picFile" >
                                 <p class="help-block">Example block-level help text here.</p>
+                            </div>-->
+                            <div id="wrapper">
+                                <div id="container">
+                                    <!--头部，相册选择和格式选择-->
+
+                                    <div id="uploader">
+                                        <div class="queueList">
+                                            <div id="dndArea" class="placeholder">
+                                                <div id="filePicker"></div>
+                                                <p>或将照片拖到这里，单次最多可选300张</p>
+                                            </div>
+                                        </div>
+                                        <div class="statusBar" style="display:none;">
+                                            <div class="progress">
+                                                <span class="text">0%</span>
+                                                <span class="percentage"></span>
+                                            </div><div class="info"></div>
+                                            <div class="btns">
+                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -141,6 +166,8 @@
     <script src="../../content/ui/global/jQuery/jquery.min.js"></script>
     <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../content/min/js/supershopui.common.js"></script>
+    <script src="../../plugin/webuploader/webuploader.js"></script>
+    <script src="../../plugin/webuploader/upload.js"></script>
     <script>
         function goBack () {
             window.history.go(-1);
@@ -160,6 +187,10 @@
                 }
             });
         }
+
+       
+      
+        
     </script>
 </body>
 </html>
