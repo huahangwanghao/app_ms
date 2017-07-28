@@ -14,7 +14,7 @@ xxxx表设计
 	修改时间
 	推荐人
 
-1.1地址表
+1.1地址表  t_cms_customer_address
 	地址Id
 	客户id
 	详细地址
@@ -26,27 +26,28 @@ xxxx表设计
 	优惠Id
 	优惠内容
 
-2.购物订单表
-	订单id 
-	客户id
-	手机号
-	收货地址
-	总金额
-	创建时间
-	修改时间
+2.购物订单表  t_cms_customer_order
+	订单id    order_id
+	客户id    customer_id
+	手机号    customer_phone
+	收货地址  customer_address
+	总金额    order_amount
+	创建时间  crt_date
+	修改时间  mdf_date
 
 
-3.购物商品表
-	商品Id
-	客户Id
-	订单Id
-	商品名称
-	原价
-	现价
-	价格
-	图片路径
-	创建时间
-	修改时间
+3.购物商品表  t_cms_customer_good    
+	商品Id   good_id
+	客户Id   customer_id
+	订单Id   order_id
+	商品名称 good_name
+	原价     good_amount_old
+	现价     good_amount_now
+	图片路径  good_img_src
+	创建时间  crt_date
+	修改时间  mdf_date
+	商品状态  good_status  退货 1:正常 0:退货  2:未知原因  
+	
 
 4.后台商品表
 	商品Id
