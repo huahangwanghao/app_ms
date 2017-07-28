@@ -141,24 +141,28 @@
         uploader = WebUploader.create({
             pick: {
                 id: '#filePicker',
-                label: '点击选择图片'
+                label: '点击选择文件'
             },
             formData: {
-                uid: 123
+            	//设置文件上传文件夹
+            	filefolder: $("#upload_filefolder").val()
             },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: 'dist/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'uploadtopicimg.do',
+            server: '/upload/fileUpload.do',
             // runtimeOrder: 'flash',
 
-             accept: {
-                 title: 'Images',
-                 extensions: 'gif,jpg,jpeg,bmp,png',
-                 mimeTypes: 'image/*'
-             },
+            //设置上传文件类型
+            /*
+            accept: {
+            	title: 'Images',
+            	extensions: 'gif,jpg,jpeg,bmp,png',
+            	mimeTypes: 'image/*'
+            },
+            */
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
@@ -197,25 +201,15 @@
         //     });
         // });
 
-        
-        //add by leyan 
         uploader.on('uploadSuccess', function (file, response) {//上传成功事件
-            /*var fileEvent = {
-                queueId: file.id,
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                filePath: response._raw
-            };*/
-        	var imgpath = response._raw;
-        	var topicimgs = getCookie("topicimgs");
-        	if(topicimgs != null && topicimgs != ''){
-        		fileList = getCookie("topicimgs").split(',');
-        	}
-        	fileList.push(imgpath);
-        	setCookie("topicimgs",fileList.join(','));
+        	var data = JSON.parse(response._raw);
+        	var files = getCookie("files");
+        	if(files != null && files != ''){
+                fileList = getCookie("files").split(',');
+            }
+        	fileList.push(data.data.filepath);
+        	setCookie("files",fileList.join(','));
         });
-        //add by leyan 
         
         // 添加“添加文件”的按钮，
         uploader.addButton({
@@ -589,3 +583,30 @@
     });
 
 })( jQuery );
+
+//写cookies 
+function setCookie(name, value) {
+	var Days = 30;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+	document.cookie = name + "=" + escape(value) + ";expires="
+			+ exp.toGMTString();
+}
+
+// 读取cookies
+function getCookie(name) {
+	var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+	if (arr = document.cookie.match(reg))
+		return unescape(arr[2]);
+	else
+		return null;
+}
+
+// 删除cookies
+function delCookie(name) {
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval = getCookie(name);
+	if (cval != null)
+		document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
