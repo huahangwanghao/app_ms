@@ -37,9 +37,10 @@ xxxx表设计
 
 
 3.购物商品表  t_cms_customer_good    
-	商品Id   good_id
+	商品主键Id   good_id
 	客户Id   customer_id
 	订单Id   order_id
+	商品Id   cms_good_id
 	商品名称 good_name
 	原价     good_amount_old
 	现价     good_amount_now
@@ -62,4 +63,33 @@ xxxx表设计
 5.后台用户/角色/权限 还是之前的吧
 
 
+
+6.购物车的表 t_cms_shopping_car
+    主键Id   car_id
+    客户Id   customer_id
+    商品主键id   customer_good_id
+    开始时间 crt_date
+    结束时间 end_date
+    状态     shopping_car_status 0:无效  1:有效
+    
+7.涉及到物流表 肯定是调用三方的接口
+    主键id 
+    订单Id
+    商品Id
+    流转的地方 应该是一条记录有几个流转的记录
+
+
+
+8.广告轮播图表  t_cms_ad
+    主键Id          ad_id
+    显示图片路径     ad_img_src
+    点击图片打开url  ad_url
+    状态             ad_status 0:失效 1:正常
+    创建时间        crt_date
+    修改时间        mdf_date
+        类型  type  (商品主键  cms_good_id  知道点击哪个对应哪个图片 )
+    描述            ad_dec
+    顺序              ad_sort
+    标题              ad_title
+    
 
