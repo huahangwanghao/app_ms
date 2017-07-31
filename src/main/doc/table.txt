@@ -68,9 +68,10 @@ xxxx表设计
     主键Id   car_id
     客户Id   customer_id
     商品主键id   customer_good_id
+    订单Id    order_id
     开始时间 crt_date
     结束时间 end_date
-    状态     shopping_car_status 0:无效  1:有效
+    状态     shopping_car_status 0:放弃,1:在购物车,2:付款成功
     
 7.涉及到物流表 肯定是调用三方的接口
     主键id 
