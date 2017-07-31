@@ -49,7 +49,7 @@
 										for="txt_search_departmentname">商品名称</label>
 									<div class="col-sm-3">
 										<input type="text" class="form-control" name="goodName"
-											id="txt_search_departmentname" value="123">
+											id="txt_search_departmentname">
 									</div>
 									<label class="control-label col-sm-1" for="txt_search_statu">用户名</label>
 									<div class="col-sm-3">
@@ -241,12 +241,33 @@
 	function editGood(id){
 		window.location.href = "cms-good-update.html?id=" + id;
 	}
-	function deleteGood(){
-		
-	}
-	
-    function goGoodAdd(){
-        window.location.href="cms-good-add.html";
+	function deleteGood(obj) {
+            var id =obj;
+            alert("want to delete id is " + id);
+            $.ajax({
+                type: "post",
+                url: "/good/doDeleteCmsGood.do?goodId=" + id,
+                contentType: "application/x-www-form-urlencoded",
+                async: false,
+                error: function () {
+                    alert("请求失败！");
+                },
+                success: function (json) {
+                    var result = JSON.parse(json);
+                    if (result.code == 0) {
+                        initTable();
+                    } else {
+                        alert(result.msg);
+                    }
+                }
+            });
+
+        
     }
+
+        function goGoodAdd() {
+            window.location.href = "cms-good-add.html";
+        }
+    
 </script>
 </html>
