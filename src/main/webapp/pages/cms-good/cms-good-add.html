@@ -149,7 +149,7 @@
                 contentType : "application/x-www-form-urlencoded",
                 async : false,
                 error : function() {
-                    alert("请求失败！");
+                    modalAlert(2,"请求失败！");
                 },
                 success : function(json) {
                     var result=JSON.parse(json);
