@@ -69,7 +69,7 @@
 							<span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
 						</button>
 						<button id="btn_delete" type="button" class="btn btn-default"
-							onclick="doDelete();">
+							onclick="deleteGood();">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>批量删除
 						</button>
 					</div>
@@ -242,6 +242,34 @@
 		window.location.href = "cms-good-update.html?id=" + id;
 	}
 	function deleteGood(obj) {
+	    
+	    	if(!obj){
+	    	    alert("是否批量删除");
+				var ids="";
+                $("input[type=checkbox][name=btSelectItem]:checked").each(function() {
+                    var value=$(this).parent().next().text();
+                    ids+=value+",";
+                });
+                $.ajax({
+                    type : "post",
+                    url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
+                    contentType : "application/x-www-form-urlencoded",
+                    async : false,
+                    error : function() {
+                        alert("请求失败！");
+                    },
+                    success : function(json) {
+                        var result=JSON.parse(json);
+                        if(result.code==0){
+                            initTable();
+                        }else{
+                            alert(result.msg);
+                        }
+                    }
+                });
+                return;
+			}
+	    
             var id =obj;
             alert("want to delete id is " + id);
             $.ajax({
