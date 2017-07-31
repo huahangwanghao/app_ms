@@ -274,27 +274,33 @@
                 });
 	    	    
                 return;
-			}
+			}else{
+                layer.confirm('确认要删除吗?', {icon: 3, title:'系统提示'}, function(index){
+                    layer.close(index);
+                    var id =obj;
+
+                    $.ajax({
+                        type: "post",
+                        url: "/good/doDeleteCmsGood.do?goodId=" + id,
+                        contentType: "application/x-www-form-urlencoded",
+                        async: false,
+                        error: function () {
+                            alert("请求失败！");
+                        },
+                        success: function (json) {
+                            var result = JSON.parse(json);
+                            if (result.code == 0) {
+                                initTable();
+                            } else {
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                        
+                    });
+            }
 	    
-            var id =obj;
-            alert("want to delete id is " + id);
-            $.ajax({
-                type: "post",
-                url: "/good/doDeleteCmsGood.do?goodId=" + id,
-                contentType: "application/x-www-form-urlencoded",
-                async: false,
-                error: function () {
-                    alert("请求失败！");
-                },
-                success: function (json) {
-                    var result = JSON.parse(json);
-                    if (result.code == 0) {
-                        initTable();
-                    } else {
-                        alert(result.msg);
-                    }
-                }
-            });
+            
 
         
     }
