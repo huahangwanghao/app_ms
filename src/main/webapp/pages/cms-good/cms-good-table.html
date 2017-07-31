@@ -244,29 +244,35 @@
 	function deleteGood(obj) {
 	    
 	    	if(!obj){
-	    	    alert("是否批量删除");
-				var ids="";
-                $("input[type=checkbox][name=btSelectItem]:checked").each(function() {
-                    var value=$(this).parent().next().text();
-                    ids+=value+",";
-                });
-                $.ajax({
-                    type : "post",
-                    url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
-                    contentType : "application/x-www-form-urlencoded",
-                    async : false,
-                    error : function() {
-                        alert("请求失败！");
-                    },
-                    success : function(json) {
-                        var result=JSON.parse(json);
-                        if(result.code==0){
-                            initTable();
-                        }else{
-                            alert(result.msg);
+
+
+                layer.confirm('确认要删除吗?', {icon: 3, title:'系统提示'}, function(index){
+                    layer.close(index);
+                    var ids="";
+                    $("input[type=checkbox][name=btSelectItem]:checked").each(function() {
+                        var value=$(this).parent().next().text();
+                        ids+=value+",";
+                    });
+                    $.ajax({
+                        type : "post",
+                        url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
+                        contentType : "application/x-www-form-urlencoded",
+                        async : false,
+                        error : function() {
+                            alert("请求失败！");
+                        },
+                        success : function(json) {
+                            var result=JSON.parse(json);
+                            if(result.code==0){
+                                layer.closeAll('dialog');
+                                initTable();
+                            }else{
+                                alert(result.msg);
+                            }
                         }
-                    }
+                    });
                 });
+	    	    
                 return;
 			}
 	    
