@@ -4290,7 +4290,7 @@
     
                 if ( file.size > max ) {
                     file.setStatus( WUFile.Status.INVALID, 'exceed_size' );
-                    this.trigger( 'error', '单个文件过大，请重新选择上传文件', max, file );
+                    this.trigger( 'error', 'F_EXCEED_SIZE', max, file );
                     return false;
                 }
     
