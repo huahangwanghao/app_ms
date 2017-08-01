@@ -61,11 +61,11 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         if(null!=cmsGoodReq.getGoodId())
         criteria.andGoodIdEqualTo(cmsGoodReq.getGoodId());
         //3类产品
-        criteria.andGoodLevelEqualTo("3");
+//        criteria.andGoodLevelEqualTo("3");
         //有效的记录
-        criteria.andDataFlagEqualTo("1");
+//        criteria.andDataFlagEqualTo("1");
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
-        return ResponseMessage.createSuccessMsg(list);
+        return ResponseMessage.createSuccessMsg(list.get(0));
     }
 
     /**

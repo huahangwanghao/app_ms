@@ -38,8 +38,8 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="/pages" />
+		<property name="suffix" value=".html" />
 	</bean>
 	
 	<!-- 统一异常处理 -->
