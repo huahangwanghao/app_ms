@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group">
                                 <label>商品详情</label>
-                                <script id="good_detail_container" name="good_detail" type="text/plain"></script>
+                                <script id="good_detail_container"  type="text/plain"></script>
                             </div>
                             <div class="form-group" style="display: none;">
                                 <label>Select Multiple</label>
@@ -156,6 +156,7 @@
                             </div>
                             <input type="hidden" id="upload_filefolder" value="good" />
                             <input type="hidden" id="upload_files" name="upload_files" />
+                            <input type="hidden" id="goodDetail" name="goodDetail" />
                         </form>
                     </div>
                     <div class="box-footer">
@@ -181,8 +182,18 @@
     <script src="../../plugin/ueditor/ueditor.all.js"></script>
     <script>    
     	var ue = UE.getEditor('good_detail_container');
-    	
+    	var html;
+        ue.ready(function() {
+            //设置编辑器的内容
+           // ue.setContent('hello');
+            //获取html内容，返回: <p>hello</p >
+            html = ue.getContent();
+            //获取纯文本内容，返回: hello
+            var txt = ue.getContentTxt();
+        });
         function saveGood() {
+            var ueHtml=ue.getContent();
+            $("#goodDetail").val(ueHtml);
         	var files = getCookie("files");
         	if(null==files){
                 modalAlert(2,"请先上传图片!");
