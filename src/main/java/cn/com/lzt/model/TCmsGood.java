@@ -142,4 +142,24 @@ public class TCmsGood {
     public void setCrtDate(Date crtDate) {
         this.crtDate = crtDate;
     }
+
+    @Override
+    public String toString() {
+        return "TCmsGood{" +
+                "goodId=" + goodId +
+                ", goodLevel='" + goodLevel + '\'' +
+                ", parentId=" + parentId +
+                ", goodName='" + goodName + '\'' +
+                ", hasCount=" + hasCount +
+                ", goodDec='" + goodDec + '\'' +
+                ", goodBrand='" + goodBrand + '\'' +
+                ", goodGuige='" + goodGuige + '\'' +
+                ", goodEndTime=" + goodEndTime +
+                ", goodDetail='" + goodDetail + '\'' +
+                ", goodImage='" + goodImage + '\'' +
+                ", goodStatus='" + goodStatus + '\'' +
+                ", dataFlag='" + dataFlag + '\'' +
+                ", crtDate=" + crtDate +
+                '}';
+    }
 }

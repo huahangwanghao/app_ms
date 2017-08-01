@@ -54,4 +54,12 @@ public class ResponseMessage implements java.io.Serializable {
 		this.data = data;
 	}
 
+	@Override
+	public String toString() {
+		return "ResponseMessage{" +
+				"code=" + code +
+				", msg='" + msg + '\'' +
+				", data=" + data +
+				'}';
+	}
 }

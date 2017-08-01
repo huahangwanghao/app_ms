@@ -57,17 +57,13 @@
                                 <label>商品名称</label>
                                 <input id="goodName" type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
                             </div>
-                            <div class="form-group">
-                                <label>商品等级</label>
-                                <input id="goodLevel" type="text" name="goodLevel" class="form-control" placeholder="Enter ...">
-                            </div>
 
                             <div class="form-group">
                                 <label>商品等级</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select name="goodLevel" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
                             
@@ -142,6 +138,7 @@
     <script src="../../content/ui/global/jQuery/jquery.min.js"></script>
     <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../content/min/js/supershopui.common.js"></script>
+    <script src="../../content/supermgr/Base/js/common.js"></script>
     <script>
         var thisURL = document.URL;
         var  getval =thisURL.split('?')[1];
@@ -166,14 +163,13 @@
                     var result=JSON.parse(json);
                     var dataObj=JSON.parse(json).data;
                     if(result.code!=0){
-                        alert("无此数据!");
+                        $.fn.modalAlert("无此数据！", "error");
                         return;
                     }
                     dataObj=dataObj[0];
                     $("#goodName").val(dataObj.goodName);
                     $("#goodLeve").val(dataObj.goodLeve);
                     $("#hasCount").val(dataObj.hasCount);
-                    alert(dataObj.goodId);
                     $("#goodId").val(dataObj.goodId);
                 }
             });
@@ -186,11 +182,11 @@
                 contentType : "application/x-www-form-urlencoded",
                 async : false,
                 error : function() {
-                    alert("请求失败！");
+                    $.fn.modalAlert("请求失败！", "error");
                 },
                 success : function(json) {
                     var result=JSON.parse(json);
-                    alert(result.msg);
+                    $.fn.modalAlert(result.msg, "success");
                 }
             });
         }
