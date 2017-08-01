@@ -49,7 +49,7 @@
 										for="txt_search_departmentname">商品名称</label>
 									<div class="col-sm-3">
 										<input type="text" class="form-control" name="goodName"
-											id="txt_search_departmentname" value="123">
+											id="txt_search_departmentname">
 									</div>
 									<label class="control-label col-sm-1" for="txt_search_statu">用户名</label>
 									<div class="col-sm-3">
@@ -69,7 +69,7 @@
 							<span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
 						</button>
 						<button id="btn_delete" type="button" class="btn btn-default"
-							onclick="doDelete();">
+							onclick="deleteGood();">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>批量删除
 						</button>
 					</div>
@@ -241,12 +241,73 @@
 	function editGood(id){
 		window.location.href = "cms-good-update.html?id=" + id;
 	}
-	function deleteGood(){
-		
-	}
-	
-    function goGoodAdd(){
-        window.location.href="cms-good-add.html";
+	function deleteGood(obj) {
+	    
+	    	if(!obj){
+
+
+                layer.confirm('确认要删除吗?', {icon: 3, title:'系统提示'}, function(index){
+                    layer.close(index);
+                    var ids="";
+                    $("input[type=checkbox][name=btSelectItem]:checked").each(function() {
+                        var value=$(this).parent().next().text();
+                        ids+=value+",";
+                    });
+                    $.ajax({
+                        type : "post",
+                        url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
+                        contentType : "application/x-www-form-urlencoded",
+                        async : false,
+                        error : function() {
+                            alert("请求失败！");
+                        },
+                        success : function(json) {
+                            var result=JSON.parse(json);
+                            if(result.code==0){
+                                layer.closeAll('dialog');
+                                initTable();
+                            }else{
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                });
+	    	    
+                return;
+			}else{
+                layer.confirm('确认要删除吗?', {icon: 3, title:'系统提示'}, function(index){
+                    layer.close(index);
+                    var id =obj;
+
+                    $.ajax({
+                        type: "post",
+                        url: "/good/doDeleteCmsGood.do?goodId=" + id,
+                        contentType: "application/x-www-form-urlencoded",
+                        async: false,
+                        error: function () {
+                            alert("请求失败！");
+                        },
+                        success: function (json) {
+                            var result = JSON.parse(json);
+                            if (result.code == 0) {
+                                initTable();
+                            } else {
+                                alert(result.msg);
+                            }
+                        }
+                    });
+                        
+                    });
+            }
+	    
+            
+
+        
     }
+
+        function goGoodAdd() {
+            window.location.href = "cms-good-add.html";
+        }
+    
 </script>
 </html>

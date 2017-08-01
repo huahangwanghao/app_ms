@@ -53,6 +53,9 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <form role="form" id="goodForm">
+                            
+                            <input style="display:none" name="goodImage" id="goodImage"/>
+                            
                             <!-- text input -->
                             <div class="form-group">
                                 <label>商品名称</label>
@@ -168,16 +171,28 @@
     <script src="../../content/ui/global/jQuery/jquery.min.js"></script>
     <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../content/min/js/supershopui.common.js"></script>
+    <script src="../../content/supermgr/Base/js/common.js"></script>
     <script src="../../plugin/webuploader/webuploader.js"></script>
     <script src="../../plugin/webuploader/upload.js"></script>
+
     <script>
     delCookie("files");
         function goBack () {
             window.history.go(-1);
         }
+
+    <script src="../../scripts/common.js"></script>
+    <script>    
+
         function saveGood() {
         	var files = getCookie("files");
-        	alert(files);return;
+        	if(null==files){
+                modalAlert(2,"请先上传图片!");
+        	    return;
+            }
+            
+            $("#goodImage").val(files);
+            
             $.ajax({
                 type : "post",
                 url : "/good/toAddCmsGood.do",
@@ -185,10 +200,11 @@
                 contentType : "application/x-www-form-urlencoded",
                 async : false,
                 error : function() {
-                    alert("请求失败！");
+                    modalAlert(2,"请求失败！");
                 },
                 success : function(json) {
-                    alert(json.msg);
+                    var result=JSON.parse(json);
+                    modalAlert(1,result.msg);
                 }
             });
         }
@@ -196,6 +212,21 @@
        
       
         
+        //需要引入content/supermgr/Base/js/common.js 文件
+        function modalAlert(type,msg) {
+            switch(type) {
+                case 1:
+                    $.fn.modalAlert(msg, "success");
+                    return;
+                case 2:
+                    $.fn.modalAlert(msg, "error");
+                    return;
+                case 3:
+                    $.fn.modalAlert(msg, "warning");
+                    return;
+            }
+
+        }
     </script>
 </body>
 </html>
