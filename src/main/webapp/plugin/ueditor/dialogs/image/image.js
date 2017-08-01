@@ -772,7 +772,7 @@
         getInsertList: function () {
             var i, data, list = [],
                 align = getAlign(),
-                prefix = editor.getOpt('imageUrlPrefix');
+                prefix = basePath;//editor.getOpt('imageUrlPrefix');
             for (i = 0; i < this.imageList.length; i++) {
                 data = this.imageList[i];
                 list.push({

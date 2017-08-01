@@ -91,7 +91,6 @@
                                 <label>库存数量</label>
                                 <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
                             </div>
-
                             <div class="form-group">
                                 <label class="control-label col-md-3">高级Datetimepicker示例</label>
                                 <div class="col-md-4">
@@ -113,7 +112,10 @@
                                 <label>商品描述</label>
                                 <textarea name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
                             </div>
-                            
+                            <div class="form-group">
+                                <label>商品详情</label>
+                                <script id="good_detail_container" name="good_detail" type="text/plain"></script>
+                            </div>
                             <div class="form-group" style="display: none;">
                                 <label>Select Multiple</label>
                                 <select multiple class="form-control">
@@ -153,7 +155,7 @@
                                 </div>
                             </div>
                             <input type="hidden" id="upload_filefolder" value="good" />
-                            <input type="text" id="upload_files" name="upload_files" />
+                            <input type="hidden" id="upload_files" name="upload_files" />
                         </form>
                     </div>
                     <div class="box-footer">
@@ -174,16 +176,12 @@
     <script src="../../content/supermgr/Base/js/common.js"></script>
     <script src="../../plugin/webuploader/webuploader.js"></script>
     <script src="../../plugin/webuploader/upload.js"></script>
-
-    <script>
-    delCookie("files");
-        function goBack () {
-            window.history.go(-1);
-        }
-
     <script src="../../scripts/common.js"></script>
+	<script src="../../plugin/ueditor/ueditor.config.js"></script>
+    <script src="../../plugin/ueditor/ueditor.all.js"></script>
     <script>    
-
+    	var ue = UE.getEditor('good_detail_container');
+    	
         function saveGood() {
         	var files = getCookie("files");
         	if(null==files){
