@@ -60,7 +60,7 @@
 
                             <div class="form-group">
                                 <label>商品等级</label>
-                                <select name="goodLevel" class="form-control">
+                                <select id="goodLevel" name="goodLevel" class="form-control">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -168,7 +168,9 @@
                     }
                     dataObj=dataObj[0];
                     $("#goodName").val(dataObj.goodName);
-                    $("#goodLeve").val(dataObj.goodLeve);
+                    //$("#goodLevel").find("option[text='3']").attr("selected",true);
+                    //$("#goodLevel option").eq(1).attr("selected", true);
+                    $("#goodLevel option[value='"+dataObj.goodLevel+"']").attr("selected", true);
                     $("#hasCount").val(dataObj.hasCount);
                     $("#goodId").val(dataObj.goodId);
                 }
