@@ -19,10 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 @RestController
@@ -83,7 +80,7 @@ public class CmsGoodController extends BaseController {
 	}
 
 	/**
-	 * 修改cms商品
+	 * 删除cms商品
 	 *
 	 * @param tCmsGood
 	 * @return
@@ -97,7 +94,7 @@ public class CmsGoodController extends BaseController {
 		return responseMessage;
 	}
 	/**
-	 * 修改cms商品
+	 * 删除选中cms商品
 	 *
 	 * @param goodIds
 	 * @return
@@ -173,6 +170,21 @@ public class CmsGoodController extends BaseController {
 		logger.info("查询cms分页信息返回结果:"+json);
 		return json;
 		
+	}
+
+	/**
+	 * 通过商品名称进行模糊查询
+	 *
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/getGoodPageInfoByName.do")
+	public JSONObject getGoodPageInfoByName(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
+		logger.info("通过商品名称查询cms分页信息入参:"+pageInfo);
+		JSONObject json= cmsGoodService.query4Page(pageInfo);
+		logger.info("通过商品名称查询cms分页信息返回结果:"+json);
+		return json;
+
 	}
 
 }

@@ -1,0 +1,17 @@
+
+1.新增商品接口            /good/toAddCmsGood.do
+2.修改商品接口            /good/toUpdateCmsGood.do
+3.删除商品接口            /good/doDeleteCmsGood.do
+4.删除选中的商品接口         /good/doDeleteAllCmsGood.do
+5.查询商品列表接口             /good/getGoodPageInfo.do
+6.根据商品名称查询接口            /good/getGoodPageInfoByName.do
+
+
+
+
+
+
+
+
+
+
