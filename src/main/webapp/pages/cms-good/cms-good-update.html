@@ -206,7 +206,7 @@
     function getGood(id) {
         $.ajax({
             type : "post",
-            url : "/good/getCmsGoodList.do?goodId="+id,
+            url : "/good/getCmsGoodById.do?goodId="+id,
             contentType : "application/x-www-form-urlencoded",
             async : false,
             error : function() {

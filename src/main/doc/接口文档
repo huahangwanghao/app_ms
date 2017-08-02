@@ -5,6 +5,7 @@
 4.删除选中的商品接口         /good/doDeleteAllCmsGood.do
 5.查询商品列表接口             /good/getGoodPageInfo.do
 6.根据商品名称查询接口            /good/getGoodPageInfoByName.do
+7.查询商品的详情接口             /good/getCmsGoodById.do
 
 
 

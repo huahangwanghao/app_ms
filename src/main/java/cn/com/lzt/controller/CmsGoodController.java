@@ -143,13 +143,13 @@ public class CmsGoodController extends BaseController {
 	
 	
 	/**
-	 * 查询cms商品
+	 * 查询cms商品通过商品Id
 	 *
 	 * @param cmsGoodReq
 	 * @return
 	 */
-	@RequestMapping("/getCmsGoodList.do")
-	public ResponseMessage getGood(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
+	@RequestMapping("/getCmsGoodById.do")
+	public ResponseMessage getGoodById(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
 		logger.info("查询cms商品的入参:"+cmsGoodReq);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodService.queryByCondition(cmsGoodReq);
@@ -186,5 +186,7 @@ public class CmsGoodController extends BaseController {
 		return json;
 
 	}
+	
+	
 
 }
