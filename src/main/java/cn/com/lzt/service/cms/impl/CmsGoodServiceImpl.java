@@ -43,7 +43,9 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
         //设置过期时间是2099年
         tCmsGood.setGoodEndTime(new Date(2114355661000l));
+        //<insert id="insertSelective" useGeneratedKeys="true" keyProperty="goodId" parameterType="cn.com.lzt.model.TCmsGood">
          tCmsGoodMapper.insertSelective(tCmsGood);
+         logger.info("返回主键是"+tCmsGood.getGoodId());
         return rm;
     }
 

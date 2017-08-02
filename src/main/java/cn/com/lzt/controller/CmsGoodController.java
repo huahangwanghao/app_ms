@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -30,25 +29,6 @@ public class CmsGoodController extends BaseController {
 	private CmsGoodService cmsGoodService;
 
 
-
-
-	/**
-	 * 新增cms商品
-	 *
-	 * @param tCmsGood
-	 * @return
-	 */
-	@RequestMapping("/toAddCmsGoo1d.do")
-	public ModelAndView toSysUsers1(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
-	    logger.info("新增cms商品的入参:"+tCmsGood);
-		ModelAndView mav = new ModelAndView();
-		ResponseMessage responseMessage=null;
-		int i =0;
-		responseMessage=cmsGoodService.save(tCmsGood);
-		mav.addObject("roles", null);
-		mav.setViewName("sys/sysusers");
-		return mav;
-	}
 
 
 	/**

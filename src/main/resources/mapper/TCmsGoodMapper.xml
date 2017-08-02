@@ -124,7 +124,7 @@
       #{goodDetail,jdbcType=VARCHAR}, #{goodImage,jdbcType=VARCHAR}, #{goodStatus,jdbcType=VARCHAR}, 
       #{dataFlag,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.lzt.model.TCmsGood">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="goodId" parameterType="cn.com.lzt.model.TCmsGood">
     insert into t_cms_good
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodId != null">
