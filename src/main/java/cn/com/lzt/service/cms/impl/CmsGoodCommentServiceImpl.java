@@ -64,7 +64,7 @@ public class CmsGoodCommentServiceImpl implements CmsGoodCommentService {
         // tCmsGoodCommentCriteria.setOrderByClause("");
         //都是有效的评论
         //criteria.andDataFlagEqualTo("1");
-        PageHelper.startPage(pageInfo.getPageSize(),pageInfo.getPageNumber());
+        PageHelper.startPage(pageInfo.getPageNumber(),pageInfo.getPageSize());
         List<TCmsGoodComment> list=tCmsGoodCommentMapper.selectByExample(tCmsGoodCommentCriteria);
         PageInfo<TCmsGoodComment> pageInfo1=new PageInfo<TCmsGoodComment>();
         JSONObject jsonObject=new JSONObject();
