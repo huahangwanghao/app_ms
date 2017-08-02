@@ -119,7 +119,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         //3类产品
         // criteria.andGoodLevelEqualTo("3");
         if(StringUtils.isNotEmpty(goodName))
-        criteria.andGoodNameLike(goodName);
+        criteria.andGoodNameLike("%"+goodName+"%");
         //有效的记录
         criteria.andDataFlagEqualTo("1");
         PageHelper.startPage(pageInfo.getPageNumber(),pageInfo.getPageSize());
