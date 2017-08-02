@@ -6,7 +6,7 @@ import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsGoodCommentMapper;
 import cn.com.lzt.model.TCmsGoodComment;
 import cn.com.lzt.model.TCmsGoodCommentCriteria;
-import cn.com.lzt.model.dto.CmsGoodReq;
+import cn.com.lzt.model.dto.CmsGoodCommentReq;
 import cn.com.lzt.model.dto.PageInfoReq;
 import cn.com.lzt.service.cms.CmsGoodCommentService;
 import com.alibaba.fastjson.JSONArray;
@@ -37,7 +37,8 @@ public class CmsGoodCommentServiceImpl implements CmsGoodCommentService {
     
     @Override
     public ResponseMessage update(TCmsGoodComment tCmsGoodComment) {
-        return null;
+        tCmsGoodCommentMapper.updateByPrimaryKeySelective(tCmsGoodComment);
+        return ResponseMessage.createSuccessMsg(0);
     }
 
     /**
@@ -83,7 +84,10 @@ public class CmsGoodCommentServiceImpl implements CmsGoodCommentService {
      * @return
      */
     @Override
-    public ResponseMessage getGoodCommentById(CmsGoodReq cmsGoodReq) {
-        return null;
+    public ResponseMessage getGoodCommentById(CmsGoodCommentReq cmsGoodReq) {
+        
+        TCmsGoodComment tCmsGoodComment=tCmsGoodCommentMapper.selectByPrimaryKey(cmsGoodReq.getCommentId());
+        
+        return ResponseMessage.createSuccessMsg(tCmsGoodComment);
     }
 }

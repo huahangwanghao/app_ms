@@ -2,7 +2,7 @@ package cn.com.lzt.service.cms;
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsGoodComment;
-import cn.com.lzt.model.dto.CmsGoodReq;
+import cn.com.lzt.model.dto.CmsGoodCommentReq;
 import cn.com.lzt.model.dto.PageInfoReq;
 import com.alibaba.fastjson.JSONObject;
 
@@ -26,5 +26,5 @@ public interface CmsGoodCommentService {
      * @param cmsGoodReq
      * @return
      */
-    ResponseMessage getGoodCommentById(CmsGoodReq cmsGoodReq);
+    ResponseMessage getGoodCommentById(CmsGoodCommentReq cmsGoodReq);
 }

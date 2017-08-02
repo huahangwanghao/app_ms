@@ -2,7 +2,7 @@ package cn.com.lzt.controller;
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsGoodComment;
-import cn.com.lzt.model.dto.CmsGoodReq;
+import cn.com.lzt.model.dto.CmsGoodCommentReq;
 import cn.com.lzt.model.dto.PageInfoReq;
 import cn.com.lzt.service.cms.CmsGoodCommentService;
 import com.alibaba.fastjson.JSONObject;
@@ -78,7 +78,7 @@ public class CmsGoodCommentController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getCmsGoodCommentById.do")
-	public ResponseMessage getGoodCommentById(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
+	public ResponseMessage getGoodCommentById(@ModelAttribute("cmsGoodReq") CmsGoodCommentReq cmsGoodReq) {
 		logger.info("查询cms商品的入参:"+cmsGoodReq);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodCommentService.getGoodCommentById(cmsGoodReq);
