@@ -55,7 +55,7 @@
                     <form role="form" id="goodForm">
                         <input name="goodId" id="goodId" value="" hidden="hidden"/>
                         <input style="display:none" name="goodImage" id="goodImage"/>
-
+                        
                         <!-- text input -->
                         <div class="form-group">
                             <label>商品名称</label>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="box-footer">
                     <button type="button" class="btn btn-default">重置</button>
-                    <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
+                    <button type="button" onclick="updateGood()" class="btn btn-info pull-right">保存</button>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -235,6 +235,8 @@
         });
     }
     function updateGood() {
+        var ueHtml=ue.getContent();
+        $("#goodDetail").val(ueHtml);
         $.ajax({
             type : "post",
             url : "/good/toUpdateCmsGood.do",
@@ -247,6 +249,7 @@
             success : function(json) {
                 var result=JSON.parse(json);
                 $.fn.modalAlert(result.msg, "success");
+                window.location.href = "cms-good-table.html";
             }
         });
     }
