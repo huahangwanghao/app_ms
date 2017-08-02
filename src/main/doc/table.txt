@@ -100,6 +100,26 @@ xxxx表设计
     标题              ad_title
     
 
-9.商品浏览记录表
+9.商品浏览记录表  t_cms_good_read
+浏览Id    read_id
+商品主键Id  cms_good_id
+客户Id     customer_id
+浏览时间    crt_date
+
+
+
+10.购买评论表 t_cms_good_comment
+主键Id    comment_id
+客户Id    customer_id
+客户购买记录Id    customer_good_id
+商品Id        cms_good_id
+评论内容       comment_content
+评论时间    crt_date
+星级      comment_start
+状态      data_flag  0:正常 1:关闭
+
+
+
+
 
 
