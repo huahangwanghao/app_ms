@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="../../content/adminlte/dist/css/AdminLTE.css">
     <link rel="stylesheet" href="../../content/adminlte/dist/css/skins/_all-skins.min.css">
     <link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet"/>
-    <link href="../../plugin/webuploader/webuploader.css" rel="stylesheet"/>
-    <link href="../../plugin/webuploader/style.css" rel="stylesheet"/>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -24,16 +22,16 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-app="myApp">
 <section class="content-header">
     <h1>
-        <a href="#" onclick="goBack()"><<</a>商品添加
+        <a href="#" onclick="goBack()"><<</a>商品修改
         <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Forms</a></li>
-        <li class="active">商品添加</li>
+        <li class="active">商品修改</li>
     </ol>
 </section>
 <!-- Main content -->
@@ -51,15 +49,13 @@
                     <h3 class="box-title"></h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" ng-controller="myCtrl">
                     <form role="form" id="goodForm">
                         <input name="goodId" id="goodId" value="" hidden="hidden"/>
-                        <input style="display:none" name="goodImage" id="goodImage"/>
-
                         <!-- text input -->
                         <div class="form-group">
                             <label>商品名称</label>
-                            <input type="text" id="goodName" name="goodName" class="form-control" placeholder="商品名称 ...">
+                            <input id="goodName" type="text" ng-model="good.goodName" name="goodName" class="form-control" placeholder="商品名称 ...">
                         </div>
 
                         <div class="form-group">
@@ -87,6 +83,7 @@
                             <label>库存数量</label>
                             <input id="hasCount" name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
                         </div>
+
                         <div class="form-group">
                             <label class="control-label col-md-3">高级Datetimepicker示例</label>
                             <div class="col-md-4">
@@ -108,10 +105,7 @@
                             <label>商品描述</label>
                             <textarea name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>商品详情</label>
-                            <script id="good_detail_container"  type="text/plain"></script>
-                        </div>
+
                         <div class="form-group" style="display: none;">
                             <label>Select Multiple</label>
                             <select multiple class="form-control">
@@ -122,42 +116,16 @@
                                 <option>option 5</option>
                             </select>
                         </div>
-                        <!--<div class="form-group">
-                            <label for="picFile">上传图片</label>
-                            <input type="file" id="picFile" >
+                        <div class="form-group">
+                            <label for="exampleInputFile">上传图片</label>
+                            <input type="file" id="exampleInputFile">
                             <p class="help-block">Example block-level help text here.</p>
-                        </div>-->
-                        <div id="wrapper">
-                            <div id="container">
-                                <!--头部，相册选择和格式选择-->
-
-                                <div id="uploader">
-                                    <div class="queueList">
-                                        <div id="dndArea" class="placeholder">
-                                            <div id="filePicker"></div>
-                                            <p>单次最多可选300张</p>
-                                        </div>
-                                    </div>
-                                    <div class="statusBar" style="display:none;">
-                                        <div class="progress">
-                                            <span class="text">0%</span>
-                                            <span class="percentage"></span>
-                                        </div><div class="info"></div>
-                                        <div class="btns">
-                                            <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <input type="hidden" id="upload_filefolder" value="good" />
-                        <input type="hidden" id="upload_files" name="upload_files" />
-                        <input type="hidden" id="goodDetail" name="goodDetail" />
                     </form>
                 </div>
                 <div class="box-footer">
                     <button type="button" class="btn btn-default">重置</button>
-                    <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
+                    <button type="button" onclick="updateGood()" class="btn btn-info pull-right">保存</button>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -171,18 +139,12 @@
 <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../content/min/js/supershopui.common.js"></script>
 <script src="../../content/supermgr/Base/js/common.js"></script>
-<script src="../../plugin/webuploader/webuploader.js"></script>
-<script src="../../plugin/webuploader/upload.js"></script>
-<script src="../../scripts/common.js"></script>
-<script src="../../plugin/ueditor/ueditor.config.js"></script>
-<script src="../../plugin/ueditor/ueditor.all.js"></script>
 <script src="../../scripts/angular.min.js"></script>
 <script>
-    var ue = UE.getEditor('good_detail_container');
     var thisURL = document.URL;
     var  getval =thisURL.split('?')[1];
     var id= getval.split("=")[1];
-    /*   var app = angular.module('myApp', []);
+    var app = angular.module('myApp', []);
     app.controller('myCtrl', function($scope, $http) {
         $http({
             method: 'post',
@@ -194,10 +156,10 @@
         });
 
     });
-*/
+
 
     $(function(){
-        getGood(id);
+        //getGood(id);
     });
 
     function goBack () {
@@ -219,18 +181,13 @@
                     $.fn.modalAlert("无此数据！", "error");
                     return;
                 }
-                //dataObj=dataObj[0];
+                dataObj=dataObj[0];
                 $("#goodName").val(dataObj.goodName);
                 //$("#goodLevel").find("option[text='3']").attr("selected",true);
                 //$("#goodLevel option").eq(1).attr("selected", true);
                 $("#goodLevel option[value='"+dataObj.goodLevel+"']").attr("selected", true);
                 $("#hasCount").val(dataObj.hasCount);
                 $("#goodId").val(dataObj.goodId);
-                ue.ready(function() {
-                    //设置编辑器的内容
-                    ue.setContent(dataObj.goodDetail);
-                 
-                });
             }
         });
     }
@@ -249,23 +206,6 @@
                 $.fn.modalAlert(result.msg, "success");
             }
         });
-    }
-
-
-    //需要引入content/supermgr/Base/js/common.js 文件
-    function modalAlert(type,msg) {
-        switch(type) {
-            case 1:
-                $.fn.modalAlert(msg, "success");
-                return;
-            case 2:
-                $.fn.modalAlert(msg, "error");
-                return;
-            case 3:
-                $.fn.modalAlert(msg, "warning");
-                return;
-        }
-
     }
 </script>
 </body>
