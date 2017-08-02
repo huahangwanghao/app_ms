@@ -214,6 +214,7 @@
                 success : function(json) {
                     var result=JSON.parse(json);
                     modalAlert(1,result.msg);
+                    window.location.href = "cms-good-table.html";
                 }
             });
         }
