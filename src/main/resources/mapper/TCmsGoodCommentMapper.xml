@@ -7,6 +7,7 @@
     <result column="customer_good_id" property="customerGoodId" jdbcType="INTEGER" />
     <result column="cms_good_id" property="cmsGoodId" jdbcType="INTEGER" />
     <result column="comment_start" property="commentStart" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
     <result column="comment_content_answer" property="commentContentAnswer" jdbcType="VARCHAR" />
     <result column="comment_content1" property="commentContent1" jdbcType="VARCHAR" />
@@ -308,4 +309,15 @@
       crt_date = #{crtDate,jdbcType=TIMESTAMP}
     where comment_id = #{commentId,jdbcType=BIGINT}
   </update>
+  
+  
+  <select id="getCommentPageInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select gc.*,c.customer_name from t_cms_customer c,t_cms_good_comment gc where c.customer_id=gc.customer_id
+    <if test="customerName != null ">
+      and c.customer_name like #{customerName}
+    </if>
+     order by gc.crt_date desc 
+  </select>
+  
+  
 </mapper>

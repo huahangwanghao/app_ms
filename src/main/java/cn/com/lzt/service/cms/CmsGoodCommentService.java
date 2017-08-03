@@ -3,7 +3,6 @@ package cn.com.lzt.service.cms;
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsGoodComment;
 import cn.com.lzt.model.dto.CmsGoodCommentReq;
-import cn.com.lzt.model.dto.PageInfoReq;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -19,7 +18,7 @@ public interface CmsGoodCommentService {
      */
     ResponseMessage batchDeleteByIds(String goodIds);
 
-    JSONObject queryGoodComment4Page(PageInfoReq pageInfo);
+    JSONObject queryGoodComment4Page(CmsGoodCommentReq pageInfo);
 
     /**
      * 通过Id查询出对应的数据

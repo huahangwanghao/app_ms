@@ -3,7 +3,6 @@ package cn.com.lzt.controller;
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsGoodComment;
 import cn.com.lzt.model.dto.CmsGoodCommentReq;
-import cn.com.lzt.model.dto.PageInfoReq;
 import cn.com.lzt.service.cms.CmsGoodCommentService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -90,7 +89,7 @@ public class CmsGoodCommentController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoodCommentPageInfo.do")
-	public JSONObject getGoodCommentPageInfo(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
+	public JSONObject getGoodCommentPageInfo(@ModelAttribute("pageInfo") CmsGoodCommentReq pageInfo) {
 		logger.info("查询cms分页信息入参:"+pageInfo);
 		JSONObject json= cmsGoodCommentService.queryGoodComment4Page(pageInfo);
 		logger.info("查询cms分页信息返回结果:"+json);
@@ -105,7 +104,7 @@ public class CmsGoodCommentController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoodPageInfoByName.do")
-	public JSONObject getGoodPageInfoByName(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
+	public JSONObject getGoodPageInfoByName(@ModelAttribute("pageInfo") CmsGoodCommentReq pageInfo) {
 		logger.info("通过商品名称查询cms分页信息入参:"+pageInfo);
 		JSONObject json= cmsGoodCommentService.queryGoodComment4Page(pageInfo);
 		logger.info("通过商品名称查询cms分页信息返回结果:"+json);

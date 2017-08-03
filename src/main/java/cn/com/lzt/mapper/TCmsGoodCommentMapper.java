@@ -2,8 +2,10 @@ package cn.com.lzt.mapper;
 
 import cn.com.lzt.model.TCmsGoodComment;
 import cn.com.lzt.model.TCmsGoodCommentCriteria;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface TCmsGoodCommentMapper {
     int countByExample(TCmsGoodCommentCriteria example);
@@ -27,4 +29,10 @@ public interface TCmsGoodCommentMapper {
     int updateByPrimaryKeySelective(TCmsGoodComment record);
 
     int updateByPrimaryKey(TCmsGoodComment record);
+
+    /**
+     * 得到评论的分页数据
+     * @return
+     */
+    List<TCmsGoodComment> getCommentPageInfo(Map<String,String> param);
 }

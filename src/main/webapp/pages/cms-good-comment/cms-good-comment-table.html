@@ -48,7 +48,7 @@
 									<label class="control-label col-sm-1"
 										for="txt_search_departmentname">商品名称</label>
 									<div class="col-sm-3">
-										<input type="text" class="form-control" name="goodName"
+										<input type="text" class="form-control" name="search"
 											id="txt_search_departmentname">
 									</div>
 									<label class="control-label col-sm-1" for="txt_search_statu">用户名</label>
@@ -146,8 +146,14 @@
 	            valign : 'middle',
 	            width : 60
 	        },{
-	        	field : 'customerId',
-	            title : '客户Id',
+                field : 'customerId',
+                title : '客户Id',
+                align : 'center',
+                width :  100,
+                valign : 'middle'
+            },{
+	        	field : 'customerName',
+	            title : '客户姓名',
 	            align : 'center',
 	            width :  100,
 	            valign : 'middle'

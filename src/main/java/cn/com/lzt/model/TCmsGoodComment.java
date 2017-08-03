@@ -24,6 +24,8 @@ public class TCmsGoodComment {
     private String dataFlag;
 
     private Date crtDate;
+    
+    private String customerName;
 
     public Long getCommentId() {
         return commentId;
@@ -113,6 +115,14 @@ public class TCmsGoodComment {
         this.crtDate = crtDate;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     @Override
     public String toString() {
         return "TCmsGoodComment{" +
@@ -127,6 +137,7 @@ public class TCmsGoodComment {
                 ", commentContentAnswer1='" + commentContentAnswer1 + '\'' +
                 ", dataFlag='" + dataFlag + '\'' +
                 ", crtDate=" + crtDate +
+                ", customerName='" + customerName + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package cn.com.lzt.common.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -74,5 +75,17 @@ public class JsonUtil {
 			logger.error("Error when converting a string to a object. " + e.getMessage(), e);
 			return null;
 		}
+	}
+
+	/**
+	 * 得到前台查询的条件内容
+	 * @param jsonString
+	 * @param key
+	 * @return
+	 */
+	public static String getQueryValue(String jsonString,String key){
+		JSONObject json=JSONObject.parseObject(jsonString);
+		String value=json.getString(key);
+		return value;
 	}
 }
