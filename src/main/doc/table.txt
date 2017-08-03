@@ -41,6 +41,7 @@ xxxx表设计
 	客户Id   customer_id
 	订单Id   order_id
 	商品Id   cms_good_id
+	商品规格  cms_good_guige
 	商品名称 good_name
 	原价     good_amount_old
 	现价     good_amount_now
@@ -73,7 +74,9 @@ xxxx表设计
 6.购物车的表 t_cms_shopping_car
     主键Id   car_id
     客户Id   customer_id
-    商品主键id   customer_good_id
+    客户购买商品主键id   customer_good_id
+    商品主键Id     cms_good_id
+    商品规格  cms_good_guige
     订单Id    order_id
     开始时间 crt_date
     结束时间 end_date

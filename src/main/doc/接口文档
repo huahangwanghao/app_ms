@@ -12,7 +12,8 @@
 11.下载图片的接口              /pic/file/download.do  get方式  url:数据库里面的值/good/20170801155700046-1870665232.jpg
 12.增加客户的收获地址           /customer/toAddCustomerAddress.do
 13.修改客户的收获地址           /customer/toUpdateCustomerAddress.do
-
+14.添加购物车                  /buy/toAddShoppingCar.do
+14.修改购物车                  /buy/toUpdateShoppingCar.do
 
 
 
