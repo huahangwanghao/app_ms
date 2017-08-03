@@ -4,7 +4,9 @@ package cn.com.lzt.service.cms.impl;/**
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsCustomerAddressMapper;
+import cn.com.lzt.mapper.TCmsCustomerMapper;
 import cn.com.lzt.model.TCmsCustomerAddress;
+import cn.com.lzt.model.dto.CmsCustomerReq;
 import cn.com.lzt.service.cms.CmsCustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,8 @@ public class CmsCustomerServiceImpl implements CmsCustomerService {
     
     @Autowired
     private TCmsCustomerAddressMapper tCmsCustomerAddressMapper;
+    @Autowired
+    private TCmsCustomerMapper tCmsCustomerMapper;
     
     /**
      * 增加收获地址
@@ -49,5 +53,27 @@ public class CmsCustomerServiceImpl implements CmsCustomerService {
     public ResponseMessage updateCustomerAddress(TCmsCustomerAddress tCmsCustomerAddress) {
         tCmsCustomerAddressMapper.updateByPrimaryKeySelective(tCmsCustomerAddress);
         return ResponseMessage.createSuccessMsg(0);
+    }
+
+    /**
+     * 登录接口
+     *
+     * @param tCmsCustomerAddress
+     * @return
+     */
+    @Override
+    public ResponseMessage login(CmsCustomerReq tCmsCustomerAddress) {
+        return null;
+    }
+
+    /**
+     * 注册接口
+     *
+     * @param tCmsCustomerAddress
+     * @return
+     */
+    @Override
+    public ResponseMessage register(CmsCustomerReq tCmsCustomerAddress) {
+        return null;
     }
 }
