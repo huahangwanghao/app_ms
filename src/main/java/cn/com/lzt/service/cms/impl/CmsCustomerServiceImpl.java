@@ -9,6 +9,8 @@ import cn.com.lzt.service.cms.CmsCustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 客户service
@@ -16,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author WangH
  * @create 2017-08-03 15:00
  **/
+@Service
+@Transactional
 public class CmsCustomerServiceImpl implements CmsCustomerService {
 
     private static final Logger logger = LoggerFactory.getLogger(CmsCustomerServiceImpl.class);
