@@ -61,6 +61,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      */
     @Override
     public ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq) {
+        logger.info("查询商品详情页面入参:"+cmsGoodReq);
         TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
         

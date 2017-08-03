@@ -22,6 +22,8 @@ public class CmsGoodCommentReq extends PageInfoReq {
 
     @Override
     public String toString() {
-        return "commentId:"+commentId+super.toString();
+        return "CmsGoodCommentReq{" +
+                "commentId=" + commentId +
+                '}'+super.toString();
     }
 }

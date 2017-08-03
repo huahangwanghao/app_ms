@@ -37,4 +37,11 @@ public class CmsGoodReq extends PageInfoReq {
                 ", customerId=" + customerId +
                 '}'+super.toString();
     }
+
+    public static void main(String[] args) {
+        CmsGoodReq t=new CmsGoodReq();
+        t.setCustomerId(1);
+        t.setGoodId(1);
+        System.out.println(t);
+    }
 }
