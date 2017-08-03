@@ -25,17 +25,14 @@ public class CmsGoodCommentController extends BaseController {
 	private CmsGoodCommentService cmsGoodCommentService;
 
 
-
-
-
 	/**
 	 * 修改cms评论
 	 *
 	 * @param tCmsGoodComment
 	 * @return
 	 */
-	@RequestMapping("/toUpdateCmsGood.do")
-	public ResponseMessage updateCmsGood(@ModelAttribute("tCmsGoodComment") TCmsGoodComment tCmsGoodComment) {
+	@RequestMapping("/toUpdateCmsGoodComment.do")
+	public ResponseMessage updateCmsGoodComment(@ModelAttribute("tCmsGoodComment") TCmsGoodComment tCmsGoodComment) {
 		logger.info("修改cms评论入参:"+tCmsGoodComment);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodCommentService.update(tCmsGoodComment);

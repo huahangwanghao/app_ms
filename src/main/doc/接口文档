@@ -6,6 +6,9 @@
 5.查询商品列表接口             /good/getGoodPageInfo.do
 6.根据商品名称查询接口            /good/getGoodPageInfoByName.do
 7.查询商品的详情接口             /good/getCmsGoodById.do
+8.得到评论的分页列表             /comment/getGoodCommentPageInfo.do
+9通过id得到评论详情             /comment/getCmsGoodCommentById.do
+10.修改评论内容               /comment/toUpdateCmsGoodComment.do
 
 
 
