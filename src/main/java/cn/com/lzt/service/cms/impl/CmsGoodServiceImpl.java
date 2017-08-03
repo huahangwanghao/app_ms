@@ -4,8 +4,10 @@ package cn.com.lzt.service.cms.impl;/**
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsGoodMapper;
+import cn.com.lzt.mapper.TCmsGoodReadMapper;
 import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.TCmsGoodCriteria;
+import cn.com.lzt.model.TCmsGoodRead;
 import cn.com.lzt.model.dto.CmsGoodReq;
 import cn.com.lzt.model.dto.PageInfoReq;
 import cn.com.lzt.service.cms.CmsGoodService;
@@ -36,6 +38,8 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     private static final Logger logger = LoggerFactory.getLogger(CmsGoodServiceImpl.class);
     @Autowired
     private TCmsGoodMapper tCmsGoodMapper;
+    @Autowired
+    private TCmsGoodReadMapper tCmsGoodReadMapper;
 
 
     @Override
@@ -66,6 +70,18 @@ public class CmsGoodServiceImpl implements CmsGoodService {
 //        criteria.andGoodLevelEqualTo("3");
         //有效的记录
 //        criteria.andDataFlagEqualTo("1");
+        
+        
+        //添加浏览记录
+        if(cmsGoodReq.getCustomerId()!=null){
+            TCmsGoodRead tCmsGoodRead=new TCmsGoodRead();
+            tCmsGoodRead.setCrtDate(new Date());
+            tCmsGoodRead.setCmsGoodId(cmsGoodReq.getGoodId());
+            tCmsGoodRead.setCustomerId(cmsGoodReq.getCustomerId());
+            tCmsGoodReadMapper.insertSelective(tCmsGoodRead);
+        }
+        
+        
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
         return ResponseMessage.createSuccessMsg(list.get(0));
     }

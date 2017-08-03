@@ -11,6 +11,8 @@ package cn.com.lzt.model.dto;/**
 public class CmsGoodReq extends PageInfoReq {
     
     private Integer goodId;
+    
+    private Integer customerId;
 
     public Integer getGoodId() {
         return goodId;
@@ -20,10 +22,19 @@ public class CmsGoodReq extends PageInfoReq {
         this.goodId = goodId;
     }
 
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     public String toString() {
         return "CmsGoodReq{" +
                 "goodId=" + goodId +
-                '}';
+                ", customerId=" + customerId +
+                '}'+super.toString();
     }
 }
