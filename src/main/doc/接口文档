@@ -1,21 +1,21 @@
 
-1.新增商品接口            /good/toAddCmsGood.do
-2.修改商品接口            /good/toUpdateCmsGood.do
-3.删除商品接口            /good/doDeleteCmsGood.do
-4.删除选中的商品接口         /good/doDeleteAllCmsGood.do
-5.查询商品列表接口             /good/getGoodPageInfo.do
-6.根据商品名称查询接口            /good/getGoodPageInfoByName.do
-7.查询商品的详情接口             /good/getCmsGoodById.do
-8.得到评论的分页列表             /comment/getGoodCommentPageInfo.do
-9通过id得到评论详情             /comment/getCmsGoodCommentById.do
-10.修改评论内容               /comment/toUpdateCmsGoodComment.do
-11.下载图片的接口              /pic/file/download.do  get方式  url:数据库里面的值/good/20170801155700046-1870665232.jpg
-12.增加客户的收获地址           /customer/toAddCustomerAddress.do
-13.修改客户的收获地址           /customer/toUpdateCustomerAddress.do
-14.添加购物车                  /buy/toAddShoppingCar.do
-15.修改购物车                  /buy/toUpdateShoppingCar.do
-16.获取购物车列表                  /buy/getShoppingCarList.do
-17.获取购物车详情                  /buy/getShoppingCarDetail.do
+1.  新增商品接口            /good/toAddCmsGood.do
+2.  修改商品接口            /good/toUpdateCmsGood.do
+3.  删除商品接口            /good/doDeleteCmsGood.do
+4.  删除选中的商品接口         /good/doDeleteAllCmsGood.do
+5.  查询商品列表接口             /good/getGoodPageInfo.do
+6.  根据商品名称查询接口            /good/getGoodPageInfoByName.do
+7.  查询商品的详情接口             /good/getCmsGoodById.do
+8.  得到评论的分页列表             /comment/getGoodCommentPageInfo.do
+9.  通过id得到评论详情             /comment/getCmsGoodCommentById.do
+10. 修改评论内容               /comment/toUpdateCmsGoodComment.do
+11. 下载图片的接口              /pic/file/download.do  get方式  url:数据库里面的值/good/20170801155700046-1870665232.jpg
+12. 增加客户的收获地址           /customer/toAddCustomerAddress.do
+13. 修改客户的收获地址           /customer/toUpdateCustomerAddress.do
+14. 添加购物车                  /buy/toAddShoppingCar.do
+15. 修改购物车                  /buy/toUpdateShoppingCar.do
+16. 获取购物车列表                  /buy/getShoppingCarList.do
+17. 获取购物车详情                  /buy/getShoppingCarDetail.do
 
 
 
