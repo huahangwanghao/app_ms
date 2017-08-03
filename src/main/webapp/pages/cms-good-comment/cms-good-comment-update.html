@@ -131,32 +131,7 @@
     function goBack () {
         window.history.go(-1);
     }
-    function getGood(id) {
-        $.ajax({
-            type : "post",
-            url : "/good/getCmsGoodList.do?goodId="+id,
-            contentType : "application/x-www-form-urlencoded",
-            async : false,
-            error : function() {
-                alert("请求失败！");
-            },
-            success : function(json) {
-                var result=JSON.parse(json);
-                var dataObj=JSON.parse(json).data;
-                if(result.code!=0){
-                    $.fn.modalAlert("无此数据！", "error");
-                    return;
-                }
-                dataObj=dataObj[0];
-                $("#goodName").val(dataObj.goodName);
-                //$("#goodLevel").find("option[text='3']").attr("selected",true);
-                //$("#goodLevel option").eq(1).attr("selected", true);
-                $("#goodLevel option[value='"+dataObj.goodLevel+"']").attr("selected", true);
-                $("#hasCount").val(dataObj.hasCount);
-                $("#goodId").val(dataObj.goodId);
-            }
-        });
-    }
+    
     function updateGood() {
         $.ajax({
             type : "post",
@@ -170,6 +145,7 @@
             success : function(json) {
                 var result=JSON.parse(json);
                 $.fn.modalAlert(result.msg, "success");
+                window.location.href = "cms-good-comment-table.html";
             }
         });
     }
