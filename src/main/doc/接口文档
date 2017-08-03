@@ -13,8 +13,9 @@
 12.增加客户的收获地址           /customer/toAddCustomerAddress.do
 13.修改客户的收获地址           /customer/toUpdateCustomerAddress.do
 14.添加购物车                  /buy/toAddShoppingCar.do
-14.修改购物车                  /buy/toUpdateShoppingCar.do
-
+15.修改购物车                  /buy/toUpdateShoppingCar.do
+16.获取购物车列表                  /buy/getShoppingCarList.do
+17.获取购物车详情                  /buy/getShoppingCarDetail.do
 
 
 

@@ -2,6 +2,7 @@ package cn.com.lzt.controller;
 
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.model.TCmsShoppingCar;
+import cn.com.lzt.model.dto.CustomerBuyReq;
 import cn.com.lzt.service.cms.CustomerBuyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class CustomerBuyGoodController extends BaseController {
 	public ResponseMessage addShoppingCar(@ModelAttribute("tCmsShoppingCar") TCmsShoppingCar tCmsShoppingCar) {
 		logger.info("添加到购物车入参:"+ tCmsShoppingCar);
 		ResponseMessage responseMessage=null;
-		responseMessage=customerBuyService.addBuyCar(tCmsShoppingCar);
+		responseMessage=customerBuyService.addShoppingCar(tCmsShoppingCar);
 		return responseMessage;
 	}
 
@@ -45,10 +46,36 @@ public class CustomerBuyGoodController extends BaseController {
 	public ResponseMessage updateShoppingCar(@ModelAttribute("tCmsShoppingCar") TCmsShoppingCar tCmsShoppingCar) {
 		logger.info("修改购物车入参:"+tCmsShoppingCar);
 		ResponseMessage responseMessage=null;
-		responseMessage=customerBuyService.updateBuyCar(tCmsShoppingCar);
+		responseMessage=customerBuyService.updateShoppingCar(tCmsShoppingCar);
 		return responseMessage;
 	}
 
+	/**
+	 * 获取购物车列表
+	 *
+	 * @param customerBuyReq
+	 * @return
+	 */
+	@RequestMapping("/getShoppingCarList.do")
+	public ResponseMessage getShoppingCarList(@ModelAttribute("customerBuyReq") CustomerBuyReq customerBuyReq) {
+		logger.info("修改购物车入参:"+customerBuyReq);
+		ResponseMessage responseMessage=null;
+		responseMessage=customerBuyService.getShoppingCarList(customerBuyReq);
+		return responseMessage;
+	}
+	/**
+	 * 获取购物车详情
+	 *
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("/getShoppingCarDetail.do")
+	public ResponseMessage getShoppingCarDetail(@ModelAttribute("customerBuyReq") CustomerBuyReq customerBuyReq) {
+		logger.info("修改购物车入参:"+customerBuyReq);
+		ResponseMessage responseMessage=null;
+		responseMessage=customerBuyService.getShoppingCarDetailById(customerBuyReq.getCarId());
+		return responseMessage;
+	}
 	
 	
 
