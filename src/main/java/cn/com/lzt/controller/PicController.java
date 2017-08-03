@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 
 @Controller
 @RequestMapping("/pic")
@@ -30,7 +33,7 @@ public class PicController extends BaseController {
 	 * 上传基本信息照片
 	 * @return
 	 */
-	@RequestMapping(value={"monthloan/basePic/upload"}, method= RequestMethod.POST)
+	@RequestMapping(value={"/basePic/upload"}, method= RequestMethod.POST)
 	@ResponseBody
 	public ResponseMessage uploadBaseInfoPic(HttpServletRequest request){
 		ResponseMessage rm=new ResponseMessage();
@@ -48,7 +51,7 @@ public class PicController extends BaseController {
 			// String patch=request.getParameter("patch");
 			String token=request.getParameter("token");
 			String businessType=request.getParameter("businessType");
-			logger.info(loanApplyNo+"月供贷基本信息上传开始入参：fileName:" + fileName + ",loanApplyNo:"
+			logger.info(loanApplyNo+"基本信息上传开始入参：fileName:" + fileName + ",loanApplyNo:"
 					+ request.getParameter("loanApplyNo") + ",type:" + request.getParameter("type") + ",patch:"
 					+ request.getParameter("patch") + ",token:" + request.getParameter("token") + ",businessType:"
 					+ request.getParameter("businessType")+"pictureOrder"+request.getParameter("pictureOrder"));
@@ -60,6 +63,49 @@ public class PicController extends BaseController {
 			rm=ResponseMessage.createErrorMsg(e);
 		}
 		return rm;
+	}
+
+
+	/**
+	 * 下载图片
+	 *
+	 * 前端把图片的路径传递给我们,然后我们根据路径查询出来对应的图片返回给前端
+	 *
+	 * @param request
+	 */
+	@RequestMapping(value = "/file/download.do", method = RequestMethod.GET)
+	public   void  download(HttpServletRequest request, HttpServletResponse response){
+		String imagePath=request.getParameter("url");
+		logger.info("下载图片上传参数:"+UPLOAD_DIR+imagePath);
+		OutputStream out = null;
+		try {
+			
+			FileInputStream inputStream = new FileInputStream(UPLOAD_DIR+imagePath);
+			int i = inputStream.available();
+			//byte数组用于存放图片字节数据  
+			byte[] buff = new byte[i];
+			inputStream.read(buff);
+			//记得关闭输入流  
+			inputStream.close();
+			//设置发送到客户端的响应内容类型  
+			response.setContentType("image/*");
+			response.setContentType("image/jpeg");
+			out = response.getOutputStream();
+			out.write(buff);
+			//关闭响应输出流  
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(out!=null){
+					out.flush();
+					out.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 
