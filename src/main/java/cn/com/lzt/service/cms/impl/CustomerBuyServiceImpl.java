@@ -5,10 +5,12 @@ package cn.com.lzt.service.cms.impl;/**
 import cn.com.lzt.common.ResponseMessage;
 import cn.com.lzt.mapper.TCmsCustomerGoodMapper;
 import cn.com.lzt.mapper.TCmsCustomerOrderMapper;
+import cn.com.lzt.mapper.TCmsGoodMapper;
 import cn.com.lzt.mapper.TCmsShoppingCarMapper;
 import cn.com.lzt.model.TCmsCustomerGood;
 import cn.com.lzt.model.TCmsCustomerGoodCriteria;
 import cn.com.lzt.model.TCmsCustomerOrder;
+import cn.com.lzt.model.TCmsGood;
 import cn.com.lzt.model.TCmsShoppingCar;
 import cn.com.lzt.model.TCmsShoppingCarCriteria;
 import cn.com.lzt.model.dto.CustomerBuyReq;
@@ -43,6 +45,8 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
     private TCmsCustomerGoodMapper tCmsCustomerGoodMapper;
     @Autowired
     private TCmsCustomerOrderMapper tCmsCustomerOrderMapper;
+    @Autowired
+    private TCmsGoodMapper tCmsGoodMapper;
 
 
     /**
@@ -53,6 +57,20 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
      */
     @Override
     public ResponseMessage addShoppingCar(TCmsShoppingCar customerBuyReq) {
+        
+        //1.添加之前判断该商品是否还有库存
+        int goodId=customerBuyReq.getCmsGoodId();
+        TCmsGood good=tCmsGoodMapper.selectByPrimaryKey(goodId);
+        String status=good.getGoodStatus();
+        if("0".equals(status)){
+            return ResponseMessage.customMsg("此商品已经下架!");
+        }else{
+            int hasCount=good.getHasCount();
+            if(hasCount<1){
+                return ResponseMessage.customMsg("商品库存不足!");
+            }  
+        }
+        
         tCmsShoppingCarMapper.insertSelective(customerBuyReq);
         return ResponseMessage.createSuccessMsg(0);
     }

@@ -13,6 +13,11 @@ public class ResponseMessage implements java.io.Serializable {
 		return resMsg;
 	}
 
+	public static final ResponseMessage customMsg(String msg) {
+		ResponseMessage resMsg = new ResponseMessage(1, msg, msg);
+		return resMsg;
+	}
+
 	public static final ResponseMessage createErrorMsg(Exception e) {
 		return new ResponseMessage(9999, "系统错误，请联系管理员", "系统错误，请联系管理员");
 	}
