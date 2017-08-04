@@ -1,6 +1,8 @@
 (function( $ ){
     // 当domReady的时候开始初始化
     $(function() {
+    	//清除上传缓存图片
+    	delCookie("files");
         var $wrap = $('#uploader'),
         	fileList = [],
             // 图片容器
@@ -226,8 +228,8 @@
             var $li = $( '<li id="' + file.id + '">' +
                     '<p class="title">' + file.name + '</p>' +
                     '<p class="imgWrap"></p>'+
-                    '<p class="progress"><span></span></p>' +
-                    '</li>' ),
+//                    '<p class="progress"><span></span></p>' +
+                    +'</li>' ),
 
                 $btns = $('<div class="file-panel">' +
                     '<span class="cancel">删除</span>' +

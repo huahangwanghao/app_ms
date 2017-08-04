@@ -35,37 +35,19 @@
     <section class="content">
         <div class="row">
             <!-- left column -->
-          
             <!-- right column -->
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <!-- Horizontal Form -->
-               
                 <!-- general form elements disabled -->
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"></h3>
-                    </div>
+                <div class="box box-primary">
                     <!-- /.box-header -->
-                    <div class="box-body">
-                        <form role="form" id="goodForm">
-                            
-                            <input style="display:none" name="goodImage" id="goodImage"/>
-                            
+                    <form role="form" id="goodForm">
+                    	<div class="box-body">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>商品名称</label>
-                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
+                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ..." errormsg="商品名称" isvalid="yes" checkexpession="NotNull" datatype="*" />
                             </div>
-
-                            <div class="form-group">
-                                <label>商品等级</label>
-                                <select name="goodLevel" class="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                            </div>
-                            
                             <div class="form-group">
                                 <label>所属分类</label>
                                 <select class="form-control">
@@ -77,26 +59,9 @@
                                     <option>护肤品</option>
                                 </select>
                             </div>
-                           
                             <div class="form-group">
                                 <label>库存数量</label>
-                                <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ...">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3">高级Datetimepicker示例</label>
-                                <div class="col-md-4">
-                                    <div class="form-control input-group date form_datetime" data-date="2012-12-21T15:25:00Z">
-                                        <input type="text" size="16" readonly class="form-control">
-                                        <span class="input-group-btn">
-                                            <button class="btn default date-reset" type="button">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                            <button class="btn default date-set" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
+                                <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" datatype="*" />
                             </div>
                             <!-- textarea -->
                             <div class="form-group">
@@ -107,53 +72,40 @@
                                 <label>商品详情</label>
                                 <script id="good_detail_container"  type="text/plain"></script>
                             </div>
-                            <div class="form-group" style="display: none;">
-                                <label>Select Multiple</label>
-                                <select multiple class="form-control">
-                                    <option>option 1</option>
-                                    <option>option 2</option>
-                                    <option>option 3</option>
-                                    <option>option 4</option>
-                                    <option>option 5</option>
-                                </select>
+                            <div class="form-group">
+                            	<label>商品图片</label>
+                            	<div id="wrapper">
+	                                <div id="container">
+	                                    <!--头部，相册选择和格式选择-->
+	                                    <div id="uploader">
+	                                        <div class="queueList">
+	                                            <div id="dndArea" class="placeholder">
+	                                                <div id="filePicker"></div>
+	                                                <p>单次最多可选300张</p>
+	                                            </div>
+	                                        </div>
+	                                        <div class="statusBar" style="display:none;">
+	                                            <div class="progress">
+	                                                <span class="text">0%</span>
+	                                                <span class="percentage"></span>
+	                                            </div><div class="info"></div>
+	                                            <div class="btns">
+	                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
                             </div>
-                            <!--<div class="form-group">
-                                <label for="picFile">上传图片</label>
-                                <input type="file" id="picFile" >
-                                <p class="help-block">Example block-level help text here.</p>
-                            </div>-->
-                            <div id="wrapper">
-                                <div id="container">
-                                    <!--头部，相册选择和格式选择-->
-
-                                    <div id="uploader">
-                                        <div class="queueList">
-                                            <div id="dndArea" class="placeholder">
-                                                <div id="filePicker"></div>
-                                                <p>单次最多可选300张</p>
-                                            </div>
-                                        </div>
-                                        <div class="statusBar" style="display:none;">
-                                            <div class="progress">
-                                                <span class="text">0%</span>
-                                                <span class="percentage"></span>
-                                            </div><div class="info"></div>
-                                            <div class="btns">
-                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" name="goodImage" id="goodImage"/>
                             <input type="hidden" id="upload_filefolder" value="good" />
-                            <input type="hidden" id="upload_files" name="upload_files" />
                             <input type="hidden" id="goodDetail" name="goodDetail" />
-                        </form>
-                    </div>
-                    <div class="box-footer">
-                        <button type="button" class="btn btn-default">重置</button>
-                        <button type="button" onclick="saveGood()" class="btn btn-info pull-right">保存</button>
-                    </div>
+                    	</div>
+                    	<div class="box-footer">
+	                    	<input type="reset" class="btn btn-primary" onclick="javascript:window.location.reload();" value="重置" />
+	                        <button type="button" onclick="saveGood()" class="btn btn-primary">保存</button>
+	                    </div>
+                    </form>
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
@@ -171,28 +123,17 @@
     <script src="../../scripts/common.js"></script>
 	<script src="../../plugin/ueditor/ueditor.config.js"></script>
     <script src="../../plugin/ueditor/ueditor.all.js"></script>
-    <script>    
+    <script>
     	var ue = UE.getEditor('good_detail_container');
-    	var html;
-        ue.ready(function() {
-            //设置编辑器的内容
-           // ue.setContent('hello');
-            //获取html内容，返回: <p>hello</p >
-            html = ue.getContent();
-            //获取纯文本内容，返回: hello
-            var txt = ue.getContentTxt();
-        });
         function saveGood() {
-            var ueHtml=ue.getContent();
+            var ueHtml = ue.getContent();
             $("#goodDetail").val(ueHtml);
         	var files = getCookie("files");
-        	if(null==files){
-                modalAlert(2,"请先上传图片!");
-        	    return;
+        	if(null == files){
+        		$.fn.modalAlert("商品图片不能为空！", "error");
+        		return;
             }
-            
             $("#goodImage").val(files);
-            
             $.ajax({
                 type : "post",
                 url : "/good/toAddCmsGood.do",
@@ -208,25 +149,6 @@
                     window.location.href = "cms-good-table.html";
                 }
             });
-        }
-
-       
-      
-        
-        //需要引入content/supermgr/Base/js/common.js 文件
-        function modalAlert(type,msg) {
-            switch(type) {
-                case 1:
-                    $.fn.modalAlert(msg, "success");
-                    return;
-                case 2:
-                    $.fn.modalAlert(msg, "error");
-                    return;
-                case 3:
-                    $.fn.modalAlert(msg, "warning");
-                    return;
-            }
-
         }
     </script>
 </body>
