@@ -16,6 +16,9 @@
 15. 修改购物车                  /buy/toUpdateShoppingCar.do
 16. 获取购物车列表                  /buy/getShoppingCarList.do
 17. 获取购物车详情                  /buy/getShoppingCarDetail.do
+18. 新增分类信息                  /category/toAddGoodCategory.do
+19. 查询所有分类信息               /category/getAllGoodCategory.do
+20. 查询分页分类信息               /category/getGoodCategory4Page.do
 
 
 

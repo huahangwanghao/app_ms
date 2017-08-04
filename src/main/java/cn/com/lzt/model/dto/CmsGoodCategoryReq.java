@@ -1,6 +1,15 @@
-package cn.com.lzt.model;
+package cn.com.lzt.model.dto;/**
+ * Created by Administrator on 2017/7/21.
+ */
 
-public class TCmsGoodCategory {
+/**
+ * 商品请求入参
+ *
+ * @author WangH
+ * @create 2017-07-21 11:01
+ **/
+public class CmsGoodCategoryReq extends PageInfoReq {
+
     private Integer categoryId;
 
     private String categoryName;
@@ -73,7 +82,7 @@ public class TCmsGoodCategory {
 
     @Override
     public String toString() {
-        return "TCmsGoodCategory{" +
+        return "CmsGoodCategoryReq{" +
                 "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
                 ", categoryParentId=" + categoryParentId +
@@ -81,6 +90,6 @@ public class TCmsGoodCategory {
                 ", categoryImgPath='" + categoryImgPath + '\'' +
                 ", categoryUrl='" + categoryUrl + '\'' +
                 ", dataFlag='" + dataFlag + '\'' +
-                '}';
+                '}'+super.toString();
     }
 }

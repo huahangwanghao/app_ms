@@ -1,5 +1,6 @@
 package cn.com.lzt.common.util;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,7 +10,9 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.util.List;
 
 public class JsonUtil {
 	
@@ -87,5 +90,20 @@ public class JsonUtil {
 		JSONObject json=JSONObject.parseObject(jsonString);
 		String value=json.getString(key);
 		return value;
+	}
+
+	/**
+	 * 得到分页信息返回给前端的jsonobject对象
+	 * @param total
+	 * @param list
+	 * @return
+	 */
+	public static JSONObject getPageInfo2JsonObject(long total,List list){
+		JSONObject jsonObject=new JSONObject();
+		jsonObject.put("total",total);
+		JSONArray jsonArray=new JSONArray();
+		jsonArray.addAll(list);
+		jsonObject.put("rows",jsonArray);
+		return jsonObject;
 	}
 }
