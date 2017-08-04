@@ -17,19 +17,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 @RestController
 @RequestMapping("/good")
 public class CmsGoodController extends BaseController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController.class);
+	
 	@Autowired
 	private CmsGoodService cmsGoodService;
-
-
-
 
 	/**
 	 * 新增cms商品
@@ -40,8 +38,7 @@ public class CmsGoodController extends BaseController {
 	@RequestMapping("/toAddCmsGood.do")
 	public ResponseMessage addCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 		logger.info("新增cms商品的入参:"+tCmsGood);
-		ResponseMessage responseMessage=null;
-		responseMessage=cmsGoodService.save(tCmsGood);
+		ResponseMessage responseMessage = cmsGoodService.save(tCmsGood);
 		return responseMessage;
 	}
 

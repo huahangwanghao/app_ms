@@ -15,6 +15,7 @@
     <link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet"/>
     <link href="../../plugin/webuploader/webuploader.css" rel="stylesheet"/>
     <link href="../../plugin/webuploader/style.css" rel="stylesheet"/>
+    <link href="../../plugin/zTree/css/zTreeStyle/zTreeStyle.css" />
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,16 +50,9 @@
                                 <input type="text" name="goodName" class="form-control" placeholder="商品名称 ..." errormsg="商品名称" isvalid="yes" checkexpession="NotNull" datatype="*" />
                             </div>
                             <div class="form-group">
-                                <label>所属分类</label>
-                                <select class="form-control">
-                                    <option>...</option>
-                                    <option>家电</option>
-                                    <option>衣服</option>
-                                    <option>书籍</option>
-                                    <option>日用品</option>
-                                    <option>护肤品</option>
-                                </select>
-                            </div>
+				 				<label>所属分类</label>
+				 				<input type="text" class="form-control" id="good_level" name="good_level" readonly onclick="showMenu();" />
+							</div>
                             <div class="form-group">
                                 <label>库存数量</label>
                                 <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" datatype="*" />
@@ -107,6 +101,9 @@
 	                    </div>
                     </form>
                     <!-- /.box-body -->
+                    <div id="good_level_content" style="display:none; position: absolute;background: #D7E4F2;border:1px solid #DDDDDD;">
+			 			<ul id="selztree" class="ztree" style="margin-top:0; width:300px; min-height: 350px;"></ul>
+					</div>
                 </div>
                 <!-- /.box -->
             </div>
@@ -123,8 +120,51 @@
     <script src="../../scripts/common.js"></script>
 	<script src="../../plugin/ueditor/ueditor.config.js"></script>
     <script src="../../plugin/ueditor/ueditor.all.js"></script>
+    <script src="../../plugin/zTree/js/jquery.ztree.excheck-3.5.js"></script>
     <script>
     	var ue = UE.getEditor('good_detail_container');
+    	var setting = {
+   			data: {
+   				simpleData: {
+   					enable: true
+   				}
+   			},
+   			callback: {
+   				onClick: onClick
+   			}
+   		};
+    	$(function(){
+    		//查询商品分类
+    		handleAjaxSimple("/good/findGoodCategories.do", '', getGoodCategories);
+    		function getGoodCategories(data){
+    			$.fn.zTree.init($("#selztree"), setting, data.goodCategories);
+    		}
+    	});
+    	
+    	function onClick(event, treeId, treeNode) {
+			$("#good_level").val(treeNode.name);
+    		//$("#modulelevel").val(treeNode.treelevel);
+			//$("#parentid").val(treeNode.id);
+		}
+    	
+    	function showMenu() {
+			var cityObj = $("#good_level");
+			var cityOffset = $("#good_level").offset();
+			$("#good_level_content").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+			$("body").bind("mousedown", onBodyDown);
+		}
+		
+		function hideMenu() {
+			$("#good_level_content").fadeOut("fast");
+			$("body").unbind("mousedown", onBodyDown);
+		}
+		
+		function onBodyDown(event) {
+			if (!(event.target.id == "good_level" || event.target.id == "good_level_content" || $(event.target).parents("#good_level_content").length>0)) {
+				hideMenu();
+			}
+		}
+    	
         function saveGood() {
             var ueHtml = ue.getContent();
             $("#goodDetail").val(ueHtml);
