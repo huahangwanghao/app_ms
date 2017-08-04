@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | General Form Elements</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../content/ui/global/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link href="../../content/ui/global/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../content/adminlte/dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="../../content/adminlte/dist/css/skins/_all-skins.min.css">
+    <link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet"/>
+    <link href="../../plugin/webuploader/webuploader.css" rel="stylesheet"/>
+    <link href="../../plugin/webuploader/style.css" rel="stylesheet"/>
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head> 
+<body>
+    <section class="content-header">
+        <h1>
+           <a href="#" onclick="goBack()"><<</a>商品分类添加
+            <small></small>
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+          
+            <!-- right column -->
+            <div class="col-md-6">
+                <!-- Horizontal Form -->
+               
+                <!-- general form elements disabled -->
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form role="form" id="goodForm">
+                            
+                            <input style="display:none" name="goodImage" id="goodImage"/>
+                            
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>商品分类名称</label>
+                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ...">
+                            </div>
+
+                            <div class="form-group">
+                                <label>所选级别</label>
+                                <select name="goodCategoryLevel1" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>一级分类</label>
+                                <select name="goodCategoryLevel1" class="form-control">
+                                    <option value="1">手机</option>
+                                    <option value="2">电脑</option>
+                                    <option value="3">男装</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>二级分类</label>
+                                <select name="goodCategoryLevel2" class="form-control">
+                                    <option value="1">笔记本电脑</option>
+                                    <option value="2">台式机电脑</option>
+                                    <option value="3">游戏本</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" style="display: none;">
+                                <label>Select Multiple</label>
+                                <select multiple class="form-control">
+                                    <option>option 1</option>
+                                    <option>option 2</option>
+                                    <option>option 3</option>
+                                    <option>option 4</option>
+                                    <option>option 5</option>
+                                </select>
+                            </div>
+                            <input type="hidden" id="upload_filefolder" value="good" />
+                            <input type="hidden" id="upload_files" name="upload_files" />
+                            <input type="hidden" id="goodDetail" name="goodDetail" />
+                        </form>
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default">重置</button>
+                        <button type="button" onclick="saveGoodCategory()" class="btn btn-info pull-right">保存</button>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <script src="../../content/ui/global/jQuery/jquery.min.js"></script>
+    <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../content/min/js/supershopui.common.js"></script>
+    <script src="../../content/supermgr/Base/js/common.js"></script>
+    <script src="../../plugin/webuploader/webuploader.js"></script>
+    <script src="../../plugin/webuploader/upload.js"></script>
+    <script src="../../scripts/common.js"></script>
+    <script>    
+    	
+        function saveGoodCategory() {
+            var ueHtml=ue.getContent();
+            $("#goodDetail").val(ueHtml);
+        	var files = getCookie("files");
+        	if(null==files){
+                modalAlert(2,"请先上传图片!");
+        	    return;
+            }
+            
+            $("#goodImage").val(files);
+            
+            $.ajax({
+                type : "post",
+                url : "/good/toAddCmsGood.do",
+                data : $('#goodForm').serialize(),
+                contentType : "application/x-www-form-urlencoded",
+                async : false,
+                error : function() {
+                    modalAlert(2,"请求失败！");
+                },
+                success : function(json) {
+                    var result=JSON.parse(json);
+                    modalAlert(1,result.msg);
+                    window.location.href = "cms-good-table.html";
+                }
+            });
+        }
+
+       
+      
+        
+        //需要引入content/supermgr/Base/js/common.js 文件
+        function modalAlert(type,msg) {
+            switch(type) {
+                case 1:
+                    $.fn.modalAlert(msg, "success");
+                    return;
+                case 2:
+                    $.fn.modalAlert(msg, "error");
+                    return;
+                case 3:
+                    $.fn.modalAlert(msg, "warning");
+                    return;
+            }
+
+        }
+    </script>
+</body>
+</html>
