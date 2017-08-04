@@ -48,6 +48,12 @@ public interface CustomerBuyService {
      * @return
      */
     ResponseMessage getOrderDetail(CustomerBuyReq customerBuyReq);
+    /**
+     * 修改订单
+     * @param customerBuyReq
+     * @return
+     */
+    ResponseMessage updateOrder(CustomerBuyReq customerBuyReq);
 
 
 

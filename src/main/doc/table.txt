@@ -34,6 +34,7 @@ xxxx表设计
 	总金额    order_amount
 	创建时间  crt_date
 	修改时间  mdf_date
+	订单状态    data_flag  0:失效 1:正常
 
 
 3.购物商品表  t_cms_customer_good    

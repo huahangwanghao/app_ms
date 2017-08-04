@@ -111,4 +111,15 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
     public ResponseMessage getOrderDetail(CustomerBuyReq customerBuyReq) {
         return null;
     }
+
+    /**
+     * 修改订单
+     *
+     * @param customerBuyReq
+     * @return
+     */
+    @Override
+    public ResponseMessage updateOrder(CustomerBuyReq customerBuyReq) {
+        return null;
+    }
 }
