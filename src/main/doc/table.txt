@@ -124,6 +124,13 @@ xxxx表设计
 
 
 
-
+11.分类表 t_cms_good_category
+分类Id        category_id
+分类名称        category_name
+parent_id       category_parent_id
+分类等级        category_level
+显示图片        category_img_path
+点击url          category_url
+标志位          data_flag
 
 
