@@ -35,9 +35,19 @@ public interface CustomerBuyService {
      */
     ResponseMessage getShoppingCarDetailById(int carId);
 
+    /**
+     * 得到订单
+     * @param customerBuyReq
+     * @return
+     */
+    ResponseMessage getOrderList(CustomerBuyReq customerBuyReq);
 
-
-
+    /**
+     * 得到订单详情
+     * @param customerBuyReq
+     * @return
+     */
+    ResponseMessage getOrderDetail(CustomerBuyReq customerBuyReq);
 
 
 

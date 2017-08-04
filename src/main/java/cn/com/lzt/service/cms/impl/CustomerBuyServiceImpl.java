@@ -89,4 +89,26 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
         TCmsShoppingCar t=tCmsShoppingCarMapper.selectByPrimaryKey(carId);
         return ResponseMessage.createSuccessMsg(t);
     }
+
+    /**
+     * 得到订单
+     *
+     * @param customerBuyReq
+     * @return
+     */
+    @Override
+    public ResponseMessage getOrderList(CustomerBuyReq customerBuyReq) {
+        return null;
+    }
+
+    /**
+     * 得到订单详情
+     *
+     * @param customerBuyReq
+     * @return
+     */
+    @Override
+    public ResponseMessage getOrderDetail(CustomerBuyReq customerBuyReq) {
+        return null;
+    }
 }
