@@ -3,7 +3,12 @@ package cn.com.lzt.service.cms.impl;/**
  */
 
 import cn.com.lzt.common.ResponseMessage;
+import cn.com.lzt.mapper.TCmsCustomerGoodMapper;
+import cn.com.lzt.mapper.TCmsCustomerOrderMapper;
 import cn.com.lzt.mapper.TCmsShoppingCarMapper;
+import cn.com.lzt.model.TCmsCustomerGood;
+import cn.com.lzt.model.TCmsCustomerGoodCriteria;
+import cn.com.lzt.model.TCmsCustomerOrder;
 import cn.com.lzt.model.TCmsShoppingCar;
 import cn.com.lzt.model.TCmsShoppingCarCriteria;
 import cn.com.lzt.model.dto.CustomerBuyReq;
@@ -16,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 客户service
@@ -32,6 +39,10 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
     
     @Autowired
     private TCmsShoppingCarMapper tCmsShoppingCarMapper;
+    @Autowired
+    private TCmsCustomerGoodMapper tCmsCustomerGoodMapper;
+    @Autowired
+    private TCmsCustomerOrderMapper tCmsCustomerOrderMapper;
 
 
     /**
@@ -91,25 +102,35 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
     }
 
     /**
-     * 得到订单
-     *
+     * 得到订单列表
+     *SELECT o.*,g.cms_good_id from t_cms_customer_order o , t_cms_customer_good g where o.order_id=g.order_id and o.data_flag=1 and o.customer_id=
      * @param customerBuyReq
      * @return
      */
     @Override
     public ResponseMessage getOrderList(CustomerBuyReq customerBuyReq) {
-        return null;
+        Map<String,Object> param=new HashMap<>();
+        param.put("customerId",customerBuyReq.getCustomerId()+"");
+        PageHelper.startPage(customerBuyReq.getPageNumber(),customerBuyReq.getPageSize());
+        List<TCmsCustomerOrder> list=tCmsCustomerOrderMapper.selectOrderList(param);
+        return ResponseMessage.createSuccessMsg(list);
     }
 
     /**
-     * 得到订单详情
-     *
+     * 得到订单详情,通过订单Id,查询所有的商品
      * @param customerBuyReq
      * @return
      */
     @Override
     public ResponseMessage getOrderDetail(CustomerBuyReq customerBuyReq) {
-        return null;
+        
+        int orderId=customerBuyReq.getOrderId();
+        TCmsCustomerGoodCriteria tCmsCustomerGoodCriteria=new TCmsCustomerGoodCriteria();
+        TCmsCustomerGoodCriteria.Criteria criteria=tCmsCustomerGoodCriteria.createCriteria();
+        criteria.andOrderIdEqualTo(orderId);
+        List<TCmsCustomerGood> list=tCmsCustomerGoodMapper.selectByExample(tCmsCustomerGoodCriteria);
+        return ResponseMessage.createSuccessMsg(list);
+       
     }
 
     /**

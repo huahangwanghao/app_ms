@@ -2,8 +2,10 @@ package cn.com.lzt.mapper;
 
 import cn.com.lzt.model.TCmsCustomerOrder;
 import cn.com.lzt.model.TCmsCustomerOrderCriteria;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface TCmsCustomerOrderMapper {
     int countByExample(TCmsCustomerOrderCriteria example);
@@ -27,4 +29,11 @@ public interface TCmsCustomerOrderMapper {
     int updateByPrimaryKeySelective(TCmsCustomerOrder record);
 
     int updateByPrimaryKey(TCmsCustomerOrder record);
+
+    /**
+     * 得到订单列表
+     * @param param
+     * @return
+     */
+    List<TCmsCustomerOrder> selectOrderList(Map<String, Object> param);
 }

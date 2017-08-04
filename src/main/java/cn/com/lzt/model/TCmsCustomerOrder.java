@@ -6,7 +6,7 @@ import java.util.Date;
 public class TCmsCustomerOrder {
     private Integer orderId;
 
-    private String customerId;
+    private Integer customerId;
 
     private String customerPhone;
 
@@ -28,12 +28,12 @@ public class TCmsCustomerOrder {
         this.orderId = orderId;
     }
 
-    public String getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId == null ? null : customerId.trim();
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public String getCustomerPhone() {
