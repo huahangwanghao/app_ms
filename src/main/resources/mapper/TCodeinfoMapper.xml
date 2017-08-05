@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.lzt.mapper.TCodeinfoMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.lzt.model.TCodeinfo" >
+<mapper namespace="com.haohai.cms.mapper.TCodeinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCodeinfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="codename" property="codename" jdbcType="VARCHAR" />
     <result column="codeimg" property="codeimg" jdbcType="VARCHAR" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List" >
     id, codename, codeimg
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lzt.model.TCodeinfoCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCodeinfoCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -94,19 +94,19 @@
     delete from t_codeinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.lzt.model.TCodeinfoCriteria" >
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCodeinfoCriteria" >
     delete from t_codeinfo
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.lzt.model.TCodeinfo" >
+  <insert id="insert" parameterType="com.haohai.cms.model.TCodeinfo" >
     insert into t_codeinfo (id, codename, codeimg
       )
     values (#{id,jdbcType=INTEGER}, #{codename,jdbcType=VARCHAR}, #{codeimg,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.lzt.model.TCodeinfo" >
+  <insert id="insertSelective" parameterType="com.haohai.cms.model.TCodeinfo" >
     insert into t_codeinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -131,7 +131,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.lzt.model.TCodeinfoCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.haohai.cms.model.TCodeinfoCriteria" resultType="java.lang.Integer" >
     select count(*) from t_codeinfo
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -163,7 +163,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lzt.model.TCodeinfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCodeinfo" >
     update t_codeinfo
     <set >
       <if test="codename != null" >
@@ -175,7 +175,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.lzt.model.TCodeinfo" >
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCodeinfo" >
     update t_codeinfo
     set codename = #{codename,jdbcType=VARCHAR},
       codeimg = #{codeimg,jdbcType=VARCHAR}

@@ -17,7 +17,7 @@
 	
 	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:message-converters register-defaults="true">
-			<bean class="cn.com.lzt.common.converter.CustomStringHttpMessageConverter">
+			<bean class="com.haohai.cms.common.converter.CustomStringHttpMessageConverter">
 				<constructor-arg value="UTF-8" />
 			</bean>
 		</mvc:message-converters>
@@ -29,7 +29,7 @@
 		<property name="converters">
 			<list>
 				<!-- 日期类型转换 -->
-				<bean class="cn.com.lzt.common.converter.CustomDateConverter"/>
+				<bean class="com.haohai.cms.common.converter.CustomDateConverter"/>
 			</list>
 		</property>
 	</bean>
@@ -43,10 +43,10 @@
 	</bean>
 	
 	<!-- 统一异常处理 -->
-	<bean class="cn.com.lzt.common.exception.CustomExceptionResolver">
+	<bean class="com.haohai.cms.common.exception.CustomExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="cn.com.lzt.common.exception.CustomException">error/errorpage</prop>
+				<prop key="com.haohai.cms.common.exception.CustomException">error/errorpage</prop>
 			</props>
 		</property>
 	</bean>
@@ -58,14 +58,14 @@
 	</bean>
 	
 	<mvc:resources location="/superui/" mapping="/assets/**" />
-	<context:component-scan base-package="cn.com.lzt">
+	<context:component-scan base-package="com.haohai.cms">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	</context:component-scan>
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/*" />
-			<bean class="cn.com.lzt.common.inteceptor.SpringInteceptor"></bean>
+			<bean class="com.haohai.cms.common.inteceptor.SpringInteceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	

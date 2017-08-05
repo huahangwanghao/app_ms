@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.lzt.mapper.TCmsCustomerMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.lzt.model.TCmsCustomer" >
+<mapper namespace="com.haohai.cms.mapper.TCmsCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsCustomer" >
     <id column="customer_id" property="customerId" jdbcType="INTEGER" />
     <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="customer_acount" property="customerAcount" jdbcType="VARCHAR" />
@@ -75,7 +75,7 @@
     customer_id, customer_name, customer_acount, customer_pwd, customer_idno, customer_phone, 
     customer_email, crt_date, mdf_date, data_flag
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lzt.model.TCmsCustomerCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsCustomerCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -102,13 +102,13 @@
     delete from t_cms_customer
     where customer_id = #{customerId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.lzt.model.TCmsCustomerCriteria" >
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCmsCustomerCriteria" >
     delete from t_cms_customer
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.lzt.model.TCmsCustomer" >
+  <insert id="insert" parameterType="com.haohai.cms.model.TCmsCustomer" >
     insert into t_cms_customer (customer_id, customer_name, customer_acount, 
       customer_pwd, customer_idno, customer_phone, 
       customer_email, crt_date, mdf_date, 
@@ -118,7 +118,7 @@
       #{customerEmail,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, #{mdfDate,jdbcType=TIMESTAMP}, 
       #{dataFlag,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.lzt.model.TCmsCustomer" >
+  <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsCustomer" >
     insert into t_cms_customer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="customerId != null" >
@@ -185,7 +185,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.lzt.model.TCmsCustomerCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.haohai.cms.model.TCmsCustomerCriteria" resultType="java.lang.Integer" >
     select count(*) from t_cms_customer
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -245,7 +245,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lzt.model.TCmsCustomer" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCmsCustomer" >
     update t_cms_customer
     <set >
       <if test="customerName != null" >
@@ -278,7 +278,7 @@
     </set>
     where customer_id = #{customerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.lzt.model.TCmsCustomer" >
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCmsCustomer" >
     update t_cms_customer
     set customer_name = #{customerName,jdbcType=VARCHAR},
       customer_acount = #{customerAcount,jdbcType=VARCHAR},

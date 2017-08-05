@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.lzt.mapper.TUserroleMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.lzt.model.TUserrole" >
+<mapper namespace="com.haohai.cms.mapper.TUserroleMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TUserrole" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
     <result column="roleid" property="roleid" jdbcType="INTEGER" />
@@ -106,7 +106,7 @@
   <sql id="Base_Column_List" >
     id, userid, roleid, createuserid, createdate
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lzt.model.TUserroleCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TUserroleCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -133,19 +133,19 @@
     delete from t_userrole
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.lzt.model.TUserroleCriteria" >
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TUserroleCriteria" >
     delete from t_userrole
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.lzt.model.TUserrole" >
+  <insert id="insert" parameterType="com.haohai.cms.model.TUserrole" >
     insert into t_userrole (id, userid, roleid, 
       createuserid, createdate)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, 
       #{createuserid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.lzt.model.TUserrole" >
+  <insert id="insertSelective" parameterType="com.haohai.cms.model.TUserrole" >
     insert into t_userrole
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -182,7 +182,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.lzt.model.TUserroleCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.haohai.cms.model.TUserroleCriteria" resultType="java.lang.Integer" >
     select count(*) from t_userrole
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -222,7 +222,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lzt.model.TUserrole" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TUserrole" >
     update t_userrole
     <set >
       <if test="userid != null" >
@@ -240,7 +240,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.lzt.model.TUserrole" >
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TUserrole" >
     update t_userrole
     set userid = #{userid,jdbcType=INTEGER},
       roleid = #{roleid,jdbcType=INTEGER},

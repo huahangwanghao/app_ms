@@ -8,7 +8,7 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <listener>
-    <listener-class>cn.com.lzt.common.inteceptor.SmsRequestListener</listener-class>
+    <listener-class>com.haohai.cms.common.inteceptor.SmsRequestListener</listener-class>
   </listener>
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>

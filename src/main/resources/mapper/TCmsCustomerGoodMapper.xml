@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.lzt.mapper.TCmsCustomerGoodMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.lzt.model.TCmsCustomerGood" >
+<mapper namespace="com.haohai.cms.mapper.TCmsCustomerGoodMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsCustomerGood" >
     <id column="customer_good_id" property="customerGoodId" jdbcType="INTEGER" />
     <result column="customer_id" property="customerId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
@@ -77,7 +77,7 @@
     customer_good_id, customer_id, order_id, good_name, cms_good_guige, good_amount_old, 
     good_amount_now, good_img_src, crt_date, mdf_date, cms_good_id, good_status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lzt.model.TCmsCustomerGoodCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsCustomerGoodCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -104,13 +104,13 @@
     delete from t_cms_customer_good
     where customer_good_id = #{customerGoodId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.lzt.model.TCmsCustomerGoodCriteria" >
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCmsCustomerGoodCriteria" >
     delete from t_cms_customer_good
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.lzt.model.TCmsCustomerGood" >
+  <insert id="insert" parameterType="com.haohai.cms.model.TCmsCustomerGood" >
     insert into t_cms_customer_good (customer_good_id, customer_id, order_id, 
       good_name, cms_good_guige, good_amount_old, 
       good_amount_now, good_img_src, crt_date, 
@@ -122,7 +122,7 @@
       #{mdfDate,jdbcType=TIMESTAMP}, #{cmsGoodId,jdbcType=INTEGER}, #{goodStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.lzt.model.TCmsCustomerGood" >
+  <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsCustomerGood" >
     insert into t_cms_customer_good
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="customerGoodId != null" >
@@ -201,7 +201,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.lzt.model.TCmsCustomerGoodCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.haohai.cms.model.TCmsCustomerGoodCriteria" resultType="java.lang.Integer" >
     select count(*) from t_cms_customer_good
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -269,7 +269,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lzt.model.TCmsCustomerGood" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCmsCustomerGood" >
     update t_cms_customer_good
     <set >
       <if test="customerId != null" >
@@ -308,7 +308,7 @@
     </set>
     where customer_good_id = #{customerGoodId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.lzt.model.TCmsCustomerGood" >
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCmsCustomerGood" >
     update t_cms_customer_good
     set customer_id = #{customerId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},
