@@ -35,7 +35,7 @@ public class CmsGoodController extends BaseController {
 	 * @param tCmsGood
 	 * @return
 	 */
-	@RequestMapping("/toAddCmsGood.do")
+	@RequestMapping("/addCmsGood.do")
 	public ResponseMessage addCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 		logger.info("新增cms商品的入参:"+tCmsGood);
 		ResponseMessage responseMessage = cmsGoodService.save(tCmsGood);

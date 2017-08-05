@@ -9,10 +9,6 @@ public class TCmsGoodCategory {
 
     private String categoryLevel;
 
-    private String categoryImgPath;
-
-    private String categoryUrl;
-
     private String dataFlag;
 
     public Integer getCategoryId() {
@@ -47,40 +43,11 @@ public class TCmsGoodCategory {
         this.categoryLevel = categoryLevel == null ? null : categoryLevel.trim();
     }
 
-    public String getCategoryImgPath() {
-        return categoryImgPath;
-    }
-
-    public void setCategoryImgPath(String categoryImgPath) {
-        this.categoryImgPath = categoryImgPath == null ? null : categoryImgPath.trim();
-    }
-
-    public String getCategoryUrl() {
-        return categoryUrl;
-    }
-
-    public void setCategoryUrl(String categoryUrl) {
-        this.categoryUrl = categoryUrl == null ? null : categoryUrl.trim();
-    }
-
     public String getDataFlag() {
         return dataFlag;
     }
 
     public void setDataFlag(String dataFlag) {
         this.dataFlag = dataFlag == null ? null : dataFlag.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "TCmsGoodCategory{" +
-                "categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                ", categoryParentId=" + categoryParentId +
-                ", categoryLevel='" + categoryLevel + '\'' +
-                ", categoryImgPath='" + categoryImgPath + '\'' +
-                ", categoryUrl='" + categoryUrl + '\'' +
-                ", dataFlag='" + dataFlag + '\'' +
-                '}';
     }
 }

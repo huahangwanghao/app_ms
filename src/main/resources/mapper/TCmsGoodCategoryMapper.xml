@@ -6,8 +6,6 @@
     <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
     <result column="category_parent_id" property="categoryParentId" jdbcType="INTEGER" />
     <result column="category_level" property="categoryLevel" jdbcType="VARCHAR" />
-    <result column="category_img_path" property="categoryImgPath" jdbcType="VARCHAR" />
-    <result column="category_url" property="categoryUrl" jdbcType="VARCHAR" />
     <result column="data_flag" property="dataFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,8 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    category_id, category_name, category_parent_id, category_level, category_img_path, 
-    category_url, data_flag
+    category_id, category_name, category_parent_id, category_level, data_flag
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsGoodCategoryCriteria" >
     select
@@ -107,11 +104,9 @@
   </delete>
   <insert id="insert" parameterType="com.haohai.cms.model.TCmsGoodCategory" >
     insert into t_cms_good_category (category_id, category_name, category_parent_id, 
-      category_level, category_img_path, category_url, 
-      data_flag)
+      category_level, data_flag)
     values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryParentId,jdbcType=INTEGER}, 
-      #{categoryLevel,jdbcType=VARCHAR}, #{categoryImgPath,jdbcType=VARCHAR}, #{categoryUrl,jdbcType=VARCHAR}, 
-      #{dataFlag,jdbcType=VARCHAR})
+      #{categoryLevel,jdbcType=VARCHAR}, #{dataFlag,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsGoodCategory" >
     insert into t_cms_good_category
@@ -127,12 +122,6 @@
       </if>
       <if test="categoryLevel != null" >
         category_level,
-      </if>
-      <if test="categoryImgPath != null" >
-        category_img_path,
-      </if>
-      <if test="categoryUrl != null" >
-        category_url,
       </if>
       <if test="dataFlag != null" >
         data_flag,
@@ -150,12 +139,6 @@
       </if>
       <if test="categoryLevel != null" >
         #{categoryLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryImgPath != null" >
-        #{categoryImgPath,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryUrl != null" >
-        #{categoryUrl,jdbcType=VARCHAR},
       </if>
       <if test="dataFlag != null" >
         #{dataFlag,jdbcType=VARCHAR},
@@ -183,12 +166,6 @@
       <if test="record.categoryLevel != null" >
         category_level = #{record.categoryLevel,jdbcType=VARCHAR},
       </if>
-      <if test="record.categoryImgPath != null" >
-        category_img_path = #{record.categoryImgPath,jdbcType=VARCHAR},
-      </if>
-      <if test="record.categoryUrl != null" >
-        category_url = #{record.categoryUrl,jdbcType=VARCHAR},
-      </if>
       <if test="record.dataFlag != null" >
         data_flag = #{record.dataFlag,jdbcType=VARCHAR},
       </if>
@@ -203,8 +180,6 @@
       category_name = #{record.categoryName,jdbcType=VARCHAR},
       category_parent_id = #{record.categoryParentId,jdbcType=INTEGER},
       category_level = #{record.categoryLevel,jdbcType=VARCHAR},
-      category_img_path = #{record.categoryImgPath,jdbcType=VARCHAR},
-      category_url = #{record.categoryUrl,jdbcType=VARCHAR},
       data_flag = #{record.dataFlag,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -222,12 +197,6 @@
       <if test="categoryLevel != null" >
         category_level = #{categoryLevel,jdbcType=VARCHAR},
       </if>
-      <if test="categoryImgPath != null" >
-        category_img_path = #{categoryImgPath,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryUrl != null" >
-        category_url = #{categoryUrl,jdbcType=VARCHAR},
-      </if>
       <if test="dataFlag != null" >
         data_flag = #{dataFlag,jdbcType=VARCHAR},
       </if>
@@ -239,8 +208,6 @@
     set category_name = #{categoryName,jdbcType=VARCHAR},
       category_parent_id = #{categoryParentId,jdbcType=INTEGER},
       category_level = #{categoryLevel,jdbcType=VARCHAR},
-      category_img_path = #{categoryImgPath,jdbcType=VARCHAR},
-      category_url = #{categoryUrl,jdbcType=VARCHAR},
       data_flag = #{dataFlag,jdbcType=VARCHAR}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>

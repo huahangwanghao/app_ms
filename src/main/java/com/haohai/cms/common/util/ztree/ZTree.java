@@ -14,6 +14,15 @@ public class ZTree {
 		super();
 	}
 
+	public ZTree(int id, int pId, String name, boolean open, String treelevel) {
+		super();
+		this.id = id;
+		this.pId = pId;
+		this.name = name;
+		this.open = open;
+		this.treelevel = treelevel;
+	}
+
 	public ZTree(int id, int pId, String name, boolean open,
 			boolean haschildren, String treelevel, boolean checked) {
 		super();

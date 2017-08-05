@@ -6757,4 +6757,9 @@ button.close {
     display: none !important;
   }
 }
+.control-label .required {
+  color: #e02222;
+  font-size: 12px;
+  padding-left: 2px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

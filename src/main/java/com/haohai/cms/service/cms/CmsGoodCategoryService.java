@@ -9,19 +9,29 @@ import com.haohai.cms.model.dto.CmsGoodCategoryReq;
  */
 public interface CmsGoodCategoryService {
 
-    /**
-     * 增加商品分类
-     * @param tCmsGoodCategory
-     * @return
-     */
-    ResponseMessage insert(TCmsGoodCategory tCmsGoodCategory);
-    
-    ResponseMessage selectAllCategoryList();
+	/**
+	 * 增加商品分类
+	 * 
+	 * @param tCmsGoodCategory
+	 * @return
+	 */
+	ResponseMessage insert(TCmsGoodCategory tCmsGoodCategory);
 
-    /**
-     * 得到分类信息的分页信息
-     * @param cmsGoodCategoryReq
-     * @return
-     */
-    ResponseMessage selectCategoryList4Page(CmsGoodCategoryReq cmsGoodCategoryReq);
+	ResponseMessage selectAllCategoryList();
+
+	/**
+	 * 得到分类信息的分页信息
+	 * 
+	 * @param cmsGoodCategoryReq
+	 * @return
+	 */
+	ResponseMessage selectCategoryList4Page(
+			CmsGoodCategoryReq cmsGoodCategoryReq);
+	
+	/**
+	 * 查询商品分类树结构
+	 * @return
+	 */
+	ResponseMessage selectGoodCategoryTreeData();
+	
 }

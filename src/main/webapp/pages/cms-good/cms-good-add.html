@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | General Form Elements</title>
+  <title>商品添加</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="../../content/supermgr/Base/css/common.css" />
     <link rel="stylesheet" href="../../content/ui/global/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link href="../../content/ui/global/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Theme style -->
     <link rel="stylesheet" href="../../content/adminlte/dist/css/AdminLTE.css">
     <link rel="stylesheet" href="../../content/adminlte/dist/css/skins/_all-skins.min.css">
-    <link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet"/>
-    <link href="../../plugin/webuploader/webuploader.css" rel="stylesheet"/>
-    <link href="../../plugin/webuploader/style.css" rel="stylesheet"/>
-    <link href="../../plugin/zTree/css/zTreeStyle/zTreeStyle.css" />
-
-
+    <link rel="stylesheet" href="../../content/min/css/supershopui.common.min.css" />
+    <link rel="stylesheet" href="../../plugin/webuploader/webuploader.css" />
+    <link rel="stylesheet" href="../../plugin/webuploader/style.css" />
+    <link rel="stylesheet" href="../../plugin/zTree/css/zTreeStyle/zTreeStyle.css" />
+    
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -37,90 +37,124 @@
         <div class="row">
             <!-- left column -->
             <!-- right column -->
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <!-- Horizontal Form -->
                 <!-- general form elements disabled -->
                 <div class="box box-primary">
                     <!-- /.box-header -->
-                    <form role="form" id="goodForm">
+                    <form class="form-horizontal" id="goodForm">
                     	<div class="box-body">
                             <!-- text input -->
                             <div class="form-group">
-                                <label>商品名称</label>
-                                <input type="text" name="goodName" class="form-control" placeholder="商品名称 ..." errormsg="商品名称" isvalid="yes" checkexpession="NotNull" datatype="*" />
+                                <label for="goodName" class="col-sm-2 control-label">商品名称<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                	<input type="text" id="goodName" name="goodName" class="form-control" placeholder="商品名称 ..." 
+                                	errormsg="商品名称" isvalid="yes" checkexpession="NotNull" />
+                                </div>
                             </div>
                             <div class="form-group">
-				 				<label>所属分类</label>
-				 				<input type="text" class="form-control" id="good_level" name="good_level" readonly onclick="showMenu();" />
+                            	<label for="good_category_name" class="col-sm-2 control-label">商品分类<span class="required">*</span></label>
+                            	<div class="col-sm-4">
+                            		<input type="text" class="form-control" id="good_category_name" placeholder="点击选择商品分类" name="good_level" 
+	                            		readonly data-toggle="modal" data-target="#good_category_modal" 
+	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" datatype="*"/>
+                            		<input type="hidden" name="good_level" id="good_level" />
+                            	</div>
 							</div>
                             <div class="form-group">
-                                <label>库存数量</label>
-                                <input name="hasCount" type="text" class="form-control" placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" datatype="*" />
-                            </div>
-                            <!-- textarea -->
-                            <div class="form-group">
-                                <label>商品描述</label>
-                                <textarea name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
+                                <label for="hasCount" class="col-sm-2 control-label">库存数量<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                	<input id="hasCount" name="hasCount" type="text" class="form-control" placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" datatype="*" />
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label>商品详情</label>
-                                <script id="good_detail_container"  type="text/plain"></script>
+                                <label for="goodDec" class="col-sm-2 control-label">商品描述</label>
+                                <div class="col-sm-9">
+                                	<textarea id="goodDec" name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
+                                </div>
                             </div>
                             <div class="form-group">
-                            	<label>商品图片</label>
-                            	<div id="wrapper">
-	                                <div id="container">
-	                                    <!--头部，相册选择和格式选择-->
-	                                    <div id="uploader">
-	                                        <div class="queueList">
-	                                            <div id="dndArea" class="placeholder">
-	                                                <div id="filePicker"></div>
-	                                                <p>单次最多可选300张</p>
-	                                            </div>
-	                                        </div>
-	                                        <div class="statusBar" style="display:none;">
-	                                            <div class="progress">
-	                                                <span class="text">0%</span>
-	                                                <span class="percentage"></span>
-	                                            </div><div class="info"></div>
-	                                            <div class="btns">
-	                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
+                                <label for="good_detail_container" class="col-sm-2 control-label">商品详情</label>
+                                <div class="col-sm-9">
+                                	<script id="good_detail_container"  type="text/plain"></script>
+                                </div>
+                                <input type="hidden" id="goodDetail" name="goodDetail" />
                             </div>
-                            <input type="hidden" name="goodImage" id="goodImage"/>
-                            <input type="hidden" id="upload_filefolder" value="good" />
-                            <input type="hidden" id="goodDetail" name="goodDetail" />
+                            <div class="form-group">
+                            	<label class="col-sm-2 control-label">商品图片<span class="required">*</span></label>
+                            	<div class="col-sm-9">
+                            		<div id="wrapper">
+		                                <div id="container">
+		                                    <!--头部，相册选择和格式选择-->
+		                                    <div id="uploader">
+		                                        <div class="queueList">
+		                                            <div id="dndArea" class="placeholder">
+		                                                <div id="filePicker"></div>
+		                                                <p>单次最多可选300张</p>
+		                                            </div>
+		                                        </div>
+		                                        <div class="statusBar" style="display:none;">
+		                                            <div class="progress">
+		                                                <span class="text">0%</span>
+		                                                <span class="percentage"></span>
+		                                            </div><div class="info"></div>
+		                                            <div class="btns">
+		                                                <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+                            	</div>
+                            	<input type="hidden" name="goodImage" id="goodImage"/>
+                            	<input type="hidden" id="upload_filefolder" value="good" />
+                            </div>
                     	</div>
                     	<div class="box-footer">
-	                    	<input type="reset" class="btn btn-primary" onclick="javascript:window.location.reload();" value="重置" />
-	                        <button type="button" onclick="saveGood()" class="btn btn-primary">保存</button>
+                    		<div class="col-md-offset-2">
+                    			<input type="reset" class="btn btn-primary" onclick="javascript:window.location.reload();" value="重置" />
+	                        	<button type="button" onclick="saveGood()" class="btn btn-primary">保存</button>
+                    		</div>
 	                    </div>
                     </form>
                     <!-- /.box-body -->
-                    <div id="good_level_content" style="display:none; position: absolute;background: #D7E4F2;border:1px solid #DDDDDD;">
-			 			<ul id="selztree" class="ztree" style="margin-top:0; width:300px; min-height: 350px;"></ul>
-					</div>
                 </div>
                 <!-- /.box -->
+                <div id="good_category_modal" class="modal fade" tabindex="-1" data-width="400">
+                	<div class="modal-dialog">
+                       <div class="modal-content">
+                          <div class="modal-header">
+                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                             <h4 class="modal-title">商品分类</h4>
+                          </div>
+                          <div class="modal-body">
+                             <div class="row">
+                                <div class="col-md-12">
+                                	<ul id="good_category_ztree" class="ztree"></ul>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
             </div>
             <!--/.col (right) -->
         </div>
         <!-- /.row -->
     </section>
+    
     <script src="../../content/ui/global/jQuery/jquery.min.js"></script>
+    <script src="../../content/plugins/validator/validator.js"></script>
     <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../content/min/js/supershopui.common.js"></script>
     <script src="../../content/supermgr/Base/js/common.js"></script>
     <script src="../../plugin/webuploader/webuploader.js"></script>
     <script src="../../plugin/webuploader/upload.js"></script>
     <script src="../../scripts/common.js"></script>
+    <script src="../../scripts/ajax.js"></script>
 	<script src="../../plugin/ueditor/ueditor.config.js"></script>
     <script src="../../plugin/ueditor/ueditor.all.js"></script>
-    <script src="../../plugin/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+    <script src="../../plugin/zTree/js/jquery.ztree.core-3.5.js"></script>
     <script>
     	var ue = UE.getEditor('good_detail_container');
     	var setting = {
@@ -135,60 +169,35 @@
    		};
     	$(function(){
     		//查询商品分类
-    		handleAjaxSimple("/good/findGoodCategories.do", '', getGoodCategories);
-    		function getGoodCategories(data){
-    			$.fn.zTree.init($("#selztree"), setting, data.goodCategories);
-    		}
+    		handleAjaxSimple("/category/getGoodCategories.do", '', 1, function(treedata){
+    			$.fn.zTree.init($("#good_category_ztree"), setting, treedata.data);
+    		});
     	});
     	
     	function onClick(event, treeId, treeNode) {
-			$("#good_level").val(treeNode.name);
-    		//$("#modulelevel").val(treeNode.treelevel);
-			//$("#parentid").val(treeNode.id);
-		}
-    	
-    	function showMenu() {
-			var cityObj = $("#good_level");
-			var cityOffset = $("#good_level").offset();
-			$("#good_level_content").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
-			$("body").bind("mousedown", onBodyDown);
-		}
-		
-		function hideMenu() {
-			$("#good_level_content").fadeOut("fast");
-			$("body").unbind("mousedown", onBodyDown);
-		}
-		
-		function onBodyDown(event) {
-			if (!(event.target.id == "good_level" || event.target.id == "good_level_content" || $(event.target).parents("#good_level_content").length>0)) {
-				hideMenu();
-			}
+    		if (!treeNode.isParent){
+    			$("#good_category_name").val(treeNode.name);
+    			$("#good_level").val(treeNode.treelevel);
+    			$('#good_category_modal').modal('hide');
+    		}
 		}
     	
         function saveGood() {
-            var ueHtml = ue.getContent();
-            $("#goodDetail").val(ueHtml);
-        	var files = getCookie("files");
-        	if(null == files){
-        		$.fn.modalAlert("商品图片不能为空！", "error");
-        		return;
-            }
-            $("#goodImage").val(files);
-            $.ajax({
-                type : "post",
-                url : "/good/toAddCmsGood.do",
-                data : $('#goodForm').serialize(),
-                contentType : "application/x-www-form-urlencoded",
-                async : false,
-                error : function() {
-                    modalAlert(2,"请求失败！");
-                },
-                success : function(json) {
-                    var result=JSON.parse(json);
-                    modalAlert(1,result.msg);
-                    window.location.href = "cms-good-table.html";
+        	if ($('#goodForm').Validform()){
+        		var ueHtml = ue.getContent();
+                $("#goodDetail").val(ueHtml);
+            	var files = getCookie("files");
+            	if(null == files){
+            		$.fn.modalAlert("商品图片不能为空！", "error");
+            		return;
                 }
-            });
+                $("#goodImage").val(files);
+                handleAjaxSimple("/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
+                	//var result=JSON.parse(json);
+                    //modalAlert(1,result.msg);
+                    //window.location.href = "cms-good-table.html";
+                });
+        	}
         }
     </script>
 </body>
