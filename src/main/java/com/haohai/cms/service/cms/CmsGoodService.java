@@ -35,22 +35,11 @@ public interface CmsGoodService {
      */
     ResponseMessage batchDeleteByIds(String goodIds);
     
-    
-    
-    
-    
-    
-    
-    
-    
-
     /**
-     * 通过条件查询商品信息
-     * @param cmsGoodReq
+     * 根据商品id查询商品信息
+     * @param goodId
      * @return
      */
-    ResponseMessage queryByCondition(CmsGoodDto cmsGoodReq);
-
-    
+    ResponseMessage getCmsGoodById(Integer goodId);
 
 }

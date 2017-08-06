@@ -10,14 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
 
 @RestController
 @RequestMapping("/good")
@@ -79,26 +73,21 @@ public class CmsGoodController extends BaseController {
 		return responseMessage;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * 根据商品id查询商品信息
+	 * @param cmsGoodReq
+	 * @return
+	 */
+	@RequestMapping("/getCmsGoodById.do")
+	public ResponseMessage getCmsGoodById(@RequestParam Integer goodId) {
+		logger.info("查询商品信息请求参数："+goodId);
+		ResponseMessage responseMessage = cmsGoodService.getCmsGoodById(goodId);
+		logger.info("查询商品信息响应结果："+responseMessage);
+		return responseMessage;
+	}
 
 	/**
-	 * 修改cms商品
-	 *
+	 * 修改商品
 	 * @param tCmsGood
 	 * @return
 	 */
@@ -107,21 +96,6 @@ public class CmsGoodController extends BaseController {
 		logger.info("新增cms商品的入参:"+tCmsGood);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodService.updateCmsGood(tCmsGood);
-		return responseMessage;
-	}
-
-	/**
-	 * 查询cms商品通过商品Id
-	 *
-	 * @param cmsGoodReq
-	 * @return
-	 */
-	@RequestMapping("/getCmsGoodById.do")
-	public ResponseMessage getGoodById(@ModelAttribute("cmsGoodReq") CmsGoodDto cmsGoodReq) {
-		logger.info("查询cms商品的入参:"+cmsGoodReq);
-		ResponseMessage responseMessage=null;
-		responseMessage=cmsGoodService.queryByCondition(cmsGoodReq);
-		logger.info("返回给前端的数据"+responseMessage);
 		return responseMessage;
 	}
 

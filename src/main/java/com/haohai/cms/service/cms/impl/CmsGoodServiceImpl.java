@@ -1,6 +1,4 @@
-package com.haohai.cms.service.cms.impl;/**
- * Created by Administrator on 2017/7/20.
- */
+package com.haohai.cms.service.cms.impl;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.StringUtil;
@@ -8,21 +6,17 @@ import com.haohai.cms.mapper.TCmsGoodMapper;
 import com.haohai.cms.mapper.TCmsGoodReadMapper;
 import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.TCmsGoodCriteria;
-import com.haohai.cms.model.TCmsGoodRead;
 import com.haohai.cms.model.dto.CmsGoodDto;
 import com.haohai.cms.service.cms.CmsGoodService;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -111,46 +105,17 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         this.tCmsGoodMapper.batchDeleteByIds(list);
         return ResponseMessage.createSuccessMsg(0);
     }
-    
-    
-    
-    
 
     /**
-     * 通过条件查询商品信息
-     *
-     * @param cmsGoodReq
-     * @return
+     * 根据商品id查询商品信息
      */
     @Override
-    public ResponseMessage queryByCondition(CmsGoodDto cmsGoodReq) {
-        logger.info("查询商品详情页面入参:"+cmsGoodReq);
-        TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
-        TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
-        
-//        if(null!=cmsGoodReq.getGoodId())
-//        criteria.andGoodIdEqualTo(cmsGoodReq.getGoodId());
-//        //3类产品
-////        criteria.andGoodLevelEqualTo("3");
-//        //有效的记录
-////        criteria.andDataFlagEqualTo("1");
-//        
-//        
-//        //添加浏览记录
-//        if(cmsGoodReq.getCustomerId()!=null){
-//            TCmsGoodRead tCmsGoodRead=new TCmsGoodRead();
-//            tCmsGoodRead.setCrtDate(new Date());
-//            tCmsGoodRead.setCmsGoodId(cmsGoodReq.getGoodId());
-//            tCmsGoodRead.setCustomerId(cmsGoodReq.getCustomerId());
-//            tCmsGoodReadMapper.insertSelective(tCmsGoodRead);
-//        }
-        
-        
-        List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
-        return ResponseMessage.createSuccessMsg(list.get(0));
+    public ResponseMessage getCmsGoodById(Integer goodId) {
+        TCmsGoodCriteria goodCriteria = new TCmsGoodCriteria();
+        TCmsGoodCriteria.Criteria criteria = goodCriteria.createCriteria();
+        criteria.andGoodIdEqualTo(goodId);
+        TCmsGood good = this.tCmsGoodMapper.selectByPrimaryKey(goodId);
+        return ResponseMessage.createSuccessMsg(good);
     }
-
-
-    
 
 }
