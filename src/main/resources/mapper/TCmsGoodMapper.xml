@@ -1,41 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.haohai.cms.mapper.TCmsGoodMapper">
-  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsGood">
-    <id column="good_id" jdbcType="INTEGER" property="goodId" />
-    <result column="good_level" jdbcType="VARCHAR" property="goodLevel" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
-    <result column="has_count" jdbcType="INTEGER" property="hasCount" />
-    <result column="good_dec" jdbcType="VARCHAR" property="goodDec" />
-    <result column="good_brand" jdbcType="VARCHAR" property="goodBrand" />
-    <result column="good_guige" jdbcType="VARCHAR" property="goodGuige" />
-    <result column="good_end_time" jdbcType="TIMESTAMP" property="goodEndTime" />
-    <result column="good_detail" jdbcType="VARCHAR" property="goodDetail" />
-    <result column="good_image" jdbcType="VARCHAR" property="goodImage" />
-    <result column="good_status" jdbcType="VARCHAR" property="goodStatus" />
-    <result column="data_flag" jdbcType="VARCHAR" property="dataFlag" />
-    <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haohai.cms.mapper.TCmsGoodMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsGood" >
+    <id column="good_id" property="goodId" jdbcType="INTEGER" />
+    <result column="good_level" property="goodLevel" jdbcType="VARCHAR" />
+    <result column="good_name" property="goodName" jdbcType="VARCHAR" />
+    <result column="has_count" property="hasCount" jdbcType="INTEGER" />
+    <result column="good_desc" property="goodDesc" jdbcType="VARCHAR" />
+    <result column="good_speci" property="goodSpeci" jdbcType="VARCHAR" />
+    <result column="good_original_price" property="goodOriginalPrice" jdbcType="DECIMAL" />
+    <result column="good_promotion_price" property="goodPromotionPrice" jdbcType="DECIMAL" />
+    <result column="good_end_time" property="goodEndTime" jdbcType="TIMESTAMP" />
+    <result column="good_image" property="goodImage" jdbcType="VARCHAR" />
+    <result column="good_status" property="goodStatus" jdbcType="VARCHAR" />
+    <result column="data_flag" property="dataFlag" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <resultMap id="ResultMapWithBLOBs" type="com.haohai.cms.model.TCmsGood" extends="BaseResultMap" >
+    <result column="good_detail" property="goodDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -46,25 +48,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -75,293 +77,349 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    good_id, good_level, parent_id, good_name, has_count, good_dec, good_brand, good_guige, 
-    good_end_time, good_detail, good_image, good_status, data_flag, crt_date
+  <sql id="Base_Column_List" >
+    good_id, good_level, good_name, has_count, good_desc, good_speci, good_original_price, 
+    good_promotion_price, good_end_time, good_image, good_status, data_flag, crt_date
   </sql>
-  <select id="selectByExample" parameterType="com.haohai.cms.model.TCmsGoodCriteria" resultMap="BaseResultMap">
+  <sql id="Blob_Column_List" >
+    good_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.haohai.cms.model.TCmsGoodCriteria" >
     select
-    <if test="distinct">
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_cms_good
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsGoodCriteria" >
+    select
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from t_cms_good
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-    <if test="limitStart != null and limitStart&gt;=0">
+    <if test="limitStart != null and limitStart>=0" >
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from t_cms_good
     where good_id = #{goodId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_cms_good
     where good_id = #{goodId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCmsGoodCriteria">
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCmsGoodCriteria" >
     delete from t_cms_good
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.haohai.cms.model.TCmsGood">
-    insert into t_cms_good (good_id, good_level, parent_id, 
-      good_name, has_count, good_dec, 
-      good_brand, good_guige, good_end_time, 
-      good_detail, good_image, good_status, 
-      data_flag, crt_date)
-    values (#{goodId,jdbcType=INTEGER}, #{goodLevel,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
-      #{goodName,jdbcType=VARCHAR}, #{hasCount,jdbcType=INTEGER}, #{goodDec,jdbcType=VARCHAR}, 
-      #{goodBrand,jdbcType=VARCHAR}, #{goodGuige,jdbcType=VARCHAR}, #{goodEndTime,jdbcType=TIMESTAMP}, 
-      #{goodDetail,jdbcType=VARCHAR}, #{goodImage,jdbcType=VARCHAR}, #{goodStatus,jdbcType=VARCHAR}, 
-      #{dataFlag,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.haohai.cms.model.TCmsGood" >
+    insert into t_cms_good (good_id, good_level, good_name, 
+      has_count, good_desc, good_speci, 
+      good_original_price, good_promotion_price, 
+      good_end_time, good_image, good_status, 
+      data_flag, crt_date, good_detail
+      )
+    values (#{goodId,jdbcType=INTEGER}, #{goodLevel,jdbcType=VARCHAR}, #{goodName,jdbcType=VARCHAR}, 
+      #{hasCount,jdbcType=INTEGER}, #{goodDesc,jdbcType=VARCHAR}, #{goodSpeci,jdbcType=VARCHAR}, 
+      #{goodOriginalPrice,jdbcType=DECIMAL}, #{goodPromotionPrice,jdbcType=DECIMAL}, 
+      #{goodEndTime,jdbcType=TIMESTAMP}, #{goodImage,jdbcType=VARCHAR}, #{goodStatus,jdbcType=VARCHAR}, 
+      #{dataFlag,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, #{goodDetail,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="goodId" parameterType="com.haohai.cms.model.TCmsGood">
+  <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsGood" >
     insert into t_cms_good
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodId != null" >
         good_id,
       </if>
-      <if test="goodLevel != null">
+      <if test="goodLevel != null" >
         good_level,
       </if>
-      <if test="parentId != null">
-        parent_id,
-      </if>
-      <if test="goodName != null">
+      <if test="goodName != null" >
         good_name,
       </if>
-      <if test="hasCount != null">
+      <if test="hasCount != null" >
         has_count,
       </if>
-      <if test="goodDec != null">
-        good_dec,
+      <if test="goodDesc != null" >
+        good_desc,
       </if>
-      <if test="goodBrand != null">
-        good_brand,
+      <if test="goodSpeci != null" >
+        good_speci,
       </if>
-      <if test="goodGuige != null">
-        good_guige,
+      <if test="goodOriginalPrice != null" >
+        good_original_price,
       </if>
-      <if test="goodEndTime != null">
+      <if test="goodPromotionPrice != null" >
+        good_promotion_price,
+      </if>
+      <if test="goodEndTime != null" >
         good_end_time,
       </if>
-      <if test="goodDetail != null">
-        good_detail,
-      </if>
-      <if test="goodImage != null">
+      <if test="goodImage != null" >
         good_image,
       </if>
-      <if test="goodStatus != null">
+      <if test="goodStatus != null" >
         good_status,
       </if>
-      <if test="dataFlag != null">
+      <if test="dataFlag != null" >
         data_flag,
       </if>
-      <if test="crtDate != null">
+      <if test="crtDate != null" >
         crt_date,
       </if>
+      <if test="goodDetail != null" >
+        good_detail,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodId != null" >
         #{goodId,jdbcType=INTEGER},
       </if>
-      <if test="goodLevel != null">
+      <if test="goodLevel != null" >
         #{goodLevel,jdbcType=VARCHAR},
       </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="goodName != null">
+      <if test="goodName != null" >
         #{goodName,jdbcType=VARCHAR},
       </if>
-      <if test="hasCount != null">
+      <if test="hasCount != null" >
         #{hasCount,jdbcType=INTEGER},
       </if>
-      <if test="goodDec != null">
-        #{goodDec,jdbcType=VARCHAR},
+      <if test="goodDesc != null" >
+        #{goodDesc,jdbcType=VARCHAR},
       </if>
-      <if test="goodBrand != null">
-        #{goodBrand,jdbcType=VARCHAR},
+      <if test="goodSpeci != null" >
+        #{goodSpeci,jdbcType=VARCHAR},
       </if>
-      <if test="goodGuige != null">
-        #{goodGuige,jdbcType=VARCHAR},
+      <if test="goodOriginalPrice != null" >
+        #{goodOriginalPrice,jdbcType=DECIMAL},
       </if>
-      <if test="goodEndTime != null">
+      <if test="goodPromotionPrice != null" >
+        #{goodPromotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodEndTime != null" >
         #{goodEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="goodDetail != null">
-        #{goodDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="goodImage != null">
+      <if test="goodImage != null" >
         #{goodImage,jdbcType=VARCHAR},
       </if>
-      <if test="goodStatus != null">
+      <if test="goodStatus != null" >
         #{goodStatus,jdbcType=VARCHAR},
       </if>
-      <if test="dataFlag != null">
+      <if test="dataFlag != null" >
         #{dataFlag,jdbcType=VARCHAR},
       </if>
-      <if test="crtDate != null">
+      <if test="crtDate != null" >
         #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodDetail != null" >
+        #{goodDetail,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.haohai.cms.model.TCmsGoodCriteria" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.haohai.cms.model.TCmsGoodCriteria" resultType="java.lang.Integer" >
     select count(*) from t_cms_good
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update t_cms_good
-    <set>
-      <if test="record.goodId != null">
+    <set >
+      <if test="record.goodId != null" >
         good_id = #{record.goodId,jdbcType=INTEGER},
       </if>
-      <if test="record.goodLevel != null">
+      <if test="record.goodLevel != null" >
         good_level = #{record.goodLevel,jdbcType=VARCHAR},
       </if>
-      <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodName != null">
+      <if test="record.goodName != null" >
         good_name = #{record.goodName,jdbcType=VARCHAR},
       </if>
-      <if test="record.hasCount != null">
+      <if test="record.hasCount != null" >
         has_count = #{record.hasCount,jdbcType=INTEGER},
       </if>
-      <if test="record.goodDec != null">
-        good_dec = #{record.goodDec,jdbcType=VARCHAR},
+      <if test="record.goodDesc != null" >
+        good_desc = #{record.goodDesc,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodBrand != null">
-        good_brand = #{record.goodBrand,jdbcType=VARCHAR},
+      <if test="record.goodSpeci != null" >
+        good_speci = #{record.goodSpeci,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodGuige != null">
-        good_guige = #{record.goodGuige,jdbcType=VARCHAR},
+      <if test="record.goodOriginalPrice != null" >
+        good_original_price = #{record.goodOriginalPrice,jdbcType=DECIMAL},
       </if>
-      <if test="record.goodEndTime != null">
+      <if test="record.goodPromotionPrice != null" >
+        good_promotion_price = #{record.goodPromotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodEndTime != null" >
         good_end_time = #{record.goodEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.goodDetail != null">
-        good_detail = #{record.goodDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="record.goodImage != null">
+      <if test="record.goodImage != null" >
         good_image = #{record.goodImage,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodStatus != null">
+      <if test="record.goodStatus != null" >
         good_status = #{record.goodStatus,jdbcType=VARCHAR},
       </if>
-      <if test="record.dataFlag != null">
+      <if test="record.dataFlag != null" >
         data_flag = #{record.dataFlag,jdbcType=VARCHAR},
       </if>
-      <if test="record.crtDate != null">
+      <if test="record.crtDate != null" >
         crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.goodDetail != null" >
+        good_detail = #{record.goodDetail,jdbcType=LONGVARCHAR},
+      </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
     update t_cms_good
     set good_id = #{record.goodId,jdbcType=INTEGER},
       good_level = #{record.goodLevel,jdbcType=VARCHAR},
-      parent_id = #{record.parentId,jdbcType=INTEGER},
       good_name = #{record.goodName,jdbcType=VARCHAR},
       has_count = #{record.hasCount,jdbcType=INTEGER},
-      good_dec = #{record.goodDec,jdbcType=VARCHAR},
-      good_brand = #{record.goodBrand,jdbcType=VARCHAR},
-      good_guige = #{record.goodGuige,jdbcType=VARCHAR},
+      good_desc = #{record.goodDesc,jdbcType=VARCHAR},
+      good_speci = #{record.goodSpeci,jdbcType=VARCHAR},
+      good_original_price = #{record.goodOriginalPrice,jdbcType=DECIMAL},
+      good_promotion_price = #{record.goodPromotionPrice,jdbcType=DECIMAL},
       good_end_time = #{record.goodEndTime,jdbcType=TIMESTAMP},
-      good_detail = #{record.goodDetail,jdbcType=VARCHAR},
+      good_image = #{record.goodImage,jdbcType=VARCHAR},
+      good_status = #{record.goodStatus,jdbcType=VARCHAR},
+      data_flag = #{record.dataFlag,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      good_detail = #{record.goodDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_cms_good
+    set good_id = #{record.goodId,jdbcType=INTEGER},
+      good_level = #{record.goodLevel,jdbcType=VARCHAR},
+      good_name = #{record.goodName,jdbcType=VARCHAR},
+      has_count = #{record.hasCount,jdbcType=INTEGER},
+      good_desc = #{record.goodDesc,jdbcType=VARCHAR},
+      good_speci = #{record.goodSpeci,jdbcType=VARCHAR},
+      good_original_price = #{record.goodOriginalPrice,jdbcType=DECIMAL},
+      good_promotion_price = #{record.goodPromotionPrice,jdbcType=DECIMAL},
+      good_end_time = #{record.goodEndTime,jdbcType=TIMESTAMP},
       good_image = #{record.goodImage,jdbcType=VARCHAR},
       good_status = #{record.goodStatus,jdbcType=VARCHAR},
       data_flag = #{record.dataFlag,jdbcType=VARCHAR},
       crt_date = #{record.crtDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCmsGood">
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCmsGood" >
     update t_cms_good
-    <set>
-      <if test="goodLevel != null">
+    <set >
+      <if test="goodLevel != null" >
         good_level = #{goodLevel,jdbcType=VARCHAR},
       </if>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="goodName != null">
+      <if test="goodName != null" >
         good_name = #{goodName,jdbcType=VARCHAR},
       </if>
-      <if test="hasCount != null">
+      <if test="hasCount != null" >
         has_count = #{hasCount,jdbcType=INTEGER},
       </if>
-      <if test="goodDec != null">
-        good_dec = #{goodDec,jdbcType=VARCHAR},
+      <if test="goodDesc != null" >
+        good_desc = #{goodDesc,jdbcType=VARCHAR},
       </if>
-      <if test="goodBrand != null">
-        good_brand = #{goodBrand,jdbcType=VARCHAR},
+      <if test="goodSpeci != null" >
+        good_speci = #{goodSpeci,jdbcType=VARCHAR},
       </if>
-      <if test="goodGuige != null">
-        good_guige = #{goodGuige,jdbcType=VARCHAR},
+      <if test="goodOriginalPrice != null" >
+        good_original_price = #{goodOriginalPrice,jdbcType=DECIMAL},
       </if>
-      <if test="goodEndTime != null">
+      <if test="goodPromotionPrice != null" >
+        good_promotion_price = #{goodPromotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodEndTime != null" >
         good_end_time = #{goodEndTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="goodDetail != null">
-        good_detail = #{goodDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="goodImage != null">
+      <if test="goodImage != null" >
         good_image = #{goodImage,jdbcType=VARCHAR},
       </if>
-      <if test="goodStatus != null">
+      <if test="goodStatus != null" >
         good_status = #{goodStatus,jdbcType=VARCHAR},
       </if>
-      <if test="dataFlag != null">
+      <if test="dataFlag != null" >
         data_flag = #{dataFlag,jdbcType=VARCHAR},
       </if>
-      <if test="crtDate != null">
+      <if test="crtDate != null" >
         crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodDetail != null" >
+        good_detail = #{goodDetail,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where good_id = #{goodId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCmsGood">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.haohai.cms.model.TCmsGood" >
     update t_cms_good
     set good_level = #{goodLevel,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=INTEGER},
       good_name = #{goodName,jdbcType=VARCHAR},
       has_count = #{hasCount,jdbcType=INTEGER},
-      good_dec = #{goodDec,jdbcType=VARCHAR},
-      good_brand = #{goodBrand,jdbcType=VARCHAR},
-      good_guige = #{goodGuige,jdbcType=VARCHAR},
+      good_desc = #{goodDesc,jdbcType=VARCHAR},
+      good_speci = #{goodSpeci,jdbcType=VARCHAR},
+      good_original_price = #{goodOriginalPrice,jdbcType=DECIMAL},
+      good_promotion_price = #{goodPromotionPrice,jdbcType=DECIMAL},
       good_end_time = #{goodEndTime,jdbcType=TIMESTAMP},
-      good_detail = #{goodDetail,jdbcType=VARCHAR},
+      good_image = #{goodImage,jdbcType=VARCHAR},
+      good_status = #{goodStatus,jdbcType=VARCHAR},
+      data_flag = #{dataFlag,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      good_detail = #{goodDetail,jdbcType=LONGVARCHAR}
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCmsGood" >
+    update t_cms_good
+    set good_level = #{goodLevel,jdbcType=VARCHAR},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      has_count = #{hasCount,jdbcType=INTEGER},
+      good_desc = #{goodDesc,jdbcType=VARCHAR},
+      good_speci = #{goodSpeci,jdbcType=VARCHAR},
+      good_original_price = #{goodOriginalPrice,jdbcType=DECIMAL},
+      good_promotion_price = #{goodPromotionPrice,jdbcType=DECIMAL},
+      good_end_time = #{goodEndTime,jdbcType=TIMESTAMP},
       good_image = #{goodImage,jdbcType=VARCHAR},
       good_status = #{goodStatus,jdbcType=VARCHAR},
       data_flag = #{dataFlag,jdbcType=VARCHAR},
       crt_date = #{crtDate,jdbcType=TIMESTAMP}
     where good_id = #{goodId,jdbcType=INTEGER}
   </update>
-  
   <update id="batchDeleteByIds" parameterType="java.lang.String">
-    
     update t_cms_good set data_flag=0 where good_id in
     <foreach item="item" collection="list" open="(" separator="," close=")">
       #{item}
     </foreach>
-    
-    
   </update>
-  
 </mapper>

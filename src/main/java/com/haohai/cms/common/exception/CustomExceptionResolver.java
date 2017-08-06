@@ -45,15 +45,19 @@ public class CustomExceptionResolver extends SimpleMappingExceptionResolver {
 			return mav;
 		} else {
 			// JSON格式返回
+			PrintWriter writer = null;
 			try {
 				response.setContentType("text/json;charset=utf-8");
-				PrintWriter writer = response.getWriter();
+				writer = response.getWriter();
 				writer.print(JsonUtil.jsonToString(message));
-				writer.flush();
-				writer.close();
-				writer = null;
 			} catch (IOException e) {
 				e.printStackTrace();
+			}finally{
+				if (writer !=null){
+					writer.flush();
+					writer.close();
+					writer = null;
+				}
 			}
 			return null;
 		}

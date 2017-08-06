@@ -3,13 +3,13 @@ package com.haohai.cms.service.cms.impl;/**
  */
 
 import com.haohai.cms.common.ResponseMessage;
+import com.haohai.cms.common.util.StringUtil;
 import com.haohai.cms.mapper.TCmsGoodMapper;
 import com.haohai.cms.mapper.TCmsGoodReadMapper;
 import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.TCmsGoodCriteria;
 import com.haohai.cms.model.TCmsGoodRead;
-import com.haohai.cms.model.dto.CmsGoodReq;
-import com.haohai.cms.model.dto.PageInfoReq;
+import com.haohai.cms.model.dto.CmsGoodDto;
 import com.haohai.cms.service.cms.CmsGoodService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,21 +34,57 @@ import java.util.List;
 @Service
 @Transactional
 public class CmsGoodServiceImpl implements CmsGoodService {
+	
     private static final Logger logger = LoggerFactory.getLogger(CmsGoodServiceImpl.class);
+    
     @Autowired
     private TCmsGoodMapper tCmsGoodMapper;
     @Autowired
     private TCmsGoodReadMapper tCmsGoodReadMapper;
-
-
+    
+    /**
+     * 查询商品列表
+     * @param goodDto
+     * @return
+     */
     @Override
-    public ResponseMessage save(TCmsGood tCmsGood) {
-        ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
-        //设置过期时间是2099年
-        tCmsGood.setGoodEndTime(new Date(2114355661000l));
-        //<insert id="insertSelective" useGeneratedKeys="true" keyProperty="goodId" parameterType="com.haohai.cms.model.TCmsGood">
-         tCmsGoodMapper.insertSelective(tCmsGood);
-         logger.info("返回主键是"+tCmsGood.getGoodId());
+    public JSONObject getGoods(CmsGoodDto goodDto) {
+    	JSONObject paramJson = JSONObject.parseObject(goodDto.getParamJson());
+        TCmsGoodCriteria goodCriteria = new TCmsGoodCriteria();
+        TCmsGoodCriteria.Criteria criteria = goodCriteria.createCriteria();
+        criteria.andDataFlagEqualTo("1");//未删除记录
+        if (StringUtils.isNotEmpty(paramJson.getString("goodName")))
+        	criteria.andGoodNameLike("%" + paramJson.getString("goodName").trim() + "%");
+        if (StringUtils.isNotEmpty(paramJson.getString("good_startdate")))
+        	criteria.andCrtDateGreaterThanOrEqualTo(StringUtil.stringToDate(paramJson.getString("good_startdate"), "yyyy-MM-dd"));
+        if (StringUtils.isNotEmpty(paramJson.getString("good_enddate")))
+        	criteria.andCrtDateLessThanOrEqualTo(StringUtil.stringToDate(paramJson.getString("good_enddate"), "yyyy-MM-dd"));
+        if (StringUtils.isNotEmpty(paramJson.getString("goodStatus")))
+        	criteria.andGoodStatusEqualTo(paramJson.getString("goodStatus"));
+        if (StringUtils.isNotEmpty(paramJson.getString("goodSpeci")))
+        	criteria.andGoodSpeciEqualTo(paramJson.getString("goodSpeci"));
+        goodCriteria.setOrderByClause(goodDto.getSortName() + " " + goodDto.getSortOrder());
+        PageHelper.startPage(goodDto.getPageNumber(), goodDto.getPageSize());
+        List<TCmsGood> goods = this.tCmsGoodMapper.selectByExample(goodCriteria);
+        PageInfo<TCmsGood> pageInfo = new PageInfo<TCmsGood>(goods);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("total",pageInfo.getTotal());
+        jsonObject.put("rows",goods);
+        return jsonObject;
+    }
+
+    /**
+     * 新增商品
+     */
+    @Override
+    public ResponseMessage addCmsGood(TCmsGood cmsGood) {
+    	ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
+        cmsGood.setGoodEndTime(StringUtil.getMaxDate());
+        cmsGood.setGoodStatus("1");
+        cmsGood.setDataFlag("1");
+        cmsGood.setCrtDate(new Date());
+        this.tCmsGoodMapper.insertSelective(cmsGood);
+        logger.info("新增商品》商品id：" + cmsGood.getGoodId());
         return rm;
     }
 
@@ -60,27 +95,27 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      * @return
      */
     @Override
-    public ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq) {
+    public ResponseMessage queryByCondition(CmsGoodDto cmsGoodReq) {
         logger.info("查询商品详情页面入参:"+cmsGoodReq);
         TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
         
-        if(null!=cmsGoodReq.getGoodId())
-        criteria.andGoodIdEqualTo(cmsGoodReq.getGoodId());
-        //3类产品
-//        criteria.andGoodLevelEqualTo("3");
-        //有效的记录
-//        criteria.andDataFlagEqualTo("1");
-        
-        
-        //添加浏览记录
-        if(cmsGoodReq.getCustomerId()!=null){
-            TCmsGoodRead tCmsGoodRead=new TCmsGoodRead();
-            tCmsGoodRead.setCrtDate(new Date());
-            tCmsGoodRead.setCmsGoodId(cmsGoodReq.getGoodId());
-            tCmsGoodRead.setCustomerId(cmsGoodReq.getCustomerId());
-            tCmsGoodReadMapper.insertSelective(tCmsGoodRead);
-        }
+//        if(null!=cmsGoodReq.getGoodId())
+//        criteria.andGoodIdEqualTo(cmsGoodReq.getGoodId());
+//        //3类产品
+////        criteria.andGoodLevelEqualTo("3");
+//        //有效的记录
+////        criteria.andDataFlagEqualTo("1");
+//        
+//        
+//        //添加浏览记录
+//        if(cmsGoodReq.getCustomerId()!=null){
+//            TCmsGoodRead tCmsGoodRead=new TCmsGoodRead();
+//            tCmsGoodRead.setCrtDate(new Date());
+//            tCmsGoodRead.setCmsGoodId(cmsGoodReq.getGoodId());
+//            tCmsGoodRead.setCustomerId(cmsGoodReq.getCustomerId());
+//            tCmsGoodReadMapper.insertSelective(tCmsGoodRead);
+//        }
         
         
         List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
@@ -120,38 +155,5 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         
         return ResponseMessage.createSuccessMsg(0);
     }
-
-    /**
-     * 分页信息查询
-     *
-     * @param pageInfo
-     * @return
-     */
-    @Override
-    public JSONObject query4Page(PageInfoReq pageInfo) {
-        logger.info("分页查询商品信息入参:"+pageInfo);
-        JSONObject json=JSONObject.parseObject(pageInfo.getQueryJson());
-        String goodName=json.getString("goodName");
-        String userName=json.getString("userName");
-        TCmsGoodCriteria tCmsGoodCriteria=new TCmsGoodCriteria();
-        TCmsGoodCriteria.Criteria criteria=tCmsGoodCriteria.createCriteria();
-        //3类产品
-        // criteria.andGoodLevelEqualTo("3");
-        if(StringUtils.isNotEmpty(goodName))
-        criteria.andGoodNameLike("%"+goodName+"%");
-        //有效的记录
-        criteria.andDataFlagEqualTo("1");
-        PageHelper.startPage(pageInfo.getPageNumber(),pageInfo.getPageSize());
-        List<TCmsGood> list=tCmsGoodMapper.selectByExample(tCmsGoodCriteria);
-        PageInfo<TCmsGood>  pageInfo1=new PageInfo<TCmsGood>(list);
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("total",pageInfo1.getTotal());
-        JSONArray jsonArray=new JSONArray();
-        jsonArray.addAll(list);
-        jsonObject.put("rows",jsonArray);
-        logger.info("返回前端的信息:"+jsonObject);
-        return jsonObject;
-    }
-
 
 }

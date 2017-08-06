@@ -1,5 +1,6 @@
 package com.haohai.cms.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TCmsGood {
@@ -7,21 +8,19 @@ public class TCmsGood {
 
     private String goodLevel;
 
-    private Integer parentId;
-
     private String goodName;
 
     private Integer hasCount;
 
-    private String goodDec;
+    private String goodDesc;
 
-    private String goodBrand;
+    private String goodSpeci;
 
-    private String goodGuige;
+    private BigDecimal goodOriginalPrice;
+
+    private BigDecimal goodPromotionPrice;
 
     private Date goodEndTime;
-
-    private String goodDetail;
 
     private String goodImage;
 
@@ -30,6 +29,8 @@ public class TCmsGood {
     private String dataFlag;
 
     private Date crtDate;
+
+    private String goodDetail;
 
     public Integer getGoodId() {
         return goodId;
@@ -45,14 +46,6 @@ public class TCmsGood {
 
     public void setGoodLevel(String goodLevel) {
         this.goodLevel = goodLevel == null ? null : goodLevel.trim();
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
     }
 
     public String getGoodName() {
@@ -71,28 +64,36 @@ public class TCmsGood {
         this.hasCount = hasCount;
     }
 
-    public String getGoodDec() {
-        return goodDec;
+    public String getGoodDesc() {
+        return goodDesc;
     }
 
-    public void setGoodDec(String goodDec) {
-        this.goodDec = goodDec == null ? null : goodDec.trim();
+    public void setGoodDesc(String goodDesc) {
+        this.goodDesc = goodDesc == null ? null : goodDesc.trim();
     }
 
-    public String getGoodBrand() {
-        return goodBrand;
+    public String getGoodSpeci() {
+        return goodSpeci;
     }
 
-    public void setGoodBrand(String goodBrand) {
-        this.goodBrand = goodBrand == null ? null : goodBrand.trim();
+    public void setGoodSpeci(String goodSpeci) {
+        this.goodSpeci = goodSpeci == null ? null : goodSpeci.trim();
     }
 
-    public String getGoodGuige() {
-        return goodGuige;
+    public BigDecimal getGoodOriginalPrice() {
+        return goodOriginalPrice;
     }
 
-    public void setGoodGuige(String goodGuige) {
-        this.goodGuige = goodGuige == null ? null : goodGuige.trim();
+    public void setGoodOriginalPrice(BigDecimal goodOriginalPrice) {
+        this.goodOriginalPrice = goodOriginalPrice;
+    }
+
+    public BigDecimal getGoodPromotionPrice() {
+        return goodPromotionPrice;
+    }
+
+    public void setGoodPromotionPrice(BigDecimal goodPromotionPrice) {
+        this.goodPromotionPrice = goodPromotionPrice;
     }
 
     public Date getGoodEndTime() {
@@ -101,14 +102,6 @@ public class TCmsGood {
 
     public void setGoodEndTime(Date goodEndTime) {
         this.goodEndTime = goodEndTime;
-    }
-
-    public String getGoodDetail() {
-        return goodDetail;
-    }
-
-    public void setGoodDetail(String goodDetail) {
-        this.goodDetail = goodDetail == null ? null : goodDetail.trim();
     }
 
     public String getGoodImage() {
@@ -143,23 +136,11 @@ public class TCmsGood {
         this.crtDate = crtDate;
     }
 
-    @Override
-    public String toString() {
-        return "TCmsGood{" +
-                "goodId=" + goodId +
-                ", goodLevel='" + goodLevel + '\'' +
-                ", parentId=" + parentId +
-                ", goodName='" + goodName + '\'' +
-                ", hasCount=" + hasCount +
-                ", goodDec='" + goodDec + '\'' +
-                ", goodBrand='" + goodBrand + '\'' +
-                ", goodGuige='" + goodGuige + '\'' +
-                ", goodEndTime=" + goodEndTime +
-                ", goodDetail='" + goodDetail + '\'' +
-                ", goodImage='" + goodImage + '\'' +
-                ", goodStatus='" + goodStatus + '\'' +
-                ", dataFlag='" + dataFlag + '\'' +
-                ", crtDate=" + crtDate +
-                '}';
+    public String getGoodDetail() {
+        return goodDetail;
+    }
+
+    public void setGoodDetail(String goodDetail) {
+        this.goodDetail = goodDetail == null ? null : goodDetail.trim();
     }
 }

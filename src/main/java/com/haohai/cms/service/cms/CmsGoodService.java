@@ -2,22 +2,35 @@ package com.haohai.cms.service.cms;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGood;
-import com.haohai.cms.model.dto.CmsGoodReq;
-import com.haohai.cms.model.dto.PageInfoReq;
+import com.haohai.cms.model.dto.CmsGoodDto;
+import com.haohai.cms.model.dto.CmsGoodDto;
 import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by Administrator on 2017/7/20.
  */
 public interface CmsGoodService {
-    ResponseMessage save(TCmsGood tCmsGood);
+	
+	/**
+	 * 查询商品列表
+	 * @param goodDto
+	 * @return
+	 */
+	JSONObject getGoods(CmsGoodDto goodDto);
+	
+	/**
+	 * 新增商品
+	 * @param cmsGood
+	 * @return
+	 */
+    ResponseMessage addCmsGood(TCmsGood cmsGood);
 
     /**
      * 通过条件查询商品信息
      * @param cmsGoodReq
      * @return
      */
-    ResponseMessage queryByCondition(CmsGoodReq cmsGoodReq);
+    ResponseMessage queryByCondition(CmsGoodDto cmsGoodReq);
 
     /**
      * 修改商品信息
@@ -33,10 +46,4 @@ public interface CmsGoodService {
      */
     ResponseMessage batchDeleteByIds(String goodIds);
 
-    /**
-     * 分页信息查询
-     * @param pageInfo
-     * @return
-     */
-    JSONObject query4Page(PageInfoReq pageInfo);
 }

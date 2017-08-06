@@ -57,9 +57,15 @@
                             		<input type="text" class="form-control" id="good_category_name" placeholder="点击选择商品分类" name="good_level" 
 	                            		readonly data-toggle="modal" data-target="#good_category_modal" 
 	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" />
-                            		<input type="hidden" name="good_level" id="good_level" />
+                            		<input type="hidden" name="goodLevel" id="goodLevel" />
                             	</div>
 							</div>
+							<div class="form-group">
+                                <label for="goodSpeci" class="col-sm-2 control-label">商品规格<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                	<input id="goodSpeci" name="goodSpeci" type="text" class="form-control" placeholder="商品规格 ..." errormsg="商品规格" isvalid="yes" checkexpession="NotNull" />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="hasCount" class="col-sm-2 control-label">库存数量<span class="required">*</span></label>
                                 <div class="col-sm-4">
@@ -67,9 +73,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="goodDec" class="col-sm-2 control-label">商品描述</label>
+                                <label for="goodOriginalPrice" class="col-sm-2 control-label">商品原价<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                	<input id="goodOriginalPrice" name="goodOriginalPrice" type="text" class="form-control" placeholder="商品原价 ..." errormsg="商品原价" isvalid="yes" checkexpession="Num" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="goodPromotionPrice" class="col-sm-2 control-label">商品促销价<span class="required">*</span></label>
+                                <div class="col-sm-4">
+                                	<input id="goodPromotionPrice" name="goodPromotionPrice" type="text" class="form-control" placeholder="商品促销价 ..." errormsg="商品促销价" isvalid="yes" checkexpession="Num" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="goodDesc" class="col-sm-2 control-label">商品描述</label>
                                 <div class="col-sm-9">
-                                	<textarea id="goodDec" name="goodDec" class="form-control" rows="3" placeholder="商品描述...."></textarea>
+                                	<textarea id="goodDesc" name="goodDesc" class="form-control" rows="3" placeholder="商品描述...."></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -166,6 +184,7 @@
    				onClick: onClick
    			}
    		};
+    	
     	$(function(){
     		//查询商品分类
     		handleAjaxSimple("/category/getGoodCategories.do", '', 1, function(treedata){
@@ -176,7 +195,7 @@
     	function onClick(event, treeId, treeNode) {
     		if (!treeNode.isParent){
     			$("#good_category_name").val(treeNode.name);
-    			$("#good_level").val(treeNode.treelevel);
+    			$("#goodLevel").val(treeNode.treelevel);
     			$('#good_category_modal').modal('hide');
     			//删除错误提示信息
     			removeMessage($("#good_category_name"));
@@ -194,9 +213,12 @@
                 var ueHtml = ue.getContent();
                 $("#goodDetail").val(ueHtml);
                 handleAjaxSimple("/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
-                	//var result=JSON.parse(json);
-                    //modalAlert(1,result.msg);
-                    //window.location.href = "cms-good-table.html";
+                	if (data.code == 0){
+                		$.fn.modalAlert("添加成功", "success");
+                		window.location.href = "cms-good-table.html";
+                	}else{
+                		$.fn.modalAlert(data.msg, "error");
+                	}
                 });
         	}
         }

@@ -8,8 +8,7 @@ import java.util.Date;
 public class StringUtil {
 
 	public static String formatDate(String pattern, Date date) {
-		SimpleDateFormat formator = new SimpleDateFormat();
-		formator.applyPattern(pattern);
+		SimpleDateFormat formator = new SimpleDateFormat(pattern);
 		return formator.format(date);
 	}
 
@@ -17,7 +16,25 @@ public class StringUtil {
 		SimpleDateFormat ymdhms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return ymdhms.format(date);
 	}
+	
+	public static Date stringToDate(String dateStr,String pattern){
+		Date formatDate = null;
+		try {
+			SimpleDateFormat sfd = new SimpleDateFormat(pattern);
+			formatDate = sfd.parse(dateStr);
+		} catch (Exception e) {}
+		return formatDate;
+	}
 
+	public static Date getMaxDate() {
+		Date maxDate = null;
+		try {
+			SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			maxDate = sfd.parse("9999-12-31 23:59:59");
+		} catch (Exception e) {}
+		return maxDate;
+	}
+	
 	public static Timestamp getTimestamp() {
 		return new Timestamp(new Date().getTime());
 	}

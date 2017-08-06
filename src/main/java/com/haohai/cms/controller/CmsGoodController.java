@@ -2,8 +2,7 @@ package com.haohai.cms.controller;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGood;
-import com.haohai.cms.model.dto.CmsGoodReq;
-import com.haohai.cms.model.dto.PageInfoReq;
+import com.haohai.cms.model.dto.CmsGoodDto;
 import com.haohai.cms.service.cms.CmsGoodService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -28,6 +27,19 @@ public class CmsGoodController extends BaseController {
 	
 	@Autowired
 	private CmsGoodService cmsGoodService;
+	
+	/**
+	 * 查询商品列表
+	 * @param goodDto
+	 * @return
+	 */
+	@RequestMapping("/getGoods.do")
+	public JSONObject getGoods(@ModelAttribute("pageInfo") CmsGoodDto goodDto) {
+		logger.info("查询商品列表请求参数："+goodDto);
+		JSONObject goodJson = cmsGoodService.getGoods(goodDto);
+		logger.info("查询商品列表响应结果："+goodJson);
+		return goodJson;
+	}
 
 	/**
 	 * 新增cms商品
@@ -38,7 +50,7 @@ public class CmsGoodController extends BaseController {
 	@RequestMapping("/addCmsGood.do")
 	public ResponseMessage addCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 		logger.info("新增cms商品的入参:"+tCmsGood);
-		ResponseMessage responseMessage = cmsGoodService.save(tCmsGood);
+		ResponseMessage responseMessage = cmsGoodService.addCmsGood(tCmsGood);
 		return responseMessage;
 	}
 
@@ -126,44 +138,12 @@ public class CmsGoodController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getCmsGoodById.do")
-	public ResponseMessage getGoodById(@ModelAttribute("cmsGoodReq") CmsGoodReq cmsGoodReq) {
+	public ResponseMessage getGoodById(@ModelAttribute("cmsGoodReq") CmsGoodDto cmsGoodReq) {
 		logger.info("查询cms商品的入参:"+cmsGoodReq);
 		ResponseMessage responseMessage=null;
 		responseMessage=cmsGoodService.queryByCondition(cmsGoodReq);
 		logger.info("返回给前端的数据"+responseMessage);
 		return responseMessage;
 	}
-
-	/**
-	 * 查询cms分页信息
-	 *
-	 * @param 
-	 * @return
-	 */
-	@RequestMapping("/getGoodPageInfo.do")
-	public JSONObject getGoodPageInfo(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
-		logger.info("查询cms分页信息入参:"+pageInfo);
-		JSONObject json= cmsGoodService.query4Page(pageInfo);
-		logger.info("查询cms分页信息返回结果:"+json);
-		return json;
-		
-	}
-
-	/**
-	 * 通过商品名称进行模糊查询
-	 *
-	 * @param
-	 * @return
-	 */
-	@RequestMapping("/getGoodPageInfoByName.do")
-	public JSONObject getGoodPageInfoByName(@ModelAttribute("pageInfo") PageInfoReq pageInfo) {
-		logger.info("通过商品名称查询cms分页信息入参:"+pageInfo);
-		JSONObject json= cmsGoodService.query4Page(pageInfo);
-		logger.info("通过商品名称查询cms分页信息返回结果:"+json);
-		return json;
-
-	}
-	
-	
 
 }

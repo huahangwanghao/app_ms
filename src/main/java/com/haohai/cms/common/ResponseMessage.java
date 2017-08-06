@@ -19,7 +19,7 @@ public class ResponseMessage implements java.io.Serializable {
 	}
 
 	public static final ResponseMessage createErrorMsg(Exception e) {
-		return new ResponseMessage(9999, "系统错误，请联系管理员", "系统错误，请联系管理员");
+		return new ResponseMessage(9999, "系统错误，请联系管理员！", "系统错误，请联系管理员！");
 	}
 
 	public ResponseMessage() {
