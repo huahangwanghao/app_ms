@@ -6,7 +6,6 @@
   <title>商品添加</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="../../content/supermgr/Base/css/common.css" />
     <link rel="stylesheet" href="../../content/ui/global/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link href="../../content/ui/global/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -17,6 +16,7 @@
     <link rel="stylesheet" href="../../plugin/webuploader/webuploader.css" />
     <link rel="stylesheet" href="../../plugin/webuploader/style.css" />
     <link rel="stylesheet" href="../../plugin/zTree/css/zTreeStyle/zTreeStyle.css" />
+    <link rel="stylesheet" href="../../content/plugins/validator/validator.css" />
     
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +29,6 @@
     <section class="content-header">
         <h1>
            <a href="#" onclick="goBack()"><<</a>商品添加
-            <small></small>
         </h1>
     </section>
     <!-- Main content -->
@@ -57,14 +56,14 @@
                             	<div class="col-sm-4">
                             		<input type="text" class="form-control" id="good_category_name" placeholder="点击选择商品分类" name="good_level" 
 	                            		readonly data-toggle="modal" data-target="#good_category_modal" 
-	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" datatype="*"/>
+	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" />
                             		<input type="hidden" name="good_level" id="good_level" />
                             	</div>
 							</div>
                             <div class="form-group">
                                 <label for="hasCount" class="col-sm-2 control-label">库存数量<span class="required">*</span></label>
                                 <div class="col-sm-4">
-                                	<input id="hasCount" name="hasCount" type="text" class="form-control" placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" datatype="*" />
+                                	<input id="hasCount" name="hasCount" type="text" class="form-control" placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -106,7 +105,7 @@
 		                                </div>
 		                            </div>
                             	</div>
-                            	<input type="hidden" name="goodImage" id="goodImage"/>
+                            	<input type="hidden" name="goodImage" id="goodImage" />
                             	<input type="hidden" id="upload_filefolder" value="good" />
                             </div>
                     	</div>
@@ -179,19 +178,21 @@
     			$("#good_category_name").val(treeNode.name);
     			$("#good_level").val(treeNode.treelevel);
     			$('#good_category_modal').modal('hide');
+    			//删除错误提示信息
+    			removeMessage($("#good_category_name"));
     		}
 		}
     	
         function saveGood() {
         	if ($('#goodForm').Validform()){
-        		var ueHtml = ue.getContent();
-                $("#goodDetail").val(ueHtml);
             	var files = getCookie("files");
             	if(null == files){
             		$.fn.modalAlert("商品图片不能为空！", "error");
             		return;
                 }
                 $("#goodImage").val(files);
+                var ueHtml = ue.getContent();
+                $("#goodDetail").val(ueHtml);
                 handleAjaxSimple("/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
                 	//var result=JSON.parse(json);
                     //modalAlert(1,result.msg);
