@@ -76,12 +76,10 @@
 						</div>
 					</div>
 					<div id="toolbar" class="btn-group">
-						<button id="btn_add" type="button" class="btn btn-default"
-							onclick="goGoodAdd()" href="cms-good-add.html">
+						<button id="btn_add" type="button" class="btn btn-default" onclick="goGoodAdd();">
 							<span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
 						</button>
-						<button id="btn_delete" type="button" class="btn btn-default"
-							onclick="deleteGood();">
+						<button id="btn_delete" type="button" class="btn btn-default" onclick="deleteGood();">
 							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>批量删除
 						</button>
 					</div>
@@ -169,6 +167,7 @@
 	        cache: false,	//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 	        sortable: true,	//是否启用排序 
 	        pagination: true,	//显示分页按钮
+	        idField:"goodId",	//设置主键
 	        sortName:"crt_date",
 	        sortOrder:"desc",	//默认排序
 	        pageNumber: 1,	//初始化加载第一页，默认第一页
@@ -255,7 +254,7 @@
 	            }
 	        },{
 	            title : '操作',
-	            field : 'id',
+	            field : 'goodId',
 	            align : 'center',
 	            width :  80 ,
 	            valign : 'middle',
@@ -276,76 +275,48 @@
 	    });
 	}
 	
+	function goGoodAdd() {
+    	window.location.href = "cms-good-add.html";
+    }
+	
 	function editGood(id){
 		window.location.href = "cms-good-update.html?id=" + id;
 	}
+	
 	function deleteGood(obj) {
-	    
-	    	if(!obj){
-
-
-                layer.confirm('确认要删除吗?', {icon: 3, title:'系统提示'}, function(index){
-                    layer.close(index);
-                    var ids="";
-                    $("input[type=checkbox][name=btSelectItem]:checked").each(function() {
-                        var value=$(this).parent().next().text();
-                        ids+=value+",";
-                    });
-                    $.ajax({
-                        type : "post",
-                        url : "/good/doDeleteAllCmsGood.do?goodIds="+ids,
-                        contentType : "application/x-www-form-urlencoded",
-                        async : false,
-                        error : function() {
-                            alert("请求失败！");
-                        },
-                        success : function(json) {
-                            var result=JSON.parse(json);
-                            if(result.code==0){
-                                layer.closeAll('dialog');
-                                initTable();
-                            }else{
-                                alert(result.msg);
-                            }
-                        }
-                    });
-                });
-	    	    
-                return;
-			}else{
-                layer.confirm('确认要删除吗?', {icon: 3, title:'系统提示'}, function(index){
-                    layer.close(index);
-                    var id =obj;
-
-                    $.ajax({
-                        type: "post",
-                        url: "/good/doDeleteCmsGood.do?goodId=" + id,
-                        contentType: "application/x-www-form-urlencoded",
-                        async: false,
-                        error: function () {
-                            alert("请求失败！");
-                        },
-                        success: function (json) {
-                            var result = JSON.parse(json);
-                            if (result.code == 0) {
-                                initTable();
-                            } else {
-                                alert(result.msg);
-                            }
-                        }
-                    });
-                        
-                    });
-            }
-	    
-            
-
-        
+		if (obj){
+			layer.confirm('确认要删除吗？', {icon: 3, title:'系统提示'}, function(index){
+				layer.close(index);
+				handleAjaxSimple("/good/deleteCmsGood.do?goodId="+obj, '', 2, function(data){
+					if (data.code == 0){
+						$.fn.modalAlert("删除成功！", "success");
+						initTable();
+					}else{
+						$.fn.modalAlert(data.msg, "error");
+					}
+	    		});
+			});
+		}else{
+			layer.confirm('确认要删除吗？', {icon: 3, title:'系统提示'}, function(index){
+				layer.close(index);
+				if ($("input[type='checkbox'][name='btSelectItem']:checked").length != 0){
+					var ids = [];
+	                $("input[type='checkbox'][name='btSelectItem']:checked").each(function() {
+	                	ids.push($(this).val());
+	                });
+					handleAjaxSimple("/good/batchdeleteCmsGood.do?goodIds="+ids.join(','), '', 2, function(data){
+						if (data.code == 0){
+							$.fn.modalAlert("删除成功！", "success");
+							initTable();
+						}else{
+							$.fn.modalAlert(data.msg, "error");
+						}
+		    		});
+				}else{
+					$.fn.modalAlert("请选择要删除的项！", "warning");
+				}
+			});
+		}
     }
-
-        function goGoodAdd() {
-            window.location.href = "cms-good-add.html";
-        }
-    
 </script>
 </html>

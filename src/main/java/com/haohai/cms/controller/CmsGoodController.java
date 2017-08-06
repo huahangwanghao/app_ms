@@ -42,7 +42,7 @@ public class CmsGoodController extends BaseController {
 	}
 
 	/**
-	 * 新增cms商品
+	 * 新增商品
 	 *
 	 * @param tCmsGood
 	 * @return
@@ -53,6 +53,48 @@ public class CmsGoodController extends BaseController {
 		ResponseMessage responseMessage = cmsGoodService.addCmsGood(tCmsGood);
 		return responseMessage;
 	}
+	
+	/**
+	 * 删除商品
+	 * @param tCmsGood
+	 * @return
+	 */
+	@RequestMapping("/deleteCmsGood.do")
+	public ResponseMessage deleteCmsGood(@ModelAttribute("tCmsGood") TCmsGood cmsGood) {
+		logger.info("删除商品请求："+cmsGood);
+		cmsGood.setDataFlag("0");
+		ResponseMessage responseMessage = cmsGoodService.updateCmsGood(cmsGood);
+		return responseMessage;
+	}
+	
+	/**
+	 * 批量删除商品
+	 * @param goodIds
+	 * @return
+	 */
+	@RequestMapping("/batchdeleteCmsGood.do")
+	public ResponseMessage batchdeleteCmsGood(@RequestParam String goodIds) {
+		logger.info("批量删除商品请求："+goodIds);
+		ResponseMessage responseMessage = cmsGoodService.batchDeleteByIds(goodIds);
+		return responseMessage;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * 修改cms商品
@@ -64,73 +106,10 @@ public class CmsGoodController extends BaseController {
 	public ResponseMessage updateCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 		logger.info("新增cms商品的入参:"+tCmsGood);
 		ResponseMessage responseMessage=null;
-		responseMessage=cmsGoodService.update(tCmsGood);
+		responseMessage=cmsGoodService.updateCmsGood(tCmsGood);
 		return responseMessage;
 	}
 
-	/**
-	 * 删除cms商品
-	 *
-	 * @param tCmsGood
-	 * @return
-	 */
-	@RequestMapping("/doDeleteCmsGood.do")
-	public ResponseMessage deleteCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
-		logger.info("新增cms商品的入参:"+tCmsGood);
-		ResponseMessage responseMessage=null;
-		tCmsGood.setDataFlag("0");
-		responseMessage=cmsGoodService.update(tCmsGood);
-		return responseMessage;
-	}
-	/**
-	 * 删除选中cms商品
-	 *
-	 * @param goodIds
-	 * @return
-	 */
-	@RequestMapping("/doDeleteAllCmsGood.do")
-	public ResponseMessage deleteAllCmsGood(@RequestParam String goodIds) {
-		logger.info("新增cms商品的入参:"+goodIds);
-		ResponseMessage responseMessage=null;
-		responseMessage=responseMessage=cmsGoodService.batchDeleteByIds(goodIds);
-		return responseMessage;
-	}
-
-
-	
-
-
-
-
-	/**
-	 * 上传基本信息照片
-	 * @return
-	 */
-	@RequestMapping(value={"/pic/upload.do"}, method= RequestMethod.POST)
-	@ResponseBody
-	public ResponseMessage uploadBaseInfoPic(HttpServletRequest request){
-		ResponseMessage rm=new ResponseMessage();
-		String imgPath=this.UPLOAD_DIR;
-		try {
-			String loanApplyNo=request.getParameter("loanApplyNo");
-			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-			MultipartFile multipartFile = multipartRequest.getFile("multipartFile");
-			String fileName="test.png";
-			logger.info(loanApplyNo+"上传基本信息照片的名称:"+fileName);
-			File targetFile = new File(imgPath, fileName);
-			if(!targetFile.exists()){
-				targetFile.mkdir();
-			}
-			multipartFile.transferTo(targetFile);
-		} catch (Exception e) {
-			logger.info("上传基本信息照片异常:",e);
-			rm=ResponseMessage.createErrorMsg(e);
-		}
-		return rm;
-	}
-
-	
-	
 	/**
 	 * 查询cms商品通过商品Id
 	 *

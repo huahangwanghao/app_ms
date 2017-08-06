@@ -33,10 +33,12 @@ public interface TCmsGoodMapper {
     int updateByPrimaryKeyWithBLOBs(TCmsGood record);
 
     int updateByPrimaryKey(TCmsGood record);
+    
     /**
-     * 批量删除
+     * 批量删除商品
      * @param list
      * @return
      */
     int batchDeleteByIds(List<String> list);
+    
 }

@@ -15,13 +15,16 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -87,6 +90,31 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         logger.info("新增商品》商品id：" + cmsGood.getGoodId());
         return rm;
     }
+    
+    /**
+     * 修改商品信息
+     */
+    @Override
+    public ResponseMessage updateCmsGood(TCmsGood tCmsGood) {
+        ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
+        this.tCmsGoodMapper.updateByPrimaryKeySelective(tCmsGood);
+        return rm;
+    }
+    
+    /**
+     * 批量删除商品
+     */
+    @Override
+    public ResponseMessage batchDeleteByIds(String goodIds) {
+        String[] ids = goodIds.split(",");
+        List<String> list = new ArrayList<String>(Arrays.asList(ids));
+        this.tCmsGoodMapper.batchDeleteByIds(list);
+        return ResponseMessage.createSuccessMsg(0);
+    }
+    
+    
+    
+    
 
     /**
      * 通过条件查询商品信息
@@ -122,38 +150,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         return ResponseMessage.createSuccessMsg(list.get(0));
     }
 
-    /**
-     * 修改商品信息
-     *
-     * @param tCmsGood
-     * @return
-     */
-    @Override
-    public ResponseMessage update(TCmsGood tCmsGood) {
-        ResponseMessage rm=ResponseMessage.createSuccessMsg(0);
-        tCmsGoodMapper.updateByPrimaryKeySelective(tCmsGood);
-        return rm;
-    }
 
-    /**
-     * 批量删除
-     *
-     * @param goodIds
-     * @return
-     */
-    @Override
-    public ResponseMessage batchDeleteByIds(String goodIds) {
-
-
-        String _goodIds=goodIds.substring(0,goodIds.length()-1);
-        String[] a=_goodIds.split(",");
-        List<String> list=new ArrayList<String>();
-        for(int i=0;i<a.length;i++){
-            list.add(a[i]);
-        }
-        int i=tCmsGoodMapper.batchDeleteByIds(list);
-        
-        return ResponseMessage.createSuccessMsg(0);
-    }
+    
 
 }

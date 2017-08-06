@@ -30,7 +30,7 @@ function handleAjaxSimple(url, data, contentType, callback) {
 		async : true,
 		cache : false,
 		error : function() {
-			alert("请求失败！");
+			$.fn.modalAlert("请求失败！", "error");
 		},
 		success : function(json) {
 			return callback(json);
@@ -49,7 +49,7 @@ function handleAjaxAdvance(type, url, data, dataType, contentType, async, cache,
 		async : async,
 		cache : cache,
 		error : function() {
-			alert("请求失败！");
+			$.fn.modalAlert("请求失败！", "error");
 		},
 		success : function(json) {
 			handleSuccess(json);
