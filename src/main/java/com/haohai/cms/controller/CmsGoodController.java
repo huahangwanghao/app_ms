@@ -2,7 +2,7 @@ package com.haohai.cms.controller;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGood;
-import com.haohai.cms.model.dto.CmsGoodDto;
+import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CmsGoodService;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
@@ -28,9 +28,9 @@ public class CmsGoodController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoods.do")
-	public JSONObject getGoods(@ModelAttribute("pageInfo") CmsGoodDto goodDto) {
-		logger.info("查询商品列表请求参数："+goodDto);
-		JSONObject goodJson = cmsGoodService.getGoods(goodDto);
+	public JSONObject getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
+		logger.info("查询商品列表请求参数："+pageDto);
+		JSONObject goodJson = cmsGoodService.getGoods(pageDto);
 		logger.info("查询商品列表响应结果："+goodJson);
 		return goodJson;
 	}

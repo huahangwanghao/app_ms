@@ -6,7 +6,7 @@ import com.haohai.cms.mapper.TCmsGoodMapper;
 import com.haohai.cms.mapper.TCmsGoodReadMapper;
 import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.TCmsGoodCriteria;
-import com.haohai.cms.model.dto.CmsGoodDto;
+import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CmsGoodService;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
@@ -45,8 +45,8 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      * @return
      */
     @Override
-    public JSONObject getGoods(CmsGoodDto goodDto) {
-    	JSONObject paramJson = JSONObject.parseObject(goodDto.getParamJson());
+    public JSONObject getGoods(PageDto pageDto) {
+    	JSONObject paramJson = JSONObject.parseObject(pageDto.getParamJson());
         TCmsGoodCriteria goodCriteria = new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria = goodCriteria.createCriteria();
         criteria.andDataFlagEqualTo("1");//未删除记录
@@ -60,8 +60,8 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         	criteria.andGoodStatusEqualTo(paramJson.getString("goodStatus"));
         if (StringUtils.isNotEmpty(paramJson.getString("goodSpeci")))
         	criteria.andGoodSpeciEqualTo(paramJson.getString("goodSpeci"));
-        goodCriteria.setOrderByClause(goodDto.getSortName() + " " + goodDto.getSortOrder());
-        PageHelper.startPage(goodDto.getPageNumber(), goodDto.getPageSize());
+        goodCriteria.setOrderByClause(pageDto.getSortName() + " " + pageDto.getSortOrder());
+        PageHelper.startPage(pageDto.getPageNumber(), pageDto.getPageSize());
         List<TCmsGood> goods = this.tCmsGoodMapper.selectByExample(goodCriteria);
         PageInfo<TCmsGood> pageInfo = new PageInfo<TCmsGood>(goods);
         JSONObject jsonObject = new JSONObject();

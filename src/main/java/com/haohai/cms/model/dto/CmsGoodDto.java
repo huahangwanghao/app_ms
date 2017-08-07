@@ -1,15 +1,17 @@
 package com.haohai.cms.model.dto;
 
-public class CmsGoodDto extends PageDto {
+import com.haohai.cms.model.TCmsGood;
 
-	private String paramJson;
+public class CmsGoodDto extends TCmsGood {
 
-	public String getParamJson() {
-		return paramJson;
+	private String categoryName;
+
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setParamJson(String paramJson) {
-		this.paramJson = paramJson;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }
