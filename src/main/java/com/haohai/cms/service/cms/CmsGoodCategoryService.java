@@ -33,5 +33,11 @@ public interface CmsGoodCategoryService {
 	 * @return
 	 */
 	ResponseMessage selectGoodCategoryTreeData();
-	
+
+	/**
+	 * 通过等级查询树形结构
+	 * @param level
+	 * @return
+	 */
+    ResponseMessage selectGoodCategoryTreeDataByLevel(String level);
 }

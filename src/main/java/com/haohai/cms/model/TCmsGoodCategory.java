@@ -9,6 +9,8 @@ public class TCmsGoodCategory {
 
     private String categoryLevel;
 
+    private String level;
+
     private String dataFlag;
 
     public Integer getCategoryId() {
@@ -41,6 +43,14 @@ public class TCmsGoodCategory {
 
     public void setCategoryLevel(String categoryLevel) {
         this.categoryLevel = categoryLevel == null ? null : categoryLevel.trim();
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 
     public String getDataFlag() {

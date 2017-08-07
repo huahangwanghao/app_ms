@@ -3,6 +3,9 @@ package com.haohai.cms.service.cms.impl;
 /**
  * Created by Administrator on 2017/8/2.
  */
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.common.util.ztree.ZTree;
@@ -11,10 +14,6 @@ import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.TCmsGoodCategoryCriteria;
 import com.haohai.cms.model.dto.CmsGoodCategoryReq;
 import com.haohai.cms.service.cms.CmsGoodCategoryService;
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,13 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 	 */
 	@Override
 	public ResponseMessage insert(TCmsGoodCategory tCmsGoodCategory) {
+		//查询父节点的Id
+		String categoryLevel=tCmsGoodCategory.getCategoryLevel();
+		
 		tCmsGoodCategoryMapper.insertSelective(tCmsGoodCategory);
+		int categoryId=tCmsGoodCategory.getCategoryId();
+		tCmsGoodCategory.setCategoryLevel(categoryLevel+"."+categoryId);
+		tCmsGoodCategoryMapper.updateByPrimaryKeySelective(tCmsGoodCategory);
 		return ResponseMessage.createSuccessMsg(0);
 	}
 
@@ -101,6 +106,36 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 		TCmsGoodCategoryCriteria.Criteria criteria = goodCategory
 				.createCriteria();
 		criteria.andDataFlagEqualTo("1");
+		List<TCmsGoodCategory> categories = tCmsGoodCategoryMapper
+				.selectByExample(goodCategory);
+		List<ZTree> treedata = new ArrayList<ZTree>();
+		if (categories != null && categories.size() > 0) {
+			for (TCmsGoodCategory category : categories) {
+				ZTree tree = new ZTree(category.getCategoryId(),
+						category.getCategoryParentId(),
+						category.getCategoryName(), false,
+						category.getCategoryLevel());
+				if (category.getCategoryParentId() == 0)
+					tree.setOpen(true);
+				treedata.add(tree);
+			}
+		}
+		return ResponseMessage.createSuccessMsg(treedata);
+	}
+
+	/**
+	 * 通过等级查询树形结构
+	 *
+	 * @param level
+	 * @return
+	 */
+	@Override
+	public ResponseMessage selectGoodCategoryTreeDataByLevel(String level) {
+		TCmsGoodCategoryCriteria goodCategory = new TCmsGoodCategoryCriteria();
+		TCmsGoodCategoryCriteria.Criteria criteria = goodCategory
+				.createCriteria();
+		criteria.andDataFlagEqualTo("1");
+		criteria.andLevelLessThan(level);
 		List<TCmsGoodCategory> categories = tCmsGoodCategoryMapper
 				.selectByExample(goodCategory);
 		List<ZTree> treedata = new ArrayList<ZTree>();
