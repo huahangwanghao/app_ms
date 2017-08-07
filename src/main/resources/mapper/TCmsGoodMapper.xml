@@ -19,6 +19,9 @@
   <resultMap id="ResultMapWithBLOBs" type="com.haohai.cms.model.TCmsGood" extends="BaseResultMap" >
     <result column="good_detail" property="goodDetail" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <resultMap id="CmsGoodInfoResultMap" type="com.haohai.cms.model.dto.CmsGoodDto" extends="ResultMapWithBLOBs" >
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -424,5 +427,16 @@
       #{item}
     </foreach>
   </update>
+  
+  <!-- 根据商品id查询商品基本信息以及商品所属分类 -->
+  <select id="getCmsGoodById" resultMap="CmsGoodInfoResultMap" parameterType="java.lang.Integer">
+  	select
+		g.*, gc.category_name
+	from
+		t_cms_good g
+	inner join t_cms_good_category gc on g.good_level = gc.category_level
+	where
+		g.good_id = #{goodId,jdbcType=INTEGER}
+  </select>
   
 </mapper>

@@ -56,7 +56,7 @@
                             	<div class="col-sm-4">
                             		<input type="text" class="form-control" id="good_category_name" placeholder="点击选择商品分类" name="good_level" 
 	                            		readonly data-toggle="modal" data-target="#good_category_modal" 
-	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" />
+	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" ng-model="good.categoryName" />
                             		<input type="hidden" name="goodLevel" id="goodLevel" ng-model="good.goodLevel" />
                             	</div>
 							</div>
@@ -170,10 +170,11 @@
     <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../content/min/js/supershopui.common.js"></script>
     <script src="../../content/supermgr/Base/js/common.js"></script>
+    <script src="../../scripts/ajax.js"></script>
     <script src="../../plugin/webuploader/webuploader.js"></script>
     <script src="../../plugin/webuploader/upload.js"></script>
     <script src="../../scripts/common.js"></script>
-    <script src="../../scripts/ajax.js"></script>
+    
 	<script src="../../plugin/ueditor/ueditor.config.js"></script>
     <script src="../../plugin/ueditor/ueditor.all.js"></script>
     <script src="../../plugin/zTree/js/jquery.ztree.core-3.5.js"></script>
@@ -188,10 +189,12 @@
 	            url: "/good/getCmsGoodById.do?goodId="+id
 	        }).then(function successCallback(response) {
 	        	var gooddata = response.data.data;
-	            $scope.good = gooddata;
-	            ue.ready(function() {
-	            	ue.setContent(gooddata.goodDetail);
-	            });
+	        	if (gooddata !=undefined){
+	        		$scope.good = gooddata;
+		            ue.ready(function() {
+		            	ue.setContent(gooddata.goodDetail);
+		            });
+	        	}
 	        }, function errorCallback(response) {
 	        	$.fn.modalAlert("请求失败！", "error");
 	        });

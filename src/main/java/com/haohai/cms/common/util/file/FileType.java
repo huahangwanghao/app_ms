@@ -1,4 +1,4 @@
-package com.haohai.cms.common.util;
+package com.haohai.cms.common.util.file;
 
 import java.io.FileInputStream;
 import java.io.IOException;

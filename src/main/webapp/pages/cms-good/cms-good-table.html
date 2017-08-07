@@ -259,8 +259,8 @@
 	            width :  80 ,
 	            valign : 'middle',
 	            formatter : function(value,row,index){
-	                var e = '<a href="javascript:void()" onclick="editGood(\''+ row.goodId + '\')">编辑</a> ';  
-	                var d = '<a href="javascript:void()" onclick="deleteGood(\''+ row.goodId +'\')">删除</a> '; 
+	                var e = '<a href="javascript:void(0);" onclick="editGood(\''+ row.goodId + '\')">编辑</a> ';  
+	                var d = '<a href="javascript:void(0);" onclick="deleteGood(\''+ row.goodId +'\')">删除</a> '; 
 	                return e+d;
 	            }
 	        }],

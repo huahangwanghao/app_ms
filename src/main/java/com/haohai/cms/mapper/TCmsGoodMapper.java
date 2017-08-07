@@ -2,6 +2,7 @@ package com.haohai.cms.mapper;
 
 import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.TCmsGoodCriteria;
+import com.haohai.cms.model.dto.CmsGoodDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -41,6 +42,11 @@ public interface TCmsGoodMapper {
      */
     int batchDeleteByIds(List<String> list);
     
-    
+    /**
+     * 根据商品id查询商品基本信息以及商品所属分类
+     * @param goodId
+     * @return
+     */
+    CmsGoodDto getCmsGoodById(Integer goodId);
     
 }

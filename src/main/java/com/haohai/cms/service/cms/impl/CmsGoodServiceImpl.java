@@ -6,6 +6,7 @@ import com.haohai.cms.mapper.TCmsGoodMapper;
 import com.haohai.cms.mapper.TCmsGoodReadMapper;
 import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.TCmsGoodCriteria;
+import com.haohai.cms.model.dto.CmsGoodDto;
 import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CmsGoodService;
 import com.alibaba.fastjson.JSONObject;
@@ -114,7 +115,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         TCmsGoodCriteria goodCriteria = new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria = goodCriteria.createCriteria();
         criteria.andGoodIdEqualTo(goodId);
-        TCmsGood good = this.tCmsGoodMapper.selectByPrimaryKey(goodId);
+        CmsGoodDto good = this.tCmsGoodMapper.getCmsGoodById(goodId);
         return ResponseMessage.createSuccessMsg(good);
     }
 
