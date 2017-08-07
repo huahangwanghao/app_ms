@@ -53,9 +53,9 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         if (StringUtils.isNotEmpty(paramJson.getString("goodName")))
         	criteria.andGoodNameLike("%" + paramJson.getString("goodName").trim() + "%");
         if (StringUtils.isNotEmpty(paramJson.getString("good_startdate")))
-        	criteria.andCrtDateGreaterThanOrEqualTo(StringUtil.stringToDate(paramJson.getString("good_startdate"), "yyyy-MM-dd"));
+        	criteria.andCustomCriteria("DATE_FORMAT(crt_date,'%Y-%m-%d') >='" + paramJson.getString("good_startdate") + "'");
         if (StringUtils.isNotEmpty(paramJson.getString("good_enddate")))
-        	criteria.andCrtDateLessThanOrEqualTo(StringUtil.stringToDate(paramJson.getString("good_enddate"), "yyyy-MM-dd"));
+        	criteria.andCustomCriteria("DATE_FORMAT(crt_date,'%Y-%m-%d') <='" + paramJson.getString("good_enddate") + "'");
         if (StringUtils.isNotEmpty(paramJson.getString("goodStatus")))
         	criteria.andGoodStatusEqualTo(paramJson.getString("goodStatus"));
         if (StringUtils.isNotEmpty(paramJson.getString("goodSpeci")))
