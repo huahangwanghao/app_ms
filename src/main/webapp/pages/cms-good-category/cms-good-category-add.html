@@ -158,7 +158,7 @@
         if ($('#goodForm').Validform()){
             handleAjaxSimple("/category/toAddGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
                 if (data.code == 0){
-                    $.fn.modalalert("添加成功！", "success");
+                    $.fn.modalAlert("添加成功！", "success");
                     window.location.href = "cms-good-table.html";
                 }else{
                     $.fn.modalAlert(data.msg, "error");
