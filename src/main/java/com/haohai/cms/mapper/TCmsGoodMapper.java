@@ -41,4 +41,6 @@ public interface TCmsGoodMapper {
      */
     int batchDeleteByIds(List<String> list);
     
+    
+    
 }

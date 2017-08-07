@@ -180,9 +180,7 @@
     <script src="../../scripts/angular.min.js"></script>
     <script>
     	var ue = UE.getEditor('good_detail_container');
-	    var thisURL = document.URL;
-	    var getval = thisURL.split('?')[1];
-	    var id = getval.split("=")[1];
+	    var id = getUrlParam("id");
 	    var app = angular.module('myApp', []);
 	    app.controller('myCtrl', function($scope, $http) {
 	        $http({
@@ -191,7 +189,9 @@
 	        }).then(function successCallback(response) {
 	        	var gooddata = response.data.data;
 	            $scope.good = gooddata;
-	            ue.setContent(gooddata.goodDetail);
+	            ue.ready(function() {
+	            	ue.setContent(gooddata.goodDetail);
+	            });
 	        }, function errorCallback(response) {
 	        	$.fn.modalAlert("请求失败！", "error");
 	        });

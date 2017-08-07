@@ -2,17 +2,17 @@ package com.haohai.cms.service.cms;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGood;
-import com.haohai.cms.model.dto.CmsGoodDto;
+import com.haohai.cms.model.dto.PageDto;
 import com.alibaba.fastjson.JSONObject;
 
 public interface CmsGoodService {
 	
 	/**
 	 * 查询商品列表
-	 * @param goodDto
+	 * @param pageDto
 	 * @return
 	 */
-	JSONObject getGoods(CmsGoodDto goodDto);
+	JSONObject getGoods(PageDto pageDto);
 	
 	/**
 	 * 新增商品

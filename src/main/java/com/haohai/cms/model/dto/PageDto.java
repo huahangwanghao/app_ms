@@ -18,6 +18,10 @@ public class PageDto {
 	 * 排序方式
 	 */
 	private String sortOrder;
+	/**
+	 * 参数json串
+	 */
+	private String paramJson;
 
 	public int getPageNumber() {
 		return pageNumber;
@@ -49,6 +53,14 @@ public class PageDto {
 
 	public void setSortOrder(String sortOrder) {
 		this.sortOrder = sortOrder;
+	}
+
+	public String getParamJson() {
+		return paramJson;
+	}
+
+	public void setParamJson(String paramJson) {
+		this.paramJson = paramJson;
 	}
 
 }
