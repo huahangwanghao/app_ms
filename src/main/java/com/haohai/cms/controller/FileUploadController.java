@@ -2,9 +2,9 @@ package com.haohai.cms.controller;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.exception.CustomException;
-import com.haohai.cms.common.util.FileType;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.common.util.StringUtil;
+import com.haohai.cms.common.util.file.FileType;
 import com.haohai.cms.model.dto.DefaultReq;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
