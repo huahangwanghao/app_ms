@@ -1,5 +1,6 @@
 package com.haohai.cms.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.model.TCmsGoodCategory;
@@ -64,13 +65,14 @@ public class CmsGoodCategoryController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoodCategory4Page.do")
-	public ResponseMessage getGoodCategory4Page(
+	public JSONObject getGoodCategory4Page(
 			@ModelAttribute("tCmsGoodCategory") CmsGoodCategoryReq cmsGoodCategoryReq) {
 		logger.info("得到所有分类信息入参:" + cmsGoodCategoryReq);
 		ResponseMessage responseMessage = null;
-		responseMessage = cmsGoodCategoryService
+		JSONObject jsonObject = cmsGoodCategoryService
 				.selectCategoryList4Page(cmsGoodCategoryReq);
-		return responseMessage;
+		logger.info("得到所有分类信息返回前端数据:"+jsonObject);
+		return jsonObject;
 	}
 
 	/**

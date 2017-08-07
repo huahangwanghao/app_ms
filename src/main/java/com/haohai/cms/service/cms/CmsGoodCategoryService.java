@@ -1,5 +1,6 @@
 package com.haohai.cms.service.cms;
 
+import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.dto.CmsGoodCategoryReq;
@@ -25,7 +26,7 @@ public interface CmsGoodCategoryService {
 	 * @param cmsGoodCategoryReq
 	 * @return
 	 */
-	ResponseMessage selectCategoryList4Page(
+	JSONObject selectCategoryList4Page(
 			CmsGoodCategoryReq cmsGoodCategoryReq);
 	
 	/**

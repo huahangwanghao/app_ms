@@ -3,6 +3,7 @@ package com.haohai.cms.service.cms.impl;
 /**
  * Created by Administrator on 2017/8/2.
  */
+
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -14,6 +15,7 @@ import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.TCmsGoodCategoryCriteria;
 import com.haohai.cms.model.dto.CmsGoodCategoryReq;
 import com.haohai.cms.service.cms.CmsGoodCategoryService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,21 +82,24 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 	 * @return
 	 */
 	@Override
-	public ResponseMessage selectCategoryList4Page(
+	public JSONObject selectCategoryList4Page(
 			CmsGoodCategoryReq cmsGoodCategoryReq) {
+		JSONObject paramJson = JSONObject.parseObject(cmsGoodCategoryReq.getParamJson());
 		TCmsGoodCategoryCriteria tCmsGoodCategoryCriteria = new TCmsGoodCategoryCriteria();
-		TCmsGoodCategoryCriteria.Criteria criteria = tCmsGoodCategoryCriteria
-				.createCriteria();
-		criteria.andDataFlagEqualTo("1");
-		PageHelper.offsetPage(cmsGoodCategoryReq.getPageNumber(),
+		TCmsGoodCategoryCriteria.Criteria criteria = tCmsGoodCategoryCriteria.createCriteria();
+		if (StringUtils.isNotEmpty(paramJson.getString("categoryName")))
+			criteria.andCategoryNameLike("%" + paramJson.getString("categoryName").trim() + "%");
+		if (StringUtils.isNotEmpty(paramJson.getString("dataFlag")))
+			criteria.andDataFlagEqualTo(paramJson.getString("dataFlag"));
+		PageHelper.startPage(cmsGoodCategoryReq.getPageNumber(),
 				cmsGoodCategoryReq.getPageSize());
 		List<TCmsGoodCategory> list = tCmsGoodCategoryMapper
 				.selectByExample(tCmsGoodCategoryCriteria);
-		PageInfo<TCmsGoodCategory> pageInfo1 = new PageInfo<>();
+		PageInfo<TCmsGoodCategory> pageInfo1 = new PageInfo<>(list);
 		long total = pageInfo1.getTotal();
 		JSONObject jsonObject = JsonUtil.getPageInfo2JsonObject(total, list);
 		// TODO 判断是否需要使用Response形式还是使用JsonObject形式返回数据.
-		return ResponseMessage.createSuccessMsg(jsonObject);
+		return jsonObject;
 	}
 
 	/**
