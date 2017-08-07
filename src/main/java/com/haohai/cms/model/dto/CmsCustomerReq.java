@@ -10,7 +10,7 @@ import java.util.Date;
  * @author WangH
  * @create 2017-08-03 16:48
  **/
-public class CmsCustomerReq extends  CmsGoodDto {
+public class CmsCustomerReq extends  PageDto {
 
         private Integer customerId;
 

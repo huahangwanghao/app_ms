@@ -8,7 +8,7 @@ package com.haohai.cms.model.dto;/**
  * @author WangH
  * @create 2017-07-21 11:01
  **/
-public class CmsGoodCommentReq extends CmsGoodDto {
+public class CmsGoodCommentReq extends PageDto {
     
     private Long commentId;
 
