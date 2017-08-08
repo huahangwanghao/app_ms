@@ -63,4 +63,14 @@ public class PageDto {
 		this.paramJson = paramJson;
 	}
 
+	@Override
+	public String toString() {
+		return "PageDto{" +
+				"pageNumber=" + pageNumber +
+				", pageSize=" + pageSize +
+				", sortName='" + sortName + '\'' +
+				", sortOrder='" + sortOrder + '\'' +
+				", paramJson='" + paramJson + '\'' +
+				'}';
+	}
 }

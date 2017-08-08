@@ -66,7 +66,10 @@ public class CmsGoodCommentServiceImpl implements CmsGoodCommentService {
         TCmsGoodCommentCriteria tCmsGoodCommentCriteria=new TCmsGoodCommentCriteria();
         TCmsGoodCommentCriteria.Criteria criteria=tCmsGoodCommentCriteria.createCriteria();
          tCmsGoodCommentCriteria.setOrderByClause("crt_date desc");
-        String search= JsonUtil.getQueryValue(pageInfo.getParamJson(),"goodName");
+         String search=null;
+         if(StringUtils.isNotEmpty(pageInfo.getParamJson())){
+             search= JsonUtil.getQueryValue(pageInfo.getParamJson(),"goodName");     
+         }
         Map<String,String> param=new HashMap<>();
         if(StringUtils.isNotEmpty(search)){
             param.put("customerName","%"+search+"%");
