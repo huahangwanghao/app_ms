@@ -20,6 +20,11 @@
 19. 查询所有分类信息               /category/getAllGoodCategory.do
 20. 查询分页分类信息               /category/getGoodCategory4Page.do
 21. 根据输入级别不同,查询内容不同              /category/getGoodCategoriesByLevel.do
+22. 得到订单列表                  /buy/getOrderList.do
+22. 得到订单详情              /buy/getOrderListDetail.do
+
+
+
 
 
 

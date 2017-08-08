@@ -66,7 +66,7 @@ public class CustomerBuyGoodController extends BaseController {
 	/**
 	 * 获取购物车详情
 	 *
-	 * @param 
+	 * @param
 	 * @return
 	 */
 	@RequestMapping("/getShoppingCarDetail.do")
@@ -76,6 +76,37 @@ public class CustomerBuyGoodController extends BaseController {
 		responseMessage=customerBuyService.getShoppingCarDetailById(customerBuyReq.getCarId());
 		return responseMessage;
 	}
+
+	/**
+	 * 获取订单列表
+	 *
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/getOrderList.do")
+	public ResponseMessage getOrderList(@ModelAttribute("customerBuyReq") CustomerBuyReq customerBuyReq) {
+		logger.info("修改购物车入参:"+customerBuyReq);
+		ResponseMessage responseMessage=null;
+		responseMessage=customerBuyService.getOrderList(customerBuyReq);
+		return responseMessage;
+	}
+
+	/**
+	 * 获取订单列表
+	 *
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("/getOrderListDetail.do")
+	public ResponseMessage getOrderListDetail(@ModelAttribute("customerBuyReq") CustomerBuyReq customerBuyReq) {
+		logger.info("修改购物车入参:"+customerBuyReq);
+		ResponseMessage responseMessage=null;
+		responseMessage=customerBuyService.getOrderDetail(customerBuyReq);
+		return responseMessage;
+	}
+	
+	
+	
 	
 	
 
