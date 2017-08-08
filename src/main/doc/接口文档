@@ -19,6 +19,7 @@
 18. 新增分类信息                  /category/toAddGoodCategory.do
 19. 查询所有分类信息               /category/getAllGoodCategory.do
 20. 查询分页分类信息               /category/getGoodCategory4Page.do
+21. 根据输入级别不同,查询内容不同              /category/getGoodCategoriesByLevel.do
 
 
 
