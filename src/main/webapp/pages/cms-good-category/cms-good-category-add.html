@@ -55,6 +55,7 @@
                             <label class="col-sm-2 control-label">所选级别</label>
                             <div class="col-sm-4">
                                 <select id="level" name="level" class="form-control" onchange="changeCategory();">
+                                    <option value="-1">--</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -155,6 +156,10 @@
     }
 
     function saveCategory() {
+        var level=$("#level").find("option:selected").val();
+        if(level==-1){
+            $.fn.modalAlert("请选择级别!", "error"); 
+        }
         if ($('#goodForm').Validform()){
             handleAjaxSimple("/category/toAddGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
                 if (data.code == 0){
