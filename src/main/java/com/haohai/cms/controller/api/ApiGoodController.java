@@ -51,7 +51,7 @@ public class ApiGoodController extends BaseController {
 	
 	/**
 	 * 删除商品
-	 * @param tCmsGood
+	 * @param 
 	 * @return
 	 */
 	@RequestMapping("/deleteCmsGood.do")
@@ -76,7 +76,7 @@ public class ApiGoodController extends BaseController {
 	
 	/**
 	 * 根据商品id查询商品信息
-	 * @param cmsGoodReq
+	 * @param 
 	 * @return
 	 */
 	@RequestMapping("/getCmsGoodById.do")

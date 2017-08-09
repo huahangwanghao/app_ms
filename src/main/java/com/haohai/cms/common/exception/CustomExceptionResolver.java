@@ -1,22 +1,13 @@
 package com.haohai.cms.common.exception;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-import com.haohai.cms.common.ResponseMessage;
-import com.haohai.cms.common.util.JsonUtil;
 
-public class CustomExceptionResolver extends SimpleMappingExceptionResolver {
+public class CustomExceptionResolver  {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomExceptionResolver.class);
 	
-	@SuppressWarnings("static-access")
+/*	@SuppressWarnings("static-access")
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
@@ -61,5 +52,5 @@ public class CustomExceptionResolver extends SimpleMappingExceptionResolver {
 			}
 			return null;
 		}
-	}
+	}*/
 }
