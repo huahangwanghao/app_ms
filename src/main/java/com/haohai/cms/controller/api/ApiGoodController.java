@@ -31,9 +31,9 @@ public class ApiGoodController extends BaseController {
 	@RequestMapping("/getGoods.do")
 	public JSONObject getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
 		logger.info("查询商品列表请求参数："+pageDto);
-		JSONObject goodJson = cmsGoodService.getGoods(pageDto);
-		logger.info("查询商品列表响应结果："+goodJson);
-		return goodJson;
+//		JSONObject goodJson = cmsGoodService.getGoods(pageDto);
+		logger.info("查询商品列表响应结果：");
+		return null;
 	}
 
 	/**

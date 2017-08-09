@@ -46,7 +46,8 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      * @return
      */
     @Override
-    public JSONObject getGoods(PageDto pageDto) {
+    public ResponseMessage getGoods(PageDto pageDto) {
+    	ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
     	JSONObject paramJson = JSONObject.parseObject(pageDto.getParamJson());
         TCmsGoodCriteria goodCriteria = new TCmsGoodCriteria();
         TCmsGoodCriteria.Criteria criteria = goodCriteria.createCriteria();
@@ -68,7 +69,8 @@ public class CmsGoodServiceImpl implements CmsGoodService {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("total",pageInfo.getTotal());
         jsonObject.put("rows",goods);
-        return jsonObject;
+        rm.setData(jsonObject);
+        return rm;
     }
 
     /**
