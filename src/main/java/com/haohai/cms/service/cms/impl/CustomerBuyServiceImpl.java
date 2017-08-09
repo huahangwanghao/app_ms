@@ -2,6 +2,7 @@ package com.haohai.cms.service.cms.impl;/**
  * Created by Administrator on 2017/8/3.
  */
 
+import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.mapper.TCmsCustomerGoodMapper;
 import com.haohai.cms.mapper.TCmsCustomerOrderMapper;
@@ -14,6 +15,7 @@ import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.TCmsShoppingCarCriteria;
 import com.haohai.cms.model.dto.CustomerBuyReq;
+import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CustomerBuyService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -159,6 +161,17 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
      */
     @Override
     public ResponseMessage updateOrder(CustomerBuyReq customerBuyReq) {
+        return null;
+    }
+
+    /**
+     * 通过后台查询订单
+     *
+     * @param pageDto
+     * @return
+     */
+    @Override
+    public JSONObject getOrderList4Cms(PageDto pageDto) {
         return null;
     }
 }

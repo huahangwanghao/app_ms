@@ -1,8 +1,10 @@
 package com.haohai.cms.service.cms;
 
+import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.dto.CustomerBuyReq;
+import com.haohai.cms.model.dto.PageDto;
 
 /**
  * Created by Administrator on 2017/7/20.
@@ -55,6 +57,10 @@ public interface CustomerBuyService {
      */
     ResponseMessage updateOrder(CustomerBuyReq customerBuyReq);
 
-
-
+    /**
+     * 通过后台查询订单
+     * @param pageDto
+     * @return
+     */
+    JSONObject getOrderList4Cms(PageDto pageDto);
 }
