@@ -1,6 +1,5 @@
 package com.haohai.cms.controller.cms;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.controller.BaseController;
 import com.haohai.cms.model.TCmsGood;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cms/good")
-public class CmsGoodController1 extends BaseController {
+public class CmsGoodController extends BaseController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController1.class);
+	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController.class);
 	
 	@Autowired
 	private CmsGoodService cmsGoodService;
@@ -29,11 +28,11 @@ public class CmsGoodController1 extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoods.do")
-	public JSONObject getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
+	public ResponseMessage getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
 		logger.info("查询商品列表请求参数："+pageDto);
-		JSONObject goodJson = cmsGoodService.getGoods(pageDto);
-		logger.info("查询商品列表响应结果："+goodJson);
-		return goodJson;
+		ResponseMessage rm = cmsGoodService.getGoods(pageDto);
+		logger.info("查询商品列表响应结果："+rm);
+		return rm;
 	}
 
 	/**

@@ -3,7 +3,6 @@ package com.haohai.cms.service.cms;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGood;
 import com.haohai.cms.model.dto.PageDto;
-import com.alibaba.fastjson.JSONObject;
 
 public interface CmsGoodService {
 	
@@ -12,7 +11,7 @@ public interface CmsGoodService {
 	 * @param pageDto
 	 * @return
 	 */
-	JSONObject getGoods(PageDto pageDto);
+	ResponseMessage getGoods(PageDto pageDto);
 	
 	/**
 	 * 新增商品

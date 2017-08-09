@@ -187,7 +187,7 @@
     	
     	$(function(){
     		//查询商品分类
-    		handleAjaxSimple("/category/getGoodCategories.do", '', 1, function(treedata){
+    		handleAjaxSimple("/cms/category/getGoodCategories.do", '', 1, function(treedata){
     			$.fn.zTree.init($("#good_category_ztree"), setting, treedata.data);
     		});
     	});
@@ -214,7 +214,7 @@
                 $("#goodImage").val(JSON.stringify(fileObj));
                 var ueHtml = ue.getContent();
                 $("#goodDetail").val(ueHtml);
-                handleAjaxSimple("/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
+                handleAjaxSimple("/cms/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
                 	if (data.code == 0){
                 		$.fn.modalAlert("添加成功！", "success");
                 		window.location.href = "cms-good-table.html";
