@@ -157,4 +157,28 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 		}
 		return ResponseMessage.createSuccessMsg(treedata);
 	}
+
+	/**
+	 * 通过Id查询分类信息的详细信息
+	 *
+	 * @param goodId
+	 * @return
+	 */
+	@Override
+	public ResponseMessage getCategoryInfoById(Integer goodId) {
+		TCmsGoodCategory tCmsGoodCategory=tCmsGoodCategoryMapper.selectByPrimaryKey(goodId);
+		return ResponseMessage.createSuccessMsg(tCmsGoodCategory);
+	}
+
+	/**
+	 * 进行修改
+	 *
+	 * @param tCmsGoodCategory
+	 * @return
+	 */
+	@Override
+	public ResponseMessage update(TCmsGoodCategory tCmsGoodCategory) {
+		tCmsGoodCategoryMapper.updateByPrimaryKeySelective(tCmsGoodCategory);
+		return ResponseMessage.createSuccessMsg(0);
+	}
 }

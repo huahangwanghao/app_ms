@@ -60,4 +60,16 @@ public class TCmsGoodCategory {
     public void setDataFlag(String dataFlag) {
         this.dataFlag = dataFlag == null ? null : dataFlag.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TCmsGoodCategory{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", categoryParentId=" + categoryParentId +
+                ", categoryLevel='" + categoryLevel + '\'' +
+                ", level='" + level + '\'' +
+                ", dataFlag='" + dataFlag + '\'' +
+                '}';
+    }
 }

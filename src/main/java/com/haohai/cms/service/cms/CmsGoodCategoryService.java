@@ -41,4 +41,18 @@ public interface CmsGoodCategoryService {
 	 * @return
 	 */
     ResponseMessage selectGoodCategoryTreeDataByLevel(String level);
+
+	/**
+	 * 通过Id查询分类信息的详细信息
+	 * @param goodId
+	 * @return
+	 */
+    ResponseMessage getCategoryInfoById(Integer goodId);
+
+	/**
+	 * 进行修改
+	 * @param tCmsGoodCategory
+	 * @return
+	 */
+    ResponseMessage update(TCmsGoodCategory tCmsGoodCategory);
 }

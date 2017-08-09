@@ -44,6 +44,21 @@ public class CmsGoodCategoryController extends BaseController {
 	}
 
 	/**
+	 * 增加分类
+	 *
+	 * @param tCmsGoodCategory
+	 * @return
+	 */
+	@RequestMapping("/toUpdateGoodCategory.do")
+	public ResponseMessage updateGoodCategory(
+			@ModelAttribute("tCmsGoodCategory") TCmsGoodCategory tCmsGoodCategory) {
+		logger.info("增加分类入参:" + tCmsGoodCategory);
+		ResponseMessage responseMessage = null;
+		responseMessage = cmsGoodCategoryService.update(tCmsGoodCategory);
+		return responseMessage;
+	}
+
+	/**
 	 * 得到所有分类信息
 	 * 
 	 * @param tCmsGoodCategory
@@ -73,6 +88,21 @@ public class CmsGoodCategoryController extends BaseController {
 				.selectCategoryList4Page(cmsGoodCategoryReq);
 		logger.info("得到所有分类信息返回前端数据:"+jsonObject);
 		return jsonObject;
+	}
+
+	/**
+	 * 得到所有分类信息
+	 *
+	 * @param goodId
+	 * @return
+	 */
+	@RequestMapping("/getGoodCategoryById.do")
+	public ResponseMessage getGoodCategoryById(@RequestParam Integer goodId) {
+		logger.info("得到所有分类信息入参:" + goodId);
+		ResponseMessage responseMessage = null;
+		responseMessage=cmsGoodCategoryService.getCategoryInfoById(goodId);
+		logger.info("得到所有分类信息返回前端数据:"+responseMessage);
+		return responseMessage ;
 	}
 
 	/**
