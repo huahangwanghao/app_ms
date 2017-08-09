@@ -39,13 +39,13 @@
 					<div class="panel-body">
 						<form id="form_search" class="form-horizontal">
 							<div class="form-group">
-								<label class="control-label col-sm-1" for="goodName">客户名称</label>
+								<label class="control-label col-sm-1" for="customerName">客户名称</label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="goodName" id="goodName">
+									<input type="text" class="form-control" name="customerName" id="customerName">
 								</div>
-								<label class="control-label col-sm-1" for="goodSpeci">商品规格</label>
+								<label class="control-label col-sm-1" for="goodSpeci">订单编号</label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="goodSpeci" id="goodSpeci">
+									<input type="text" class="form-control" name="orderId" id="goodSpeci">
 								</div>
 								<label class="control-label col-sm-1" for="goodStatus">发货状态</label>
 								<div class="col-sm-2">
@@ -53,7 +53,8 @@
 										<option value="">--请选择--</option>
 										<option value="0">未发货</option>
 										<option value="1">发货中</option>
-										<option value="1">已完成</option>
+										<option value="2">已完成</option>
+										<option value="3">已退货</option>
 									</select>
 								</div>
 							</div>
@@ -61,10 +62,10 @@
 								<label class="control-label col-sm-1">下单时间</label>
 								<div class="col-sm-4">
 									<div class="input-group">
-										<input id="good_startdate" name="good_startdate" type="text" class="form-control"
+										<input id="good_startdate" name="startDate" type="text" class="form-control"
 											   onClick="WdatePicker({maxDate:'#F{$dp.$D(\'good_enddate\')||\'%y-%M-%d\'}',dateFmt:'yyyy-MM-dd'});" />
 										<span class="input-group-addon">至</span>
-										<input id="good_enddate" name="good_enddate" type="text" class="form-control"
+										<input id="good_enddate" name="endDate" type="text" class="form-control"
 											   onClick="WdatePicker({minDate:'#F{$dp.$D(\'good_startdate\')}',dateFmt:'yyyy-MM-dd'});" />
 									</div>
 								</div>
@@ -116,7 +117,7 @@
             cache: false,	//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             sortable: true,	//是否启用排序 
             pagination: true,	//显示分页按钮
-            idField:"orderId",	//设置主键
+            idField:"customerGoodId",	//设置主键
             sortName:"category_id",
             sortOrder:"asc",	//默认排序
             pageNumber: 1,	//初始化加载第一页，默认第一页
@@ -211,13 +212,13 @@
                 }
             },{
                 title : '操作',
-                field : 'categoryId',
+                field : 'customerGoodId',
                 align : 'center',
                 width :  80 ,
                 valign : 'middle',
                 formatter : function(value,row,index){
-                    var e = '<a href="javascript:void()" onclick="editCategory(\''+ row.orderId + '\')">编辑</a> ';
-                    var d = '<a href="javascript:void()" onclick="deleteCategory(\''+ row.orderId +'\')">删除</a> ';
+                    var e = '<a href="javascript:void()" onclick="sendGood(\''+ row.customerGoodId + '\')">发货</a> ';
+                    var d = '<a href="javascript:void()" onclick="deleteCategory(\''+ row.customerGoodId +'\')">删除</a> ';
                     return e+d;
                 }
             }],
@@ -236,7 +237,7 @@
         window.location.href = "cms-good-category-add.html?time="+Date.parse(new Date());
     }
 
-    function editCategory(id){
+    function sendGood(id){
         window.location.href = "cms-good-category-update.html?id=" + id;
     }
 

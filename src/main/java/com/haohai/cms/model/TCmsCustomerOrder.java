@@ -23,6 +23,7 @@ public class TCmsCustomerOrder {
     private String dataFlag;
     
     private String  goodName;
+    private Integer customerGoodId;
 
     public Integer getOrderId() {
         return orderId;
@@ -104,6 +105,14 @@ public class TCmsCustomerOrder {
         this.goodName = goodName;
     }
 
+    public Integer getCustomerGoodId() {
+        return customerGoodId;
+    }
+
+    public void setCustomerGoodId(Integer customerGoodId) {
+        this.customerGoodId = customerGoodId;
+    }
+
     @Override
     public String toString() {
         return "TCmsCustomerOrder{" +
@@ -117,6 +126,7 @@ public class TCmsCustomerOrder {
                 ", mdfDate=" + mdfDate +
                 ", dataFlag='" + dataFlag + '\'' +
                 ", goodName='" + goodName + '\'' +
+                ", customerGoodId=" + customerGoodId +
                 '}';
     }
 }

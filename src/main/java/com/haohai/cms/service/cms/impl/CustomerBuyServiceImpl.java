@@ -3,6 +3,8 @@ package com.haohai.cms.service.cms.impl;/**
  */
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.mapper.TCmsCustomerGoodMapper;
@@ -18,8 +20,7 @@ import com.haohai.cms.model.TCmsShoppingCarCriteria;
 import com.haohai.cms.model.dto.CustomerBuyReq;
 import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CustomerBuyService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,8 +176,31 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
      */
     @Override
     public ResponseMessage getOrderList4Cms(PageDto pageDto) {
+        
         Map<String,Object> param=new HashMap<>();
-        param.put("customerId","1");
+
+
+        JSONObject paramJson = JSONObject.parseObject(pageDto.getParamJson());
+        String customerName=paramJson.getString("customerName");
+        if (StringUtils.isNotEmpty(customerName))
+            param.put("customerName","%" + customerName.trim() + "%");
+        
+        String goodStartDate=paramJson.getString("startDate");
+        if (StringUtils.isNotEmpty(goodStartDate))
+            param.put("startDate",goodStartDate);
+        
+        String goodEndDate=paramJson.getString("endDate");
+        if (StringUtils.isNotEmpty(goodEndDate))
+            //param.put("endDate","DATE_FORMAT(crt_date,'%Y-%m-%d') >='" + goodEndDate + "'");
+            param.put("endDate",goodEndDate );
+        
+        String goodStatus=paramJson.getString("goodStatus");
+        if (StringUtils.isNotEmpty(goodStatus))
+            param.put("goodStatus",goodStatus);
+        
+        String orderId=paramJson.getString("orderId");
+        if (StringUtils.isNotEmpty(orderId))
+            param.put("orderId","%" + orderId.trim() + "%");
         PageHelper.startPage(pageDto.getPageNumber(),pageDto.getPageSize());
         List<TCmsCustomerOrder> list=tCmsCustomerOrderMapper.selectOrderList4Cms(param);
         PageInfo<TCmsCustomerOrder> pageInfo=new PageInfo<>(list);

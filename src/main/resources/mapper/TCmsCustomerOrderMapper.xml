@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsCustomerOrder" >
     <id column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="customer_good_id" property="customerGoodId" jdbcType="INTEGER" />
     <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="customer_phone" property="customerPhone" jdbcType="VARCHAR" />
     <result column="customer_address" property="customerAddress" jdbcType="VARCHAR" />
@@ -284,8 +285,24 @@
   </select>
 
   <select id="selectOrderList4Cms" resultMap="BaseResultMap" parameterType="java.util.Map">
-    select o.*,g.good_name from  t_cms_customer_order o, t_cms_customer_good g
+    select o.*,g.good_name,g.customer_good_id from  t_cms_customer_order o, t_cms_customer_good g
     where  o.order_id=g.order_id
+    <if test="goodStatus != null">
+      and good_status=#{goodStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="startDate != null">
+      and g.crt_date  &gt;=#{startDate,jdbcType=VARCHAR}
+    </if>
+    <if test="endDate != null">
+      and g.crt_date  &lt;= #{endDate,jdbcType=VARCHAR}
+    </if>
+    <if test="orderId != null">
+      and order_id  like #{orderId,jdbcType=VARCHAR}
+    </if>
+    <if test="customerName != null">
+      and c.customer_name like #{customerName,jdbcType=VARCHAR}
+    </if>
+    
   </select>
 
 
