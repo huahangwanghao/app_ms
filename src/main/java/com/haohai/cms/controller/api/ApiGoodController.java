@@ -1,6 +1,5 @@
 package com.haohai.cms.controller.api;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.controller.BaseController;
 import com.haohai.cms.model.TCmsGood;
@@ -29,11 +28,11 @@ public class ApiGoodController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoods.do")
-	public JSONObject getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
+	public ResponseMessage getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
 		logger.info("查询商品列表请求参数："+pageDto);
-//		JSONObject goodJson = cmsGoodService.getGoods(pageDto);
+		ResponseMessage responseMessage = cmsGoodService.getGoods(pageDto);
 		logger.info("查询商品列表响应结果：");
-		return null;
+		return responseMessage;
 	}
 
 	/**
