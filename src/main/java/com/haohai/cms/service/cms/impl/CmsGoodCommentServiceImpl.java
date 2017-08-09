@@ -61,7 +61,7 @@ public class CmsGoodCommentServiceImpl implements CmsGoodCommentService {
      * @return
      */
     @Override
-    public JSONObject queryGoodComment4Page(CmsGoodCommentReq pageInfo) {
+    public ResponseMessage queryGoodComment4Page(CmsGoodCommentReq pageInfo) {
         logger.info("得到评论的分页数据入参:"+pageInfo);
         TCmsGoodCommentCriteria tCmsGoodCommentCriteria=new TCmsGoodCommentCriteria();
         TCmsGoodCommentCriteria.Criteria criteria=tCmsGoodCommentCriteria.createCriteria();
@@ -86,7 +86,7 @@ public class CmsGoodCommentServiceImpl implements CmsGoodCommentService {
         jsonArray.addAll(list);
         jsonObject.put("rows",jsonArray);
         logger.info("返回前端的信息:"+jsonObject);
-        return jsonObject;
+        return ResponseMessage.createSuccessMsg(jsonObject);
     }
 
     /**

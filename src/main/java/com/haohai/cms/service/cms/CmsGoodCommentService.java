@@ -3,7 +3,6 @@ package com.haohai.cms.service.cms;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGoodComment;
 import com.haohai.cms.model.dto.CmsGoodCommentReq;
-import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by Administrator on 2017/8/2.
@@ -18,7 +17,7 @@ public interface CmsGoodCommentService {
      */
     ResponseMessage batchDeleteByIds(String goodIds);
 
-    JSONObject queryGoodComment4Page(CmsGoodCommentReq pageInfo);
+    ResponseMessage queryGoodComment4Page(CmsGoodCommentReq pageInfo);
 
     /**
      * 通过Id查询出对应的数据

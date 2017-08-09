@@ -1,6 +1,5 @@
 package com.haohai.cms.controller.api;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.controller.BaseController;
 import com.haohai.cms.model.TCmsGoodComment;
@@ -90,9 +89,9 @@ public class ApiGoodCommentController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoodCommentPageInfo.do")
-	public JSONObject getGoodCommentPageInfo(@ModelAttribute("pageInfo") CmsGoodCommentReq pageInfo) {
+	public ResponseMessage getGoodCommentPageInfo(@ModelAttribute("pageInfo") CmsGoodCommentReq pageInfo) {
 		logger.info("查询cms分页信息入参:"+pageInfo);
-		JSONObject json= cmsGoodCommentService.queryGoodComment4Page(pageInfo);
+		ResponseMessage json= cmsGoodCommentService.queryGoodComment4Page(pageInfo);
 		logger.info("查询cms分页信息返回结果:"+json);
 		return json;
 		
@@ -105,9 +104,9 @@ public class ApiGoodCommentController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getGoodPageInfoByName.do")
-	public JSONObject getGoodPageInfoByName(@ModelAttribute("pageInfo") CmsGoodCommentReq pageInfo) {
+	public ResponseMessage getGoodPageInfoByName(@ModelAttribute("pageInfo") CmsGoodCommentReq pageInfo) {
 		logger.info("通过商品名称查询cms分页信息入参:"+pageInfo);
-		JSONObject json= cmsGoodCommentService.queryGoodComment4Page(pageInfo);
+		ResponseMessage json= cmsGoodCommentService.queryGoodComment4Page(pageInfo);
 		logger.info("通过商品名称查询cms分页信息返回结果:"+json);
 		return json;
 
