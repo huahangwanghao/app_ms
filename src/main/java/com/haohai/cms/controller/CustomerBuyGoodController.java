@@ -1,6 +1,5 @@
 package com.haohai.cms.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.dto.CustomerBuyReq;
@@ -87,9 +86,10 @@ public class CustomerBuyGoodController extends BaseController {
 	 */
 	@RequestMapping("/getOrderList.do")
 	public ResponseMessage getOrderList(@ModelAttribute("customerBuyReq") CustomerBuyReq customerBuyReq) {
-		logger.info("修改购物车入参:"+customerBuyReq);
+		logger.info("获取订单列表入参:"+customerBuyReq);
 		ResponseMessage responseMessage=null;
 		responseMessage=customerBuyService.getOrderList(customerBuyReq);
+		logger.info("查询订单列表返回数据:"+responseMessage);
 		return responseMessage;
 	}
 
@@ -100,11 +100,11 @@ public class CustomerBuyGoodController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getOrderList4Cms.do")
-	public JSONObject getOrderList4Cms(@ModelAttribute("pageDto") PageDto pageDto) {
+	public ResponseMessage getOrderList4Cms(@ModelAttribute("pageDto") PageDto pageDto) {
 		logger.info("修改购物车入参:"+ pageDto);
-		JSONObject jsonObject=null;
-		jsonObject=customerBuyService.getOrderList4Cms(pageDto);
-		return jsonObject;
+		ResponseMessage responseMessage=null;
+		responseMessage=customerBuyService.getOrderList4Cms(pageDto);
+		return responseMessage;
 	}
 
 	/**

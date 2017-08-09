@@ -109,7 +109,7 @@
         //先销毁表格
         $('#datatable').bootstrapTable('destroy');
         $("#datatable").bootstrapTable({
-            url: "/buy/getOrderList.do",
+            url: "/buy/getOrderList4Cms.do",
             dataType: "json",
             singleSelect: false,
             striped: true,	//是否显示行间隔色
@@ -136,7 +136,10 @@
             responseHandler:function(res){
                 //动态渲染表格之前获取有后台传递的数据时,用于获取出除去本身渲染所需的数据的额外参数
                 //详见此函数参数的api
-                return res;
+                return {
+                    "total": res.data.total,//总页数
+                    "rows": res.data.rows   //数据
+                };
             },
             //search: true, 显示搜索框（客户端搜索）
             sidePagination: "server", //服务端处理分页
@@ -151,8 +154,8 @@
                 checkbox : true,
                 width : 10
             },{
-                field : 'categoryName',
-                title : '分类名称',
+                field : 'orderId',
+                title : '商品Id',
                 align : 'center',
                 width :  100,
                 valign : 'middle'

@@ -4,6 +4,7 @@ package com.haohai.cms.service.cms.impl;/**
 
 import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
+import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.mapper.TCmsCustomerGoodMapper;
 import com.haohai.cms.mapper.TCmsCustomerOrderMapper;
 import com.haohai.cms.mapper.TCmsGoodMapper;
@@ -133,7 +134,9 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
         param.put("customerId",customerBuyReq.getCustomerId()+"");
         PageHelper.startPage(customerBuyReq.getPageNumber(),customerBuyReq.getPageSize());
         List<TCmsCustomerOrder> list=tCmsCustomerOrderMapper.selectOrderList(param);
-        return ResponseMessage.createSuccessMsg(list);
+        PageInfo<TCmsCustomerOrder> pageInfo=new PageInfo<>(list);
+        JSONObject json=JsonUtil.getPageInfo2JsonObject(pageInfo.getTotal(),list);
+        return ResponseMessage.createSuccessMsg(json);
     }
 
     /**
@@ -171,7 +174,13 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
      * @return
      */
     @Override
-    public JSONObject getOrderList4Cms(PageDto pageDto) {
-        return null;
+    public ResponseMessage getOrderList4Cms(PageDto pageDto) {
+        Map<String,Object> param=new HashMap<>();
+        param.put("customerId","1");
+        PageHelper.startPage(pageDto.getPageNumber(),pageDto.getPageSize());
+        List<TCmsCustomerOrder> list=tCmsCustomerOrderMapper.selectOrderList(param);
+        PageInfo<TCmsCustomerOrder> pageInfo=new PageInfo<>(list);
+        JSONObject json=JsonUtil.getPageInfo2JsonObject(pageInfo.getTotal(),list);
+        return ResponseMessage.createSuccessMsg(json);
     }
 }

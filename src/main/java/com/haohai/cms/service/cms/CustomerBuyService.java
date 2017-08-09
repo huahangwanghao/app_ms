@@ -1,6 +1,5 @@
 package com.haohai.cms.service.cms;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.dto.CustomerBuyReq;
@@ -62,5 +61,5 @@ public interface CustomerBuyService {
      * @param pageDto
      * @return
      */
-    JSONObject getOrderList4Cms(PageDto pageDto);
+    ResponseMessage getOrderList4Cms(PageDto pageDto);
 }

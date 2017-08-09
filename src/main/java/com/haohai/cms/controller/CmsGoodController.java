@@ -24,7 +24,7 @@ public class CmsGoodController extends BaseController {
 	
 	/**
 	 * 查询商品列表
-	 * @param goodDto
+	 * @param 
 	 * @return
 	 */
 	@RequestMapping("/getGoods.do")
