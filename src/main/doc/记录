@@ -1,0 +1,2 @@
+设置select的选中值
+     $("#dataFlag option[value='"+dataFlag+"']").attr("selected", true);
