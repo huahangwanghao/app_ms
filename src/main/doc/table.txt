@@ -49,7 +49,7 @@ xxxx表设计
 	图片路径  good_img_src
 	创建时间  crt_date
 	修改时间  mdf_date
-	商品状态  good_status  退货 1:正常 0:退货  2:未知原因  
+	商品状态  good_status  0:未发货 1:发货中 2:发货完成 3:退货
 	
 
 4.后台商品表

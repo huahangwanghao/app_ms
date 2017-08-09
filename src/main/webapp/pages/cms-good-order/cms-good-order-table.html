@@ -179,14 +179,35 @@
                     width :  80,
                     valign : 'middle'
                 },
+                {
+                    field : 'customerAddress',
+                    title : '收获地址',
+                    align : 'center',
+                    width :  80,
+                    valign : 'middle'
+                },
 			{
-                field : 'customerAddress',
-                title : '收获地址',
+                field : 'goodStatus',
+                title : '状态',
                 align : 'center',
                 width :  50,
                 valign : 'middle',
                 formatter : function(value,row,index){
-                    return row.dataFlag=='0'?"下架":"正常";
+					var day=row.dataFlag;
+                    switch (day)
+                    {
+                        case "0":
+                            return "未发货";
+                            break;
+                        case "1":
+                            return "发货中";
+                            break;
+                        case "2":
+                            return "已完成";
+                            break;
+						default:
+							return "状态未知!";
+                    } 
                 }
             },{
                 title : '操作',
