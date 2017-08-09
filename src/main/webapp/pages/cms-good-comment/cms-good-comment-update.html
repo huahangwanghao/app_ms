@@ -114,7 +114,7 @@
     app.controller('myCtrl', function($scope, $http) {
         $http({
             method: 'post',
-            url: "/comment/getCmsGoodCommentById.do?commentId="+id
+            url: "/cms/comment/getCmsGoodCommentById.do?commentId="+id
         }).then(function successCallback(response) {
             $scope.good = response.data.data;
         }, function errorCallback(response) {
@@ -135,7 +135,7 @@
     function updateGood() {
         $.ajax({
             type : "post",
-            url : "/comment/toUpdateCmsGoodComment.do",
+            url : "/cms/comment/toUpdateCmsGoodComment.do",
             data : $('#goodForm').serialize(),
             contentType : "application/x-www-form-urlencoded",
             async : false,

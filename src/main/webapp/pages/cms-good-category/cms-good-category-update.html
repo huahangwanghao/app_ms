@@ -133,7 +133,7 @@
     app.controller('myCtrl', function($scope, $http) {
         $http({
             method: 'post',
-            url: "/category/getGoodCategoryById.do?goodId="+id
+            url: "/cms/category/getGoodCategoryById.do?goodId="+id
         }).then(function successCallback(response) {
             var gooddata = response.data.data;
             if (gooddata !=undefined){
@@ -149,7 +149,7 @@
     });
     function saveCategory() {
         if ($('#categoryform').Validform()){
-            handleAjaxSimple("/category/toUpdateGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
+            handleAjaxSimple("/cms/category/toUpdateGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
                 if (data.code == 0){
                     $.fn.modalAlert("修改成功！", "success");
                     window.location.href = "cms-good-category-table.html";

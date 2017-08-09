@@ -139,7 +139,7 @@
         var level;
         level=$("#level").find("option:selected").text();
         //removeMessage($("#good_category_name"));
-        handleAjaxSimple("/category/getGoodCategoriesByLevel.do?level="+level, '', 1, function(treedata){
+        handleAjaxSimple("/cms/category/getGoodCategoriesByLevel.do?level="+level, '', 1, function(treedata){
             $.fn.zTree.init($("#good_category_ztree"), setting, treedata.data);
         });
     }
@@ -161,7 +161,7 @@
             $.fn.modalAlert("请选择级别!", "error"); 
         }
         if ($('#goodForm').Validform()){
-            handleAjaxSimple("/category/toAddGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
+            handleAjaxSimple("/cms/category/toAddGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
                 if (data.code == 0){
                     $.fn.modalAlert("添加成功！", "success");
                     window.location.href = "cms-good-category-table.html";
