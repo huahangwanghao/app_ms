@@ -180,25 +180,31 @@
     <script>
     	var ue = UE.getEditor('ueditor_container');
     	var id = getUrlParam("id");
-	    var app = angular.module('myApp', []);
-	    app.controller('myCtrl', function($scope, $http) {
-	        $http({
-	            method: 'post',
-	            url: "/cms/good/getCmsGoodById.do?goodId="+id
-	        }).then(function successCallback(response) {
-	        	var gooddata = response.data.data;
-	        	if (gooddata !=undefined){
-	        		imgs = gooddata.goodImage;
-	        		$scope.good = gooddata;
-		            ue.ready(function() {
-		            	ue.setContent(gooddata.goodDetail);
-		            });
-	        	}
-	    	    $.getScript("../../plugin/webuploader/upload.js");
-	        }, function errorCallback(response) {
-	        	$.fn.modalAlert("请求失败！", "error");
-	        });
-	    });
+    	if (id){
+    		$('#goodForm').append('<input type="hidden" name="goodId" value="'+id+'" />');
+    		var app = angular.module('myApp', []);
+    	    app.controller('myCtrl', function($scope, $http) {
+    	        $http({
+    	            method: 'get',
+    	            url: "/cms/good/getCmsGoodById.do?goodId="+id
+    	        }).then(function successCallback(response) {
+    	        	var gooddata = response.data.data;
+    	        	if (gooddata !=undefined){
+    	        		imgs = gooddata.goodImage;
+    	        		$scope.good = gooddata;
+    		            ue.ready(function() {
+    		            	ue.setContent(gooddata.goodDetail);
+    		            });
+    	        	}
+    	    	    $.getScript("../../plugin/webuploader/upload.js");
+    	        }, function errorCallback(response) {
+    	        	$.getScript("../../plugin/webuploader/upload.js");
+    	        	$.fn.modalAlert("请求失败！", "error");
+    	        });
+    	    });
+    	}else{
+    		$.getScript("../../plugin/webuploader/upload.js");
+    	}
     	
     	var setting = {
    			data: {
@@ -238,9 +244,9 @@
                 $("#goodImage").val(files);
                 var ueHtml = ue.getContent();
                 $("#goodDetail").val(ueHtml);
-                handleAjaxSimple("/cms/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
+                handleAjaxSimple("/cms/good/saveCmsGood.do", $('#goodForm').serialize(), 2, function(data){
                 	if (data.code == 0){
-                		$.fn.modalAlert("添加成功！", "success");
+                		$.fn.modalAlert("保存成功！", "success");
                 		window.location.href = "cms-good-table.html";
                 	}else{
                 		$.fn.modalAlert(data.msg, "error");

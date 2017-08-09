@@ -89,12 +89,22 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     }
     
     /**
-     * 修改商品信息
+     * 保存商品
      */
     @Override
-    public ResponseMessage updateCmsGood(TCmsGood tCmsGood) {
-        ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
-        this.tCmsGoodMapper.updateByPrimaryKeySelective(tCmsGood);
+    public ResponseMessage tmSaveCmsGood(TCmsGood cmsGood) {
+    	ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
+    	if (cmsGood.getGoodId() !=null && cmsGood.getGoodId() !=0){
+    		//修改商品
+    		this.tCmsGoodMapper.updateByPrimaryKeySelective(cmsGood);
+    	}else{
+    		//保存商品
+    		cmsGood.setGoodEndTime(StringUtil.getMaxDate());
+            cmsGood.setGoodStatus("1");
+            cmsGood.setDataFlag("1");
+            cmsGood.setCrtDate(new Date());
+            this.tCmsGoodMapper.insertSelective(cmsGood);
+    	}
         return rm;
     }
     

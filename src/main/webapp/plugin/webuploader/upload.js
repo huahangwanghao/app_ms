@@ -228,6 +228,7 @@
             if (obj_id){
             	if (typeof(imgs) !="undefined" && imgs !=''){
             		var files = JSON.parse(imgs).data;
+            		setCookie("files",files);
             		fileCount = files.length;
             		$placeHolder.addClass('element-invisible');
                     $statusBar.show();
