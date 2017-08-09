@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cms/good")
-public class CmsGoodController extends BaseController {
+public class CmsGoodController1 extends BaseController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CmsGoodController1.class);
 	
 	@Autowired
 	private CmsGoodService cmsGoodService;
