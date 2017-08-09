@@ -96,9 +96,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="good_detail_container" class="col-sm-2 control-label">商品详情</label>
+                                <label for="ueditor_container" class="col-sm-2 control-label">商品详情</label>
                                 <div class="col-sm-9">
-                                	<script id="good_detail_container"  type="text/plain"></script>
+                                	<script id="ueditor_container"  type="text/plain"></script>
                                 </div>
                                 <input type="hidden" id="goodDetail" name="goodDetail" />
                             </div>
@@ -170,18 +170,16 @@
     <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../content/min/js/supershopui.common.js"></script>
     <script src="../../content/supermgr/Base/js/common.js"></script>
+    <script src="../../scripts/angular.min.js"></script>
     <script src="../../scripts/ajax.js"></script>
-    <script src="../../plugin/webuploader/webuploader.js"></script>
-    <script src="../../plugin/webuploader/upload.js"></script>
     <script src="../../scripts/common.js"></script>
-    
 	<script src="../../plugin/ueditor/ueditor.config.js"></script>
     <script src="../../plugin/ueditor/ueditor.all.js"></script>
     <script src="../../plugin/zTree/js/jquery.ztree.core-3.5.js"></script>
-    <script src="../../scripts/angular.min.js"></script>
+    <script src="../../plugin/webuploader/webuploader.js"></script>
     <script>
-    	var ue = UE.getEditor('good_detail_container');
-	    var id = getUrlParam("id");
+    	var ue = UE.getEditor('ueditor_container');
+    	var id = getUrlParam("id");
 	    var app = angular.module('myApp', []);
 	    app.controller('myCtrl', function($scope, $http) {
 	        $http({
@@ -190,15 +188,17 @@
 	        }).then(function successCallback(response) {
 	        	var gooddata = response.data.data;
 	        	if (gooddata !=undefined){
+	        		imgs = gooddata.goodImage;
 	        		$scope.good = gooddata;
 		            ue.ready(function() {
 		            	ue.setContent(gooddata.goodDetail);
 		            });
 	        	}
+	    	    $.getScript("../../plugin/webuploader/upload.js");
 	        }, function errorCallback(response) {
 	        	$.fn.modalAlert("请求失败！", "error");
 	        });
-	    });	
+	    });
     	
     	var setting = {
    			data: {

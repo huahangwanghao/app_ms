@@ -5,16 +5,14 @@ import com.haohai.cms.common.exception.CustomException;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.common.util.StringUtil;
 import com.haohai.cms.common.util.file.FileType;
+import com.haohai.cms.common.util.file.UploadFile;
 import com.haohai.cms.model.dto.DefaultReq;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-@Controller
-@RequestMapping("/upload")
+@RestController
+@RequestMapping("/file")
 public class FileUploadController extends BaseController {
 
 	private static final Logger logger = Logger
@@ -41,7 +39,6 @@ public class FileUploadController extends BaseController {
 
 	@SuppressWarnings("static-access")
 	@RequestMapping(value = "upload.do", method	 = RequestMethod.POST)
-	@ResponseBody
 	public ResponseMessage upload(
 			@RequestParam(value = "msg") String msg,
 			@RequestParam(value = "photo") MultipartFile file,
@@ -85,16 +82,15 @@ public class FileUploadController extends BaseController {
 	 */
 	@SuppressWarnings("static-access")
 	@RequestMapping(value = "fileUpload.do", method = RequestMethod.POST)
-	@ResponseBody
 	public ResponseMessage fileUpload(MultipartFile file,String filefolder)
 			throws Exception {
 		ResponseMessage message = new ResponseMessage();
-		JSONObject json = new JSONObject();
+		UploadFile upFile = new UploadFile();
 		String contentType = file.getContentType();
 		if (contentType.indexOf("image") == 0){
 			BufferedImage sourceImg = ImageIO.read(file.getInputStream());
-			json.put("imgwidth", sourceImg.getWidth());
-			json.put("imgheight", sourceImg.getHeight());
+			upFile.setImgWidth(sourceImg.getWidth());
+			upFile.setImgHeight(sourceImg.getHeight());
 		}
 		String fileoriname = file.getOriginalFilename();
 		String fileformat = fileoriname.substring(fileoriname.lastIndexOf("."),fileoriname.length());
@@ -110,46 +106,51 @@ public class FileUploadController extends BaseController {
 			path.mkdirs();
 		}
 		file.transferTo(new File(filepath + filename));
-		json.put("filepath", relativePath + filename);
-		message = message.createSuccessMsg(json);
+		upFile.setName(filename);
+		upFile.setSize(file.getSize());
+		upFile.setMimeType(contentType);
+		upFile.setUrl(relativePath + filename);
+		message = message.createSuccessMsg(upFile);
 		logger.info("上传文件响应：" + JsonUtil.jsonToString(message));
 		return message;
 	}
 
 	/**
 	 * 下载图片
-	 *
-	 * 前端把图片的路径传递给我们,然后我们根据路径查询出来对应的图片返回给前端
-	 *
 	 * @param request
+	 * @param response
 	 */
-	@RequestMapping(value = "/file/{key}/download.do", method = RequestMethod.GET)
-	public   void  download(HttpServletRequest request, HttpServletResponse response, @PathVariable String key){
-		logger.info("下载图片上传参数:"+key);
-		logger.info("123-------->"+request.getParameter("url"));
+	@RequestMapping(value = "download.do", method = RequestMethod.GET)
+	public void download(HttpServletRequest request, HttpServletResponse response){
+		String url = request.getParameter("url");
+		logger.info("下载图片路径：" + url);
 		OutputStream out = null;
+		FileInputStream inputStream = null;
 		try {
-			FileInputStream inputStream = new FileInputStream("D:/good/20170802103400035-93684824.jpg");
-			int i = inputStream.available();
-			//byte数组用于存放图片字节数据  
-			byte[] buff = new byte[i];
-			inputStream.read(buff);
-			//记得关闭输入流  
-			inputStream.close();
-			//设置发送到客户端的响应内容类型  
-			response.setContentType("image/*");
-			response.setContentType("image/jpeg");
-			out = response.getOutputStream();
-			out.write(buff);
-			//关闭响应输出流  
-			out.close();
+			if (StringUtils.isNotEmpty(url)){
+				inputStream = new FileInputStream(UPLOAD_DIR + url);
+				int ipu = inputStream.available();
+				//byte数组用于存放图片字节数据  
+				byte[] buff = new byte[ipu];
+				inputStream.read(buff);
+				//设置发送到客户端的响应内容类型  
+				response.setContentType("image/*");
+				out = response.getOutputStream();
+				out.write(buff);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(out!=null){
+				if (inputStream !=null){
+					inputStream.close();
+					inputStream = null;
+				}
+				if(out != null){
 					out.flush();
+					//关闭响应输出流  
 					out.close();
+					out = null;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -209,7 +209,9 @@
             		$.fn.modalAlert("商品图片不能为空！", "error");
             		return;
                 }
-                $("#goodImage").val(files);
+            	var fileObj = new Object();
+            	fileObj.data = JSON.parse("[" + files + "]");
+                $("#goodImage").val(JSON.stringify(fileObj));
                 var ueHtml = ue.getContent();
                 $("#goodDetail").val(ueHtml);
                 handleAjaxSimple("/good/addCmsGood.do", $('#goodForm').serialize(), 2, function(data){
