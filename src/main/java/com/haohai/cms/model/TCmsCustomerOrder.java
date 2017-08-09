@@ -8,6 +8,8 @@ public class TCmsCustomerOrder {
 
     private Integer customerId;
 
+    private String customerName;
+
     private String customerPhone;
 
     private String customerAddress;
@@ -19,6 +21,8 @@ public class TCmsCustomerOrder {
     private Date mdfDate;
 
     private String dataFlag;
+    
+    private String  goodName;
 
     public Integer getOrderId() {
         return orderId;
@@ -34,6 +38,14 @@ public class TCmsCustomerOrder {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName == null ? null : customerName.trim();
     }
 
     public String getCustomerPhone() {
@@ -82,5 +94,29 @@ public class TCmsCustomerOrder {
 
     public void setDataFlag(String dataFlag) {
         this.dataFlag = dataFlag == null ? null : dataFlag.trim();
+    }
+
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
+
+    @Override
+    public String toString() {
+        return "TCmsCustomerOrder{" +
+                "orderId=" + orderId +
+                ", customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", orderAmount=" + orderAmount +
+                ", crtDate=" + crtDate +
+                ", mdfDate=" + mdfDate +
+                ", dataFlag='" + dataFlag + '\'' +
+                ", goodName='" + goodName + '\'' +
+                '}';
     }
 }

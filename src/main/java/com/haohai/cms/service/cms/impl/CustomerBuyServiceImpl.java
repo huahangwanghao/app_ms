@@ -178,7 +178,7 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
         Map<String,Object> param=new HashMap<>();
         param.put("customerId","1");
         PageHelper.startPage(pageDto.getPageNumber(),pageDto.getPageSize());
-        List<TCmsCustomerOrder> list=tCmsCustomerOrderMapper.selectOrderList(param);
+        List<TCmsCustomerOrder> list=tCmsCustomerOrderMapper.selectOrderList4Cms(param);
         PageInfo<TCmsCustomerOrder> pageInfo=new PageInfo<>(list);
         JSONObject json=JsonUtil.getPageInfo2JsonObject(pageInfo.getTotal(),list);
         return ResponseMessage.createSuccessMsg(json);

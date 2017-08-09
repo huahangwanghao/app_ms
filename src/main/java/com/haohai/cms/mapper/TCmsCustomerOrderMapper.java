@@ -31,9 +31,11 @@ public interface TCmsCustomerOrderMapper {
     int updateByPrimaryKey(TCmsCustomerOrder record);
 
     /**
-     * 得到订单列表
+     * 
      * @param param
      * @return
      */
+    List<TCmsCustomerOrder> selectOrderList4Cms(Map<String, Object> param);
+
     List<TCmsCustomerOrder> selectOrderList(Map<String, Object> param);
 }

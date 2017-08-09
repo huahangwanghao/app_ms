@@ -160,14 +160,28 @@
                 width :  100,
                 valign : 'middle'
             },{
-                field : 'level',
-                title : '所属级别',
+                field : 'customerName',
+                title : '客户姓名',
                 align : 'center',
                 width :  80,
                 valign : 'middle'
             },{
-                field : 'dataFlag',
-                title : '商品状态',
+                    field : 'customerPhone',
+                    title : '客户手机',
+                    align : 'center',
+                    width :  80,
+                    valign : 'middle'
+                },
+                {
+                    field : 'goodName',
+                    title : '商品名称',
+                    align : 'center',
+                    width :  80,
+                    valign : 'middle'
+                },
+			{
+                field : 'customerAddress',
+                title : '收获地址',
                 align : 'center',
                 width :  50,
                 valign : 'middle',
@@ -181,8 +195,8 @@
                 width :  80 ,
                 valign : 'middle',
                 formatter : function(value,row,index){
-                    var e = '<a href="javascript:void()" onclick="editCategory(\''+ row.categoryId + '\')">编辑</a> ';
-                    var d = '<a href="javascript:void()" onclick="deleteCategory(\''+ row.categoryId  +'\')">删除</a> ';
+                    var e = '<a href="javascript:void()" onclick="editCategory(\''+ row.orderId + '\')">编辑</a> ';
+                    var d = '<a href="javascript:void()" onclick="deleteCategory(\''+ row.orderId +'\')">删除</a> ';
                     return e+d;
                 }
             }],
