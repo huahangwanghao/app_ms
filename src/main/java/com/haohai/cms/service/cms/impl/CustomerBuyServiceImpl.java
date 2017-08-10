@@ -27,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -235,6 +237,90 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
     @Override
     public ResponseMessage updateCustomerGoodById(TCmsCustomerGood tCmsCustomerGood) {
         tCmsCustomerGoodMapper.updateByPrimaryKeySelective(tCmsCustomerGood);
+        return ResponseMessage.createSuccessMsg(0);
+    }
+
+    /**
+     * 对订单付款操作.
+     *
+     * @return
+     */
+    @Override
+    public ResponseMessage toPayOrder4Api() {
+        
+        //传递客户的Id就可以啦.
+        Integer customerId=0;
+        //收获地址
+        String customerAddress="";
+        //商品名称
+        String goodName="";
+        //客户手机号
+        String customerPhone="";
+        //1.判断购物车里面的商品库存是否足够
+        TCmsShoppingCarCriteria tCmsShoppingCarCriteria=new TCmsShoppingCarCriteria();
+        TCmsShoppingCarCriteria.Criteria criteriaCar=tCmsShoppingCarCriteria.createCriteria();
+        criteriaCar.andCustomerIdEqualTo(customerId);
+        criteriaCar.andShoppingCarStatusEqualTo("1");
+        List<TCmsShoppingCar> listCar=tCmsShoppingCarMapper.selectByExample(tCmsShoppingCarCriteria);
+        BigDecimal totalAmount=new BigDecimal(0.0);
+        for(TCmsShoppingCar car:listCar){
+            //原价
+            BigDecimal oldPrice=car.getGoodOldPrice();
+            //现价
+            BigDecimal nowPrice=car.getGoodNowPrice();
+            totalAmount.add(nowPrice);
+            int cmsGoodId=car.getCmsGoodId();
+            TCmsGood tCmsGood=tCmsGoodMapper.selectByPrimaryKey(cmsGoodId);
+            int  goodCount=car.getCarGoodCount();
+            int hasCount=tCmsGood.getHasCount();
+            if(hasCount<goodCount){
+                return  ResponseMessage.customMsg(tCmsGood.getGoodName()+"库存不足!");
+            }
+        }
+        
+        //2.将购物车里面的商品进行删除
+        
+        
+        //3.对于订单表和商品表中进入插入数据
+        TCmsCustomerOrder order=new TCmsCustomerOrder();
+        order.setCustomerId(customerId);
+        order.setCrtDate(new Date());
+        order.setCustomerAddress(customerAddress);
+        order.setGoodName(goodName);
+        order.setCustomerPhone(customerPhone);
+        //商品总金额
+        order.setOrderAmount(totalAmount);
+        //插入然后返回主键
+        tCmsCustomerOrderMapper.insertSelective(order);
+        int orderId=order.getOrderId();
+        for(TCmsShoppingCar car:listCar){
+            int cmsGoodId=car.getCmsGoodId();
+            String cusGoodGuige=car.getCmsGoodGuige();
+            TCmsCustomerGood customerGood=new TCmsCustomerGood();
+            customerGood.setGoodName(goodName);
+            customerGood.setCrtDate(new Date());
+            customerGood.setOrderId(orderId);
+            customerGood.setCmsGoodGuige(cusGoodGuige);
+            customerGood.setCustomerGoodId(cmsGoodId);
+            customerGood.setCustomerId(customerId);
+            //TODO
+            customerGood.setGoodAmountNow(car.getGoodNowPrice());
+            customerGood.setGoodAmountOld(car.getGoodOldPrice());
+            customerGood.setGoodCount(car.getCarGoodCount());
+            tCmsCustomerGoodMapper.insertSelective(customerGood);
+        }
+        
+        
+        
+        
+        
+        //4.调用微信的支付接口进行扣钱操作......重要!!!重要!!!重要!!!
+        
+        //5.只有付款成功后,才进行减去库存操作....
+        
+        
+        
+        
         return ResponseMessage.createSuccessMsg(0);
     }
 }

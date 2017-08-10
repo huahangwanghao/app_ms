@@ -1,5 +1,6 @@
 package com.haohai.cms.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -742,6 +743,126 @@ public class TCmsShoppingCarCriteria {
 
         public Criteria andEndDateNotBetween(Date value1, Date value2) {
             addCriterion("end_date not between", value1, value2, "endDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceIsNull() {
+            addCriterion("good_now_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceIsNotNull() {
+            addCriterion("good_now_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceEqualTo(BigDecimal value) {
+            addCriterion("good_now_price =", value, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceNotEqualTo(BigDecimal value) {
+            addCriterion("good_now_price <>", value, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceGreaterThan(BigDecimal value) {
+            addCriterion("good_now_price >", value, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("good_now_price >=", value, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceLessThan(BigDecimal value) {
+            addCriterion("good_now_price <", value, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("good_now_price <=", value, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceIn(List<BigDecimal> values) {
+            addCriterion("good_now_price in", values, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceNotIn(List<BigDecimal> values) {
+            addCriterion("good_now_price not in", values, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("good_now_price between", value1, value2, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodNowPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("good_now_price not between", value1, value2, "goodNowPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceIsNull() {
+            addCriterion("good_old_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceIsNotNull() {
+            addCriterion("good_old_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceEqualTo(BigDecimal value) {
+            addCriterion("good_old_price =", value, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceNotEqualTo(BigDecimal value) {
+            addCriterion("good_old_price <>", value, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceGreaterThan(BigDecimal value) {
+            addCriterion("good_old_price >", value, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("good_old_price >=", value, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceLessThan(BigDecimal value) {
+            addCriterion("good_old_price <", value, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("good_old_price <=", value, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceIn(List<BigDecimal> values) {
+            addCriterion("good_old_price in", values, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceNotIn(List<BigDecimal> values) {
+            addCriterion("good_old_price not in", values, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("good_old_price between", value1, value2, "goodOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodOldPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("good_old_price not between", value1, value2, "goodOldPrice");
             return (Criteria) this;
         }
 

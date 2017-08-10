@@ -86,7 +86,10 @@ xxxx表设计
     结束时间 end_date
     状态     shopping_car_status 0:放弃,1:在购物车,2:付款成功
     购物车中商品数量     car_good_count
+    现在价格                good_now_price
+    原来价格                good_old_price
     
+
 
     
 7.涉及到物流表 肯定是调用三方的接口

@@ -1,5 +1,6 @@
 package com.haohai.cms.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TCmsShoppingCar {
@@ -22,6 +23,10 @@ public class TCmsShoppingCar {
     private Date crtDate;
 
     private Date endDate;
+
+    private BigDecimal goodNowPrice;
+
+    private BigDecimal goodOldPrice;
 
     public Integer getCarId() {
         return carId;
@@ -101,5 +106,21 @@ public class TCmsShoppingCar {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public BigDecimal getGoodNowPrice() {
+        return goodNowPrice;
+    }
+
+    public void setGoodNowPrice(BigDecimal goodNowPrice) {
+        this.goodNowPrice = goodNowPrice;
+    }
+
+    public BigDecimal getGoodOldPrice() {
+        return goodOldPrice;
+    }
+
+    public void setGoodOldPrice(BigDecimal goodOldPrice) {
+        this.goodOldPrice = goodOldPrice;
     }
 }

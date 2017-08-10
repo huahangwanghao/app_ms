@@ -12,6 +12,8 @@
     <result column="shopping_car_status" property="shoppingCarStatus" jdbcType="VARCHAR" />
     <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
     <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <result column="good_now_price" property="goodNowPrice" jdbcType="DECIMAL" />
+    <result column="good_old_price" property="goodOldPrice" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     car_id, customer_id, customer_good_id, order_id, cms_good_id, cms_good_guige, car_good_count, 
-    shopping_car_status, crt_date, end_date
+    shopping_car_status, crt_date, end_date, good_now_price, good_old_price
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsShoppingCarCriteria" >
     select
@@ -112,11 +114,13 @@
     insert into t_cms_shopping_car (car_id, customer_id, customer_good_id, 
       order_id, cms_good_id, cms_good_guige, 
       car_good_count, shopping_car_status, crt_date, 
-      end_date)
+      end_date, good_now_price, good_old_price
+      )
     values (#{carId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{customerGoodId,jdbcType=INTEGER}, 
       #{orderId,jdbcType=INTEGER}, #{cmsGoodId,jdbcType=INTEGER}, #{cmsGoodGuige,jdbcType=VARCHAR}, 
       #{carGoodCount,jdbcType=INTEGER}, #{shoppingCarStatus,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, 
-      #{endDate,jdbcType=TIMESTAMP})
+      #{endDate,jdbcType=TIMESTAMP}, #{goodNowPrice,jdbcType=DECIMAL}, #{goodOldPrice,jdbcType=DECIMAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsShoppingCar" >
     insert into t_cms_shopping_car
@@ -151,6 +155,12 @@
       <if test="endDate != null" >
         end_date,
       </if>
+      <if test="goodNowPrice != null" >
+        good_now_price,
+      </if>
+      <if test="goodOldPrice != null" >
+        good_old_price,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="carId != null" >
@@ -182,6 +192,12 @@
       </if>
       <if test="endDate != null" >
         #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="goodNowPrice != null" >
+        #{goodNowPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodOldPrice != null" >
+        #{goodOldPrice,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -224,6 +240,12 @@
       <if test="record.endDate != null" >
         end_date = #{record.endDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.goodNowPrice != null" >
+        good_now_price = #{record.goodNowPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodOldPrice != null" >
+        good_old_price = #{record.goodOldPrice,jdbcType=DECIMAL},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -240,7 +262,9 @@
       car_good_count = #{record.carGoodCount,jdbcType=INTEGER},
       shopping_car_status = #{record.shoppingCarStatus,jdbcType=VARCHAR},
       crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
-      end_date = #{record.endDate,jdbcType=TIMESTAMP}
+      end_date = #{record.endDate,jdbcType=TIMESTAMP},
+      good_now_price = #{record.goodNowPrice,jdbcType=DECIMAL},
+      good_old_price = #{record.goodOldPrice,jdbcType=DECIMAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -275,6 +299,12 @@
       <if test="endDate != null" >
         end_date = #{endDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="goodNowPrice != null" >
+        good_now_price = #{goodNowPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodOldPrice != null" >
+        good_old_price = #{goodOldPrice,jdbcType=DECIMAL},
+      </if>
     </set>
     where car_id = #{carId,jdbcType=INTEGER}
   </update>
@@ -288,7 +318,9 @@
       car_good_count = #{carGoodCount,jdbcType=INTEGER},
       shopping_car_status = #{shoppingCarStatus,jdbcType=VARCHAR},
       crt_date = #{crtDate,jdbcType=TIMESTAMP},
-      end_date = #{endDate,jdbcType=TIMESTAMP}
+      end_date = #{endDate,jdbcType=TIMESTAMP},
+      good_now_price = #{goodNowPrice,jdbcType=DECIMAL},
+      good_old_price = #{goodOldPrice,jdbcType=DECIMAL}
     where car_id = #{carId,jdbcType=INTEGER}
   </update>
 </mapper>

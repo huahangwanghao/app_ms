@@ -70,4 +70,13 @@ public interface CustomerBuyService {
      * @return
      */
     ResponseMessage updateCustomerGoodById(TCmsCustomerGood tCmsCustomerGood);
+
+    /**
+     * 对订单付款操作.
+     * @return
+     */
+    ResponseMessage toPayOrder4Api();
+    
+    
+    
 }
