@@ -41,15 +41,16 @@
 		<property name="prefix" value="/pages" />
 		<property name="suffix" value=".html" />
 	</bean>
-	
+
+	<bean id="exceptionResolver" class="com.haohai.cms.common.exception.ExceptionResolver"></bean>
 	<!-- 统一异常处理 -->
-	<bean class="com.haohai.cms.common.exception.CustomExceptionResolver">
+	<!--<bean class="com.haohai.cms.common.exception.CustomExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
 				<prop key="com.haohai.cms.common.exception.CustomException">error/errorpage</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 	
 	<!-- 文件上传配置 -->
 	<bean id="multipartResolver"

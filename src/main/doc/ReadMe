@@ -1,3 +1,8 @@
 需要在tomcat上进行编码的处理.
     修改tomcat下的conf/server.xml文件 
     Connector connectionTimeout="20000" port="8084" URIEncoding="UTF-8" protocol="HTTP/1.1" redirectPort="8443"/>
+
+测试快递查询接口
+    AppKey：24496353     AppSecret：acc5f58e39727bd227e6313557ac6b9a 
+    AppCode：acc1fcc66a5c4c938f7fb4333eba336b
+
