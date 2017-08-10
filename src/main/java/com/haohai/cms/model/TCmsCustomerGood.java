@@ -32,6 +32,8 @@ public class TCmsCustomerGood {
 
     private Integer goodStatus;
 
+    private Integer goodCount;
+
     public Integer getCustomerGoodId() {
         return customerGoodId;
     }
@@ -144,23 +146,11 @@ public class TCmsCustomerGood {
         this.goodStatus = goodStatus;
     }
 
-    @Override
-    public String toString() {
-        return "TCmsCustomerGood{" +
-                "customerGoodId=" + customerGoodId +
-                ", customerId=" + customerId +
-                ", orderId=" + orderId +
-                ", goodName='" + goodName + '\'' +
-                ", cmsGoodGuige='" + cmsGoodGuige + '\'' +
-                ", goodAmountOld=" + goodAmountOld +
-                ", goodAmountNow=" + goodAmountNow +
-                ", goodImgSrc='" + goodImgSrc + '\'' +
-                ", crtDate=" + crtDate +
-                ", mdfDate=" + mdfDate +
-                ", cmsGoodId=" + cmsGoodId +
-                ", expressId='" + expressId + '\'' +
-                ", expressType='" + expressType + '\'' +
-                ", goodStatus=" + goodStatus +
-                '}';
+    public Integer getGoodCount() {
+        return goodCount;
+    }
+
+    public void setGoodCount(Integer goodCount) {
+        this.goodCount = goodCount;
     }
 }

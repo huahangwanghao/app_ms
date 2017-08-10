@@ -52,6 +52,7 @@ xxxx表设计
 	快递单号  express_id   ***
 	快递公司  express_type  ***
 	商品状态  good_status  0:未发货 1:发货中 2:发货完成 3:退货
+	购买数量  good_count
 	
 
 4.后台商品表

@@ -61,7 +61,29 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
      */
     @Override
     public ResponseMessage addShoppingCar(TCmsShoppingCar customerBuyReq) {
-        
+
+        /***
+         * 
+         * 对于添加购物车的伪代码
+         * 
+         * 1.用户在前台浏览商品, 点击添加购物车
+         * 
+         * 
+         * 
+         * 
+         */
+
+
+
+
+
+
+
+
+
+
+
+
         //1.添加之前判断该商品是否还有库存
         int goodId=customerBuyReq.getCmsGoodId();
         TCmsGood good=tCmsGoodMapper.selectByPrimaryKey(goodId);

@@ -1016,6 +1016,66 @@ public class TCmsCustomerGoodCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andGoodCountIsNull() {
+            addCriterion("good_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountIsNotNull() {
+            addCriterion("good_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountEqualTo(Integer value) {
+            addCriterion("good_count =", value, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountNotEqualTo(Integer value) {
+            addCriterion("good_count <>", value, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountGreaterThan(Integer value) {
+            addCriterion("good_count >", value, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("good_count >=", value, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountLessThan(Integer value) {
+            addCriterion("good_count <", value, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountLessThanOrEqualTo(Integer value) {
+            addCriterion("good_count <=", value, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountIn(List<Integer> values) {
+            addCriterion("good_count in", values, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountNotIn(List<Integer> values) {
+            addCriterion("good_count not in", values, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountBetween(Integer value1, Integer value2) {
+            addCriterion("good_count between", value1, value2, "goodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("good_count not between", value1, value2, "goodCount");
+            return (Criteria) this;
+        }
+
         public Criteria andCustomCriteria(String value) {
             addCriterion( "("+ value +")" );
             return (Criteria) this;

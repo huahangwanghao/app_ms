@@ -16,6 +16,7 @@
     <result column="express_id" property="expressId" jdbcType="VARCHAR" />
     <result column="express_type" property="expressType" jdbcType="VARCHAR" />
     <result column="good_status" property="goodStatus" jdbcType="INTEGER" />
+    <result column="good_count" property="goodCount" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +79,7 @@
   <sql id="Base_Column_List" >
     customer_good_id, customer_id, order_id, good_name, cms_good_guige, good_amount_old, 
     good_amount_now, good_img_src, crt_date, mdf_date, cms_good_id, express_id, express_type, 
-    good_status
+    good_status, good_count
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsCustomerGoodCriteria" >
     select
@@ -118,12 +119,14 @@
       good_name, cms_good_guige, good_amount_old, 
       good_amount_now, good_img_src, crt_date, 
       mdf_date, cms_good_id, express_id, 
-      express_type, good_status)
+      express_type, good_status, good_count
+      )
     values (#{customerGoodId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
       #{goodName,jdbcType=VARCHAR}, #{cmsGoodGuige,jdbcType=VARCHAR}, #{goodAmountOld,jdbcType=DECIMAL}, 
       #{goodAmountNow,jdbcType=DECIMAL}, #{goodImgSrc,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, 
       #{mdfDate,jdbcType=TIMESTAMP}, #{cmsGoodId,jdbcType=INTEGER}, #{expressId,jdbcType=VARCHAR}, 
-      #{expressType,jdbcType=VARCHAR}, #{goodStatus,jdbcType=INTEGER})
+      #{expressType,jdbcType=VARCHAR}, #{goodStatus,jdbcType=INTEGER}, #{goodCount,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsCustomerGood" >
     insert into t_cms_customer_good
@@ -170,6 +173,9 @@
       <if test="goodStatus != null" >
         good_status,
       </if>
+      <if test="goodCount != null" >
+        good_count,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="customerGoodId != null" >
@@ -213,6 +219,9 @@
       </if>
       <if test="goodStatus != null" >
         #{goodStatus,jdbcType=INTEGER},
+      </if>
+      <if test="goodCount != null" >
+        #{goodCount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -267,6 +276,9 @@
       <if test="record.goodStatus != null" >
         good_status = #{record.goodStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.goodCount != null" >
+        good_count = #{record.goodCount,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -287,7 +299,8 @@
       cms_good_id = #{record.cmsGoodId,jdbcType=INTEGER},
       express_id = #{record.expressId,jdbcType=VARCHAR},
       express_type = #{record.expressType,jdbcType=VARCHAR},
-      good_status = #{record.goodStatus,jdbcType=INTEGER}
+      good_status = #{record.goodStatus,jdbcType=INTEGER},
+      good_count = #{record.goodCount,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -334,6 +347,9 @@
       <if test="goodStatus != null" >
         good_status = #{goodStatus,jdbcType=INTEGER},
       </if>
+      <if test="goodCount != null" >
+        good_count = #{goodCount,jdbcType=INTEGER},
+      </if>
     </set>
     where customer_good_id = #{customerGoodId,jdbcType=INTEGER}
   </update>
@@ -351,7 +367,8 @@
       cms_good_id = #{cmsGoodId,jdbcType=INTEGER},
       express_id = #{expressId,jdbcType=VARCHAR},
       express_type = #{expressType,jdbcType=VARCHAR},
-      good_status = #{goodStatus,jdbcType=INTEGER}
+      good_status = #{goodStatus,jdbcType=INTEGER},
+      good_count = #{goodCount,jdbcType=INTEGER}
     where customer_good_id = #{customerGoodId,jdbcType=INTEGER}
   </update>
 </mapper>
