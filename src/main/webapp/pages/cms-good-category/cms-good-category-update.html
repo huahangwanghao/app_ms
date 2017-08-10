@@ -43,8 +43,8 @@
                 <!-- /.box-header -->
                 <form class="form-horizontal" id="categoryform">
                     <div class="box-body" ng-controller="myCtrl">
-                        <input type="text" ng-model="good.categoryId" id="categoryId" name="categoryId" class="form-control" placeholder="商品名称 ..."
-                               hidden/>
+                        <input type="hidden" ng-model="good.categoryId" id="categoryId" name="categoryId" class="form-control" placeholder="商品名称 ..."
+                               />
                         <!-- text input -->
                         <div class="form-group">
                             <label for="categoryName" class="col-sm-2 control-label">商品名称<span class="required">*</span></label>
@@ -65,7 +65,7 @@
                         <div readonly="readonly" class="form-group">
                             <label class="col-sm-2 control-label">所选级别</label>
                             <div class="col-sm-4">
-                                <select id="level" name="level" class="form-control" onchange="changeCategory();">
+                                <select disabled id="level" name="level" class="form-control" onchange="changeCategory();">
                                     <option value="-1">-请选择-</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
