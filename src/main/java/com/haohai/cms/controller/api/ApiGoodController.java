@@ -57,7 +57,7 @@ public class ApiGoodController extends BaseController {
 	public ResponseMessage deleteCmsGood(@ModelAttribute("tCmsGood") TCmsGood cmsGood) {
 		logger.info("删除商品请求："+cmsGood);
 		cmsGood.setDataFlag("0");
-		ResponseMessage responseMessage = cmsGoodService.updateCmsGood(cmsGood);
+		ResponseMessage responseMessage = null;//cmsGoodService.updateCmsGood(cmsGood);
 		return responseMessage;
 	}
 	
@@ -95,7 +95,7 @@ public class ApiGoodController extends BaseController {
 	public ResponseMessage updateCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
 		logger.info("新增cms商品的入参:"+tCmsGood);
 		ResponseMessage responseMessage=null;
-		responseMessage=cmsGoodService.updateCmsGood(tCmsGood);
+//		responseMessage=cmsGoodService.updateCmsGood(tCmsGood);
 		return responseMessage;
 	}
 

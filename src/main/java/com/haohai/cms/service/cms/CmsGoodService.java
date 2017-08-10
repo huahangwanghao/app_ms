@@ -21,11 +21,11 @@ public interface CmsGoodService {
     ResponseMessage addCmsGood(TCmsGood cmsGood);
     
     /**
-     * 修改商品信息
-     * @param tCmsGood
+     * 保存商品
+     * @param cmsGood
      * @return
      */
-    ResponseMessage updateCmsGood(TCmsGood tCmsGood);
+    ResponseMessage tmSaveCmsGood(TCmsGood cmsGood);
     
     /**
      * 批量删除商品
