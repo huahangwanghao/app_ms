@@ -179,10 +179,10 @@
     <script src="../../plugin/webuploader/webuploader.js"></script>
     <script>
     	var ue = UE.getEditor('ueditor_container');
+    	var app = angular.module('myApp', []);
     	var id = getUrlParam("id");
     	if (id){
     		$('#goodForm').append('<input type="hidden" name="goodId" value="'+id+'" />');
-    		var app = angular.module('myApp', []);
     	    app.controller('myCtrl', function($scope, $http) {
     	        $http({
     	            method: 'get',
@@ -203,6 +203,7 @@
     	        });
     	    });
     	}else{
+    		app.controller('myCtrl', function($scope, $http) {});
     		$.getScript("../../plugin/webuploader/upload.js");
     	}
     	
@@ -241,7 +242,9 @@
             		$.fn.modalAlert("商品图片不能为空！", "error");
             		return;
                 }
-                $("#goodImage").val(files);
+            	var fileObj = new Object();
+            	fileObj.data = JSON.parse("[" + files + "]");
+                $("#goodImage").val(JSON.stringify(fileObj));
                 var ueHtml = ue.getContent();
                 $("#goodDetail").val(ueHtml);
                 handleAjaxSimple("/cms/good/saveCmsGood.do", $('#goodForm').serialize(), 2, function(data){
