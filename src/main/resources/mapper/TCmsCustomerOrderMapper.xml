@@ -15,6 +15,7 @@
     <result column="good_name" property="goodName" jdbcType="VARCHAR" />
     <result column="express_id" property="expressId" jdbcType="VARCHAR" />
     <result column="express_type" property="expressType" jdbcType="VARCHAR" />
+    <result column="good_status" property="goodStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -287,7 +288,7 @@
   </select>
 
   <select id="selectOrderList4Cms" resultMap="BaseResultMap" parameterType="java.util.Map">
-    select o.*,g.good_name,g.customer_good_id,g.express_id,g.express_type from  t_cms_customer_order o, t_cms_customer_good g
+    select o.*,g.good_name,g.customer_good_id,g.express_id,g.express_type,g.good_status from  t_cms_customer_order o, t_cms_customer_good g
     where  o.order_id=g.order_id
     <if test="goodStatus != null">
       and good_status=#{goodStatus,jdbcType=VARCHAR}

@@ -162,9 +162,9 @@
                 width : 10
             },{
                 field : 'orderId',
-                title : '商品Id',
+                title : '订单Id',
                 align : 'center',
-                width :  100,
+                width :  60,
                 valign : 'middle'
             },
                 {
@@ -172,7 +172,7 @@
                     title : '商品Id',
 					hidden:	"hidden",
                     align : 'center',
-                    width :  100,
+                    width :  60,
                     valign : 'middle'
                 },{
                 field : 'customerName',
@@ -248,16 +248,16 @@
                 width :  50,
                 valign : 'middle',
                 formatter : function(value,row,index){
-					var day=row.dataFlag;
+					var day=row.goodStatus;
                     switch (day)
                     {
-                        case "0":
+                        case 0:
                             return "未发货";
                             break;
-                        case "1":
+                        case 1:
                             return "发货中";
                             break;
-                        case "2":
+                        case 2:
                             return "已完成";
                             break;
 						default:
@@ -315,8 +315,34 @@
         window.location.href = "cms-good-category-add.html?time="+Date.parse(new Date());
     }
 
+    /**
+	 * 发货
+     * @param id
+     */
     function sendGood(id){
-        window.location.href = "cms-good-category-update.html?id=" + id;
+		var data={};
+		data.customerGoodId=id;
+		//发货中....
+		data.goodStatus=1;
+        $.ajax({
+            type: "post",
+            url: "/cms/buy/doUpdateExpress.do",
+			data:data,
+            dataType: 'JSON',
+            success: function (data, status) {
+                if (status == "success") {
+                    window.location.href = "cms-good-order-table.html?time=" + new Date();
+                }
+            },
+            error: function () {
+                alert('编辑失败');
+            },
+            complete: function () {
+
+            }
+
+        });
+        
     }
 
     function deleteGood(obj) {

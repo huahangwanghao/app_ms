@@ -26,6 +26,7 @@ public class TCmsCustomerOrder {
     private Integer customerGoodId;
     private String expressType;
     private String expressId;
+    private Integer goodStatus;
 
     public Integer getOrderId() {
         return orderId;
@@ -131,6 +132,14 @@ public class TCmsCustomerOrder {
         this.expressId = expressId;
     }
 
+    public Integer getGoodStatus() {
+        return goodStatus;
+    }
+
+    public void setGoodStatus(Integer goodStatus) {
+        this.goodStatus = goodStatus;
+    }
+
     @Override
     public String toString() {
         return "TCmsCustomerOrder{" +
@@ -147,6 +156,7 @@ public class TCmsCustomerOrder {
                 ", customerGoodId=" + customerGoodId +
                 ", expressType='" + expressType + '\'' +
                 ", expressId='" + expressId + '\'' +
+                ", goodStatus=" + goodStatus +
                 '}';
     }
 }
