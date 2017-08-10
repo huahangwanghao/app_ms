@@ -8,6 +8,7 @@
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="cms_good_id" property="cmsGoodId" jdbcType="INTEGER" />
     <result column="cms_good_guige" property="cmsGoodGuige" jdbcType="VARCHAR" />
+    <result column="car_good_count" property="carGoodCount" jdbcType="INTEGER" />
     <result column="shopping_car_status" property="shoppingCarStatus" jdbcType="VARCHAR" />
     <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
     <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    car_id, customer_id, customer_good_id, order_id, cms_good_id, cms_good_guige, shopping_car_status, 
-    crt_date, end_date
+    car_id, customer_id, customer_good_id, order_id, cms_good_id, cms_good_guige, car_good_count, 
+    shopping_car_status, crt_date, end_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsShoppingCarCriteria" >
     select
@@ -110,12 +111,12 @@
   <insert id="insert" parameterType="com.haohai.cms.model.TCmsShoppingCar" >
     insert into t_cms_shopping_car (car_id, customer_id, customer_good_id, 
       order_id, cms_good_id, cms_good_guige, 
-      shopping_car_status, crt_date, end_date
-      )
+      car_good_count, shopping_car_status, crt_date, 
+      end_date)
     values (#{carId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{customerGoodId,jdbcType=INTEGER}, 
       #{orderId,jdbcType=INTEGER}, #{cmsGoodId,jdbcType=INTEGER}, #{cmsGoodGuige,jdbcType=VARCHAR}, 
-      #{shoppingCarStatus,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}
-      )
+      #{carGoodCount,jdbcType=INTEGER}, #{shoppingCarStatus,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, 
+      #{endDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsShoppingCar" >
     insert into t_cms_shopping_car
@@ -137,6 +138,9 @@
       </if>
       <if test="cmsGoodGuige != null" >
         cms_good_guige,
+      </if>
+      <if test="carGoodCount != null" >
+        car_good_count,
       </if>
       <if test="shoppingCarStatus != null" >
         shopping_car_status,
@@ -166,6 +170,9 @@
       </if>
       <if test="cmsGoodGuige != null" >
         #{cmsGoodGuige,jdbcType=VARCHAR},
+      </if>
+      <if test="carGoodCount != null" >
+        #{carGoodCount,jdbcType=INTEGER},
       </if>
       <if test="shoppingCarStatus != null" >
         #{shoppingCarStatus,jdbcType=VARCHAR},
@@ -205,6 +212,9 @@
       <if test="record.cmsGoodGuige != null" >
         cms_good_guige = #{record.cmsGoodGuige,jdbcType=VARCHAR},
       </if>
+      <if test="record.carGoodCount != null" >
+        car_good_count = #{record.carGoodCount,jdbcType=INTEGER},
+      </if>
       <if test="record.shoppingCarStatus != null" >
         shopping_car_status = #{record.shoppingCarStatus,jdbcType=VARCHAR},
       </if>
@@ -227,6 +237,7 @@
       order_id = #{record.orderId,jdbcType=INTEGER},
       cms_good_id = #{record.cmsGoodId,jdbcType=INTEGER},
       cms_good_guige = #{record.cmsGoodGuige,jdbcType=VARCHAR},
+      car_good_count = #{record.carGoodCount,jdbcType=INTEGER},
       shopping_car_status = #{record.shoppingCarStatus,jdbcType=VARCHAR},
       crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
       end_date = #{record.endDate,jdbcType=TIMESTAMP}
@@ -252,6 +263,9 @@
       <if test="cmsGoodGuige != null" >
         cms_good_guige = #{cmsGoodGuige,jdbcType=VARCHAR},
       </if>
+      <if test="carGoodCount != null" >
+        car_good_count = #{carGoodCount,jdbcType=INTEGER},
+      </if>
       <if test="shoppingCarStatus != null" >
         shopping_car_status = #{shoppingCarStatus,jdbcType=VARCHAR},
       </if>
@@ -271,6 +285,7 @@
       order_id = #{orderId,jdbcType=INTEGER},
       cms_good_id = #{cmsGoodId,jdbcType=INTEGER},
       cms_good_guige = #{cmsGoodGuige,jdbcType=VARCHAR},
+      car_good_count = #{carGoodCount,jdbcType=INTEGER},
       shopping_car_status = #{shoppingCarStatus,jdbcType=VARCHAR},
       crt_date = #{crtDate,jdbcType=TIMESTAMP},
       end_date = #{endDate,jdbcType=TIMESTAMP}

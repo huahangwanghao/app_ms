@@ -15,6 +15,8 @@ public class TCmsShoppingCar {
 
     private String cmsGoodGuige;
 
+    private Integer carGoodCount;
+
     private String shoppingCarStatus;
 
     private Date crtDate;
@@ -67,6 +69,14 @@ public class TCmsShoppingCar {
 
     public void setCmsGoodGuige(String cmsGoodGuige) {
         this.cmsGoodGuige = cmsGoodGuige == null ? null : cmsGoodGuige.trim();
+    }
+
+    public Integer getCarGoodCount() {
+        return carGoodCount;
+    }
+
+    public void setCarGoodCount(Integer carGoodCount) {
+        this.carGoodCount = carGoodCount;
     }
 
     public String getShoppingCarStatus() {

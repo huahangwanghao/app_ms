@@ -495,6 +495,66 @@ public class TCmsShoppingCarCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andCarGoodCountIsNull() {
+            addCriterion("car_good_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountIsNotNull() {
+            addCriterion("car_good_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountEqualTo(Integer value) {
+            addCriterion("car_good_count =", value, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountNotEqualTo(Integer value) {
+            addCriterion("car_good_count <>", value, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountGreaterThan(Integer value) {
+            addCriterion("car_good_count >", value, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("car_good_count >=", value, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountLessThan(Integer value) {
+            addCriterion("car_good_count <", value, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountLessThanOrEqualTo(Integer value) {
+            addCriterion("car_good_count <=", value, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountIn(List<Integer> values) {
+            addCriterion("car_good_count in", values, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountNotIn(List<Integer> values) {
+            addCriterion("car_good_count not in", values, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountBetween(Integer value1, Integer value2) {
+            addCriterion("car_good_count between", value1, value2, "carGoodCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCarGoodCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("car_good_count not between", value1, value2, "carGoodCount");
+            return (Criteria) this;
+        }
+
         public Criteria andShoppingCarStatusIsNull() {
             addCriterion("shopping_car_status is null");
             return (Criteria) this;

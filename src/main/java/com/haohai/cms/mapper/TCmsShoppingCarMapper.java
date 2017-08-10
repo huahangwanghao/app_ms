@@ -2,9 +2,8 @@ package com.haohai.cms.mapper;
 
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.TCmsShoppingCarCriteria;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TCmsShoppingCarMapper {
     int countByExample(TCmsShoppingCarCriteria example);

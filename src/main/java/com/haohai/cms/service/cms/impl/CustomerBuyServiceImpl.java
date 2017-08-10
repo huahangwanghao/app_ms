@@ -65,17 +65,13 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
         /***
          * 
          * 对于添加购物车的伪代码
-         * 
-         * 1.用户在前台浏览商品, 点击添加购物车
-         * 
-         * 
-         * 
-         * 
          */
 
 
 
-
+        // 1.用户在前台浏览商品, 点击添加购物车
+        
+        
 
 
 
