@@ -13,6 +13,8 @@
     <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
     <result column="mdf_date" property="mdfDate" jdbcType="TIMESTAMP" />
     <result column="cms_good_id" property="cmsGoodId" jdbcType="INTEGER" />
+    <result column="express_id" property="expressId" jdbcType="VARCHAR" />
+    <result column="express_type" property="expressType" jdbcType="VARCHAR" />
     <result column="good_status" property="goodStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -75,7 +77,8 @@
   </sql>
   <sql id="Base_Column_List" >
     customer_good_id, customer_id, order_id, good_name, cms_good_guige, good_amount_old, 
-    good_amount_now, good_img_src, crt_date, mdf_date, cms_good_id, good_status
+    good_amount_now, good_img_src, crt_date, mdf_date, cms_good_id, express_id, express_type, 
+    good_status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsCustomerGoodCriteria" >
     select
@@ -114,13 +117,13 @@
     insert into t_cms_customer_good (customer_good_id, customer_id, order_id, 
       good_name, cms_good_guige, good_amount_old, 
       good_amount_now, good_img_src, crt_date, 
-      mdf_date, cms_good_id, good_status
-      )
+      mdf_date, cms_good_id, express_id, 
+      express_type, good_status)
     values (#{customerGoodId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
       #{goodName,jdbcType=VARCHAR}, #{cmsGoodGuige,jdbcType=VARCHAR}, #{goodAmountOld,jdbcType=DECIMAL}, 
       #{goodAmountNow,jdbcType=DECIMAL}, #{goodImgSrc,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, 
-      #{mdfDate,jdbcType=TIMESTAMP}, #{cmsGoodId,jdbcType=INTEGER}, #{goodStatus,jdbcType=INTEGER}
-      )
+      #{mdfDate,jdbcType=TIMESTAMP}, #{cmsGoodId,jdbcType=INTEGER}, #{expressId,jdbcType=VARCHAR}, 
+      #{expressType,jdbcType=VARCHAR}, #{goodStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsCustomerGood" >
     insert into t_cms_customer_good
@@ -157,6 +160,12 @@
       </if>
       <if test="cmsGoodId != null" >
         cms_good_id,
+      </if>
+      <if test="expressId != null" >
+        express_id,
+      </if>
+      <if test="expressType != null" >
+        express_type,
       </if>
       <if test="goodStatus != null" >
         good_status,
@@ -195,6 +204,12 @@
       </if>
       <if test="cmsGoodId != null" >
         #{cmsGoodId,jdbcType=INTEGER},
+      </if>
+      <if test="expressId != null" >
+        #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null" >
+        #{expressType,jdbcType=VARCHAR},
       </if>
       <if test="goodStatus != null" >
         #{goodStatus,jdbcType=INTEGER},
@@ -243,6 +258,12 @@
       <if test="record.cmsGoodId != null" >
         cms_good_id = #{record.cmsGoodId,jdbcType=INTEGER},
       </if>
+      <if test="record.expressId != null" >
+        express_id = #{record.expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressType != null" >
+        express_type = #{record.expressType,jdbcType=VARCHAR},
+      </if>
       <if test="record.goodStatus != null" >
         good_status = #{record.goodStatus,jdbcType=INTEGER},
       </if>
@@ -264,6 +285,8 @@
       crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
       mdf_date = #{record.mdfDate,jdbcType=TIMESTAMP},
       cms_good_id = #{record.cmsGoodId,jdbcType=INTEGER},
+      express_id = #{record.expressId,jdbcType=VARCHAR},
+      express_type = #{record.expressType,jdbcType=VARCHAR},
       good_status = #{record.goodStatus,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -302,6 +325,12 @@
       <if test="cmsGoodId != null" >
         cms_good_id = #{cmsGoodId,jdbcType=INTEGER},
       </if>
+      <if test="expressId != null" >
+        express_id = #{expressId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null" >
+        express_type = #{expressType,jdbcType=VARCHAR},
+      </if>
       <if test="goodStatus != null" >
         good_status = #{goodStatus,jdbcType=INTEGER},
       </if>
@@ -320,6 +349,8 @@
       crt_date = #{crtDate,jdbcType=TIMESTAMP},
       mdf_date = #{mdfDate,jdbcType=TIMESTAMP},
       cms_good_id = #{cmsGoodId,jdbcType=INTEGER},
+      express_id = #{expressId,jdbcType=VARCHAR},
+      express_type = #{expressType,jdbcType=VARCHAR},
       good_status = #{goodStatus,jdbcType=INTEGER}
     where customer_good_id = #{customerGoodId,jdbcType=INTEGER}
   </update>

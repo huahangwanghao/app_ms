@@ -63,7 +63,6 @@ public class ExpressUtil {
             responseMessage.setCode(jsonObject.getInteger("status"));
             responseMessage.setMsg(jsonObject.getString("msg"));
             responseMessage.setData(jsonObject.get("result"));
-            System.out.println(responseMessage);
         } catch (Exception e) {
             e.printStackTrace();
             responseMessage=ResponseMessage.customMsg("调用查询接口异常!");

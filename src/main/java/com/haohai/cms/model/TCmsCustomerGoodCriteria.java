@@ -816,6 +816,146 @@ public class TCmsCustomerGoodCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andExpressIdIsNull() {
+            addCriterion("express_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdIsNotNull() {
+            addCriterion("express_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdEqualTo(String value) {
+            addCriterion("express_id =", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdNotEqualTo(String value) {
+            addCriterion("express_id <>", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdGreaterThan(String value) {
+            addCriterion("express_id >", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdGreaterThanOrEqualTo(String value) {
+            addCriterion("express_id >=", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdLessThan(String value) {
+            addCriterion("express_id <", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdLessThanOrEqualTo(String value) {
+            addCriterion("express_id <=", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdLike(String value) {
+            addCriterion("express_id like", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdNotLike(String value) {
+            addCriterion("express_id not like", value, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdIn(List<String> values) {
+            addCriterion("express_id in", values, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdNotIn(List<String> values) {
+            addCriterion("express_id not in", values, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdBetween(String value1, String value2) {
+            addCriterion("express_id between", value1, value2, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressIdNotBetween(String value1, String value2) {
+            addCriterion("express_id not between", value1, value2, "expressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeIsNull() {
+            addCriterion("express_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeIsNotNull() {
+            addCriterion("express_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeEqualTo(String value) {
+            addCriterion("express_type =", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeNotEqualTo(String value) {
+            addCriterion("express_type <>", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeGreaterThan(String value) {
+            addCriterion("express_type >", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("express_type >=", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeLessThan(String value) {
+            addCriterion("express_type <", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeLessThanOrEqualTo(String value) {
+            addCriterion("express_type <=", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeLike(String value) {
+            addCriterion("express_type like", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeNotLike(String value) {
+            addCriterion("express_type not like", value, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeIn(List<String> values) {
+            addCriterion("express_type in", values, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeNotIn(List<String> values) {
+            addCriterion("express_type not in", values, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeBetween(String value1, String value2) {
+            addCriterion("express_type between", value1, value2, "expressType");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressTypeNotBetween(String value1, String value2) {
+            addCriterion("express_type not between", value1, value2, "expressType");
+            return (Criteria) this;
+        }
+
         public Criteria andGoodStatusIsNull() {
             addCriterion("good_status is null");
             return (Criteria) this;

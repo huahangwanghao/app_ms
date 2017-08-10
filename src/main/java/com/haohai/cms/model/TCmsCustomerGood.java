@@ -26,6 +26,10 @@ public class TCmsCustomerGood {
 
     private Integer cmsGoodId;
 
+    private String expressId;
+
+    private String expressType;
+
     private Integer goodStatus;
 
     public Integer getCustomerGoodId() {
@@ -114,6 +118,22 @@ public class TCmsCustomerGood {
 
     public void setCmsGoodId(Integer cmsGoodId) {
         this.cmsGoodId = cmsGoodId;
+    }
+
+    public String getExpressId() {
+        return expressId;
+    }
+
+    public void setExpressId(String expressId) {
+        this.expressId = expressId == null ? null : expressId.trim();
+    }
+
+    public String getExpressType() {
+        return expressType;
+    }
+
+    public void setExpressType(String expressType) {
+        this.expressType = expressType == null ? null : expressType.trim();
     }
 
     public Integer getGoodStatus() {
