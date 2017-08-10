@@ -34,4 +34,13 @@ public enum ExpressEnum {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static ExpressEnum getByCode(String code){
+        for(ExpressEnum e: values()){
+            if(e.code.equals(code.toUpperCase())){
+                return e;
+            }
+        }
+        return null;
+    }
 }
