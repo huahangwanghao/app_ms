@@ -56,6 +56,10 @@ public class BaseController {
 	@Value("${UPLOAD_DIR}")
 	public String UPLOAD_DIR;
 
+	/** 读取快递查询的code */
+	@Value("${EXPRESS_APPCODE}")
+	public String EXPRESS_APPCODE;
+
 	protected TSysuser getSessionUserWeb(HttpServletRequest req) {
 		return (TSysuser) WebUtils.getSessionAttribute(req,
 				Constants.USER_SESSION_KEY);

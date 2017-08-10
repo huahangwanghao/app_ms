@@ -22,7 +22,7 @@ public class ExpressUtil {
     
     
     public static void main(String[] args) {
-    queryExpress("1202516745301","YUNDA");
+    queryExpress("1202516745301","YUNDA","acc1fcc66a5c4c938f7fb4333eba336b");
     }
 
     /**
@@ -31,12 +31,12 @@ public class ExpressUtil {
      * @param type  YUNDA
      * @return
      */
-    public static ResponseMessage queryExpress(String num,String type) {
+    public static ResponseMessage queryExpress(String num,String type,String appcode) {
         ResponseMessage responseMessage = new ResponseMessage();
         String host = "http://jisukdcx.market.alicloudapi.com";
         String path = "/express/query";
         String method = "GET";
-        String appcode = "acc1fcc66a5c4c938f7fb4333eba336b";
+        //String appcode = "acc1fcc66a5c4c938f7fb4333eba336b";
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);

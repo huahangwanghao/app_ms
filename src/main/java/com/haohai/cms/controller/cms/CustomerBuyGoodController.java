@@ -37,7 +37,7 @@ public class CustomerBuyGoodController extends BaseController {
 	public ResponseMessage getExpressList(@ModelAttribute("expressDto") ExpressDto expressDto) {
 		logger.info("CMS查询快递入参:"+ expressDto);
 		ResponseMessage responseMessage=null;
-		responseMessage= ExpressUtil.queryExpress(expressDto.getNum(),expressDto.getType());
+		responseMessage= ExpressUtil.queryExpress(expressDto.getNum(),expressDto.getType(),EXPRESS_APPCODE);
 		return responseMessage;
 	}
 
