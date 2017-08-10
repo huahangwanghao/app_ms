@@ -1,9 +1,11 @@
 package com.haohai.cms.controller.cms;
 
 import com.haohai.cms.common.ResponseMessage;
+import com.haohai.cms.common.util.ExpressUtil;
 import com.haohai.cms.controller.BaseController;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.dto.CustomerBuyReq;
+import com.haohai.cms.model.dto.ExpressDto;
 import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CustomerBuyService;
 import org.slf4j.Logger;
@@ -22,6 +24,23 @@ public class CustomerBuyGoodController extends BaseController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerBuyGoodController.class);
 	@Autowired
 	private CustomerBuyService customerBuyService;
+
+
+
+	/**
+	 * 查询快递
+	 *
+	 * @param expressDto
+	 * @return
+	 */
+	@RequestMapping("/getExpressList.do")
+	public ResponseMessage getExpressList(@ModelAttribute("expressDto") ExpressDto expressDto) {
+		logger.info("CMS查询快递入参:"+ expressDto);
+		ResponseMessage responseMessage=null;
+		responseMessage= ExpressUtil.queryExpress(expressDto.getNum(),expressDto.getType());
+		return responseMessage;
+	}
+
 
 
 	/**
