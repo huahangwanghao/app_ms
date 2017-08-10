@@ -27,27 +27,14 @@ public class CmsGoodController extends BaseController {
 	 * @param 
 	 * @return
 	 */
-	@RequestMapping("/getGoods.do")
-	public ResponseMessage getGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
+	@RequestMapping("/getCmsGoods.do")
+	public ResponseMessage getCmsGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
 		logger.info("查询商品列表请求参数："+pageDto);
-		ResponseMessage rm = cmsGoodService.getGoods(pageDto);
+		ResponseMessage rm = cmsGoodService.getCmsGoods(pageDto);
 		logger.info("查询商品列表响应结果："+rm);
 		return rm;
 	}
 
-	/**
-	 * 新增商品
-	 *
-	 * @param tCmsGood
-	 * @return
-	 */
-	@RequestMapping("/addCmsGood.do")
-	public ResponseMessage addCmsGood(@ModelAttribute("tCmsGood") TCmsGood tCmsGood) {
-		logger.info("新增cms商品的入参:"+tCmsGood);
-		ResponseMessage responseMessage = cmsGoodService.addCmsGood(tCmsGood);
-		return responseMessage;
-	}
-	
 	/**
 	 * 删除商品
 	 * @param tCmsGood
@@ -69,7 +56,7 @@ public class CmsGoodController extends BaseController {
 	@RequestMapping("/batchdeleteCmsGood.do")
 	public ResponseMessage batchdeleteCmsGood(@RequestParam String goodIds) {
 		logger.info("批量删除商品请求："+goodIds);
-		ResponseMessage responseMessage = cmsGoodService.batchDeleteByIds(goodIds);
+		ResponseMessage responseMessage = cmsGoodService.tmBatchDeleteByIds(goodIds);
 		return responseMessage;
 	}
 	
