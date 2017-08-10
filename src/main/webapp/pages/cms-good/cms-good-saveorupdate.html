@@ -25,10 +25,10 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head> 
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="myCtrl">
     <section class="content-header">
         <h1>
-           <a href="#" onclick="goBack()"><<</a>商品修改
+           <a href="#" onclick="goBack()"><<</a><span ng-bind="page_title"></span>
         </h1>
     </section>
     <!-- Main content -->
@@ -42,7 +42,7 @@
                 <div class="box box-primary">
                     <!-- /.box-header -->
                     <form class="form-horizontal" id="goodForm">
-                    	<div class="box-body" ng-controller="myCtrl">
+                    	<div class="box-body">
                             <!-- text input -->
                             <div class="form-group">
                                 <label for="goodName" class="col-sm-2 control-label">商品名称<span class="required">*</span></label>
@@ -184,6 +184,7 @@
     	if (id){
     		$('#goodForm').append('<input type="hidden" name="goodId" value="'+id+'" />');
     	    app.controller('myCtrl', function($scope, $http) {
+    	    	$scope.page_title= "商品修改";
     	        $http({
     	            method: 'get',
     	            url: "/cms/good/getCmsGoodById.do?goodId="+id
@@ -203,7 +204,9 @@
     	        });
     	    });
     	}else{
-    		app.controller('myCtrl', function($scope, $http) {});
+    		app.controller('myCtrl', function($scope, $http) {
+    			$scope.page_title= "商品新增";
+    		});
     		$.getScript("../../plugin/webuploader/upload.js");
     	}
     	

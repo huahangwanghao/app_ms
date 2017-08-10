@@ -76,7 +76,7 @@
 						</div>
 					</div>
 					<div id="toolbar" class="btn-group">
-						<button id="btn_add" type="button" class="btn btn-default" onclick="goGoodAdd();">
+						<button id="btn_add" type="button" class="btn btn-default" onclick="saveOrUpdateGood();">
 							<span class="glyphicon glyphicon-plus create" aria-hidden="true"></span>新增
 						</button>
 						<button id="btn_delete" type="button" class="btn btn-default" onclick="deleteGood();">
@@ -160,7 +160,7 @@
 		//先销毁表格
         $('#datatable').bootstrapTable('destroy');
         $("#datatable").bootstrapTable({
-			url: "/cms/good/getGoods.do",
+			url: "/cms/good/getCmsGoods.do",
 	        dataType: "json",
 	        singleSelect: false,
 	        striped: true,	//是否显示行间隔色
@@ -262,7 +262,7 @@
 	            width :  80 ,
 	            valign : 'middle',
 	            formatter : function(value,row,index){
-	                var e = '<a href="javascript:void(0);" onclick="editGood(\''+ row.goodId + '\')">编辑</a> ';  
+	                var e = '<a href="javascript:void(0);" onclick="saveOrUpdateGood(\''+ row.goodId + '\')">编辑</a> ';  
 	                var d = '<a href="javascript:void(0);" onclick="deleteGood(\''+ row.goodId +'\')">删除</a> '; 
 	                return e+d;
 	            }
@@ -278,12 +278,11 @@
 	    });
 	}
 	
-	function goGoodAdd() {
-    	window.location.href = "cms-good-update.html";
-    }
-	
-	function editGood(id){
-		window.location.href = "cms-good-update.html?id=" + id;
+	function saveOrUpdateGood(id){
+		var url = "cms-good-saveorupdate.html";
+		if (id)
+			url += "?id=" + id;
+		window.location.href = url;
 	}
 	
 	function deleteGood(obj) {

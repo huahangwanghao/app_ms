@@ -46,7 +46,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      * @return
      */
     @Override
-    public ResponseMessage getGoods(PageDto pageDto) {
+    public ResponseMessage getCmsGoods(PageDto pageDto) {
     	ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
     	JSONObject paramJson = JSONObject.parseObject(pageDto.getParamJson());
         TCmsGoodCriteria goodCriteria = new TCmsGoodCriteria();
@@ -74,21 +74,6 @@ public class CmsGoodServiceImpl implements CmsGoodService {
     }
 
     /**
-     * 新增商品
-     */
-    @Override
-    public ResponseMessage addCmsGood(TCmsGood cmsGood) {
-    	ResponseMessage rm = ResponseMessage.createSuccessMsg(0);
-        cmsGood.setGoodEndTime(StringUtil.getMaxDate());
-        cmsGood.setGoodStatus("1");
-        cmsGood.setDataFlag("1");
-        cmsGood.setCrtDate(new Date());
-        this.tCmsGoodMapper.insertSelective(cmsGood);
-        logger.info("新增商品》商品id：" + cmsGood.getGoodId());
-        return rm;
-    }
-    
-    /**
      * 保存商品
      */
     @Override
@@ -112,7 +97,7 @@ public class CmsGoodServiceImpl implements CmsGoodService {
      * 批量删除商品
      */
     @Override
-    public ResponseMessage batchDeleteByIds(String goodIds) {
+    public ResponseMessage tmBatchDeleteByIds(String goodIds) {
         String[] ids = goodIds.split(",");
         List<String> list = new ArrayList<String>(Arrays.asList(ids));
         this.tCmsGoodMapper.batchDeleteByIds(list);

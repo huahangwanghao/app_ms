@@ -11,15 +11,8 @@ public interface CmsGoodService {
 	 * @param pageDto
 	 * @return
 	 */
-	ResponseMessage getGoods(PageDto pageDto);
+	ResponseMessage getCmsGoods(PageDto pageDto);
 	
-	/**
-	 * 新增商品
-	 * @param cmsGood
-	 * @return
-	 */
-    ResponseMessage addCmsGood(TCmsGood cmsGood);
-    
     /**
      * 保存商品
      * @param cmsGood
@@ -32,7 +25,7 @@ public interface CmsGoodService {
      * @param goodIds
      * @return
      */
-    ResponseMessage batchDeleteByIds(String goodIds);
+    ResponseMessage tmBatchDeleteByIds(String goodIds);
     
     /**
      * 根据商品id查询商品信息
