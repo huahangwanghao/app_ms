@@ -1,5 +1,5 @@
 (function( $ ){
-    // 当domReady的时候开始初始化
+    // 当domReady的时候开始初始化 
     $(function() {
     	//清除上传缓存图片
     	delCookie("files");
