@@ -22,6 +22,7 @@
 	<link href="../../content/min/css/supershopui.common.min.css" rel="stylesheet" />
 	<link href="../../content/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet" />
 	<link href="../../plugin/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" />
+	<link href="../../plugin/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet" />
 </head>
 <body>
 <section class="content-header">
@@ -99,13 +100,17 @@
 <script src="../../content/ui/global/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../content/min/js/supershopui.common.js"></script>
 <script src="../../content/supermgr/Base/js/common.js"></script>
+<script src="../../plugin/bootstrap-editable/js/edittable.min.js"></script>
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>-->
 <script src="../../content/plugins/bootstrap-table/bootstrap-table.js"></script>
 <script src="../../content/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <script src="../../scripts/ajax.js"></script>
 <script src="../../scripts/tableutil.js"></script>
 <script src="../../plugin/My97DatePicker/WdatePicker.js"></script>
+<script src="../../plugin/bootstrap-editable/js/bootstarp-table-edit.js"></script>
 </body>
 <script>
+	//http://www.cnblogs.com/landeanfen/p/5821192.html#_label2_0
     function initTable(){
         //先销毁表格
         $('#datatable').bootstrapTable('destroy');
@@ -113,6 +118,7 @@
             url: "/cms/buy/getOrderList4Cms.do",
             dataType: "json",
             singleSelect: false,
+            clickToSelect: true,
             striped: true,	//是否显示行间隔色
             cache: false,	//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             sortable: true,	//是否启用排序 
@@ -160,17 +166,25 @@
                 align : 'center',
                 width :  100,
                 valign : 'middle'
-            },{
+            },
+                {
+                    field : 'customerGoodId',
+                    title : '商品Id',
+					hidden:	"hidden",
+                    align : 'center',
+                    width :  100,
+                    valign : 'middle'
+                },{
                 field : 'customerName',
                 title : '客户姓名',
                 align : 'center',
-                width :  80,
+                width :  40,
                 valign : 'middle'
             },{
                     field : 'customerPhone',
                     title : '客户手机',
                     align : 'center',
-                    width :  80,
+                    width :  50,
                     valign : 'middle'
                 },
                 {
@@ -184,7 +198,47 @@
                     field : 'customerAddress',
                     title : '收获地址',
                     align : 'center',
-                    width :  80,
+                    width :  180,
+                    valign : 'middle'
+                },
+                {
+                    field : 'expressId',
+                    title : '快递单号',
+                    editable: {
+                        type: 'text',
+                        title: '订单号',
+                        validate: function (v) {
+                            if (!v) return '订单号不能为空';
+                        }
+                    },
+                    align : 'center',
+                    width :  50,
+                    valign : 'middle',
+                    formatter : function(value,row,index) {
+                        var day=row.expressId;
+                        if(typeof(day)=="undefined"){
+
+                            return "";
+
+                        }
+                        return day;
+                        
+                    }
+                },
+                {
+                    field: "expressType",
+                    title: "快递公司",
+                    editable: {
+                        type: 'select',
+                        title: '快递公司',
+                        source:[
+                            	{value:"YUNDA",text:"韵达"},
+								{value:"ZHONGTONG",text:"中通"},
+								{value:"YUANTONG",text:"圆通"}
+								]
+                    }, 
+					align : 'center',
+                    width :  50,
                     valign : 'middle'
                 },
 			{
@@ -222,7 +276,31 @@
                     return e+d;
                 }
             }],
+            onEditableSave: function (field, row, oldValue, $el) {
+                $.ajax({
+                    type: "post",
+                    url: "/cms/buy/doUpdateExpress.do",
+                    data: row,
+                    dataType: 'JSON',
+                    success: function (data, status) {
+                        if (status == "success") {
+                            window.location.href = "cms-good-order-table.html?time=" + new Date();
+                        }
+                    },
+                    error: function () {
+                        alert('编辑失败');
+                    },
+                    complete: function () {
+
+                    }
+
+                });
+            },
             onLoadSuccess: function(data){  //加载成功时执行  
+
+
+
+				
                 if (data.code == 9999)
                     $.fn.modalAlert(data.msg, "error");
                 //$("#theTable th").css("text-align","center");  //设置表头内容居中

@@ -207,4 +207,16 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
         JSONObject json=JsonUtil.getPageInfo2JsonObject(pageInfo.getTotal(),list);
         return ResponseMessage.createSuccessMsg(json);
     }
+
+    /**
+     * 通过主键Id更新对应的数据
+     *
+     * @param tCmsCustomerGood
+     * @return
+     */
+    @Override
+    public ResponseMessage updateCustomerGoodById(TCmsCustomerGood tCmsCustomerGood) {
+        tCmsCustomerGoodMapper.updateByPrimaryKeySelective(tCmsCustomerGood);
+        return ResponseMessage.createSuccessMsg(0);
+    }
 }

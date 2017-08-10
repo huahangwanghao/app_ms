@@ -1,6 +1,7 @@
 package com.haohai.cms.service.cms;
 
 import com.haohai.cms.common.ResponseMessage;
+import com.haohai.cms.model.TCmsCustomerGood;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.dto.CustomerBuyReq;
 import com.haohai.cms.model.dto.PageDto;
@@ -62,4 +63,11 @@ public interface CustomerBuyService {
      * @return
      */
     ResponseMessage getOrderList4Cms(PageDto pageDto);
+
+    /**
+     * 通过主键Id更新对应的数据
+     * @param tCmsCustomerGood
+     * @return
+     */
+    ResponseMessage updateCustomerGoodById(TCmsCustomerGood tCmsCustomerGood);
 }

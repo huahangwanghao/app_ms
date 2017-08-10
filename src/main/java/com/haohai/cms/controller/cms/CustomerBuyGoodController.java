@@ -3,6 +3,7 @@ package com.haohai.cms.controller.cms;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.ExpressUtil;
 import com.haohai.cms.controller.BaseController;
+import com.haohai.cms.model.TCmsCustomerGood;
 import com.haohai.cms.model.TCmsShoppingCar;
 import com.haohai.cms.model.dto.CustomerBuyReq;
 import com.haohai.cms.model.dto.ExpressDto;
@@ -41,6 +42,23 @@ public class CustomerBuyGoodController extends BaseController {
 		return responseMessage;
 	}
 
+	/**
+	 * 更新快递单号
+	 *
+	 * @param tCmsCustomerGood
+	 * @return
+	 */
+	@RequestMapping("/doUpdateExpress.do")
+	public ResponseMessage doUpdateExpress(@ModelAttribute("expressDto") TCmsCustomerGood tCmsCustomerGood) {
+		logger.info("CMS更新快递单号入参:"+ tCmsCustomerGood);
+		ResponseMessage responseMessage=null;
+		responseMessage=customerBuyService.updateCustomerGoodById(tCmsCustomerGood);
+		responseMessage= ResponseMessage.createSuccessMsg(0);
+		return responseMessage;
+	}
+
+
+	
 
 
 	/**
