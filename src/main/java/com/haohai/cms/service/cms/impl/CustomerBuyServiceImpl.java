@@ -315,6 +315,9 @@ public class CustomerBuyServiceImpl implements CustomerBuyService {
         
         
         //4.调用微信的支付接口进行扣钱操作......重要!!!重要!!!重要!!!
+        /**
+         * 这里面需要商户Id
+         */
         
         //5.只有付款成功后,才进行减去库存操作....
         
