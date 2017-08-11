@@ -222,7 +222,7 @@
             		$placeHolder.addClass('element-invisible');
                     $statusBar.show();
                     $.each(files,function(i,n){
-                    	fileSize += n.wuSize;
+                    	fileSize += parseFloat(n.wuSize);
                     	var obj={},statusMap={},file_id='WU_FILE_UPLOADED_' + i;
                     	obj.id = file_id;
                         obj.name = n.wuName;
@@ -490,7 +490,6 @@
 
         function updateStatus() {
             var text = '', stats;
-
             if ( state === 'ready' ) {
                 text = '选中' + fileCount + '张图片，共' +
                         WebUploader.formatSize( fileSize ) + '。';
