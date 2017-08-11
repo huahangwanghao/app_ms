@@ -89,8 +89,8 @@ public class FileUploadController extends BaseController {
 		String contentType = file.getContentType();
 		if (contentType.indexOf("image") == 0){
 			BufferedImage sourceImg = ImageIO.read(file.getInputStream());
-			upFile.setImgWidth(sourceImg.getWidth());
-			upFile.setImgHeight(sourceImg.getHeight());
+			upFile.setWuImgWidth(sourceImg.getWidth());
+			upFile.setWuImgHeight(sourceImg.getHeight());
 		}
 		String fileoriname = file.getOriginalFilename();
 		String fileformat = fileoriname.substring(fileoriname.lastIndexOf("."),fileoriname.length());
@@ -106,10 +106,10 @@ public class FileUploadController extends BaseController {
 			path.mkdirs();
 		}
 		file.transferTo(new File(filepath + filename));
-		upFile.setName(filename);
-		upFile.setSize(file.getSize());
-		upFile.setMimeType(contentType);
-		upFile.setUrl(relativePath + filename);
+		upFile.setWuName(filename);
+		upFile.setWuSize(file.getSize());
+		upFile.setWuMimeType(contentType);
+		upFile.setWuUrl(relativePath + filename);
 		message = message.createSuccessMsg(upFile);
 		logger.info("上传文件响应：" + JsonUtil.jsonToString(message));
 		return message;
@@ -156,6 +156,28 @@ public class FileUploadController extends BaseController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * 删除图片
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@SuppressWarnings("static-access")
+	@RequestMapping(value = "deleteFile.do")
+	public ResponseMessage deleteFile(HttpServletRequest request,
+			HttpServletResponse response) {
+		String url = request.getParameter("url");
+		logger.info("删除图片路径：" + url);
+		if (StringUtils.isNotEmpty(url)){
+			File file = new File(UPLOAD_DIR + url);
+			if (file.exists())
+				file.delete();
+		}
+		ResponseMessage message = new ResponseMessage().createSuccessMsg("");
+		logger.info("删除图片相应结果："+JsonUtil.jsonToString(message));
+		return message;
 	}
 	
 }

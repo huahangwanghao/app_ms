@@ -4333,7 +4333,7 @@
     
                 // 已经重复了
                 if ( mapping[ hash ] ) {
-                    this.trigger( 'error', 'F_DUPLICATE', file );
+                    this.trigger( 'error', '文件重复', file );
                     return false;
                 }
             });
