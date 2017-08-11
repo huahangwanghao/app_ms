@@ -342,6 +342,35 @@
 	    	<version>1.1.2</version>
 	    </dependency>
 
+        
+        <!--支付pom start-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.51</version>
+        </dependency>
+        <!--支付 end-->
+        
+        <!--本地增加jar包-->
+        <dependency>
+            <groupId>com.pentahohub.nexus</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>20161029120104</version>
+            <scope>system</scope>
+            <!--<systemPath>D:\idea-workspace\huahangwanghao\app_ms\src\main\webapp\WEB-INF\lib\alipay-sdk-java20161029120104.jar</systemPath>-->
+            <systemPath>${basedir}/lib/alipay-sdk-java20161029120104.jar</systemPath>
+        </dependency>
+        
     </dependencies>
     <build>
         <finalName>app_ms</finalName>
