@@ -33,12 +33,12 @@ public class UnionPayTradeTest {
     public void testTokenOpen(){
         UnionPayTrade unionPayTrade = new UnionPayTrade();
         Map<String,String> paramMap = new HashMap<String,String>();
-        paramMap.put("accNo", "6222021304008026228");
+        paramMap.put("accNo", "622588013245478");
         Map<String,String> customerInfo = new HashMap<String,String>();
         customerInfo.put("certifTp", "01");						//证件类型
-        customerInfo.put("certifId", "341126197709218366");		//证件号码
-        customerInfo.put("customerNm", "全渠道");					//姓名
-        customerInfo.put("phoneNo", "13552535506");			        //手机号
+        customerInfo.put("certifId", "1305199231231076039");		//证件号码
+        customerInfo.put("customerNm", "王4");					//姓名
+        customerInfo.put("phoneNo", "18101307677");			        //手机号
         paramMap.put("orderId", System.currentTimeMillis()+"");
         unionPayTrade.tokenOpen(paramMap,customerInfo);
     }
