@@ -57,7 +57,7 @@ public final class AliPayConfig {
     /**
      * 收款方账号
      */
-    public static final String SELLER_ID = "xxxx@qq.com";
+    public static final String SELLER_ID = "1178952125@qq.com";
     /**
      * 支付宝请求客户端入口
      */
