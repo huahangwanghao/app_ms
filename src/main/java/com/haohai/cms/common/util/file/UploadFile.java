@@ -2,68 +2,59 @@ package com.haohai.cms.common.util.file;
 
 public class UploadFile {
 
-	private String id;
-	private String name;
-	private long size;
-	private String url;
-	private String mimeType;
-	private int imgWidth;
-	private int imgHeight;
+	private String wuName;
+	private long wuSize;
+	private String wuUrl;
+	private String wuMimeType;
+	private int wuImgWidth;
+	private int wuImgHeight;
 
-	public String getId() {
-		return id;
+	public String getWuName() {
+		return wuName;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setWuName(String wuName) {
+		this.wuName = wuName;
 	}
 
-	public String getName() {
-		return name;
+	public long getWuSize() {
+		return wuSize;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setWuSize(long wuSize) {
+		this.wuSize = wuSize;
 	}
 
-	public long getSize() {
-		return size;
+	public String getWuUrl() {
+		return wuUrl;
 	}
 
-	public void setSize(long size) {
-		this.size = size;
+	public void setWuUrl(String wuUrl) {
+		this.wuUrl = wuUrl;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getWuMimeType() {
+		return wuMimeType;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setWuMimeType(String wuMimeType) {
+		this.wuMimeType = wuMimeType;
 	}
 
-	public String getMimeType() {
-		return mimeType;
+	public int getWuImgWidth() {
+		return wuImgWidth;
 	}
 
-	public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
+	public void setWuImgWidth(int wuImgWidth) {
+		this.wuImgWidth = wuImgWidth;
 	}
 
-	public int getImgWidth() {
-		return imgWidth;
+	public int getWuImgHeight() {
+		return wuImgHeight;
 	}
 
-	public void setImgWidth(int imgWidth) {
-		this.imgWidth = imgWidth;
-	}
-
-	public int getImgHeight() {
-		return imgHeight;
-	}
-
-	public void setImgHeight(int imgHeight) {
-		this.imgHeight = imgHeight;
+	public void setWuImgHeight(int wuImgHeight) {
+		this.wuImgHeight = wuImgHeight;
 	}
 
 }

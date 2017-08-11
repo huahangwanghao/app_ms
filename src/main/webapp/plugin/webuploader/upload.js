@@ -1,8 +1,6 @@
 (function( $ ){
     // 当domReady的时候开始初始化 
     $(function() {
-    	//清除上传缓存图片
-    	delCookie("files");
         var $wrap = $('#uploader'),
         	fileList = [],
             // 图片容器
@@ -205,14 +203,7 @@
 
         uploader.on('uploadSuccess', function (file, response) {//上传成功事件
         	var data = JSON.parse(response._raw).data;
-        	var fileid = (file.id).split("_")[2];
-        	data.id = fileid;
-        	var files = getCookie("files");
-        	if(files != null && files != ''){
-                fileList = getCookie("files").split(',');
-            }
-        	fileList.push(JSON.stringify(data));
-        	setCookie("files",fileList.join(','));
+        	$("#"+file.id).append(inputStr(file.id, data));
         });
         
         // 添加“添加文件”的按钮，
@@ -220,32 +211,29 @@
             id: '#filePicker2',
             label: '继续添加'
         });
-
         
         uploader.on('ready', function() {
             window.uploader = uploader;
             var obj_id = getUrlParam("id");
             if (obj_id){
             	if (typeof(imgs) !="undefined" && imgs !=''){
-            		var files = JSON.parse(imgs).data;
-            		var fileJson = JSON.stringify(files);
-            		setCookie("files",fileJson.substring(1,fileJson.length-1));
+            		var files = JSON.parse(imgs);
             		fileCount = files.length;
             		$placeHolder.addClass('element-invisible');
                     $statusBar.show();
                     $.each(files,function(i,n){
-                    	fileSize += n.size;
-                    	var obj={},statusMap={},file_id='WU_FILE_' + n.id;
+                    	fileSize += parseFloat(n.wuSize);
+                    	var obj={},statusMap={},file_id='WU_FILE_UPLOADED_' + i;
                     	obj.id = file_id;
-                        obj.name = n.name;
+                        obj.name = n.wuName;
                         obj.getStatus = function() {
                         	return '';
                         };
                         obj.statusText = '';
-                        obj.size = n.size;
+                        obj.size = n.wuSize;
                         obj.version = WebUploader.Base.version;
-                        obj.type = n.mimeType;
-                        obj.url = n.url;
+                        obj.type = n.wuMimeType;
+                        obj.url = n.wuUrl;
                         obj.source = this;
                         obj.setStatus = function(status, text) {
                         	var prevStatus = statusMap[ this.id ];
@@ -256,6 +244,7 @@
                         	}
                         };
                         editFile(obj);
+                        $("#"+file_id).append(inputStr(file_id, n));
                     });
                     WebUploader.Base.idSuffix = fileCount;
                     setState('ready');
@@ -501,7 +490,6 @@
 
         function updateStatus() {
             var text = '', stats;
-
             if ( state === 'ready' ) {
                 text = '选中' + fileCount + '张图片，共' +
                         WebUploader.formatSize( fileSize ) + '。';
@@ -673,6 +661,18 @@
 
         $upload.addClass( 'state-' + state );
         updateTotalProgress();
+        
+        function inputStr(file_id, json){
+        	var inputStr = '<div id="'+file_id+'" name="webuploader_file" style="display:none;">';
+        	inputStr += '<input type="hidden" name="wuName" value="'+json.wuName+'" />';
+        	inputStr += '<input type="hidden" name="wuSize" value="'+json.wuSize+'" />';
+        	inputStr += '<input type="hidden" name="wuUrl" value="'+json.wuUrl+'" />';
+        	inputStr += '<input type="hidden" name="wuMimeType" value="'+json.wuMimeType+'" />';
+        	inputStr += '<input type="hidden" name="wuImgWidth" value="'+json.wuImgWidth+'" />';
+        	inputStr += '<input type="hidden" name="wuImgHeight" value="'+json.wuImgHeight+'" />';
+        	inputStr += '</div>';
+        	return inputStr;
+        }
     });
 
 })( jQuery );

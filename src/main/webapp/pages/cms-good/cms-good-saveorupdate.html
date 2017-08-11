@@ -182,7 +182,9 @@
     	var app = angular.module('myApp', []);
     	var id = getUrlParam("id");
     	if (id){
-    		$('#goodForm').append('<input type="hidden" name="goodId" value="'+id+'" />');
+    		//修改
+    		$('#goodForm').append('<input type="hidden" name="goodId" value="'+id+'" />');//添加商品id隐藏域
+    		//angularjs动态绑定数据
     	    app.controller('myCtrl', function($scope, $http) {
     	    	$scope.page_title= "商品修改";
     	        $http({
@@ -204,6 +206,7 @@
     	        });
     	    });
     	}else{
+    		//新增
     		app.controller('myCtrl', function($scope, $http) {
     			$scope.page_title= "商品新增";
     		});
@@ -240,14 +243,17 @@
     	
         function saveGood() {
         	if ($('#goodForm').Validform()){
-            	var files = getCookie("files");
-            	if(null == files){
-            		$.fn.modalAlert("商品图片不能为空！", "error");
+        		var imgs = [];
+        		$("div[name='webuploader_file']").each(function(i){
+            		var jsondata = JSON.stringify($(this).children().serializeJsonObject());
+            		imgs.push(jsondata);
+            	});
+        		if (imgs.length == 0){
+        			$.fn.modalAlert("商品图片不能为空！", "error");
             		return;
-                }
-            	var fileObj = new Object();
-            	fileObj.data = JSON.parse("[" + files + "]");
-                $("#goodImage").val(JSON.stringify(fileObj));
+        		}
+        		var imgsJson = "[" + imgs.join(',') + "]";
+                $("#goodImage").val(imgsJson);
                 var ueHtml = ue.getContent();
                 $("#goodDetail").val(ueHtml);
                 handleAjaxSimple("/cms/good/saveCmsGood.do", $('#goodForm').serialize(), 2, function(data){
