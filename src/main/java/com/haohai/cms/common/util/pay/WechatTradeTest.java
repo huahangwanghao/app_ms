@@ -23,13 +23,13 @@ public class WechatTradeTest {
      */
     public void testunifiedOrder(){
         WechatUnifiedOrder request = new WechatUnifiedOrder();
-        request.setBody("测试商品");
-        request.setDetail("一个好商品");
+        request.setBody("my测试红包商品");
+        request.setDetail("付款0.01元");
         request.setGoods_tag("测试");
         request.setOut_trade_no(System.currentTimeMillis()+"");
         request.setFee_type("CNY");
-        request.setTotal_fee(1000);
-        request.setSpbill_create_ip("127.0.0.1");
+        request.setTotal_fee(1); //单位是分
+        request.setSpbill_create_ip("14.23.150.211");
         request.setTime_start(System.currentTimeMillis()+"");
         request.setLimit_pay("cera");
         WechatUnifiedOrder.Response response = WechatConfig.getInstance().unifiedOrder(request);

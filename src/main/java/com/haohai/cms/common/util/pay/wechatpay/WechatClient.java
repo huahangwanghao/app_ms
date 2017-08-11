@@ -54,7 +54,9 @@ public class WechatClient {
         unifiedOrder.setTrade_type(this.trade_type);
         unifiedOrder.setNotify_url(WechatConfig.NOTIFY_PAY);
         unifiedOrder.setNonce_str(nonce_str(16));
+        //unifiedOrder.setNonce_str("1add1a30ac87aa2db72f57a2375d8fec");
         unifiedOrder.setSign(sign(SignUtil.bean2TreeMap(unifiedOrder)).toUpperCase());
+        //unifiedOrder.setSign("0CB01533B8C1EF103065174F50BCA001");
         String tempXmlStr = XmlUtil.beanToXml(new ByteArrayOutputStream(), unifiedOrder);
         String requestXml = tempXmlStr!= null?tempXmlStr.substring(55):"";
         logger.debug("xml转义后内容:"+requestXml);

@@ -1,5 +1,7 @@
 package com.haohai.cms.common.util.pay.wechatpay;
 
+import com.haohai.cms.common.util.PropertiesUtils;
+
 /**
  * 微信支付配置
  * @author Niu Li
@@ -9,7 +11,7 @@ public final class WechatConfig {
     /**
      * 用户的id
      */
-    public static final String APP_ID = "xxxxx";
+    public static final String APP_ID = PropertiesUtils.getValue("wechat-APP_ID");// "wx2421b1c4370ec43b";
     /**
      * 身份密钥
      */
@@ -17,7 +19,7 @@ public final class WechatConfig {
     /**
      * 商户id
      */
-    public static final String MCH_ID = "xxxxx";
+    public static final String MCH_ID = "10000100";
     /**
      * 统一下单地址
      */
@@ -33,7 +35,7 @@ public final class WechatConfig {
     /**
      * 支付成功回调
      */
-    public static final String NOTIFY_PAY = "http://mart.xxxxxx.com/api/rest/notify/wechatNotify";
+    public static final String NOTIFY_PAY = "http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php";
     /**
      * 支付类型
      */
