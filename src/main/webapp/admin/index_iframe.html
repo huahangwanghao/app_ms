@@ -651,65 +651,79 @@ immediately after the control sidebar -->
                      ]
 
                  },
-            {
-                id: "70020",
-                isOpen: false,
-                text: "商品管理",
-                icon: "fa fa-bookmark-o",
-                children: [
-                    {
-                        id: "80021", text: "商品查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good/cms-good-table.html"
-                    }
-                    ,
-                    {
-                        id: "80022", text: "分类查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good-category/cms-good-category-table.html?time="+ Date.parse(new Date())
-                    }
-                ]   
-            },
-            {
-                id: "70021",
-                isOpen: false,
-                text: "订单管理",
-                icon: "fa fa-bookmark-o",
-                children: [
-                    {
-                        id: "80121", text: "订单查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good-order/cms-good-order-table.html"
-                    }
-                ]
-            },
-            {
-                id: "70022",
-                isOpen: false,
-                text: "评论管理",
-                icon: "fa fa-bookmark-o",
-                children: [
-                    {
-                        id: "80122", text: "评论查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good-comment/cms-good-comment-table.html"
-                    }
-                ]
-            },
-            
-            {
-                id: "71021",
-                isOpen: false,
-                text: "系统管理",
-                icon: "fa fa-bookmark-o",
-                children: [
-                    {
-                        id: "81023", text: "用户管理",  icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
-                    },
-                    {
-                        id: "81024", text: "日志管理",  icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
-                    },
-                    {
-                        id: "81025",text: "配置管理", icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
-                    }
-                ]
-            }
-        ];
-        $('.sidebar-menu').sidebarMenu({ data: menus, param: { strUser: 'admin' } });
-
-       
+	            {
+	                id: "70020",
+	                isOpen: false,
+	                text: "商品管理",
+	                icon: "fa fa-bookmark-o",
+	                children: [
+	                    {
+	                        id: "80021", text: "商品查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good/cms-good-table.html"
+	                    }
+	                    ,
+	                    {
+	                        id: "80022", text: "分类查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good-category/cms-good-category-table.html?time="+ Date.parse(new Date())
+	                    }
+	                ]   
+	            },
+	            {
+	                id: "70021",
+	                isOpen: false,
+	                text: "订单管理",
+	                icon: "fa fa-bookmark-o",
+	                children: [
+	                    {
+	                        id: "80121", text: "订单查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good-order/cms-good-order-table.html"
+	                    }
+	                ]
+	            },
+	            {
+	                id: "70022",
+	                isOpen: false,
+	                text: "评论管理",
+	                icon: "fa fa-bookmark-o",
+	                children: [
+	                    {
+	                        id: "80122", text: "评论查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-good-comment/cms-good-comment-table.html"
+	                    }
+	                ]
+	            },
+	            {
+	                id: "71023",
+	                isOpen: false,
+	                text: "系统管理",
+	                icon: "fa fa-bookmark-o",
+	                children: [
+	                    {
+	                        id: "81023", text: "用户管理",  icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
+	                    },
+	                    {
+	                        id: "81024", text: "日志管理",  icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
+	                    },
+	                    {
+	                        id: "81025",text: "配置管理", icon: "fa fa-circle-o",targetType: "iframe-tab", url: "../pages/mailbox/mailbox.html"
+	                    }
+	                ]
+	            },
+	            {
+	                id: "70024",
+	                isOpen: false,
+	                text: "标签管理",
+	                icon: "fa fa-bookmark-o",
+	                children: [
+	                    {
+	                        id: "81026", text: "标签查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-tag/cms-tag-table.html"
+	                    },
+	                    {
+	                        id: "81027", text: "商品分类标签查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-tag/cms-good-category-tag-table.html?time="+ Date.parse(new Date())
+	                    },
+	                    {
+	                        id: "81028", text: "商品标签查询",  icon: "fa fa-circle-o", targetType: "iframe-tab", url: "../pages/cms-tag/cms-good-tag-table.html?time="+ Date.parse(new Date())
+	                    }
+	                ]   
+	            }
+	        ];
+	        $('.sidebar-menu').sidebarMenu({ data: menus, param: { strUser: 'admin' } });
     });
 </script>
 </body>

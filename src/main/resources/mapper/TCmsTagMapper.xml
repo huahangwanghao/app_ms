@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haohai.cms.mapper.TCmsTagMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsTag" >
+    <id column="tag_id" property="tagId" jdbcType="INTEGER" />
+    <result column="tag_parent_id" property="tagParentId" jdbcType="INTEGER" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="data_flag" property="dataFlag" jdbcType="INTEGER" />
+    <result column="tag_level" property="tagLevel" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="TIMESTAMP" />
+    <result column="upd_date" property="updDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tag_id, tag_parent_id, tag_name, data_flag, tag_level, crt_date, upd_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsTagCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cms_tag
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cms_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cms_tag
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCmsTagCriteria" >
+    delete from t_cms_tag
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haohai.cms.model.TCmsTag" >
+    insert into t_cms_tag (tag_id, tag_parent_id, tag_name, 
+      data_flag, tag_level, crt_date, 
+      upd_date)
+    values (#{tagId,jdbcType=INTEGER}, #{tagParentId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, 
+      #{dataFlag,jdbcType=INTEGER}, #{tagLevel,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, 
+      #{updDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="tagId" parameterType="com.haohai.cms.model.TCmsTag" >
+    insert into t_cms_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tagId != null" >
+        tag_id,
+      </if>
+      <if test="tagParentId != null" >
+        tag_parent_id,
+      </if>
+      <if test="tagName != null" >
+        tag_name,
+      </if>
+      <if test="dataFlag != null" >
+        data_flag,
+      </if>
+      <if test="tagLevel != null" >
+        tag_level,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="updDate != null" >
+        upd_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tagId != null" >
+        #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="tagParentId != null" >
+        #{tagParentId,jdbcType=INTEGER},
+      </if>
+      <if test="tagName != null" >
+        #{tagName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFlag != null" >
+        #{dataFlag,jdbcType=INTEGER},
+      </if>
+      <if test="tagLevel != null" >
+        #{tagLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updDate != null" >
+        #{updDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haohai.cms.model.TCmsTagCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_cms_tag
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_cms_tag
+    <set >
+      <if test="record.tagId != null" >
+        tag_id = #{record.tagId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagParentId != null" >
+        tag_parent_id = #{record.tagParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagName != null" >
+        tag_name = #{record.tagName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataFlag != null" >
+        data_flag = #{record.dataFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagLevel != null" >
+        tag_level = #{record.tagLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updDate != null" >
+        upd_date = #{record.updDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_cms_tag
+    set tag_id = #{record.tagId,jdbcType=INTEGER},
+      tag_parent_id = #{record.tagParentId,jdbcType=INTEGER},
+      tag_name = #{record.tagName,jdbcType=VARCHAR},
+      data_flag = #{record.dataFlag,jdbcType=INTEGER},
+      tag_level = #{record.tagLevel,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      upd_date = #{record.updDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCmsTag" >
+    update t_cms_tag
+    <set >
+      <if test="tagParentId != null" >
+        tag_parent_id = #{tagParentId,jdbcType=INTEGER},
+      </if>
+      <if test="tagName != null" >
+        tag_name = #{tagName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFlag != null" >
+        data_flag = #{dataFlag,jdbcType=INTEGER},
+      </if>
+      <if test="tagLevel != null" >
+        tag_level = #{tagLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updDate != null" >
+        upd_date = #{updDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCmsTag" >
+    update t_cms_tag
+    set tag_parent_id = #{tagParentId,jdbcType=INTEGER},
+      tag_name = #{tagName,jdbcType=VARCHAR},
+      data_flag = #{dataFlag,jdbcType=INTEGER},
+      tag_level = #{tagLevel,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=TIMESTAMP},
+      upd_date = #{updDate,jdbcType=TIMESTAMP}
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+</mapper>
