@@ -11,10 +11,14 @@ import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.common.util.ztree.ZTree;
 import com.haohai.cms.mapper.TCmsGoodCategoryMapper;
+import com.haohai.cms.mapper.TCmsGoodCategoryTagMapper;
 import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.TCmsGoodCategoryCriteria;
+import com.haohai.cms.model.TCmsGoodCategoryTag;
+import com.haohai.cms.model.dto.CmsGoodCategoryDto;
 import com.haohai.cms.model.dto.CmsGoodCategoryReq;
 import com.haohai.cms.service.cms.CmsGoodCategoryService;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,22 +44,33 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 
 	@Autowired
 	private TCmsGoodCategoryMapper tCmsGoodCategoryMapper;
+	@Autowired
+	private TCmsGoodCategoryTagMapper tCmsGoodCategoryTagMapper;
 
 	/**
 	 * 增加商品分类
-	 * 
-	 * @param tCmsGoodCategory
-	 * @return
 	 */
 	@Override
-	public ResponseMessage insert(TCmsGoodCategory tCmsGoodCategory) {
-		//查询父节点的Id
-		String categoryLevel=tCmsGoodCategory.getCategoryLevel();
-		
-		tCmsGoodCategoryMapper.insertSelective(tCmsGoodCategory);
-		int categoryId=tCmsGoodCategory.getCategoryId();
-		tCmsGoodCategory.setCategoryLevel(categoryLevel+"."+categoryId);
-		tCmsGoodCategoryMapper.updateByPrimaryKeySelective(tCmsGoodCategory);
+	public ResponseMessage addGoodCategory(CmsGoodCategoryDto cmsGoodCategoryDto) {
+		String categoryLevel = cmsGoodCategoryDto.getCategoryLevel();
+		tCmsGoodCategoryMapper.insertSelective(cmsGoodCategoryDto);
+		int categoryId = cmsGoodCategoryDto.getCategoryId();
+		//更新节点深度
+		cmsGoodCategoryDto.setCategoryLevel(categoryLevel+"."+categoryId);
+		tCmsGoodCategoryMapper.updateByPrimaryKeySelective(cmsGoodCategoryDto);
+		//保存商品分类和标签的关系
+		String[] goodCategoryTag = cmsGoodCategoryDto.getGoodCategoryTag();
+		if (goodCategoryTag !=null && goodCategoryTag.length > 0){
+			List<TCmsGoodCategoryTag> gcTags = new ArrayList<TCmsGoodCategoryTag>();
+			for (int i=0;i<goodCategoryTag.length;i++){
+				TCmsGoodCategoryTag gcTag = new TCmsGoodCategoryTag();
+				gcTag.setCategoryId(categoryId);
+				gcTag.setTagId(Integer.parseInt(goodCategoryTag[i]));
+				gcTag.setGoodCategoryTagSort(i+1);
+				gcTags.add(gcTag);
+			}
+			this.tCmsGoodCategoryTagMapper.batchInsert(gcTags);
+		}
 		return ResponseMessage.createSuccessMsg(0);
 	}
 

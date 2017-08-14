@@ -3,6 +3,7 @@ package com.haohai.cms.service.cms;
 import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsGoodCategory;
+import com.haohai.cms.model.dto.CmsGoodCategoryDto;
 import com.haohai.cms.model.dto.CmsGoodCategoryReq;
 
 /**
@@ -13,10 +14,10 @@ public interface CmsGoodCategoryService {
 	/**
 	 * 增加商品分类
 	 * 
-	 * @param tCmsGoodCategory
+	 * @param cmsGoodCategoryDto
 	 * @return
 	 */
-	ResponseMessage insert(TCmsGoodCategory tCmsGoodCategory);
+	ResponseMessage addGoodCategory(CmsGoodCategoryDto cmsGoodCategoryDto);
 
 	ResponseMessage selectAllCategoryList();
 

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haohai.cms.mapper.TCmsGoodCategoryTagMapper" >
+  <resultMap id="BaseResultMap" type="com.haohai.cms.model.TCmsGoodCategoryTag" >
+    <id column="good_category_tag_id" property="goodCategoryTagId" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="tag_id" property="tagId" jdbcType="INTEGER" />
+    <result column="good_category_tag_sort" property="goodCategoryTagSort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    good_category_tag_id, category_id, tag_id, good_category_tag_sort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haohai.cms.model.TCmsGoodCategoryTagCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cms_good_category_tag
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cms_good_category_tag
+    where good_category_tag_id = #{goodCategoryTagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cms_good_category_tag
+    where good_category_tag_id = #{goodCategoryTagId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haohai.cms.model.TCmsGoodCategoryTagCriteria" >
+    delete from t_cms_good_category_tag
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haohai.cms.model.TCmsGoodCategoryTag" >
+    insert into t_cms_good_category_tag (good_category_tag_id, category_id, tag_id, 
+      good_category_tag_sort)
+    values (#{goodCategoryTagId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER}, 
+      #{goodCategoryTagSort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haohai.cms.model.TCmsGoodCategoryTag" >
+    insert into t_cms_good_category_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodCategoryTagId != null" >
+        good_category_tag_id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="tagId != null" >
+        tag_id,
+      </if>
+      <if test="goodCategoryTagSort != null" >
+        good_category_tag_sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodCategoryTagId != null" >
+        #{goodCategoryTagId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="tagId != null" >
+        #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="goodCategoryTagSort != null" >
+        #{goodCategoryTagSort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haohai.cms.model.TCmsGoodCategoryTagCriteria" resultType="java.lang.Integer" >
+    select count(*) from t_cms_good_category_tag
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_cms_good_category_tag
+    <set >
+      <if test="record.goodCategoryTagId != null" >
+        good_category_tag_id = #{record.goodCategoryTagId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null" >
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tagId != null" >
+        tag_id = #{record.tagId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodCategoryTagSort != null" >
+        good_category_tag_sort = #{record.goodCategoryTagSort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_cms_good_category_tag
+    set good_category_tag_id = #{record.goodCategoryTagId,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      tag_id = #{record.tagId,jdbcType=INTEGER},
+      good_category_tag_sort = #{record.goodCategoryTagSort,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haohai.cms.model.TCmsGoodCategoryTag" >
+    update t_cms_good_category_tag
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="tagId != null" >
+        tag_id = #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="goodCategoryTagSort != null" >
+        good_category_tag_sort = #{goodCategoryTagSort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where good_category_tag_id = #{goodCategoryTagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haohai.cms.model.TCmsGoodCategoryTag" >
+    update t_cms_good_category_tag
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      tag_id = #{tagId,jdbcType=INTEGER},
+      good_category_tag_sort = #{goodCategoryTagSort,jdbcType=INTEGER}
+    where good_category_tag_id = #{goodCategoryTagId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 批量插入商品分类和标签的关系 -->
+  <insert id="batchInsert">
+  	insert into t_cms_good_category_tag (category_id, tag_id, 
+      good_category_tag_sort)
+	<foreach collection="gcTags" item="item" separator="union all" index="index">
+	select
+		#{item.categoryId},#{item.tagId},#{item.goodCategoryTagSort} from dual
+	</foreach>
+  </insert>
+  
+</mapper>

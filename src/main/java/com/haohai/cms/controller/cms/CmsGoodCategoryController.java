@@ -5,8 +5,10 @@ import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.controller.BaseController;
 import com.haohai.cms.model.TCmsGoodCategory;
+import com.haohai.cms.model.dto.CmsGoodCategoryDto;
 import com.haohai.cms.model.dto.CmsGoodCategoryReq;
 import com.haohai.cms.service.cms.CmsGoodCategoryService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +36,11 @@ public class CmsGoodCategoryController extends BaseController {
 	 * @param tCmsGoodCategory
 	 * @return
 	 */
-	@RequestMapping("/toAddGoodCategory.do")
-	public ResponseMessage addGoodCategory(
-			@ModelAttribute("tCmsGoodCategory") TCmsGoodCategory tCmsGoodCategory) {
-		logger.info("增加分类入参:" + tCmsGoodCategory);
+	@RequestMapping("/addGoodCategory.do")
+	public ResponseMessage addGoodCategory(CmsGoodCategoryDto cmsGoodCategoryDto) {
+		logger.info("增加分类入参:" + cmsGoodCategoryDto);
 		ResponseMessage responseMessage = null;
-		responseMessage = cmsGoodCategoryService.insert(tCmsGoodCategory);
+		responseMessage = cmsGoodCategoryService.addGoodCategory(cmsGoodCategoryDto);
 		return responseMessage;
 	}
 
