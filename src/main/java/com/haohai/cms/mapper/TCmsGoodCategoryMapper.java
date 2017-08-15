@@ -2,6 +2,7 @@ package com.haohai.cms.mapper;
 
 import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.TCmsGoodCategoryCriteria;
+import com.haohai.cms.model.dto.CmsGoodCategoryDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +28,12 @@ public interface TCmsGoodCategoryMapper {
     int updateByPrimaryKeySelective(TCmsGoodCategory record);
 
     int updateByPrimaryKey(TCmsGoodCategory record);
+    
+    /**
+     * 根据商品分类id查询商品分类详情
+     * @param categoryId
+     * @return
+     */
+    CmsGoodCategoryDto getCmsGoodCategoryById(Integer categoryId);
+    
 }

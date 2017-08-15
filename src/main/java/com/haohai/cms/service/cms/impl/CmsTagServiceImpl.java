@@ -3,19 +3,17 @@ package com.haohai.cms.service.cms.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.ztree.ZTree;
+import com.haohai.cms.mapper.TCmsGoodCategoryTagMapper;
 import com.haohai.cms.mapper.TCmsTagMapper;
 import com.haohai.cms.model.TCmsTag;
 import com.haohai.cms.model.TCmsTagCriteria;
-import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.ICmsTagService;
 
 @Service
@@ -26,12 +24,14 @@ public class CmsTagServiceImpl implements ICmsTagService {
     
     @Autowired
     private TCmsTagMapper tCmsTagMapper;
+    @Autowired
+    private TCmsGoodCategoryTagMapper tCmsGoodCategoryTagMapper;
 	
     /**
      * 查询标签列表
      */
 	@Override
-	public ResponseMessage getCmsTags(PageDto pageDto) {
+	public ResponseMessage getCmsTags() {
 		TCmsTagCriteria tagCriteria = new TCmsTagCriteria();
 		TCmsTagCriteria.Criteria criteria = tagCriteria.createCriteria();
 		criteria.andDataFlagEqualTo(1);

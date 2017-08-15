@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../../plugin/zTree/css/zTreeStyle/zTreeStyle.css" />
     <link rel="stylesheet" href="../../content/plugins/validator/validator.css" />
     <link rel="stylesheet" href="../../content/plugins/bootstrap-multiselect/bootstrap-multiselect.css" />
-
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,10 +26,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
 <section class="content-header">
     <h1>
-        <a href="#" onclick="goBack()"><<</a>添加商品分类
+        <a href="#" onclick="goBack()"><<</a><span ng-bind="page_title"></span>
     </h1>
 </section>
 <!-- Main content -->
@@ -43,21 +43,30 @@
             <div class="box box-primary">
                 <!-- /.box-header -->
                 <form class="form-horizontal" id="categoryform">
-                    <div class="box-body">
+                    <div class="box-body" ng-controller="myCtrl">
+                        <input type="hidden" ng-value="gc.categoryId" id="categoryId" name="categoryId" />
                         <!-- text input -->
                         <div class="form-group">
                             <label for="categoryName" class="col-sm-2 control-label">商品分类名称<span class="required">*</span></label>
                             <div class="col-sm-4">
-                                <input type="text" id="categoryName" name="categoryName" class="form-control" placeholder="商品分类名称 ..."
+                                <input type="text" ng-value="gc.categoryName" id="categoryName" name="categoryName" class="form-control" placeholder="商品分类名称 ..."
                                        errormsg="商品分类名称" isvalid="yes" checkexpession="NotNull" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">商品级别<span class="required">*</span></label>
+                        <div class="form-group" id="gc_dataflag">
+                            <label class="col-sm-2 control-label">分类状态</label>
                             <div class="col-sm-4">
-                                <select id="level" name="level" class="form-control" onchange="changeCategory();"
-                                	errormsg="商品级别" isvalid="yes" checkexpession="NotNull">
-                                    <option value="-1">-请选择-</option>
+                                <select ng-value="gc.dataFlag" id="dataFlag" name="dataFlag" class="form-control" onchange="changeDataFlag(this);">
+                                    <option value="1">正常</option>
+                                    <option value="0">失效</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div readonly="readonly" class="form-group">
+                            <label class="col-sm-2 control-label">商品级别</label>
+                            <div class="col-sm-4">
+                            	<select ng-value="gc.level" id="level" name="level" class="form-control" onchange="changeCategory();">
+                            		<option value="-1">-请选择-</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -69,9 +78,10 @@
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="good_category_name" placeholder="选择商品级别后点击选择商品分类" name="good_level"
                                        readonly data-toggle="modal" data-target="#good_category_modal"
-                                       errormsg="商品分类" isvalid="yes" checkexpession="NotNull" />
-                                <input type="hidden" name="categoryLevel" id="categoryLevel" />
-                                <input type="hidden" name="categoryParentId" id="categoryParentId" />
+                                       errormsg="商品分类" isvalid="yes" checkexpession="NotNull"
+                                       ng-value="gc.categoryParentName" />
+                                <input type="hidden" name="categoryLevel" id="categoryLevel" ng-value="gc.categoryLevel" />
+                                <input type="hidden" name="categoryParentId" id="categoryParentId" ng-value="gc.categoryParentId" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -84,7 +94,7 @@
                     </div>
                     <div class="box-footer">
                         <div class="col-md-offset-2">
-                            <input type="reset" class="btn btn-primary" value="重置" />
+                        	<input type="reset" class="btn btn-primary" value="重置" />
                             <button type="button" onclick="saveCategory();" class="btn btn-primary">保存</button>
                         </div>
                     </div>
@@ -123,9 +133,10 @@
 <script src="../../scripts/common.js"></script>
 <script src="../../scripts/ajax.js"></script>
 <script src="../../plugin/zTree/js/jquery.ztree.core-3.5.js"></script>
+<script src="../../scripts/angular.min.js"></script>
 <script src="../../content/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
 <script>
-    var setting = {
+	var setting = {
         data: {
             simpleData: {
                 enable: true
@@ -135,7 +146,47 @@
             onClick: onClick
         }
     };
-
+	
+	function onClick(event, treeId, treeNode) {
+        if (!treeNode.isParent){
+            $("#good_category_name").val(treeNode.name);
+            $("#categoryLevel").val(treeNode.treelevel);
+            $("#categoryParentId").val(treeNode.id);
+            $('#good_category_modal').modal('hide');
+            //删除错误提示信息
+            removeMessage($("#good_category_name"));
+        }
+    }
+    
+	var gcTags = "";//商品分类绑定的标签
+    var param_id = getUrlParam("id");
+    var app = angular.module('myApp', []);
+    if (param_id){
+    	//修改
+    	//angularjs动态绑定数据
+    	app.controller('myCtrl', function($scope, $http) {
+    		$scope.page_title= "修改商品分类";
+            $http({
+                method: 'post',
+                url: "/cms/category/getGoodCategoryById.do?categoryId="+param_id
+            }).then(function successCallback(response) {
+                var gcTagData = response.data.data;
+                if (gcTagData !=undefined){
+                    $scope.gc = gcTagData;
+                    gcTags = gcTagData.goodCategoryTag;
+                }
+            }, function errorCallback(response) {
+                $.fn.modalAlert("请求失败！", "error");
+            });
+        });
+    }else{
+    	$("#gc_dataflag").remove();
+    	//新增
+		app.controller('myCtrl', function($scope, $http) {
+			$scope.page_title= "添加商品分类";
+		});
+    }
+    
     $(function(){
     	//查询标签
     	handleAjaxSimple("/cms/tag/getCmsTags.do", '', 1, function(tagdata){
@@ -179,10 +230,18 @@
     	                }
     	            },
     	        });
+    		   if (gcTags !=undefined && gcTags !=''){
+    			   var gcTagArray = gcTags.split(",");
+    			   for (var i=0;i<gcTagArray.length;i++){
+    				   orderCount++;
+    				   $('option[value="'+gcTagArray[i]+'"]', $('#good_category_tag')).data('order', orderCount);
+    			   }
+    			   $("#good_category_tag").multiselect('select', gcTagArray);
+    		   }
     	   }
         });
     });
-
+    
     function changeCategory(){
         var level = $("#level").find("option:selected").text();
         handleAjaxSimple("/cms/category/getGoodCategoriesByLevel.do?level="+level, '', 1, function(treedata){
@@ -190,17 +249,6 @@
         });
     }
     
-    function onClick(event, treeId, treeNode) {
-        if (!treeNode.isParent){
-            $("#good_category_name").val(treeNode.name);
-            $("#categoryLevel").val(treeNode.treelevel);
-            $("#categoryParentId").val(treeNode.id);
-            $('#good_category_modal').modal('hide');
-            //删除错误提示信息
-            removeMessage($("#good_category_name"));
-        }
-    }
-
     function saveCategory() {
         if ($('#categoryform').Validform()) {
         	var selected = [];//选中的标签集合
@@ -221,9 +269,9 @@
             if(level == -1){
                 $.fn.modalAlert("请选择商品级别！", "error");
             }
-            handleAjaxSimple("/cms/category/addGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
+            handleAjaxSimple("/cms/category/saveGoodCategory.do", $('#categoryform').serialize(), 2, function(data){
                 if (data.code == 0){
-                    $.fn.modalAlert("添加成功！", "success");
+                    $.fn.modalAlert("保存成功！", "success");
                     window.location.href = "cms-good-category-table.html";
                 }else{
                     $.fn.modalAlert(data.msg, "error");
@@ -231,6 +279,17 @@
             });
         }
     }
+    
+    function changeDataFlag(obj){
+    	if (param_id){
+    		if (obj.value == 0){
+    			layer.confirm('确认要将分类状态改为失效状态吗？', {icon: 3, title:'系统提示'}, function(index){
+    				//判断商品分类下绑定的商品，如果有绑定商品，先将商品下架后在删除
+                });
+    		}
+    	}
+    }
+    
 </script>
 </body>
 </html>

@@ -2,16 +2,14 @@ package com.haohai.cms.service.cms;
 
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.model.TCmsTag;
-import com.haohai.cms.model.dto.PageDto;
 
 public interface ICmsTagService {
 
 	/**
-	 * 查询标签列表
-	 * @param pageDto
+	 * 查询标签集合
 	 * @return
 	 */
-	ResponseMessage getCmsTags(PageDto pageDto);
+	ResponseMessage getCmsTags();
 	
 	/**
 	 * 保存标签信息

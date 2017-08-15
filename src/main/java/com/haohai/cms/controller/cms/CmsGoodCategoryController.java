@@ -1,14 +1,11 @@
 package com.haohai.cms.controller.cms;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.common.util.JsonUtil;
 import com.haohai.cms.controller.BaseController;
-import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.dto.CmsGoodCategoryDto;
-import com.haohai.cms.model.dto.CmsGoodCategoryReq;
+import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CmsGoodCategoryService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,89 +26,52 @@ public class CmsGoodCategoryController extends BaseController {
 
 	@Autowired
 	private CmsGoodCategoryService cmsGoodCategoryService;
-
+	
 	/**
-	 * 增加分类
-	 * 
-	 * @param tCmsGoodCategory
+	 * 查询商品分类列表
+	 * @param pageDto
 	 * @return
 	 */
-	@RequestMapping("/addGoodCategory.do")
-	public ResponseMessage addGoodCategory(CmsGoodCategoryDto cmsGoodCategoryDto) {
-		logger.info("增加分类入参:" + cmsGoodCategoryDto);
-		ResponseMessage responseMessage = null;
-		responseMessage = cmsGoodCategoryService.addGoodCategory(cmsGoodCategoryDto);
+	@RequestMapping("/getGoodCategories.do")
+	public ResponseMessage getGoodCategories(@ModelAttribute("pageInfo") PageDto pageDto) {
+		logger.info("查询商品分类列表请求：" + pageDto);
+		ResponseMessage rm = cmsGoodCategoryService.getCmsGoodCategories(pageDto);
+		logger.info("查询商品分类列表响应："+rm);
+		return rm;
+	}
+	
+	/**
+	 * 保存商品分类
+	 * @param tCmsGood
+	 * @return
+	 */
+	@RequestMapping("/saveGoodCategory.do")
+	public ResponseMessage saveGoodCategory(CmsGoodCategoryDto cmsGoodCategoryDto) {
+		logger.info("保存商品分类请求："+cmsGoodCategoryDto);
+		ResponseMessage responseMessage = this.cmsGoodCategoryService.tmSaveCmsGood(cmsGoodCategoryDto);
+		logger.info("保存商品分类响应："+responseMessage);
 		return responseMessage;
 	}
-
+	
 	/**
-	 * 增加分类
-	 *
-	 * @param tCmsGoodCategory
-	 * @return
-	 */
-	@RequestMapping("/toUpdateGoodCategory.do")
-	public ResponseMessage updateGoodCategory(
-			@ModelAttribute("tCmsGoodCategory") TCmsGoodCategory tCmsGoodCategory) {
-		logger.info("增加分类入参:" + tCmsGoodCategory);
-		ResponseMessage responseMessage = null;
-		responseMessage = cmsGoodCategoryService.update(tCmsGoodCategory);
-		return responseMessage;
-	}
-
-	/**
-	 * 得到所有分类信息
-	 * 
-	 * @param tCmsGoodCategory
-	 * @return
-	 */
-	@RequestMapping("/getAllGoodCategory.do")
-	public ResponseMessage getAllGoodCategory(
-			@ModelAttribute("tCmsGoodCategory") TCmsGoodCategory tCmsGoodCategory) {
-		logger.info("得到所有分类信息入参:" + tCmsGoodCategory);
-		ResponseMessage responseMessage = null;
-		responseMessage = cmsGoodCategoryService.selectAllCategoryList();
-		return responseMessage;
-	}
-
-	/**
-	 * 得到所有分类信息
-	 * 
-	 * @param cmsGoodCategoryReq
-	 * @return
-	 */
-	@RequestMapping("/getGoodCategory4Page.do")
-	public JSONObject getGoodCategory4Page(
-			@ModelAttribute("tCmsGoodCategory") CmsGoodCategoryReq cmsGoodCategoryReq) {
-		logger.info("得到所有分类信息入参:" + cmsGoodCategoryReq);
-		ResponseMessage responseMessage = null;
-		JSONObject jsonObject = cmsGoodCategoryService
-				.selectCategoryList4Page(cmsGoodCategoryReq);
-		logger.info("得到所有分类信息返回前端数据:"+jsonObject);
-		return jsonObject;
-	}
-
-	/**
-	 * 得到所有分类信息
-	 *
+	 * 根据商品分类id查询商品分类信息
 	 * @param goodId
 	 * @return
 	 */
 	@RequestMapping("/getGoodCategoryById.do")
-	public ResponseMessage getGoodCategoryById(@RequestParam Integer goodId) {
-		logger.info("得到所有分类信息入参:" + goodId);
-		ResponseMessage responseMessage = null;
-		responseMessage=cmsGoodCategoryService.getCategoryInfoById(goodId);
-		logger.info("得到所有分类信息返回前端数据:"+responseMessage);
-		return responseMessage ;
+	public ResponseMessage getGoodCategoryById(@RequestParam Integer categoryId) {
+		logger.info("查询商品分类请求参数：" + categoryId);
+		ResponseMessage responseMessage = cmsGoodCategoryService.getCategoryInfoById(categoryId);
+		logger.info("查询商品分类相应信息："+responseMessage);
+		return responseMessage;
 	}
-
+	
 	/**
 	 * 查询商品分类树结构
 	 * @return
 	 */
-	@RequestMapping("/getGoodCategories.do")
-	public ResponseMessage getGoodCategories() {
+	@RequestMapping("/getGoodCategoryTree.do")
+	public ResponseMessage getGoodCategoryTree() {
 		logger.info("查询商品分类树结构入参");
 		ResponseMessage responseMessage = this.cmsGoodCategoryService.selectGoodCategoryTreeData();
 		logger.info("查询商品分类树结构响应" + JsonUtil.jsonToString(responseMessage));

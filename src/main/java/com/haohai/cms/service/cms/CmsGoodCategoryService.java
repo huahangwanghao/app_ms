@@ -1,35 +1,32 @@
 package com.haohai.cms.service.cms;
 
-import com.alibaba.fastjson.JSONObject;
 import com.haohai.cms.common.ResponseMessage;
-import com.haohai.cms.model.TCmsGoodCategory;
 import com.haohai.cms.model.dto.CmsGoodCategoryDto;
-import com.haohai.cms.model.dto.CmsGoodCategoryReq;
+import com.haohai.cms.model.dto.PageDto;
 
-/**
- * Created by Administrator on 2017/8/2.
- */
 public interface CmsGoodCategoryService {
-
+	
 	/**
-	 * 增加商品分类
-	 * 
+	 * 查询商品分类列表
+	 * @param pageDto
+	 * @return
+	 */
+	ResponseMessage getCmsGoodCategories(PageDto pageDto);
+	
+	/**
+	 * 保存商品分类
 	 * @param cmsGoodCategoryDto
 	 * @return
 	 */
-	ResponseMessage addGoodCategory(CmsGoodCategoryDto cmsGoodCategoryDto);
-
-	ResponseMessage selectAllCategoryList();
-
+	ResponseMessage tmSaveCmsGood(CmsGoodCategoryDto cmsGoodCategoryDto);
+	
 	/**
-	 * 得到分类信息的分页信息
-	 * 
-	 * @param cmsGoodCategoryReq
+	 * 根据商品分类id查询商品分类信息
+	 * @param categoryId
 	 * @return
 	 */
-	JSONObject selectCategoryList4Page(
-			CmsGoodCategoryReq cmsGoodCategoryReq);
-	
+    ResponseMessage getCategoryInfoById(Integer categoryId);
+
 	/**
 	 * 查询商品分类树结构
 	 * @return
@@ -43,17 +40,4 @@ public interface CmsGoodCategoryService {
 	 */
     ResponseMessage selectGoodCategoryTreeDataByLevel(String level);
 
-	/**
-	 * 通过Id查询分类信息的详细信息
-	 * @param goodId
-	 * @return
-	 */
-    ResponseMessage getCategoryInfoById(Integer goodId);
-
-	/**
-	 * 进行修改
-	 * @param tCmsGoodCategory
-	 * @return
-	 */
-    ResponseMessage update(TCmsGoodCategory tCmsGoodCategory);
 }

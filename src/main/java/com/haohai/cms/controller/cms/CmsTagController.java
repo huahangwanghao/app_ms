@@ -3,15 +3,11 @@ package com.haohai.cms.controller.cms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.alibaba.fastjson.JSON;
 import com.haohai.cms.common.ResponseMessage;
 import com.haohai.cms.controller.BaseController;
 import com.haohai.cms.model.TCmsTag;
-import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.ICmsTagService;
 
 @RestController
@@ -29,9 +25,8 @@ public class CmsTagController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getCmsTags.do")
-	public ResponseMessage getCmsGoods(@ModelAttribute("pageInfo") PageDto pageDto) {
-		logger.info("查询标签列表请求参数："+pageDto);
-		ResponseMessage rm = this.cmsTagService.getCmsTags(pageDto);
+	public ResponseMessage getCmsGoods() {
+		ResponseMessage rm = this.cmsTagService.getCmsTags();
 		logger.info("查询标签列表响应结果："+rm);
 		return rm;
 	}

@@ -226,7 +226,7 @@
     	
     	$(function(){
     		//查询商品分类
-    		handleAjaxSimple("/cms/category/getGoodCategories.do", '', 1, function(treedata){
+    		handleAjaxSimple("/cms/category/getGoodCategoryTree.do", '', 1, function(treedata){
     			$.fn.zTree.init($("#good_category_ztree"), setting, treedata.data);
     		});
     	});
