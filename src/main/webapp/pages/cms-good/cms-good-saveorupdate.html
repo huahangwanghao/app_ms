@@ -48,7 +48,7 @@
                                 <label for="goodName" class="col-sm-2 control-label">商品名称<span class="required">*</span></label>
                                 <div class="col-sm-4">
                                 	<input type="text" id="goodName" name="goodName" class="form-control" placeholder="商品名称 ..." 
-                                	errormsg="商品名称" isvalid="yes" checkexpession="NotNull" ng-model="good.goodName" />
+                                	errormsg="商品名称" isvalid="yes" checkexpession="NotNull" ng-value="good.goodName" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -56,43 +56,43 @@
                             	<div class="col-sm-4">
                             		<input type="text" class="form-control" id="good_category_name" placeholder="点击选择商品分类" name="good_level" 
 	                            		readonly data-toggle="modal" data-target="#good_category_modal" 
-	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" ng-model="good.categoryName" />
-                            		<input type="hidden" name="goodLevel" id="goodLevel" ng-model="good.goodLevel" />
+	                            		errormsg="商品分类" isvalid="yes" checkexpession="NotNull" ng-value="good.categoryName" />
+                            		<input type="hidden" name="goodLevel" id="goodLevel" ng-value="good.goodLevel" />
                             	</div>
 							</div>
 							<div class="form-group">
                                 <label for="goodSpeci" class="col-sm-2 control-label">商品规格<span class="required">*</span></label>
                                 <div class="col-sm-4">
                                 	<input id="goodSpeci" name="goodSpeci" type="text" class="form-control" 
-                                		placeholder="商品规格 ..." errormsg="商品规格" isvalid="yes" checkexpession="NotNull" ng-model="good.goodSpeci" />
+                                		placeholder="商品规格 ..." errormsg="商品规格" isvalid="yes" checkexpession="NotNull" ng-value="good.goodSpeci" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="hasCount" class="col-sm-2 control-label">库存数量<span class="required">*</span></label>
                                 <div class="col-sm-4">
                                 	<input id="hasCount" name="hasCount" type="text" class="form-control" 
-                                		placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" ng-model="good.hasCount" />
+                                		placeholder="库存数量 ..." errormsg="库存数量" isvalid="yes" checkexpession="NotNull" ng-value="good.hasCount" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="goodOriginalPrice" class="col-sm-2 control-label">商品原价<span class="required">*</span></label>
                                 <div class="col-sm-4">
                                 	<input id="goodOriginalPrice" name="goodOriginalPrice" type="text" class="form-control" 
-                                		placeholder="商品原价 ..." errormsg="商品原价" isvalid="yes" checkexpession="Num" ng-model="good.goodOriginalPrice" />
+                                		placeholder="商品原价 ..." errormsg="商品原价" isvalid="yes" checkexpession="Num" ng-value="good.goodOriginalPrice" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="goodPromotionPrice" class="col-sm-2 control-label">商品促销价<span class="required">*</span></label>
                                 <div class="col-sm-4">
                                 	<input id="goodPromotionPrice" name="goodPromotionPrice" type="text" class="form-control" placeholder="商品促销价 ..." 
-                                		errormsg="商品促销价" isvalid="yes" checkexpession="Num" ng-model="good.goodPromotionPrice" />
+                                		errormsg="商品促销价" isvalid="yes" checkexpession="Num" ng-value="good.goodPromotionPrice" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="goodDesc" class="col-sm-2 control-label">商品描述</label>
                                 <div class="col-sm-9">
                                 	<textarea id="goodDesc" name="goodDesc" class="form-control" 
-                                		rows="3" placeholder="商品描述...." ng-model="good.goodDesc"></textarea>
+                                		rows="3" placeholder="商品描述...." ng-value="good.goodDesc"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
