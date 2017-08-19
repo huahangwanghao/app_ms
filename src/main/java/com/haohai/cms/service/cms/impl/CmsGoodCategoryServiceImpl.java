@@ -12,6 +12,7 @@ import com.haohai.cms.model.TCmsGoodCategoryCriteria;
 import com.haohai.cms.model.TCmsGoodCategoryTag;
 import com.haohai.cms.model.TCmsGoodCategoryTagCriteria;
 import com.haohai.cms.model.dto.CmsGoodCategoryDto;
+import com.haohai.cms.model.dto.CmsGoodCategoryTagDto;
 import com.haohai.cms.model.dto.PageDto;
 import com.haohai.cms.service.cms.CmsGoodCategoryService;
 import org.apache.commons.lang.StringUtils;
@@ -196,5 +197,29 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 		}
 		return ResponseMessage.createSuccessMsg(treedata);
 	}
+	
+	/**
+     * 根据商品分类id查询商品分类标签树
+     * @param categoryId
+     * @return
+     */
+	@Override
+	public ResponseMessage getGoodCategoryTagTree(Integer categoryId){
+    	TCmsGoodCategoryTagCriteria cctCriteria = new TCmsGoodCategoryTagCriteria();
+    	TCmsGoodCategoryTagCriteria.Criteria criteria = cctCriteria.createCriteria();
+    	criteria.andCategoryIdEqualTo(categoryId);
+    	List<CmsGoodCategoryTagDto> list = this.tCmsGoodCategoryTagMapper.selectGoodCategoryTagByCategoryId(categoryId);
+    	List<ZTree> treedata = new ArrayList<ZTree>();
+		if (list != null && list.size() > 0) {
+			for (CmsGoodCategoryTagDto categoryTag : list) {
+				ZTree tree = new ZTree(categoryTag.getTagId(), categoryTag.getTagParentId(), 
+						categoryTag.getTagName(), false, null);
+				if (categoryTag.getTagParentId() == 1)
+					tree.setOpen(true);
+				treedata.add(tree);
+			}
+		}
+		return ResponseMessage.createSuccessMsg(treedata);
+    }
 	
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 public class TCmsGood {
     private Integer goodId;
 
-    private String goodLevel;
+    private String categoryId;
 
     private String goodName;
 
@@ -40,12 +40,12 @@ public class TCmsGood {
         this.goodId = goodId;
     }
 
-    public String getGoodLevel() {
-        return goodLevel;
+    public String getcategoryId() {
+        return categoryId;
     }
 
-    public void setGoodLevel(String goodLevel) {
-        this.goodLevel = goodLevel == null ? null : goodLevel.trim();
+    public void setcategoryId(String categoryId) {
+        this.categoryId = categoryId == null ? null : categoryId.trim();
     }
 
     public String getGoodName() {

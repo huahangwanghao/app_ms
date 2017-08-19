@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 产品分类control
- */
 @RestController
 @RequestMapping("/cms/category")
 public class CmsGoodCategoryController extends BaseController {
@@ -87,6 +84,19 @@ public class CmsGoodCategoryController extends BaseController {
 		logger.info("查询商品分类树结构入参");
 		ResponseMessage responseMessage = this.cmsGoodCategoryService.selectGoodCategoryTreeDataByLevel(level);
 		logger.info("查询商品分类树结构响应" + JsonUtil.jsonToString(responseMessage));
+		return responseMessage;
+	}
+	
+	/**
+	 * 根据商品分类id查询商品分类标签树
+	 * @param categoryId
+	 * @return
+	 */
+	@RequestMapping("/getGoodCategoryTagTree.do")
+	public ResponseMessage getGoodCategoryTagTree(@RequestParam Integer categoryId) {
+		logger.info("查询商品分类标签请求参数："+categoryId);
+		ResponseMessage responseMessage = this.cmsGoodCategoryService.getGoodCategoryTagTree(categoryId);
+		logger.info("查询商品分类标签响应：" + JsonUtil.jsonToString(responseMessage));
 		return responseMessage;
 	}
 

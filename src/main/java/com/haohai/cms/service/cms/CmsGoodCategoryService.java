@@ -39,5 +39,12 @@ public interface CmsGoodCategoryService {
 	 * @return
 	 */
     ResponseMessage selectGoodCategoryTreeDataByLevel(String level);
+    
+    /**
+     * 根据商品分类id查询商品分类标签树
+     * @param categoryId
+     * @return
+     */
+    ResponseMessage getGoodCategoryTagTree(Integer categoryId);
 
 }

@@ -186,73 +186,73 @@ public class TCmsGoodCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelIsNull() {
-            addCriterion("good_level is null");
+        public Criteria andCategoryIdIsNull() {
+            addCriterion("category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelIsNotNull() {
-            addCriterion("good_level is not null");
+        public Criteria andCategoryIdIsNotNull() {
+            addCriterion("category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelEqualTo(String value) {
-            addCriterion("good_level =", value, "goodLevel");
+        public Criteria andCategoryIdEqualTo(String value) {
+            addCriterion("category_id =", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelNotEqualTo(String value) {
-            addCriterion("good_level <>", value, "goodLevel");
+        public Criteria andCategoryIdNotEqualTo(String value) {
+            addCriterion("category_id <>", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelGreaterThan(String value) {
-            addCriterion("good_level >", value, "goodLevel");
+        public Criteria andCategoryIdGreaterThan(String value) {
+            addCriterion("category_id >", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelGreaterThanOrEqualTo(String value) {
-            addCriterion("good_level >=", value, "goodLevel");
+        public Criteria andCategoryIdGreaterThanOrEqualTo(String value) {
+            addCriterion("category_id >=", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelLessThan(String value) {
-            addCriterion("good_level <", value, "goodLevel");
+        public Criteria andCategoryIdLessThan(String value) {
+            addCriterion("category_id <", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelLessThanOrEqualTo(String value) {
-            addCriterion("good_level <=", value, "goodLevel");
+        public Criteria andCategoryIdLessThanOrEqualTo(String value) {
+            addCriterion("category_id <=", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelLike(String value) {
-            addCriterion("good_level like", value, "goodLevel");
+        public Criteria andCategoryIdLike(String value) {
+            addCriterion("category_id like", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelNotLike(String value) {
-            addCriterion("good_level not like", value, "goodLevel");
+        public Criteria andCategoryIdNotLike(String value) {
+            addCriterion("category_id not like", value, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelIn(List<String> values) {
-            addCriterion("good_level in", values, "goodLevel");
+        public Criteria andCategoryIdIn(List<String> values) {
+            addCriterion("category_id in", values, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelNotIn(List<String> values) {
-            addCriterion("good_level not in", values, "goodLevel");
+        public Criteria andCategoryIdNotIn(List<String> values) {
+            addCriterion("category_id not in", values, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelBetween(String value1, String value2) {
-            addCriterion("good_level between", value1, value2, "goodLevel");
+        public Criteria andCategoryIdBetween(String value1, String value2) {
+            addCriterion("category_id between", value1, value2, "CategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andGoodLevelNotBetween(String value1, String value2) {
-            addCriterion("good_level not between", value1, value2, "goodLevel");
+        public Criteria andCategoryIdNotBetween(String value1, String value2) {
+            addCriterion("category_id not between", value1, value2, "CategoryId");
             return (Criteria) this;
         }
 

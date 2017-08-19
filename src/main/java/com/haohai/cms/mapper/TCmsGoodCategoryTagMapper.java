@@ -2,6 +2,7 @@ package com.haohai.cms.mapper;
 
 import com.haohai.cms.model.TCmsGoodCategoryTag;
 import com.haohai.cms.model.TCmsGoodCategoryTagCriteria;
+import com.haohai.cms.model.dto.CmsGoodCategoryTagDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,5 +35,12 @@ public interface TCmsGoodCategoryTagMapper {
      * @return
      */
     int batchInsert(@Param("gcTags") List<TCmsGoodCategoryTag> records);
+    
+    /**
+     * 根据商品分类id查询商品分类标签树
+     * @param categoryId
+     * @return
+     */
+    List<CmsGoodCategoryTagDto> selectGoodCategoryTagByCategoryId(Integer categoryId);
     
 }

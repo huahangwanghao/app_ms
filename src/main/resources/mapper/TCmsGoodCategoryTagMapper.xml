@@ -7,6 +7,12 @@
     <result column="tag_id" property="tagId" jdbcType="INTEGER" />
     <result column="good_category_tag_sort" property="goodCategoryTagSort" jdbcType="INTEGER" />
   </resultMap>
+  
+  <resultMap id="GoodCategoryTagResultMap" extends="BaseResultMap" type="com.haohai.cms.model.dto.CmsGoodCategoryTagDto" >
+    <result column="tag_parent_id" property="tagParentId" jdbcType="INTEGER" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -206,5 +212,13 @@
 		#{item.categoryId},#{item.tagId},#{item.goodCategoryTagSort} from dual
 	</foreach>
   </insert>
+  
+  <!-- 根据商品分类id查询商品分类标签树 -->
+  <select id="selectGoodCategoryTagByCategoryId" resultMap="GoodCategoryTagResultMap" parameterType="java.lang.Integer">
+  	select gct.tag_id,ct.tag_parent_id,ct.tag_name 
+  	from t_cms_good_category_tag gct inner join t_cms_tag ct on gct.tag_id=ct.tag_id
+	where gct.category_id=#{categoryId,jdbcType=INTEGER} and ct.data_flag='1'
+	order by good_category_tag_sort
+  </select>
   
 </mapper>
