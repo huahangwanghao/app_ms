@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>标签新增</title>
+  <title>规格新增</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="../../content/ui/global/bootstrap/css/bootstrap.min.css">
@@ -49,7 +49,7 @@
 </head> 
 <body>
     <section class="content-header">
-		<h1>标签管理</h1>
+		<h1>规格管理</h1>
 	</section>
     <!-- Main content -->
     <section class="content">
@@ -67,10 +67,10 @@
                     <form class="form-horizontal" id="tagForm">
                     	<!-- text input -->
                         <div class="form-group">
-                            <label for="tagName" class="col-sm-2 control-label">标签名称<span class="required">*</span></label>
+                            <label for="tagName" class="col-sm-2 control-label">规格名称<span class="required">*</span></label>
                             <div class="col-sm-4">
-                            	<input type="text" id="tagName" name="tagName" class="form-control" placeholder="标签名称 ..." 
-                            	errormsg="标签名称" isvalid="yes" checkexpession="NotNull" />
+                            	<input type="text" id="tagName" name="tagName" class="form-control" placeholder="规格名称 ..." 
+                            	errormsg="规格名称" isvalid="yes" checkexpession="NotNull" />
                             </div> 
                         </div>
                     	<div class="box-footer">
@@ -129,7 +129,7 @@
     		});
     	});
     	
-    	//修改标签
+    	//修改规格
     	function editTagTreeNode() {
     		hideRMenu();
     		var nodes = zTree.getSelectedNodes();
@@ -139,7 +139,7 @@
 			}
 		}
     	
-    	//新增标签
+    	//新增规格
     	function addTagTreeNode(){
     		hideRMenu();
     		$("#tagName").val("");
@@ -155,7 +155,7 @@
     		hideRMenu();
     		var nodes = zTree.getSelectedNodes();
 			if (nodes && nodes.length>0) {
-				//判断商品类型和商品是否绑定过该标签，todo
+				//判断商品类型和商品是否绑定过该规格，todo
 				if (nodes[0].children && nodes[0].children.length > 0) {
 					var msg = "要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！";
 					if (confirm(msg)==true){
@@ -199,13 +199,13 @@
         		var tagId = $("#tagId").val();
 				var tagParentId = $("#tagParentId").val();
         		if (tagId =='' && tagParentId ==''){
-        			$.fn.modalAlert("请右击商品标签树选择增加或修改！", "error");
+        			$.fn.modalAlert("请右击商品规格树选择增加或修改！", "error");
         			return;
         		}
                 handleAjaxSimple("/cms/tag/saveCmsTag.do", $('#tagForm').serialize(), 2, function(data){
                 	if (data.code == 0){
                 		$.fn.modalAlert("保存成功！", "success");
-                		window.location.href = "cms-tag-table.html";
+                		window.location.href = "cms-good-specification.html";
                 	}else{
                 		$.fn.modalAlert(data.msg, "error");
                 	}

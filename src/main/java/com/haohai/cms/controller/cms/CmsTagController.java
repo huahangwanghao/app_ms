@@ -25,7 +25,7 @@ public class CmsTagController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/getCmsTags.do")
-	public ResponseMessage getCmsGoods() {
+	public ResponseMessage getCmsTags() {
 		ResponseMessage rm = this.cmsTagService.getCmsTags();
 		logger.info("查询标签列表响应结果："+rm);
 		return rm;

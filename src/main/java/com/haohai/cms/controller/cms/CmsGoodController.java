@@ -84,5 +84,11 @@ public class CmsGoodController extends BaseController {
 		ResponseMessage responseMessage = cmsGoodService.tmSaveCmsGood(cmsGood);
 		return responseMessage;
 	}
+	
+	@RequestMapping("/sedSms.do")
+	public ResponseMessage sedSms() {
+		System.out.println("kettle调用");
+		return null;
+	}
 
 }

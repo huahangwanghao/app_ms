@@ -180,7 +180,7 @@ public class CmsGoodCategoryServiceImpl implements CmsGoodCategoryService {
 		TCmsGoodCategoryCriteria.Criteria criteria = goodCategory
 				.createCriteria();
 		criteria.andDataFlagEqualTo("1");
-		criteria.andLevelLessThan(level);
+//		criteria.andLevelLessThan(level);
 		List<TCmsGoodCategory> categories = tCmsGoodCategoryMapper
 				.selectByExample(goodCategory);
 		List<ZTree> treedata = new ArrayList<ZTree>();

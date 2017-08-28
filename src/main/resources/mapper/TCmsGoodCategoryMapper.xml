@@ -13,6 +13,7 @@
   <resultMap id="CmsGoodCategoryResultMap" type="com.haohai.cms.model.dto.CmsGoodCategoryDto" extends="BaseResultMap" >
     <result column="category_parent_name" property="categoryParentName" jdbcType="VARCHAR" />
     <result column="good_category_tag" property="goodCategoryTag" jdbcType="VARCHAR" />
+    <result column="good_category_tagname" property="goodCategoryTagname" jdbcType="VARCHAR" />
   </resultMap>
   
   <sql id="Example_Where_Clause" >
@@ -237,10 +238,12 @@
   
   <!-- 根据商品分类id查询商品分类详情 -->
   <select id="getCmsGoodCategoryById" resultMap="CmsGoodCategoryResultMap" parameterType="java.lang.Integer">
-  	select gc.*,gcp.category_name category_parent_name,group_concat(gct.tag_id order by gct.good_category_tag_sort) good_category_tag
+  	select gc.*,gcp.category_name category_parent_name,group_concat(gct.tag_id order by gct.good_category_tag_sort) good_category_tag,
+  	group_concat(gct.tag_name order by gct.good_category_tag_sort) good_category_tagname
 	from (select * from t_cms_good_category where category_id=#{categoryId,jdbcType=INTEGER}) gc
 	inner join t_cms_good_category gcp on gcp.category_id=gc.category_parent_id
-	left join t_cms_good_category_tag gct on gct.category_id=gc.category_id
+	left join (select gct.*,tg.tag_name from t_cms_good_category_tag gct inner join t_cms_tag tg on gct.tag_id=tg.tag_id) gct 
+	on gct.category_id=gc.category_id
   </select>
   
 </mapper>
