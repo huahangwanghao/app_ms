@@ -89,5 +89,8 @@
 		<!-- 线程池所使用的缓冲队列  -->
 		<property name="queueCapacity" value="25" />
 	</bean>
+	
+	<!---->
+	<bean id="user" class="com.haohai.cms.test.User"></bean>
 
 </beans>

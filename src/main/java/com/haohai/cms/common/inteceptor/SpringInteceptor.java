@@ -1,14 +1,12 @@
 package com.haohai.cms.common.inteceptor;
 
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
-import com.haohai.cms.common.util.Constants;
-
-public class SpringInteceptor implements HandlerInterceptor {
+public class  SpringInteceptor implements HandlerInterceptor {
 
 	// 设置不需要过滤的url
 	private static final String[] noFilters = new String[] { "login.do",
